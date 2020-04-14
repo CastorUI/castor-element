@@ -4,7 +4,7 @@ import router from './router'
 
 // 导入组件库
 import datePicker from './../packages/index'
-// import './../packages/theme-default/src/test.scss'
+import './../packages/theme-default/src/datePicker.scss'
 
 // 注册组件库
 Vue.use(datePicker)

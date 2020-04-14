@@ -1,5 +1,5 @@
 <template>
-  <div>这是一个datePicker组件</div>
+  <div class="date-picker">这是一个datePicker组件</div>
 </template>
 
 <script>
