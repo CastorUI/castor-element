@@ -1,4 +1,4 @@
-# fe-components-static
+# polarwin-ui
 
 ## Project setup
 ```
