@@ -3,11 +3,11 @@ import App from './App.vue'
 import router from './router'
 
 // 导入组件库
-import datePicker from './../packages/index'
-import './../packages/theme-default/src/datePicker.scss'
+import PolarwinUI from './../packages/index'
+import './../packages/theme-default/src/index.scss'
 
 // 注册组件库
-Vue.use(datePicker)
+Vue.use(PolarwinUI)
 
 Vue.config.productionTip = false
 
