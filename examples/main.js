@@ -3,11 +3,11 @@ import App from './App.vue'
 import router from './router'
 
 // 导入组件库
-import PolarwinUI from './../packages/index'
+import Castor from './../packages/index'
 import './../packages/theme-default/src/index.scss'
 
 // 注册组件库
-Vue.use(PolarwinUI)
+Vue.use(Castor)
 
 Vue.config.productionTip = false
 
