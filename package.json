@@ -47,9 +47,11 @@
   "browserslist": [
     "> 1%",
     "last 2 versions",
+    "not ie <= 9",
     "not dead"
   ],
+  "engineStrict": true,
   "engines": {
-    "node": ">=10.19.0 <11.0.0"
+    "node": ">=10.19.0"
   }
 }
