@@ -3,11 +3,11 @@ import App from './App.vue'
 import router from './router'
 
 // 导入组件库
-import Castor from './../packages/index'
+import CastorUI from './../packages/index'
 import './../packages/theme-default/src/index.scss'
 
 // 注册组件库
-Vue.use(Castor)
+Vue.use(CastorUI)
 
 Vue.config.productionTip = false
 
