@@ -1,17 +1,17 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
 
 // 导入组件库
-import CastorUI from './../packages/index'
-import './../packages/theme-default/src/index.scss'
+import CastorUI from './../packages/index';
+import './../packages/theme-default/src/index.scss';
 
 // 注册组件库
-Vue.use(CastorUI)
+Vue.use(CastorUI);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 new Vue({
   router,
   render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');
