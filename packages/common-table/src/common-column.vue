@@ -142,7 +142,6 @@
 </template>
 <script>
 export default {
-  name: 'CaCommonColumn',
   props: {
     type: {
       type: String,

@@ -1,0 +1,10 @@
+// 导入组件，组件必须声明 name
+import ReportTable from './src/main';
+
+// 为组件提供 install 安装方法，供按需引入
+ReportTable.install = function (Vue) {
+  Vue.component(ReportTable.name, ReportTable);
+}
+
+// 默认导出组件
+export default ReportTable;
