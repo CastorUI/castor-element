@@ -66,7 +66,7 @@
 <script>
 import CommonFormCtrl from './common-form-ctrl';
 export default {
-  name: 'CommonForm',
+  name: 'CaCommonForm',
   components: {
     CommonFormCtrl
   },
