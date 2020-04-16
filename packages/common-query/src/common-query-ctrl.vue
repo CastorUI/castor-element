@@ -1,0 +1,177 @@
+<template>
+  <el-form-item
+    :label="label+' :'"
+    :prop="dataField"
+    :style="'float:left;minWidth:300px;width:'+width+';'"
+  >
+    <el-select
+      v-if="type === 'select' || type === 'multiSelect'"
+      v-model="model[dataField]"
+      :placeholder="'查询'+label"
+      clearable
+      filterable
+      style="width:100%; "
+      size="small"
+    >
+      <el-option
+        v-for="option in options"
+        :key="option.value"
+        :label="option.label"
+        :value="option.value"
+      />
+    </el-select>
+    <el-date-picker
+      v-else-if="type==='dateTimeRange' || type==='dateRange'  || type==='monthRange'|| type==='date' || type==='month'"
+      v-model="model[dataField]"
+      :value-format="extendProps.valueFormat"
+      :type="type.toLocaleLowerCase()"
+      :picker-options="pickerOptions"
+      range-separator="至"
+      start-placeholder="开始日期"
+      end-placeholder="结束日期"
+      style="width:100%;"
+      size="small"
+    ></el-date-picker>
+    <el-switch v-else-if="type==='switch'" v-model="model[dataField]" style="width:40px;"/>
+    <el-checkbox-group
+      v-else-if="type==='checkboxGroup'"
+      v-model="model[dataField]"
+      style="width:100%;"
+      class="query-item"
+    >
+      <el-checkbox v-for="item in options" :label="item" :key="item">{{item}}</el-checkbox>
+    </el-checkbox-group>
+    <input-number-range
+      v-else-if="type==='inputNumberRange'"
+      :model="model"
+      :extendProps="extendProps"
+      style="width:100%;"
+      class="query-item"
+      size="small"
+    />
+    <el-input
+      v-else
+      :placeholder="'查询'+label"
+      v-model="model[dataField]"
+      class="filter-item filter-list query-item"
+      clearable
+      size="small"
+    />
+  </el-form-item>
+</template>
+<script>
+import InputNumberRange from './input-number-range';
+export default {
+  components: { InputNumberRange },
+  props: {
+    type: {
+      type: String,
+      default: undefined
+    },
+    label: {
+      type: String,
+      default: undefined
+    },
+    model: {
+      type: Object,
+      default: undefined
+    },
+    dataField: {
+      type: String,
+      default: undefined
+    },
+    options: {
+      type: Array,
+      default: undefined
+    },
+    width: {
+      type: String,
+      default: undefined
+    },
+    extendProps: {
+      type: Object,
+      default: function() {
+        return {
+          valueFormat: 'yyyy-MM-dd'
+        };
+      }
+    }
+  },
+  computed: {
+    pickerOptions: function() {
+      if (this.type === 'dateTimeRange' || this.type === 'dateRange') {
+        return (
+          this.extendProps.pickerOptions || {
+            shortcuts: [
+              {
+                text: '最近一周',
+                onClick(picker) {
+                  const end = new Date();
+                  const start = new Date();
+                  start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                  picker.$emit('pick', [start, end]);
+                }
+              },
+              {
+                text: '最近一个月',
+                onClick(picker) {
+                  const end = new Date();
+                  const start = new Date();
+                  start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                  picker.$emit('pick', [start, end]);
+                }
+              },
+              {
+                text: '最近三个月',
+                onClick(picker) {
+                  const end = new Date();
+                  const start = new Date();
+                  start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                  picker.$emit('pick', [start, end]);
+                }
+              }
+            ]
+          }
+        );
+      } else if (this.type === 'monthRange') {
+        return (
+          this.extendProps.pickerOptions || {
+            shortcuts: [
+              {
+                text: '本月',
+                onClick(picker) {
+                  picker.$emit('pick', [new Date(), new Date()]);
+                }
+              },
+              {
+                text: '今年至今',
+                onClick(picker) {
+                  const end = new Date();
+                  const start = new Date(new Date().getFullYear(), 0);
+                  picker.$emit('pick', [start, end]);
+                }
+              },
+              {
+                text: '最近六个月',
+                onClick(picker) {
+                  const end = new Date();
+                  const start = new Date();
+                  start.setMonth(start.getMonth() - 6);
+                  picker.$emit('pick', [start, end]);
+                }
+              }
+            ]
+          }
+        );
+      } else {
+        return {};
+      }
+    }
+  }
+};
+</script>
+<style rel="stylesheet/scss" lang="scss">
+.el-select--small, .el-input--small{
+  line-height: 13px;
+}
+</style>
