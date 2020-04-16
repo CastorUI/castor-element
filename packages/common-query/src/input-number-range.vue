@@ -21,7 +21,9 @@
       clearable
       style="float:right;width:calc(50% - 10px);"
     />
-    <div style="width:20px;margin: 0 calc(50% - 10px);text-align:center;">~</div>
+    <div style="width:20px;margin: 0 calc(50% - 10px);text-align:center;">
+      ~
+    </div>
   </div>
 </template>
 <script>

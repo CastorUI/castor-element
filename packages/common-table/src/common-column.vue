@@ -26,6 +26,7 @@
     show-overflow-tooltip
   >
     <template slot-scope="scope">
+      // eslint-disable-next-line vue/no-v-html
       <div v-html="dataTemplate(scope.row)" />
     </template>
   </el-table-column>
@@ -45,7 +46,9 @@
         :type="item.linkType"
         :disabled="item.disableValidator &&item.disableValidator.call(this,scope.row)"
         @click.stop="$emit(item.command,scope.$index,scope.row)"
-      >{{ item.text }}</el-link>
+      >
+        {{ item.text }}
+      </el-link>
     </template>
   </el-table-column>
   <el-table-column
@@ -61,7 +64,9 @@
       <el-link
         :type="extendProps.type"
         @click.stop="$emit(linkCommand,scope.$index,scope.row)"
-      >{{ scope.row[dataField] }}</el-link>
+      >
+        {{ scope.row[dataField] }}
+      </el-link>
     </template>
   </el-table-column>
   <el-table-column
@@ -84,7 +89,8 @@
           v-if="extendProps.showTips === scope.row[dataField] && scope.row[extendProps.tipsContent]"
           class="item"
           effect="dark"
-          placement="bottom">
+          placement="bottom"
+        >
           <div slot="content">{{ scope.row[extendProps.tipsContent] }}</div>
           <i :class="options.filter(r=>r.value === scope.row[dataField])[0].tipsIcon" />
         </el-tooltip>
@@ -101,11 +107,12 @@
     show-overflow-tooltip
   >
     <template slot-scope="scope">
-      <span class="dot-status"
-      v-if="options.some(r=>r.value === scope.row[dataField])"
+      <span
+        v-if="options.some(r=>r.value === scope.row[dataField])"
+        class="dot-status"
       >
-        <span :style="`display:inline-block; width: 10px;height:10px;border-radius:50%; background: ${options.filter(r=>r.value === scope.row[dataField])[0].color}`"></span>
-         {{ options.filter(r=>r.value === scope.row[dataField])[0].label }}
+        <span :style="`display:inline-block; width: 10px;height:10px;border-radius:50%; background: ${options.filter(r=>r.value === scope.row[dataField])[0].color}`" />
+        {{ options.filter(r=>r.value === scope.row[dataField])[0].label }}
       </span>
     </template>
   </el-table-column>

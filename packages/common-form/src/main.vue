@@ -53,7 +53,7 @@
         :disabled="item.disableValidator && item.disableValidator.call(this,model)"
         v-show="item.visibleValidator && item.visibleValidator.call(this,model)"
         :type="item.styleType || 'primary'"
-        class="command"
+        class= "command"
         :loading="item.loading && loading"
         :plain="item.extendProps && item.extendProps.plain"
         :circle="item.extendProps && item.extendProps.circle"
@@ -140,7 +140,7 @@ export default {
       }
     });
     return {
-      model: { ...dataModel, ...this.dataSource },
+      model: {...dataModel, ...this.dataSource },
       rules: dataRules
     };
   },

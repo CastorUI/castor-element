@@ -1,95 +1,127 @@
 <template>
-  <div v-resize:debounce="handleResize"
-       style="overflow:hidden;minWidth:700px;background:#fff;padding:20px 10px 0 10px;"
-       class="clearfix common-query">
-    <div v-show="fields.some(r=>r.showType==='dynamic')"
-         style="display:inline-block;float:left">
-      <el-button type="medium"
-                 @click="$refs.filterSelect.$el.click()">
+  <div
+    v-resize:debounce="handleResize"
+    style="overflow:hidden;minWidth:700px;background:#fff;padding:20px 10px 0 10px;"
+    class="clearfix common-query"
+  >
+    <div
+      v-show="fields.some(r=>r.showType==='dynamic')"
+      style="display:inline-block;float:left"
+    >
+      <el-button
+        type="medium"
+        @click="$refs.filterSelect.$el.click()"
+      >
         筛选
         <i class="el-icon-arrow-down" />
       </el-button>
-      <el-select ref="filterSelect"
-                 v-model="checkedKeys"
-                 class="dynamic-filter-select"
-                 multiple
-                 collapse-tags
-                 placeholder="请选择">
-        <el-option class="dynamic-select-options"
-                   v-for="item in fields.filter(r=>r.showType==='dynamic')"
-                   :key="item.dataField"
-                   :label="item.label"
-                   :value="item.dataField" />
+      <el-select
+        ref="filterSelect"
+        v-model="checkedKeys"
+        class="dynamic-filter-select"
+        multiple
+        collapse-tags
+        placeholder="请选择"
+      >
+        <el-option
+          v-for="item in fields.filter(r=>r.showType==='dynamic')"
+          :key="item.dataField"
+          class="dynamic-select-options"
+          :label="item.label"
+          :value="item.dataField"
+        />
       </el-select>
     </div>
-    <el-form ref="form"
-             :model="model"
-             :id="formId"
-             :label-width="labelWidth"
-             :style="fields.some(r=>r.showType==='dynamic')? 'marginLeft:100px;' : ''"
-             size="small"
-             @submit.native.prevent>
+    <el-form
+      :id="formId"
+      ref="form"
+      :model="model"
+      :label-width="labelWidth"
+      :style="fields.some(r=>r.showType==='dynamic')? 'marginLeft:100px;' : ''"
+      size="small"
+      @submit.native.prevent
+    >
       <template v-if="!dynamicFieldsBack">
-        <common-query-ctrl v-for="item in checkedFields"
-                           :key="item.dataField"
-                           :type="item.type"
-                           :label="item.label"
-                           :model="model"
-                           :data-field="item.dataField"
-                           :options="item.options"
-                           :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'" />
+        <common-query-ctrl
+          v-for="item in checkedFields"
+          :key="item.dataField"
+          :type="item.type"
+          :label="item.label"
+          :model="model"
+          :data-field="item.dataField"
+          :options="item.options"
+          :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
+        />
       </template>
-      <common-query-ctrl v-for="item in fields.filter(r=>r.showType==='static')"
-                         :key="item.dataField"
-                         :type="item.type"
-                         :label="item.label"
-                         :model="model"
-                         :data-field="item.dataField"
-                         :options="item.options"
-                         :extendProps="item.extendProps"
-                         :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'" />
+      <common-query-ctrl
+        v-for="item in fields.filter(r=>r.showType==='static')"
+        :key="item.dataField"
+        :type="item.type"
+        :label="item.label"
+        :model="model"
+        :data-field="item.dataField"
+        :options="item.options"
+        :extend-props="item.extendProps"
+        :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
+      />
       <template v-if="dynamicFieldsBack">
-        <common-query-ctrl v-for="item in checkedFields"
-                           :key="item.dataField"
-                           :type="item.type"
-                           :label="item.label"
-                           :model="model"
-                           :data-field="item.dataField"
-                           :options="item.options"
-                           :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'" />
+        <common-query-ctrl
+          v-for="item in checkedFields"
+          :key="item.dataField"
+          :type="item.type"
+          :label="item.label"
+          :model="model"
+          :data-field="item.dataField"
+          :options="item.options"
+          :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
+        />
       </template>
-      <el-form-item label-width="10px"
-                    style="float:right;">
-        <el-button v-for="(item,index) of commands"
-                   :key="index"
-                   :icon="item.icon"
-                   :disabled="item.disableValidator && item.disableValidator.call(this)"
-                   :type="item.styleType || 'primary'"
-                   class="filter-item"
-                   :loading="item.loading && loading"
-                   :plain="item.extendProps && item.extendProps.plain"
-                   :circle="item.extendProps && item.extendProps.circle"
-                   :round="item.extendProps && item.extendProps.round"
-                   size="medium"
-                   @click="$emit(item.command)">{{ item.text }}</el-button>
+      <el-form-item
+        label-width="10px"
+        style="float:right;"
+      >
+        <el-button
+          v-for="(item,index) of commands"
+          :key="index"
+          :icon="item.icon"
+          :disabled="item.disableValidator && item.disableValidator.call(this)"
+          :type="item.styleType || 'primary'"
+          class="filter-item"
+          :loading="item.loading && loading"
+          :plain="item.extendProps && item.extendProps.plain"
+          :circle="item.extendProps && item.extendProps.circle"
+          :round="item.extendProps && item.extendProps.round"
+          size="medium"
+          @click="$emit(item.command)"
+        >
+          {{ item.text }}
+        </el-button>
 
-        <el-dropdown v-if="downloadOpt && downloadOpt.options && downloadOpt.options.length > 0"
-                     size="medium">
-          <el-button type="primary"
-                     icon="el-icon-document"
-                     size="medium"
-                     :loading="downloadOpt.loading && loading"
-                     :plain="downloadOpt.extendProps && downloadOpt.extendProps.plain">
-            导出<i class="el-icon-arrow-down el-icon--right"></i>
+        <el-dropdown
+          v-if="downloadOpt && downloadOpt.options && downloadOpt.options.length > 0"
+          size="medium"
+        >
+          <el-button
+            type="primary"
+            icon="el-icon-document"
+            size="medium"
+            :loading="downloadOpt.loading && loading"
+            :plain="downloadOpt.extendProps && downloadOpt.extendProps.plain"
+          >
+            导出<i class="el-icon-arrow-down el-icon--right" />
           </el-button>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item v-for="(item,index) of downloadOpt.options"
-                              :key="index"
-                              :icon="item.icon"
-                              :disabled="item.disableValidator && item.disableValidator.call(this)"
-                              :type="item.styleType || 'primary'"
-                              class="filter-item"
-                              @click.native="$emit(item.command)">{{ item.text }}</el-dropdown-item>
+            <el-dropdown-item
+              v-for="(item,index) of downloadOpt.options"
+              :key="index"
+              :icon="item.icon"
+              :disabled="item.disableValidator && item.disableValidator.call(this)"
+              :type="item.styleType || 'primary'"
+              class="filter-item"
+              @click.native="$emit(item.command)"
+            >
+              {{ item.text }}
+            </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-form-item>
@@ -125,7 +157,7 @@ export default {
     commands: {
       type: Array,
       default: function() {
-        return [];
+        return [] ;
       }
     },
     downloadOpt: {
@@ -187,7 +219,7 @@ export default {
       this.rowFieldsCount = Math.floor(
         form.getBoundingClientRect().width / this.maxFieldWidth
       );
-    },
+    }
   }
 };
 </script>

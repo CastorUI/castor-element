@@ -1,5 +1,8 @@
 <template>
-  <div class="report-table-container" v-if="hackReset">
+  <div
+    v-if="hackReset"
+    class="report-table-container"
+  >
     <div class="table-commands">
       <el-button
         v-show="addText"
@@ -7,15 +10,22 @@
         icon="el-icon-circle-plus-outline"
         class="table-add-command"
         @click="$emit('handleAdd')"
-      >{{ addText }}</el-button>
-      <el-button-group v-show="customTableCommands" class="table-custom-commands">
+      >
+        {{ addText }}
+      </el-button>
+      <el-button-group
+        v-show="customTableCommands"
+        class="table-custom-commands"
+      >
         <el-button
           v-for="(item,index) of customTableCommands"
           :key="index"
           :disabled="item.disableValidator &&item.disableValidator.call(this)"
           type="text"
           @click="$emit(item.command,multipleSelection)"
-        >{{ item.text }}</el-button>
+        >
+          {{ item.text }}
+        </el-button>
       </el-button-group>
     </div>
     <div class="table-content">
@@ -51,7 +61,7 @@
                     :key="'grandChild' + grandChildIndex"
                     :label="grandChildItem.label"
                     :align="grandChildItem.align"
-                  ></el-table-column>
+                  />
                   <common-column
                     v-if="grandChildItem.reportType==='data'"
                     :key="grandChildItem.dataField"
@@ -60,8 +70,8 @@
                     :options="grandChildItem.options"
                     :type="grandChildItem.type"
                     :commands="grandChildItem.commands"
-                    :linkCommand="grandChildItem.linkCommand"
-                    :indexMethod="indexMethod"
+                    :link-command="grandChildItem.linkCommand"
+                    :index-method="indexMethod"
                     :width="grandChildItem.width"
                     :align="grandChildItem.align"
                     :column-span="grandChildItem.columnSpan"
@@ -82,8 +92,8 @@
                 :options="childItem.options"
                 :type="childItem.type"
                 :commands="childItem.commands"
-                :linkCommand="childItem.linkCommand"
-                :indexMethod="indexMethod"
+                :link-command="childItem.linkCommand"
+                :index-method="indexMethod"
                 :width="childItem.width"
                 :align="childItem.align"
                 :column-span="childItem.columnSpan"
@@ -104,8 +114,8 @@
             :options="item.options"
             :type="item.type"
             :commands="item.commands"
-            :linkCommand="item.linkCommand"
-            :indexMethod="indexMethod"
+            :link-command="item.linkCommand"
+            :index-method="indexMethod"
             :width="item.width"
             :align="item.align"
             :column-span="item.columnSpan"
@@ -119,7 +129,10 @@
         </template>
       </el-table>
     </div>
-    <div v-if="pagination.total > 10" class="common-pagination-container">
+    <div
+      v-if="pagination.total > 10"
+      class="common-pagination-container"
+    >
       <el-pagination
         :current-page="pagination.pageIndex"
         :page-size="pagination.pageSize"

@@ -8,15 +8,22 @@
         class="table-add-command"
         :disabled="addTextDisableValidator && addTextDisableValidator.call(this)"
         @click="$emit('handleAdd')"
-      >{{ addText }}</el-button>
-      <el-button-group v-show="customTableCommands" class="table-custom-commands">
+      >
+        {{ addText }}
+      </el-button>
+      <el-button-group
+        v-show="customTableCommands"
+        class="table-custom-commands"
+      >
         <el-button
           v-for="(item,index) of customTableCommands"
           :key="index"
           :disabled="item.disableValidator && item.disableValidator.call(this)"
           type="text"
           @click="$emit(item.command,multipleSelection)"
-        >{{ item.text }}</el-button>
+        >
+          {{ item.text }}
+        </el-button>
       </el-button-group>
     </div>
     <div class="table-content">
@@ -41,8 +48,8 @@
           :options="item.options"
           :type="item.type"
           :commands="item.commands"
-          :linkCommand="item.linkCommand"
-          :indexMethod="indexMethod"
+          :link-command="item.linkCommand"
+          :index-method="indexMethod"
           :width="item.width"
           :align="item.align"
           :column-span="item.columnSpan"
@@ -55,7 +62,10 @@
         />
       </el-table>
     </div>
-    <div v-if="pagination.total > 0" class="common-pagination-container">
+    <div
+      v-if="pagination.total > 0"
+      class="common-pagination-container"
+    >
       <el-pagination
         :current-page="pagination.pageIndex"
         :page-size="pagination.pageSize"
@@ -109,13 +119,12 @@ export default {
       default: undefined
     },
     addTextDisableValidator: {
-      type: Function
+      type: Function,
+      default: ()=>{}
     },
     customTableCommands: {
       type: Array,
-      default: function() {
-        return [];
-      }
+      default: ()=>[]
     },
     showVerticalBorder: {
       type: Boolean,
@@ -127,15 +136,15 @@ export default {
     },
     defaultSort: {
       type: Object,
-      default: function() {
-        return {};
-      }
+      default: ()=>{}
     },
     getList: {
-      type: Function
+      type: Function,
+      default: ()=>{}
     },
     spanMethod: {
-      type: Function
+      type: Function,
+      default: ()=>{}
     },
     tableStyle: {
       type: String,
@@ -152,7 +161,8 @@ export default {
       }
     },
     customSelectionChangeEvent: {
-      type: Function
+      type: Function,
+      default: ()=>{}
     }
   },
   data() {
@@ -182,10 +192,10 @@ export default {
     handlePageSizeChange(pageSize) {
       this.pagination.pageIndex = 1;
       this.pagination.pageSize = pageSize;
-      this.$store.dispatch('SetPagesize', pageSize)
+      this.$store.dispatch('SetPagesize', pageSize);
       this.getList();
     },
-    handleSortChange({  prop, order }) {
+    handleSortChange({ prop, order }) {
       this.pagination.sortField = prop;
       this.pagination.order = order;
       this.getList();

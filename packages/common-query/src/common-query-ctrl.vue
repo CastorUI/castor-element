@@ -21,7 +21,7 @@
       />
     </el-select>
     <el-date-picker
-      v-else-if="type==='dateTimeRange' || type==='dateRange'  || type==='monthRange'|| type==='date' || type==='month'"
+      v-else-if="type==='dateTimeRange' || type==='dateRange' || type==='monthRange'|| type==='date' || type==='month'"
       v-model="model[dataField]"
       :value-format="extendProps.valueFormat"
       :type="type.toLocaleLowerCase()"
@@ -31,28 +31,38 @@
       end-placeholder="结束日期"
       style="width:100%;"
       size="small"
-    ></el-date-picker>
-    <el-switch v-else-if="type==='switch'" v-model="model[dataField]" style="width:40px;"/>
+    />
+    <el-switch
+      v-else-if="type==='switch'"
+      v-model="model[dataField]"
+      style="width:40px;"
+    />
     <el-checkbox-group
       v-else-if="type==='checkboxGroup'"
       v-model="model[dataField]"
       style="width:100%;"
       class="query-item"
     >
-      <el-checkbox v-for="item in options" :label="item" :key="item">{{item}}</el-checkbox>
+      <el-checkbox
+        v-for="item in options"
+        :key="item"
+        :label="item"
+      >
+        {{ item }}
+      </el-checkbox>
     </el-checkbox-group>
     <input-number-range
       v-else-if="type==='inputNumberRange'"
       :model="model"
-      :extendProps="extendProps"
+      :extend-props="extendProps"
       style="width:100%;"
       class="query-item"
       size="small"
     />
     <el-input
       v-else
-      :placeholder="'查询'+label"
       v-model="model[dataField]"
+      :placeholder="'查询'+label"
       class="filter-item filter-list query-item"
       clearable
       size="small"

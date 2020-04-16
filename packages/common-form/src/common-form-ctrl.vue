@@ -1,10 +1,10 @@
 <template>
   <el-form-item
+    v-if="visibleValidator && visibleValidator.call(this,model)"
     :label="label?(label+' :'):''"
     :prop="dataField"
     :label-width="label?labelWidth:'0'"
     :style="'float:left;padding-right:10px;minWidth:300px;width:'+width+';'"
-    v-if="visibleValidator && visibleValidator.call(this,model)"
     :required="extendProps && extendProps.required"
   >
     <el-select
@@ -14,11 +14,11 @@
       :disabled="disableValidator && disableValidator.call(this,model)"
       :multiple="type==='multiSelect'"
       :allow-create="extendProps.allowCreate || false"
-      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
-      @clear="handleClear"
       clearable
       filterable
       style="width:100%;"
+      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+      @clear="handleClear"
     >
       <el-option
         v-for="option in options"
@@ -34,12 +34,12 @@
       :disabled="disableValidator && disableValidator.call(this,model)"
       :multiple="type==='multiSelect'"
       :allow-create="extendProps.allowCreate || false"
-      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
-      @clear="handleClear"
       clearable
       filterable
-      :filter-method="(query)=> extendProps.filterMethod && this.handleFilter(query,extendProps.filterMethod,options)"
+      :filter-method="(query)=> extendProps.filterMethod && handleFilter(query,extendProps.filterMethod,options)"
       style="width:100%;"
+      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+      @clear="handleClear"
     >
       <el-option
         v-for="option in options"
@@ -54,13 +54,17 @@
       :placeholder="'选择'+label"
       :disabled="disableValidator && disableValidator.call(this,model)"
       :multiple="type==='multiSelect'"
-      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
-      @clear="handleClear"
       clearable
       filterable
       style="width:100%;"
+      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+      @clear="handleClear"
     >
-      <el-option-group v-for="group in options" :key="group.label" :label="group.label">
+      <el-option-group
+        v-for="group in options"
+        :key="group.label"
+        :label="group.label"
+      >
         <el-option
           v-for="option in group.options"
           :key="option.value"
@@ -75,8 +79,8 @@
     >
       <el-radio
         v-for="option in options"
-        :label="option.value"
         :key="option.value"
+        :label="option.value"
       >
         {{ option.label }}
       </el-radio>
@@ -93,15 +97,26 @@
         :key="option.label"
         :label="option.label"
         :disabled="option.disabled"
-      ></el-checkbox>
+      />
     </el-checkbox-group>
     <span
       v-else-if="type==='groupTitle'"
       style="font-size:16px;font-weight:bold;color:#006934FF"
-    >{{groupTitle}}</span>
-    <span v-else-if="type==='text'" style="display:inline-block;font-size:14px;height: 36px;line-height: 36px;">{{ options ? options.filter(r => r.value === model[dataField])[0].label : model[dataField] }}</span>
-    <hr v-else-if="type==='hr'" :style="extendProps.style" />
-    <div v-else-if="type==='diy'" :style="extendProps.style">
+    >{{ groupTitle }}</span>
+    <span
+      v-else-if="type==='text'"
+      style="display:inline-block;font-size:14px;height: 36px;line-height: 36px;"
+    >{{ options ? options.filter(r => r.value === model[dataField])[0].label : model[dataField] }}</span>
+    <hr
+      v-else-if="type==='hr'"
+      :style="extendProps.style"
+    >
+    <div
+      v-else-if="type==='diy'"
+      :style="extendProps.style"
+    >
+      <!-- TODO: 待禁用 -->
+      // eslint-disable-next-line vue/no-v-html
       <div v-html="extendProps.vHtml" />
     </div>
     <el-switch
@@ -123,7 +138,7 @@
       start-placeholder="开始日期"
       end-placeholder="结束日期"
       style="width:100%; "
-    ></el-date-picker>
+    />
     <el-input-number
       v-else-if="type==='inputNumber'"
       v-model="model[dataField]"
@@ -147,9 +162,9 @@
       clearable
     />
     <el-input
-      :class="['complexInput']"
       v-else-if="type==='complexInput' && currentField.options.filter(r=>r.value === model[currentField.dataField]).length > 0"
       v-model="currentField.options.filter(r=>r.value === model[currentField.dataField])[0].label"
+      :class="['complexInput']"
       disabled
       style="width:100%;"
     >
@@ -161,14 +176,14 @@
           <i
             :class="appendField.options.filter(r=>r.value === model[appendField.dataField])[0].icon"
           />
-          {{appendField.options.filter(r=>r.value === model[appendField.dataField])[0].label.slice(0,5) }}
+          {{ appendField.options.filter(r=>r.value === model[appendField.dataField])[0].label.slice(0,5) }}
         </span>
       </template>
     </el-input>
     <component
-      v-else-if="type==='custom'"
       :is="customComponents[componentKey]"
-      :componentData.sync="model[dataField]"
+      v-else-if="type==='custom'"
+      :component-data.sync="model[dataField]"
       :model="model"
     />
     <el-input
@@ -201,7 +216,7 @@
       clearable
       style="width:100%;"
       @select="extendProps.onChange && extendProps.onChange.call(this,model)"
-    ></el-autocomplete>
+    />
     <el-autocomplete
       v-else-if="type==='input' && extendProps.autocomplete && extendProps.needTrim"
       v-model.trim="model[dataField]"
@@ -212,7 +227,7 @@
       clearable
       style="width:100%;"
       @select="extendProps.onChange && extendProps.onChange.call(this,model)"
-    ></el-autocomplete>
+    />
     <el-input
       v-else-if="type==='input' && extendProps.needTrim"
       v-model.trim="model[dataField]"
@@ -231,12 +246,17 @@
       style="width:100%;"
       @change="extendProps.onChange && extendProps.onChange.call(this,model)"
     >
-      <template v-if="extendProps.appendText" slot="append">{{ extendProps.appendText }}</template>
+      <template
+        v-if="extendProps.appendText"
+        slot="append"
+      >
+        {{ extendProps.appendText }}
+      </template>
     </el-input>
   </el-form-item>
 </template>
 <script>
-import { trim } from '@/utils'
+import { trim } from '@/utils';
 export default {
   props: {
     type: {
@@ -350,11 +370,11 @@ export default {
       this.model[this.dataField] = undefined;
     },
     handleFilter(query, method, options) {
-      method.call(this, query, options, this.model)
+      method.call(this, query, options, this.model);
     },
     querySearch(queryString, cb) {
       var options = this.options;
-      queryString = this.extendProps.needTrim && trim(queryString)
+      queryString = this.extendProps.needTrim && trim(queryString);
       console.log('query', queryString);
       var results = queryString ? options.filter(this.createFilter(queryString)) : options;
       // 调用 callback 返回建议列表的数据

@@ -2,9 +2,9 @@
 import DatePicker from './src/main';
 
 // 为组件提供 install 安装方法，供按需引入
-DatePicker.install = function (Vue) {
+DatePicker.install = function(Vue) {
   Vue.component(DatePicker.name, DatePicker);
-}
+};
 
 // 默认导出组件
 export default DatePicker;
