@@ -1,5 +1,5 @@
 // 导入日期选择器组件
-import DatePicker from './datePicker'
+import DatePicker from './date-picker'
 
 // 存储组件列表
 const components = [
