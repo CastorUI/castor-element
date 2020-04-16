@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <datePicker></datePicker>
+    <ca-date-picker></ca-date-picker>
   </div>
 </template>
 

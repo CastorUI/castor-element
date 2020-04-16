@@ -4,6 +4,6 @@
 
 <script>
 export default {
-  name: 'datePicker'
+  name: 'CaDatePicker'
 }
 </script>
