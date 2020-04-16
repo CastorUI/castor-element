@@ -1,17 +1,20 @@
 <template>
   <el-form
-    class="form"
+    :id="formId"
     ref="form"
+    class="form"
     :model="model"
     :rules="rules"
-    :id="formId"
     :label-width="labelWidth"
     :label-position="labelPosition"
     :disabled="operateType==='view'"
     size="medium"
     style="minWidth:600px;"
   >
-    <div v-if="customCommands" style="position: absolute;top: 28px;right: 20px;z-index:99;">
+    <div
+      v-if="customCommands"
+      style="position: absolute;top: 28px;right: 20px;z-index:99;"
+    >
       <el-button
         v-for="(item,index) of customCommands"
         :key="index"
@@ -21,7 +24,9 @@
         :underline="true"
         :disabled="item.disableValidator && item.disableValidator.call(this,model)"
         @click.stop="$emit(item.command,model)"
-      >{{ item.text }}</el-button>
+      >
+        {{ item.text }}
+      </el-button>
     </div>
     <common-form-ctrl
       v-for="item in fields"
@@ -32,14 +37,14 @@
       :data-field="item.dataField"
       :options="item.options"
       :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
-      :groupTitle="item.groupTitle"
-      :currentField="item.currentField"
-      :appendField="item.appendField"
-      :componentKey="item.componentKey"
-      :disableValidator="item.disableValidator"
-      :visibleValidator="item.visibleValidator"
-      :extendProps="item.extendProps"
-      :customComponents="customComponents"
+      :group-title="item.groupTitle"
+      :current-field="item.currentField"
+      :append-field="item.appendField"
+      :component-key="item.componentKey"
+      :disable-validator="item.disableValidator"
+      :visible-validator="item.visibleValidator"
+      :extend-props="item.extendProps"
+      :custom-components="customComponents"
     />
     <el-form-item
       v-if="operateType !== 'view'"
@@ -48,18 +53,20 @@
     >
       <el-button
         v-for="(item,index) of commands"
+        v-show="item.visibleValidator && item.visibleValidator.call(this,model)"
         :key="index"
         :icon="item.icon"
         :disabled="item.disableValidator && item.disableValidator.call(this,model)"
-        v-show="item.visibleValidator && item.visibleValidator.call(this,model)"
         :type="item.styleType || 'primary'"
-        class= "command"
+        class="command"
         :loading="item.loading && loading"
         :plain="item.extendProps && item.extendProps.plain"
         :circle="item.extendProps && item.extendProps.circle"
         :round="item.extendProps && item.extendProps.round"
         @click="$emit(item.command,model)"
-      >{{ item.text }}</el-button>
+      >
+        {{ item.text }}
+      </el-button>
     </el-form-item>
   </el-form>
 </template>

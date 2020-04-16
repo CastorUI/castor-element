@@ -1,19 +1,22 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <img
+      alt="Vue logo"
+      src="./assets/logo.png"
+    >
     <home />
   </div>
 </template>
 
 <script>
-import home from './views/home'
+import home from "./views/home";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     home
   }
-}
+};
 </script>
 
 <style>
