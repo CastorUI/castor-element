@@ -1,17 +1,23 @@
 import Vue from 'vue';
-import App from './App.vue';
-import router from './router';
-
-// 导入组件库
+import ElementUI from 'element-ui';
+import locale from 'element-ui/lib/locale/lang/zh-CN';
 import CastorUI from './../packages/index';
 import './../packages/theme-default/src/index.scss';
 
-// 注册组件库
-Vue.use(CastorUI);
+import App from './App.vue';
+import router from './router';
+import MainHeader from './components/header';
+import SideNav from './components/side-nav';
 
+// 注册组件库
+Vue.use(ElementUI, { locale });
+Vue.use(CastorUI);
 Vue.config.productionTip = false;
+
+Vue.component('main-header', MainHeader);
+Vue.component('side-nav', SideNav);
 
 new Vue({
   router,
-  render: h => h(App)
+  render: (h) => h(App),
 }).$mount('#app');

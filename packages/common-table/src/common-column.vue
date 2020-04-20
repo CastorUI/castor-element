@@ -25,10 +25,10 @@
     :align="align"
     show-overflow-tooltip
   >
-    <template slot-scope="scope">
+    <!-- <template slot-scope="scope">
       // eslint-disable-next-line vue/no-v-html
       <div v-html="dataTemplate(scope.row)" />
-    </template>
+    </template> -->
   </el-table-column>
   <el-table-column
     v-else-if="type==='commands'"
@@ -126,9 +126,7 @@
     show-overflow-tooltip
   >
     <template slot-scope="scope">
-      <span
-        v-if="options.some(r=>r.value === scope.row[dataField])"
-      >{{ options.filter(r=>r.value === scope.row[dataField])[0].label }}</span>
+      <span v-if="options.some(r=>r.value === scope.row[dataField])">{{ options.filter(r=>r.value === scope.row[dataField])[0].label }}</span>
     </template>
   </el-table-column>
   <el-table-column
@@ -206,7 +204,7 @@ export default {
     },
     indexMethod: {
       type: Function,
-      default: () => {}
+      default: () => { }
     },
     extendProps: {
       type: Object,
