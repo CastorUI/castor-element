@@ -49,7 +49,8 @@
     "markdown-it-anchor": "^5.0.2",
     "markdown-it-container": "^2.0.0",
     "style-loader": "^0.23.1",
-    "transliteration": "^1.1.11"
+    "transliteration": "^1.1.11",
+    "highlight.js": "^9.3.0"
   },
   "browserslist": [
     "> 1%",

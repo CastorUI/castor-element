@@ -3,6 +3,7 @@ import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/zh-CN';
 import CastorUI from './../packages/index';
 
+import './../node_modules/highlight.js/styles/color-brewer.css';
 import './assets/styles/index.scss';
 import './../packages/theme-default/src/index.scss';
 import './demo-styles/index.scss';
