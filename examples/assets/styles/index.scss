@@ -1,0 +1,266 @@
+@import './element-variables.scss';
+@import './mixin.scss';
+@import './transition.scss';
+@import './element-ui.scss';
+@import './sidebar.scss';
+
+body {
+  height: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
+  Microsoft YaHei, Arial, sans-serif;
+  min-width: 1280px;
+  overflow: auto;
+}
+
+label {
+  font-weight: 700;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+#app {
+  height: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  outline: none;
+  text-decoration: none;
+}
+
+div:focus {
+  outline: none;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+// a,
+// a:focus,
+// a:hover {
+//   cursor: pointer;
+//   color: inherit;
+//   text-decoration: none;
+// }
+
+.clearfix {
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: ' ';
+    clear: both;
+    height: 0;
+  }
+}
+.fl-l{
+  float: left;
+}
+.fl-r{
+  float: right;
+}
+
+//main-container全局样式
+.app-main {
+  min-height: 100%;
+}
+
+.app-container {
+  padding: 20px;
+}
+
+// 公用的样式
+.fx-border-table {
+  border: 1px solid rgba(220, 223, 230, 1);
+  border-radius: 8px;
+}
+.fx-border-form {
+  padding: 20px 20px;
+  border: 1px solid #dcdfe6;
+  border-radius: 8px;
+  overflow: auto;
+}
+.fx-form-table {
+  .table-header {
+    &__text {
+      display: inline-block;
+      padding: 5px 0;
+      font-size: 16px;
+      font-family: MicrosoftYaHei, Helvetica, Arial, Verdana, Tahoma, sans-serif;
+      margin-right: 19px;
+    }
+  }
+}
+.fx-dialog {
+  padding: 0 67px;
+  &-title {
+    margin: 0;
+    margin-bottom: 35px;
+    text-align: center;
+    font-size: 18px;
+  }
+  .dialog-footer{
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+.fx-collapse-item {
+  .collapse-title__inner {
+    display: inline-block;
+  }
+  .header-index {
+    display: block;
+    float: left;
+    text-align: center;
+    height: 44px;
+    width: 44px;
+    border-radius: 50%;
+    border: 3px solid rgba(0, 202, 90, 1);
+    font-size: 30px;
+    font-family: STHeiti, Helvetica, Arial, Verdana, Tahoma, sans-serif;
+    color: rgba(0, 153, 68, 1);
+  }
+  .header-title {
+    margin-left: 18px;
+    font-size: 18px;
+    font-family: MicrosoftYaHei, Helvetica, Arial, Verdana, Tahoma, sans-serif;
+    color: #251c19;
+  }
+}
+.fx-collapse-item.noActive {
+  .header-index {
+    display: block;
+    float: left;
+    text-align: center;
+    height: 44px;
+    width: 44px;
+    border-radius: 50%;
+    border: 3px solid rgba(89,87,87,1);
+    font-size: 30px;
+    font-family: STHeiti, Helvetica, Arial, Verdana, Tahoma, sans-serif;
+    color:rgba(89,87,87,1);
+  }
+  .header-title {
+    margin-left: 18px;
+    font-size: 18px;
+    font-family: MicrosoftYaHei, Helvetica, Arial, Verdana, Tahoma, sans-serif;
+    color:rgba(89,87,87,1);
+  }
+
+}
+.step-container{
+  padding: 15px 38px;
+}
+.el-form-item {
+  .step {
+  &-input__xshort {
+    width: 224px;
+  }
+  &-input__short {
+    width: 320px;
+  }
+  &-input__normal {
+    width: 420px;
+  }
+  &-input__inline {
+    // width: 100%;
+    width: 224px;
+  }
+  &-switch-item {
+    display: inline-block;
+    margin-left: 40px;
+  }
+  &-button-row {
+    display: flex;
+    justify-content: flex-end;
+  }
+  &-save {
+    width: 120px;
+  }
+}
+}
+.step-button-row {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+
+// colors
+.danger {
+  color: #d0021b;
+}
+
+// 文件上传
+.upload-notification{
+  margin-bottom: 22px;
+  .upload-demo{
+    font-size: 14px;
+    color: #606266;
+    font-weight: 700;
+    .upload-btn{
+      margin-left: 30px;
+      font-size: 12px;
+      i{
+        font-size:16px;
+        font-weight: 700;
+
+      }
+    }
+  }
+}
+
+
+// 1-1 的label
+.step1-1-form {
+  .el-form-item__label{
+    padding: 0 28px 0 0
+  }
+}
+// 步骤里的配置加号按钮
+.add-btn {
+  margin-left: 20px
+}
+// 项目中带有分隔的标题
+.sigma-content{
+    background-color: #fff;
+    margin-bottom: 20px;
+}
+.sigma-middle-line:before{
+    content: '';
+    z-index: 19;
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: #f0f0f0;/*颜色需与主题大背景色一致*/ 
+    position: relative;
+    top: 14px;/*调节线高*/
+    left: 0;
+}
+.sigma-line-text{
+    display: inline-block;
+    z-index: 20;
+    background: #fff;
+    margin-left: 29px;
+    padding: 0 11px 0 9px;
+    position: relative;
+    font-size: 12px;
+    font-weight: 500;
+    color:rgba(0,153,68,1);
+}

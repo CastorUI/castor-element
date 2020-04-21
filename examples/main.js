@@ -2,7 +2,12 @@ import Vue from 'vue';
 import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/zh-CN';
 import CastorUI from './../packages/index';
+
+import './assets/styles/index.scss';
 import './../packages/theme-default/src/index.scss';
+import './demo-styles/index.scss';
+import './assets/styles/common.scss';
+import './assets/styles/fonts/style.css';
 
 import App from './App.vue';
 import router from './router';
