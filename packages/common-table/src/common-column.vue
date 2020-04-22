@@ -41,10 +41,10 @@
     <template slot-scope="scope">
       <el-link
         v-for="(item,index) of commands"
-        v-show="item.showValidator && item.showValidator.call(this, scope.row)"
+        v-show="!item.showValidator || item.showValidator.call(this, scope.row)"
         :key="index"
-        :type="item.linkType"
-        :disabled="item.disableValidator &&item.disableValidator.call(this,scope.row)"
+        :type="item.extendProps.type"
+        :disabled="item.disableValidator && item.disableValidator.call(this,scope.row)"
         @click.stop="$emit(item.command,scope.$index,scope.row)"
       >
         {{ item.text }}
