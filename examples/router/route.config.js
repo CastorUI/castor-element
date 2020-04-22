@@ -59,7 +59,7 @@ route = route.concat([
     path: '/',
     meta: {},
     name: 'home',
-    component: load('home'),
+    redirect: '/component',
   },
 ]);
 

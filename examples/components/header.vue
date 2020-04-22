@@ -281,10 +281,10 @@
             <!-- logo -->
             <slot>
               <img
-                src="../assets/logo.png"
+                src="../assets/images/logo.png"
                 alt="castor-logo"
                 class="nav-logo"
-                style="width:64px;height:64px;"
+                style="width:224px;height:78px;"
               >
             </slot>
           </router-link>
