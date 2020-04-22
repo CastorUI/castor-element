@@ -62,6 +62,7 @@
         ];
       },
     },
+    methods: {},
   };
 </script>
 ```
@@ -430,6 +431,82 @@
     methods: {
       getList() {
         console.log('this.table.pagination', this.table.pagination);
+      },
+    },
+  };
+</script>
+```
+
+:::
+
+### 新增
+
+展示新增功能的用法。
+
+:::demo 新增功能约定以链接的形式放在表格的左上角。`addText`属性来控制其是否显示，`handleAdd`方法用来响应新增事件。
+
+```html
+<template>
+  <ca-common-table
+    :dataSource="table.dataList"
+    :columns="tableColumns"
+    addText="新增任务"
+    @handleAdd="handleAdd"
+  />
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        table: {
+          dataList: [
+            {
+              id: 1001,
+              code: 'A1',
+              name: '上海燃气一期工程',
+            },
+            {
+              id: 1002,
+              code: 'A2',
+              name: '上海燃气二期工程',
+            },
+            {
+              id: 1003,
+              code: 'A3',
+              name: '上海燃气三期工程',
+            },
+          ],
+        },
+      };
+    },
+    computed: {
+      tableColumns() {
+        return [
+          {
+            type: 'default',
+            label: 'ID',
+            dataField: 'id',
+            columnSpan: 1,
+          },
+          {
+            type: 'default',
+            label: '编号',
+            dataField: 'code',
+            columnSpan: 1,
+          },
+          {
+            type: 'default',
+            label: '名称',
+            dataField: 'name',
+            columnSpan: 2,
+          },
+        ];
+      },
+    },
+    methods: {
+      handleAdd() {
+        console.log('add new record');
       },
     },
   };
