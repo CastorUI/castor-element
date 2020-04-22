@@ -11,7 +11,11 @@
         "list": [
           {
             "path": "/date-picker",
-            "title": "Table 表格"
+            "title": "日期选择器"
+          },
+          {
+            "path": "/common-table",
+            "title": "通用表格"
           }
         ]
       }
