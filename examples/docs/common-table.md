@@ -73,7 +73,7 @@
 
 展示序号列的用法。
 
-:::demo 在`tableColumns`中添加 type 为`index`的对象即可。
+:::demo 在`tableColumns`中添加`type`为`index`的对象即可。
 
 ```html
 <template>
@@ -145,7 +145,7 @@
 
 展示超链接列的用法。
 
-:::demo 在`tableColumns`中添加 type 为`link`的对象，并在`linkCommand`中绑定事件。通过在`extendProps`中添加`type`属性值设置样式。
+:::demo 在`tableColumns`中添加`type`为`link`的对象，并在`linkCommand`中绑定事件。通过在`extendProps`中添加`type`属性值设置样式。
 
 ```html
 <template>
@@ -221,11 +221,209 @@
 
 :::
 
+### 数据转换列
+
+展示数据转换列的用法。
+
+:::demo 在`tableColumns`中添加`type`为`keyToValue`的对象，并在`options`中绑定数据源。
+
+```html
+<template>
+  <ca-common-table :dataSource="table.dataList" :columns="tableColumns" />
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        optionsMap: {
+          type: [
+            {
+              value: 1,
+              label: '住宅配套项目',
+            },
+            {
+              value: 2,
+              label: '工营事业项目',
+            },
+            {
+              value: 3,
+              label: '道路工程项目',
+            },
+          ],
+        },
+        table: {
+          dataList: [
+            {
+              id: 1001,
+              code: 'A1',
+              name: '上海燃气一期工程',
+              type: 1,
+            },
+            {
+              id: 1002,
+              code: 'A2',
+              name: '上海燃气二期工程',
+              type: 2,
+            },
+            {
+              id: 1003,
+              code: 'A3',
+              name: '上海燃气三期工程',
+              type: 3,
+            },
+          ],
+        },
+      };
+    },
+    computed: {
+      tableColumns() {
+        return [
+          {
+            type: 'default',
+            label: 'ID',
+            dataField: 'id',
+            columnSpan: 1,
+          },
+          {
+            type: 'default',
+            label: '编号',
+            dataField: 'code',
+            columnSpan: 1,
+          },
+          {
+            type: 'default',
+            label: '名称',
+            dataField: 'name',
+            columnSpan: 2,
+          },
+          {
+            type: 'keyToValue',
+            label: '项目类型',
+            dataField: 'type',
+            width: '120px',
+            options: this.optionsMap['type'],
+          },
+        ];
+      },
+    },
+    methods: {},
+  };
+</script>
+```
+
+:::
+
+### 状态列
+
+展示状态列的用法。
+
+:::demo 在`tableColumns`中添加`type`为`status`的对象，并在`options`中绑定数据源。状态列与数据转换列类似，但更为定制化，可以指定图标和字体颜色。
+
+```html
+<template>
+  <ca-common-table :dataSource="table.dataList" :columns="tableColumns" />
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        optionsMap: {
+          type: [
+            {
+              value: 1,
+              label: '住宅配套项目',
+              color: '#f5a623',
+              icon: 'el-icon-success',
+            },
+            {
+              value: 2,
+              label: '工营事业项目',
+              color: '#d0021b',
+              icon: 'el-icon-remove',
+            },
+            {
+              value: 3,
+              label: '道路工程项目',
+              color: '#3d1ab7',
+              icon: 'el-icon-time',
+            },
+            {
+              value: 4,
+              label: '街坊管位移项目',
+              color: '#4a90e2',
+              icon: 'el-icon-top',
+            },
+          ],
+        },
+        table: {
+          dataList: [
+            {
+              id: 1001,
+              code: 'A1',
+              name: '上海燃气一期工程',
+              type: 1,
+            },
+            {
+              id: 1002,
+              code: 'A2',
+              name: '上海燃气二期工程',
+              type: 2,
+            },
+            {
+              id: 1003,
+              code: 'A3',
+              name: '上海燃气三期工程',
+              type: 3,
+            },
+          ],
+        },
+      };
+    },
+    computed: {
+      tableColumns() {
+        return [
+          {
+            type: 'default',
+            label: 'ID',
+            dataField: 'id',
+            columnSpan: 1,
+          },
+          {
+            type: 'default',
+            label: '编号',
+            dataField: 'code',
+            columnSpan: 1,
+          },
+          {
+            type: 'default',
+            label: '名称',
+            dataField: 'name',
+            columnSpan: 2,
+          },
+          {
+            type: 'status',
+            label: '项目类型',
+            dataField: 'type',
+            width: '140px',
+            options: this.optionsMap['type'],
+          },
+        ];
+      },
+    },
+    methods: {},
+  };
+</script>
+```
+
+:::
+
 ### 操作列
 
 展示操作列的用法。
 
-:::demo 在`tableColumns`中添加 type 为`commands`的对象。
+:::demo 在`tableColumns`中添加`type`为`commands`的对象。
 
 ```html
 <template>
@@ -507,6 +705,102 @@
     methods: {
       handleAdd() {
         console.log('add new record');
+      },
+    },
+  };
+</script>
+```
+
+:::
+
+### 定制事件
+
+展示定制事件的用法。
+
+:::demo 定制事件约定放置在表格的右上角。`customTableCommands`属性用来配置定制事件集合。定制事件一般与多选列配置使用，所以要添加`type`为`selection`的列。
+
+```html
+<template>
+  <ca-common-table
+    :dataSource="table.dataList"
+    :columns="tableColumns"
+    :customTableCommands="table.customCommands"
+    @handleStar="handleStar"
+    @handleUnstar="handleUnstar"
+  />
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        table: {
+          dataList: [
+            {
+              id: 1001,
+              code: 'A1',
+              name: '上海燃气一期工程',
+            },
+            {
+              id: 1002,
+              code: 'A2',
+              name: '上海燃气二期工程',
+            },
+            {
+              id: 1003,
+              code: 'A3',
+              name: '上海燃气三期工程',
+            },
+          ],
+          customCommands: [
+            {
+              text: '关注',
+              command: 'handleStar',
+            },
+            {
+              text: '取消关注',
+              command: 'handleUnstar',
+            },
+          ],
+        },
+      };
+    },
+    computed: {
+      tableColumns() {
+        return [
+          {
+            type: 'selection',
+            label: '',
+            dataField: '',
+            width: '40px',
+          },
+          {
+            type: 'default',
+            label: 'ID',
+            dataField: 'id',
+            columnSpan: 1,
+          },
+          {
+            type: 'default',
+            label: '编号',
+            dataField: 'code',
+            columnSpan: 1,
+          },
+          {
+            type: 'default',
+            label: '名称',
+            dataField: 'name',
+            columnSpan: 2,
+          },
+        ];
+      },
+    },
+    methods: {
+      handleStar(multipleSelection) {
+        console.log('star multipleSelection', multipleSelection);
+      },
+      handleUnstar(multipleSelection) {
+        console.log('unstar multipleSelection', multipleSelection);
       },
     },
   };
