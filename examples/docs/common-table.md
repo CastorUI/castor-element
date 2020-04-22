@@ -321,3 +321,119 @@
 ```
 
 :::
+
+### 分页
+
+展示表格分页的用法。
+
+:::demo 在`pagination`中配置分页相关属性，包含`pageIndex`和`pageSize`和`total`。这里的分页用于后台分页，所以需要配置`getList`方法用于调用后台接口，每次切换分页时都会调用此方法。当后台返回`total`值大于设置的`pageSize`属性值时，会自动显示分页组件。
+
+```html
+<template>
+  <ca-common-table
+    :dataSource="table.dataList"
+    :columns="tableColumns"
+    :pagination="table.pagination"
+    :getList="getList"
+  />
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        table: {
+          dataList: [
+            {
+              id: 1001,
+              code: 'A1',
+              name: '上海燃气一期工程',
+            },
+            {
+              id: 1002,
+              code: 'A2',
+              name: '上海燃气二期工程',
+            },
+            {
+              id: 1003,
+              code: 'A3',
+              name: '上海燃气三期工程',
+            },
+            {
+              id: 1004,
+              code: 'A4',
+              name: '上海燃气四期工程',
+            },
+            {
+              id: 1005,
+              code: 'A5',
+              name: '上海燃气三期工程',
+            },
+            {
+              id: 1006,
+              code: 'A6',
+              name: '上海燃气三期工程',
+            },
+            {
+              id: 1007,
+              code: 'A7',
+              name: '上海燃气三期工程',
+            },
+            {
+              id: 1008,
+              code: 'A8',
+              name: '上海燃气三期工程',
+            },
+            {
+              id: 1009,
+              code: 'A9',
+              name: '上海燃气三期工程',
+            },
+            {
+              id: 1010,
+              code: 'A10',
+              name: '上海燃气三期工程',
+            },
+          ],
+          pagination: {
+            pageIndex: 1,
+            pageSize: 10,
+            total: 30,
+          },
+        },
+      };
+    },
+    computed: {
+      tableColumns() {
+        return [
+          {
+            type: 'default',
+            label: 'ID',
+            dataField: 'id',
+            columnSpan: 1,
+          },
+          {
+            type: 'default',
+            label: '编号',
+            dataField: 'code',
+            columnSpan: 1,
+          },
+          {
+            type: 'default',
+            label: '名称',
+            dataField: 'name',
+            columnSpan: 2,
+          },
+        ];
+      },
+    },
+    methods: {
+      getList() {
+        console.log('this.table.pagination', this.table.pagination);
+      },
+    },
+  };
+</script>
+```
+
+:::

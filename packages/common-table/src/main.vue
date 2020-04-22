@@ -63,7 +63,7 @@
       </el-table>
     </div>
     <div
-      v-if="pagination.total > 0"
+      v-if="pagination.total > pagination.pageSize"
       class="common-pagination-container"
     >
       <el-pagination
@@ -120,11 +120,11 @@ export default {
     },
     addTextDisableValidator: {
       type: Function,
-      default: ()=>{}
+      default: () => { }
     },
     customTableCommands: {
       type: Array,
-      default: ()=>[]
+      default: () => []
     },
     showVerticalBorder: {
       type: Boolean,
@@ -136,15 +136,15 @@ export default {
     },
     defaultSort: {
       type: Object,
-      default: ()=>{}
+      default: () => { }
     },
     getList: {
       type: Function,
-      default: ()=>{}
+      default: () => { }
     },
     spanMethod: {
       type: Function,
-      default: ()=>{}
+      default: () => { }
     },
     tableStyle: {
       type: String,
@@ -162,7 +162,7 @@ export default {
     },
     customSelectionChangeEvent: {
       type: Function,
-      default: ()=>{}
+      default: () => { }
     }
   },
   data() {
@@ -172,37 +172,37 @@ export default {
   },
   computed: {
     pageSizes: function() {
-      const pageSizeArray = [10, 15, 20, 30, 50];
-      return pageSizeArray.indexOf(this.pagination.pageSize) > -1
+      const pageSizeArray=[10,15,20,30,50];
+      return pageSizeArray.indexOf(this.pagination.pageSize)>-1
         ? pageSizeArray
-        : pageSizeArray.concat(this.pagination.pageSize);
+        :pageSizeArray.concat(this.pagination.pageSize);
     }
   },
   methods: {
     handleSelectionChange(multipleSelection) {
-      this.multipleSelection = multipleSelection;
-      if (this.customSelectionChangeEvent) {
+      this.multipleSelection=multipleSelection;
+      if(this.customSelectionChangeEvent) {
         this.customSelectionChangeEvent(multipleSelection);
       }
     },
     handlePageIndexChange(pageIndex) {
-      this.pagination.pageIndex = pageIndex;
+      this.pagination.pageIndex=pageIndex;
       this.getList();
     },
     handlePageSizeChange(pageSize) {
-      this.pagination.pageIndex = 1;
-      this.pagination.pageSize = pageSize;
-      this.$store.dispatch('SetPagesize', pageSize);
+      this.pagination.pageIndex=1;
+      this.pagination.pageSize=pageSize;
+      this.$store.dispatch('SetPagesize',pageSize);
       this.getList();
     },
-    handleSortChange({ prop, order }) {
-      this.pagination.sortField = prop;
-      this.pagination.order = order;
+    handleSortChange({ prop,order }) {
+      this.pagination.sortField=prop;
+      this.pagination.order=order;
       this.getList();
     },
     indexMethod(index) {
       return (
-        this.pagination.pageSize * (this.pagination.pageIndex - 1) + index + 1
+        this.pagination.pageSize*(this.pagination.pageIndex-1)+index+1
       );
     }
   }
@@ -265,7 +265,8 @@ export default {
   .table-content {
     overflow: auto;
     width: 100%;
-    .el-table__header-wrapper tr th,.el-table__fixed-header-wrapper tr th{
+    .el-table__header-wrapper tr th,
+    .el-table__fixed-header-wrapper tr th {
       color: rgba(0, 0, 0, 0.85);
       font-weight: 500;
       background: #fafafa;
