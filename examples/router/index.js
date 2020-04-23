@@ -26,10 +26,10 @@ router.afterEach((route) => {
     Array.prototype.forEach.call(blocks, hljs.highlightBlock);
   });
   const data = {
-    home: 'Element - 网站快速成型工具',
-    guide: '指南 | Element',
-    component: '组件 | Element',
-    resource: '资源 | Element',
+    home: 'Castor - 网站快速成型工具',
+    guide: '指南 | Castor',
+    component: '组件 | Castor',
+    resource: '资源 | Castor',
   };
   for (let val in data) {
     if (new RegExp('^' + val, 'g').test(route.name)) {
