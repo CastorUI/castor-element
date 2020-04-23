@@ -250,7 +250,7 @@ export default {
     filterColumnsByDynamicFields(dynamicCloumns) {
       dynamicCloumns=dynamicCloumns.filter(
         r =>
-          r.showType==='static'||
+          r.showType!=='dynamic'||
           (r.showType==='dynamic'&&
             this.dynamicFields.some(f => f===r.label))
       );

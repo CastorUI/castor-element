@@ -111,14 +111,13 @@
       v-else-if="type==='hr'"
       :style="extendProps.style"
     >
-    <div
+    <!-- <div
       v-else-if="type==='diy'"
       :style="extendProps.style"
     >
-      <!-- TODO: 待禁用 -->
       // eslint-disable-next-line vue/no-v-html
       <div v-html="extendProps.vHtml" />
-    </div>
+    </div> -->
     <el-switch
       v-else-if="type==='switch'"
       v-model="model[dataField]"
@@ -173,9 +172,7 @@
           v-if="appendField.options && model[appendField.dataField]"
           :style="'color:'+appendField.options.filter(r=>r.value === model[appendField.dataField])[0].color+';'"
         >
-          <i
-            :class="appendField.options.filter(r=>r.value === model[appendField.dataField])[0].icon"
-          />
+          <i :class="appendField.options.filter(r=>r.value === model[appendField.dataField])[0].icon" />
           {{ appendField.options.filter(r=>r.value === model[appendField.dataField])[0].label.slice(0,5) }}
         </span>
       </template>
@@ -256,7 +253,6 @@
   </el-form-item>
 </template>
 <script>
-import { trim } from '@/utils';
 export default {
   props: {
     type: {
@@ -337,28 +333,28 @@ export default {
           {
             text: '最近一周',
             onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit('pick', [start, end]);
+              const end=new Date();
+              const start=new Date();
+              start.setTime(start.getTime()-3600*1000*24*7);
+              picker.$emit('pick',[start,end]);
             }
           },
           {
             text: '最近一个月',
             onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-              picker.$emit('pick', [start, end]);
+              const end=new Date();
+              const start=new Date();
+              start.setTime(start.getTime()-3600*1000*24*30);
+              picker.$emit('pick',[start,end]);
             }
           },
           {
             text: '最近三个月',
             onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-              picker.$emit('pick', [start, end]);
+              const end=new Date();
+              const start=new Date();
+              start.setTime(start.getTime()-3600*1000*24*90);
+              picker.$emit('pick',[start,end]);
             }
           }
         ]
@@ -367,23 +363,26 @@ export default {
   },
   methods: {
     handleClear() {
-      this.model[this.dataField] = undefined;
+      this.model[this.dataField]=undefined;
     },
-    handleFilter(query, method, options) {
-      method.call(this, query, options, this.model);
+    handleFilter(query,method,options) {
+      method.call(this,query,options,this.model);
     },
-    querySearch(queryString, cb) {
-      var options = this.options;
-      queryString = this.extendProps.needTrim && trim(queryString);
-      console.log('query', queryString);
-      var results = queryString ? options.filter(this.createFilter(queryString)) : options;
+    querySearch(queryString,cb) {
+      var options=this.options;
+      queryString=this.extendProps.needTrim&&this.trim(queryString);
+      console.log('query',queryString);
+      var results=queryString? options.filter(this.createFilter(queryString)):options;
       // 调用 callback 返回建议列表的数据
       cb(results);
     },
     createFilter(queryString) {
       return (option) => {
-        return (option.value.toLowerCase().indexOf(queryString.toLowerCase()) >= 0);
+        return (option.value.toLowerCase().indexOf(queryString.toLowerCase())>=0);
       };
+    },
+    trim(str) {
+      return str.replace(/^(\s|\u00A0)+/,'').replace(/(\s|\u00A0)+$/,'');
     }
   }
 };

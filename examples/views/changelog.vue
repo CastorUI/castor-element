@@ -141,7 +141,7 @@
         <a
           href="https://github.com/ElemeFE/element/releases"
           target="_blank"
-        >GitHub Releases</a>
+        >GitLab Releases</a>
       </el-button>
       更新日志
     </div>

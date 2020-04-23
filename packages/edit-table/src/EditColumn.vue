@@ -40,7 +40,7 @@
           :key="index"
           class="command-link"
           :type="item.linkType"
-          :disabled="!validateEditingCommands(scope.row,item.permissionUrl,item.statusValidator)"
+          :disabled="item.disableValidator && item.disableValidator.call(this,scope.row)"
           @click.stop="handleEmitEvent(item.commandType,item.command,scope.$index,scope.row)"
         >
           {{ item.text }}
@@ -52,7 +52,7 @@
           :key="index"
           class="command-link"
           :type="item.linkType"
-          :disabled="!validate(scope.row,item.permissionUrl,item.statusValidator)"
+          :disabled="item.disableValidator && item.disableValidator.call(this,scope.row)"
           @click.stop="handleEmitEvent(item.commandType,item.command,scope.$index,scope.row)"
         >
           {{ item.text }}
@@ -116,7 +116,6 @@
   </el-table-column>
 </template>
 <script>
-import { permissionConfirm } from '@/utils/permission.js';
 export default {
   directives: {
     inputNumberFocus: {
@@ -200,21 +199,6 @@ export default {
     }
   },
   methods: {
-    validate(row,permissionUrl,statusValidator) {
-      return (
-        (!permissionUrl||
-          permissionConfirm(this.$route.meta.childRoles,permissionUrl))&&
-        (!statusValidator||statusValidator.call(this,row))&&
-        !this.editing
-      );
-    },
-    validateEditingCommands(row,permissionUrl,statusValidator) {
-      return (
-        (!permissionUrl||
-          permissionConfirm(this.$route.meta.childRoles,permissionUrl))&&
-        (!statusValidator||statusValidator.call(this,row))
-      );
-    },
     getFormRules(dataField,rules) {
       const formRules={};
       formRules[dataField]=rules;

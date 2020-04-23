@@ -1,8 +1,19 @@
 import DatePicker from './date-picker';
 import CommonTable from './common-table';
+import ReportTable from './report-table';
+import EditTable from './edit-table';
+import CommonForm from './common-form';
+import CommonQuery from './common-query';
 
 // 存储组件列表
-const components = [DatePicker, CommonTable];
+const components = [
+  DatePicker,
+  CommonTable,
+  ReportTable,
+  EditTable,
+  CommonForm,
+  CommonQuery,
+];
 
 /**
  * 定义 install 方法，接收 Vue 作为参数。
