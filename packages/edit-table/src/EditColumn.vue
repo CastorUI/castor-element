@@ -34,7 +34,7 @@
     :align="align"
   >
     <template slot-scope="scope">
-      <template v-if="editingRow != null">
+      <template v-if="editingRow != null && editingRow.id === scope.row.id">
         <el-link
           v-for="(item,index) of editableCommands"
           :key="index"
