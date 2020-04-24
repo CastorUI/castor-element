@@ -53,12 +53,12 @@
     >
       <el-button
         v-for="(item,index) of commands"
-        v-show="item.visibleValidator && item.visibleValidator.call(this,model)"
+        v-show="!item.visibleValidator || item.visibleValidator.call(this,model)"
         :key="index"
+        class="command"
         :icon="item.icon"
         :disabled="item.disableValidator && item.disableValidator.call(this,model)"
         :type="item.styleType || 'primary'"
-        class="command"
         :loading="item.loading && loading"
         :plain="item.extendProps && item.extendProps.plain"
         :circle="item.extendProps && item.extendProps.circle"
@@ -82,7 +82,7 @@ export default {
       type: String,
       default: null
     },
-    dataSource: {
+    model: {
       type: Object,
       default: function() {
         return {};
@@ -122,10 +122,6 @@ export default {
       type: String,
       default: 'add'
     },
-    visibleValidator: {
-      type: Function,
-      default: () => true
-    },
     customComponents: {
       type: Object,
       default: function() {
@@ -138,29 +134,15 @@ export default {
     }
   },
   data() {
-    const dataModel = {};
-    const dataRules = {};
+    const dataRules={};
     this.fields.forEach(r => {
-      if (r.dataField) {
-        dataModel[r.dataField] = r.defaultValue ? r.defaultValue : undefined;
-        dataRules[r.dataField] = r.rules ? r.rules : undefined;
+      if(r.dataField&&r.rules) {
+        dataRules[r.dataField]=r.rules;
       }
     });
     return {
-      model: {...dataModel, ...this.dataSource },
       rules: dataRules
     };
-  },
-  watch: {
-    dataSource: {
-      handler: function() {
-        if (this.model && this.dataSource) {
-          this.model = { ...this.model, ...this.dataSource };
-        }
-      },
-      deep: true,
-      immediate: false
-    }
   }
 };
 </script>

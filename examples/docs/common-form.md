@@ -12,9 +12,9 @@
     :formId="form.formId"
     :ref="form.formId"
     :operateType="form.operateType"
-    :fields="formFields"
-    :dataSource="form.dataSource"
+    :model="form.model"
     :commands="form.commands"
+    :fields="formFields"
     @handleCancel="handleCancel"
     @handleSave="handleSave"
   />
@@ -27,7 +27,11 @@
         form: {
           formId: 'editForm',
           operateType: 'add',
-          dataSource: {},
+          model: {
+            code: undefined,
+            en_name: undefined,
+            cn_name: undefined,
+          },
           commands: [
             {
               text: '取消',
@@ -66,14 +70,11 @@
       },
     },
     methods: {
-      handleCancel(model) {
-        this.form.visible = false;
-        this.getList();
+      handleCancel() {
+        console.log('handleCancel,model:', this.form.model);
       },
-      handleSave(model) {
-        console.log('model', model);
-        this.form.visible = false;
-        this.getList();
+      handleSave() {
+        console.log('handleSave,model:', this.form.model);
       },
     },
   };
