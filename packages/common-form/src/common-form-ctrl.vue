@@ -4,7 +4,7 @@
     :label="label?(label+' :'):''"
     :prop="dataField"
     :label-width="label?labelWidth:'0'"
-    :style="'float:left;padding-right:10px;minWidth:300px;width:'+width+';'"
+    :style="'float:left;padding-right:10px;minWidth:300px;width:'+width+';'+ heightStyle"
     :required="extendProps && extendProps.required"
   >
     <el-select
@@ -279,6 +279,10 @@ export default {
       type: String,
       default: undefined
     },
+    height: {
+      type: String,
+      default: '36px'
+    },
     groupTitle: {
       type: String,
       default: undefined
@@ -360,6 +364,11 @@ export default {
         ]
       }
     };
+  },
+  computed: {
+    heightStyle() {
+      return this.type==='custom'? '':`height:${this.height};`;
+    }
   },
   methods: {
     handleClear() {

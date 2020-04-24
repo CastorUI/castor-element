@@ -2,7 +2,7 @@
   <el-form-item
     :label="label+' :'"
     :prop="dataField"
-    :style="'float:left;minWidth:300px;width:'+width+';'"
+    :style="'float:left;minWidth:300px;width:'+width+';height:'+height+';'"
   >
     <el-select
       v-if="type === 'select' || type === 'multiSelect'"
@@ -98,6 +98,10 @@ export default {
     width: {
       type: String,
       default: undefined
+    },
+    height: {
+      type: String,
+      default: '36px'
     },
     extendProps: {
       type: Object,

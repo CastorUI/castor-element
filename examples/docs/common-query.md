@@ -64,7 +64,7 @@
           ],
         },
         search: {
-          formId: 'editForm',
+          formId: 'searchForm',
           operateType: 'add',
           model: {
             code: '1001',
@@ -148,11 +148,10 @@
     },
     methods: {
       handleFilter() {
-        this.table.pagination.pageIndex = 1;
-        this.getList();
+        console.log('handleFilter', this.search.model);
       },
       handleReset() {
-        this.$refs['queryForm'].$refs['form'].resetFields();
+        this.$refs['searchForm'].$refs['form'].resetFields();
       },
     },
   };
