@@ -211,8 +211,7 @@
     },
     methods: {
       handleLink(index, row) {
-        console.log('handleLink');
-        console.log(index, row);
+        console.log('handleLink,', index, row);
       },
     },
   };
@@ -507,12 +506,10 @@
     },
     methods: {
       handleEdit(index, row) {
-        console.log('handleEdit');
-        console.log(index, row);
+        console.log('handleEdit,', index, row);
       },
       handleDelete(index, row) {
-        console.log('handleDelete');
-        console.log(index, row);
+        console.log('handleDelete,', index, row);
       },
     },
   };

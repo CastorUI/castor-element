@@ -95,13 +95,11 @@
     },
     methods: {
       handleEdit(index, row) {
-        console.log('handleEdit');
-        console.log(index, row);
+        console.log('handleEdit,', index, row);
         row.operateType = 'edit';
       },
       handleSave(index, row) {
-        console.log('handleSave');
-        console.log(index, row);
+        console.log('handleSave,', index, row);
       },
     },
   };
@@ -208,13 +206,11 @@
     },
     methods: {
       handleEdit(index, row) {
-        console.log('handleEdit');
-        console.log(index, row);
+        console.log('handleEdit,', index, row);
         row.operateType = 'edit';
       },
       handleSave(index, row) {
-        console.log('handleSave');
-        console.log(index, row);
+        console.log('handleSave,', index, row);
       },
     },
   };
@@ -336,23 +332,19 @@
     },
     methods: {
       handleEdit(index, row) {
-        console.log('handleEdit');
-        console.log(index, row);
+        console.log('handleEdit,', index, row);
         row.operateType = 'edit';
       },
       handleSave(index, row) {
-        console.log('handleSave');
-        console.log(index, row);
+        console.log('handleSave,', index, row);
         row.operateType = 'view';
       },
       handleCancel(index, row) {
         row.operateType = 'view';
-        console.log('handleCancel');
-        console.log(index, row);
+        console.log('handleCancel,', index, row);
       },
       handleDelete(index, row) {
-        console.log('handleDelete');
-        console.log(index, row);
+        console.log('handleDelete,', index, row);
       },
     },
   };
@@ -481,23 +473,19 @@
     },
     methods: {
       handleEdit(index, row) {
-        console.log('handleEdit');
-        console.log(index, row);
+        console.log('handleEdit,', index, row);
         row.operateType = 'edit';
       },
       handleSave(index, row) {
-        console.log('handleSave');
-        console.log(index, row);
+        console.log('handleSave,', index, row);
         row.operateType = 'view';
       },
       handleCancel(index, row) {
         row.operateType = 'view';
-        console.log('handleCancel');
-        console.log(index, row);
+        console.log('handleCancel,', index, row);
       },
       handleDelete(index, row) {
-        console.log('handleDelete');
-        console.log(index, row);
+        console.log('handleDelete,', index, row);
       },
     },
   };
