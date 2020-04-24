@@ -1,6 +1,5 @@
 <template>
   <el-form
-    :id="formId"
     ref="form"
     class="form"
     :model="model"
@@ -63,7 +62,7 @@
         :plain="item.extendProps && item.extendProps.plain"
         :circle="item.extendProps && item.extendProps.circle"
         :round="item.extendProps && item.extendProps.round"
-        @click="$emit(item.command,model)"
+        @click="$emit(item.command)"
       >
         {{ item.text }}
       </el-button>
@@ -78,10 +77,6 @@ export default {
     CommonFormCtrl
   },
   props: {
-    formId: {
-      type: String,
-      default: null
-    },
     model: {
       type: Object,
       default: function() {
