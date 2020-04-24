@@ -8,6 +8,8 @@
       v-if="type === 'select' || type === 'multiSelect'"
       v-model="model[dataField]"
       :placeholder="'查询'+label"
+      :multiple="type==='multiSelect'"
+      :allow-create="extendProps.allowCreate || false"
       clearable
       filterable
       style="width:100%; "
@@ -44,12 +46,11 @@
       class="query-item"
     >
       <el-checkbox
-        v-for="item in options"
-        :key="item"
-        :label="item"
-      >
-        {{ item }}
-      </el-checkbox>
+        v-for="option in options"
+        :key="option.value"
+        :label="option.label"
+        :disabled="option.disabled"
+      />
     </el-checkbox-group>
     <input-number-range
       v-else-if="type==='inputNumberRange'"
@@ -109,65 +110,65 @@ export default {
   },
   computed: {
     pickerOptions: function() {
-      if (this.type === 'dateTimeRange' || this.type === 'dateRange') {
+      if(this.type==='dateTimeRange'||this.type==='dateRange') {
         return (
-          this.extendProps.pickerOptions || {
+          this.extendProps.pickerOptions||{
             shortcuts: [
               {
                 text: '最近一周',
                 onClick(picker) {
-                  const end = new Date();
-                  const start = new Date();
-                  start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-                  picker.$emit('pick', [start, end]);
+                  const end=new Date();
+                  const start=new Date();
+                  start.setTime(start.getTime()-3600*1000*24*7);
+                  picker.$emit('pick',[start,end]);
                 }
               },
               {
                 text: '最近一个月',
                 onClick(picker) {
-                  const end = new Date();
-                  const start = new Date();
-                  start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-                  picker.$emit('pick', [start, end]);
+                  const end=new Date();
+                  const start=new Date();
+                  start.setTime(start.getTime()-3600*1000*24*30);
+                  picker.$emit('pick',[start,end]);
                 }
               },
               {
                 text: '最近三个月',
                 onClick(picker) {
-                  const end = new Date();
-                  const start = new Date();
-                  start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-                  picker.$emit('pick', [start, end]);
+                  const end=new Date();
+                  const start=new Date();
+                  start.setTime(start.getTime()-3600*1000*24*90);
+                  picker.$emit('pick',[start,end]);
                 }
               }
             ]
           }
         );
-      } else if (this.type === 'monthRange') {
+      } else if(this.type==='monthRange') {
         return (
-          this.extendProps.pickerOptions || {
+          this.extendProps.pickerOptions||{
             shortcuts: [
               {
                 text: '本月',
                 onClick(picker) {
-                  picker.$emit('pick', [new Date(), new Date()]);
+                  picker.$emit('pick',[new Date(),new Date()]);
                 }
               },
               {
                 text: '今年至今',
                 onClick(picker) {
-                  const end = new Date();
-                  const start = new Date(new Date().getFullYear(), 0);
-                  picker.$emit('pick', [start, end]);
+                  const end=new Date();
+                  const start=new Date(new Date().getFullYear(),0);
+                  picker.$emit('pick',[start,end]);
                 }
               },
               {
                 text: '最近六个月',
                 onClick(picker) {
-                  const end = new Date();
-                  const start = new Date();
-                  start.setMonth(start.getMonth() - 6);
-                  picker.$emit('pick', [start, end]);
+                  const end=new Date();
+                  const start=new Date();
+                  start.setMonth(start.getMonth()-6);
+                  picker.$emit('pick',[start,end]);
                 }
               }
             ]
@@ -181,7 +182,8 @@ export default {
 };
 </script>
 <style rel="stylesheet/scss" lang="scss">
-.el-select--small, .el-input--small{
+.el-select--small,
+.el-input--small {
   line-height: 13px;
 }
 </style>

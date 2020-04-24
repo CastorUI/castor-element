@@ -94,7 +94,7 @@
     >
       <el-checkbox
         v-for="option in options"
-        :key="option.label"
+        :key="option.value"
         :label="option.label"
         :disabled="option.disabled"
       />
