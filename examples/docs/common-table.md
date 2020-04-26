@@ -805,3 +805,33 @@
 ```
 
 :::
+
+### Attributes
+
+| 参数                       | 说明                           | 类型     | 可选值 | 默认值 |
+| -------------------------- | ------------------------------ | -------- | ------ | ------ |
+| loading                    | 是否显示 loading               | boolean  | —      | false  |
+| dataSource                 | 数据源                         | array    | —      | []     |
+| columns                    | 列集合                         | array    | —      | []     |
+| pagination                 | 分页对象                       | object   | —      | {}     |
+| addText                    | 新增按钮显示文本               | string   | —      | -      |
+| addTextDisableValidator    | 新增禁用校验器                 | function | —      | -      |
+| customTableCommands        | 自定义事件，显示在表格上方右侧 | array    | —      | []     |
+| showVerticalBorder         | 是否显示纵向边框               | boolean  | —      | true   |
+| showStripe                 | 是否显示斑马线                 | boolean  | -      | false  |
+| getList                    | 查询数据方法                   | function | —      | —      |
+| spanMethod                 | 合并单元格方法                 | function | —      | —      |
+| tableStyle                 | 自定义表格样式                 | string   | -      | -      |
+| rowKey                     | 行 ID 字段                     | string   | -      | -      |
+| extendProps                | 扩展属性对象                   | object   | -      | -      |
+| customSelectionChangeEvent | 行多选事件                     | function | —      | —      |
+
+### Pagination Options
+
+| 参数      | 说明         | 类型   | 可选值               | 默认值    |
+| --------- | ------------ | ------ | -------------------- | --------- |
+| pageIndex | 分页索引     | number | —                    | 1         |
+| pageSize  | 每页显示条数 | number | —                    | 10        |
+| total     | 数据条数总计 | number | -                    | 0         |
+| sortField | 排序字段     | string | —                    | —         |
+| order     | 排序方式     | string | ascending/descending | ascending |

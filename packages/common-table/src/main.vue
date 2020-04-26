@@ -134,10 +134,6 @@ export default {
       type: Boolean,
       default: false
     },
-    defaultSort: {
-      type: Object,
-      default: () => { }
-    },
     getList: {
       type: Function,
       default: () => { }
@@ -171,11 +167,17 @@ export default {
     };
   },
   computed: {
-    pageSizes: function() {
+    pageSizes() {
       const pageSizeArray=[10,15,20,30,50];
       return pageSizeArray.indexOf(this.pagination.pageSize)>-1
         ? pageSizeArray
         :pageSizeArray.concat(this.pagination.pageSize);
+    },
+    defaultSort() {
+      return {
+        prop: this.pagination.sortField,
+        order: this.pagination.order
+      }
     }
   },
   methods: {
