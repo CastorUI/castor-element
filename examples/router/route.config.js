@@ -59,16 +59,16 @@ let guideRoute = {
   component: load('guide'),
   children: [
     {
-      path: 'design', // 设计原则
+      path: 'aim', // 目标
+      name: 'guide-aim',
+      meta: {},
+      component: load('aim'),
+    },
+    {
+      path: 'design', // 适用场景
       name: 'guide-design',
       meta: {},
       component: load('design'),
-    },
-    {
-      path: 'nav', // 导航
-      name: 'guide-nav',
-      meta: {},
-      component: load('nav'),
     },
   ],
 };

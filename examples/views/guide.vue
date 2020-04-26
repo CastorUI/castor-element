@@ -85,13 +85,13 @@ export default {
     return {
       navsData: [
         {
-          path: '/design',
-          name: '设计原则'
+          path: '/aim',
+          name: '设计目标'
         },
         {
-          path: '/nav',
-          name: '导航'
-        }
+          path: '/design',
+          name: '适用场景'
+        },
       ]
     };
   }
