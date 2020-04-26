@@ -5,6 +5,7 @@
   },
   {
     "name": "开发指南",
+    "path": "/guide",
     "children": [
       {
         "path": "/installation",
@@ -22,6 +23,7 @@
   },
   {
     "name": "组件",
+    "path": "/components",
     "groups": [
       {
         "groupName": "Data",

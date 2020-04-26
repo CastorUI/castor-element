@@ -4,8 +4,8 @@ const load = function(path) {
   return require(`../views/${path}.vue`).default;
 };
 
-const loadDocs = function(path) {
-  return require(`../docs${path}.md`);
+const loadDocs = function(path, modulePath = '') {
+  return require(`../docs${modulePath}${path}.md`);
 };
 
 const registerComponentRoute = () => {
@@ -20,21 +20,23 @@ const registerComponentRoute = () => {
     if (nav.href) return;
     if (nav.groups) {
       nav.groups.forEach((group) => {
-        group.list.forEach((nav) => {
-          addRoute(nav);
+        group.list.forEach((item) => {
+          addRoute(item, nav.path);
         });
       });
     } else if (nav.children) {
-      nav.children.forEach((nav) => {
-        addRoute(nav);
+      nav.children.forEach((child) => {
+        addRoute(child, nav.path);
       });
     } else {
       addRoute(nav);
     }
   });
-  function addRoute(page) {
+  function addRoute(page, modulePath = '') {
     const component =
-      page.path === '/changelog' ? load('changelog') : loadDocs(page.path);
+      page.path === '/changelog'
+        ? load('changelog')
+        : loadDocs(page.path, modulePath);
     let child = {
       path: page.path.slice(1),
       meta: {
