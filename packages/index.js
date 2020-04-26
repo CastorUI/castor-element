@@ -1,4 +1,3 @@
-import DatePicker from './date-picker';
 import CommonTable from './common-table';
 import ReportTable from './report-table';
 import EditTable from './edit-table';
@@ -7,7 +6,6 @@ import CommonQuery from './common-query';
 
 // 存储组件列表
 const components = [
-  DatePicker,
   CommonTable,
   ReportTable,
   EditTable,
@@ -32,7 +30,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
-  version: '2.10.1',
+  version: '1.0.0',
   // 导出的对象必须具有 install，才能被 Vue.use() 方法安装
   install,
   // 以下是具体的组件列表
