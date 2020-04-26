@@ -29,10 +29,6 @@
         "groupName": "Data",
         "list": [
           {
-            "path": "/date-picker",
-            "title": "日期选择器"
-          },
-          {
             "path": "/common-table",
             "title": "通用表格"
           },
