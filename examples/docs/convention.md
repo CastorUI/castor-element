@@ -32,3 +32,8 @@
 - 每个可以显示的`command`都支持两种校验器：`disableValidator`和`visibleValidator`
   - `disableValidator` 返回 `true` 时禁用
   - `visibleValidator` 返回 `false` 时不可见
+
+# TODO
+
+- 在指南中定义`支持什么`和`不支持什么`
+- 将通用的理念提取出来，如`命令`

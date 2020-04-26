@@ -865,7 +865,7 @@
 | ---------------- | ------------ | -------- | ------ | ------ |
 | text             | 显示文本     | string   | —      | -      |
 | command          | 绑定事件名称 | string   | —      | -      |
-| showValidator    | 显示校验     | function | —      | -      |
+| visibleValidator | 显示校验     | function | —      | -      |
 | disableValidator | 可用校验     | function | —      | -      |
 | extendProps      | 扩展属性     | object   | —      | -      |
 
