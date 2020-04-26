@@ -69,11 +69,15 @@
           model: {
             code: '1001',
             en_name: undefined,
-            cn_name: undefined,
             valid_end_date: undefined,
             user_type: undefined,
             enabled: false,
             equipment: [],
+            from_num: 200,
+            to_num: 500,
+            create_date_range: undefined,
+            create_month_range: undefined,
+            create_month: undefined,
           },
           commands: [
             {
@@ -106,12 +110,6 @@
             columnSpan: 1,
           },
           {
-            type: 'input',
-            label: '汉语名',
-            dataField: 'cn_name',
-            columnSpan: 1,
-          },
-          {
             type: 'date',
             label: '有效期',
             dataField: 'valid_end_date',
@@ -136,6 +134,51 @@
             dataField: 'user_type',
             columnSpan: 1,
             options: this.optionsMap['user_type'],
+          },
+          {
+            dataField: '',
+            label: '工程编号',
+            type: 'inputNumberRange',
+            showType: 'static',
+            columnSpan: 2,
+            extendProps: {
+              from: {
+                dataField: 'from_num',
+                label: '起始编号',
+                precision: 2,
+                step: 5,
+                min: 100,
+                max: 1000,
+              },
+              to: {
+                dataField: 'to_num',
+                label: '终止编号',
+                precision: 2,
+                step: 5,
+                min: 100,
+                max: 1000,
+              },
+            },
+          },
+          {
+            type: 'dateRange',
+            label: '创建日期区间',
+            dataField: 'create_date_range',
+            columnSpan: 2,
+            showType: 'static',
+          },
+          {
+            type: 'monthRange',
+            label: '创建月份',
+            dataField: 'create_month_range',
+            columnSpan: 2,
+            showType: 'static',
+          },
+          {
+            type: 'month',
+            label: '创建月份',
+            dataField: 'create_month',
+            showType: 'static',
           },
           {
             type: 'checkboxGroup',
