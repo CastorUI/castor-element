@@ -204,8 +204,8 @@ export default {
         this.editCommand.command
       ) {
         if(
-          this.editCommand.statusValidator&&
-          !this.editCommand.statusValidator.call(this,row)
+          this.editCommand.disableValidator&&
+          this.editCommand.disableValidator.call(this,row)
         ) {
           return;
         }
@@ -235,8 +235,8 @@ export default {
         this.saveCommand.command
       ) {
         if(
-          this.saveCommand.statusValidator&&
-          !this.saveCommand.statusValidator.call(this,this.editingRow)
+          this.saveCommand.disableValidator&&
+          this.saveCommand.disableValidator.call(this,this.editingRow)
         ) {
           return false;
         }

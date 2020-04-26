@@ -29,3 +29,6 @@
 
 - ElementUI 相关属性都放在 ExtendProps 中处理
 - 自定义事件以`handle`前缀来命名，如`handleAdd`
+- 每个可以显示的`command`都支持两种校验器：`disableValidator`和`visibleValidator`
+  - `disableValidator` 返回 `true` 时禁用
+  - `visibleValidator` 返回 `false` 时不可见

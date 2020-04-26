@@ -194,13 +194,13 @@
       rowEditCommand() {
         return {
           command: 'handleEdit',
-          statusValidator: () => this.table.validateStatus,
+          disableValidator: () => !this.table.validateStatus,
         };
       },
       rowSaveCommand() {
         return {
           command: 'handleSave',
-          statusValidator: () => this.table.validateStatus,
+          disableValidator: () => !this.table.validateStatus,
         };
       },
     },
