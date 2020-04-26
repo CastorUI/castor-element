@@ -835,3 +835,36 @@
 | total     | 数据条数总计 | number | -                    | 0         |
 | sortField | 排序字段     | string | —                    | —         |
 | order     | 排序方式     | string | ascending/descending | ascending |
+
+### column Options
+
+| 参数        | 说明                                                                      | 类型     | 可选值                                                  | 默认值    |
+| ----------- | ------------------------------------------------------------------------- | -------- | ------------------------------------------------------- | --------- |
+| type        | 类型                                                                      | string   | default/selection/index/link/keyToValue/status/commands | default   |
+| label       | 标题                                                                      | string   | —                                                       | 10        |
+| dataField   | 绑定字段                                                                  | string   | —                                                       | 0         |
+| width       | 固定宽度                                                                  | string   | -                                                       | -         |
+| columnSpan  | 列宽所占比例                                                              | string   | —                                                       | —         |
+| minWidth    | 最小宽度,此属性与 columnSpan 两者二选一使用                               | string   |                                                         | -         |
+| commands    | 行事件集合，当 type 为 commands 时使用,详情见 `Command Options`           | array    | -                                                       | []        |
+| options     | 数据转换数据源                                                            | array    | -                                                       | []        |
+| extendProps | 扩展属性，当使用 ElementUI 属性时使用,详情见 `Column extendProps Options` | string   | -                                                       | ascending |
+| align       | 对齐方式                                                                  | string   | -                                                       | center    |
+| sortable    | 是否支持排序                                                              | boolean  | -                                                       | false     |
+| linkCommand | 超链接事件，当 type 为 link 时使用                                        | function | -                                                       | -         |
+
+### Command Options
+
+| 参数             | 说明         | 类型     | 可选值 | 默认值 |
+| ---------------- | ------------ | -------- | ------ | ------ |
+| text             | 显示文本     | string   | —      | -      |
+| command          | 绑定事件名称 | string   | —      | -      |
+| showValidator    | 显示校验     | function | —      | -      |
+| disableValidator | 可用校验     | function | —      | -      |
+| extendProps      | 扩展属性     | object   | —      | -      |
+
+### Column extendProps Options
+
+| 参数 | 说明     | 类型   | 可选值 | 默认值 |
+| ---- | -------- | ------ | ------ | ------ |
+| type | 控件类型 | string | —      | -      |
