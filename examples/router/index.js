@@ -29,7 +29,6 @@ router.afterEach((route) => {
     home: 'Castor - 网站快速成型工具',
     guide: '指南 | Castor',
     component: '组件 | Castor',
-    resource: '资源 | Castor',
   };
   for (let val in data) {
     if (new RegExp('^' + val, 'g').test(route.name)) {
@@ -38,7 +37,6 @@ router.afterEach((route) => {
     }
   }
   document.title = 'Element';
-  // ga('send', 'event', 'PageView', route.name);
 });
 
 export default router;

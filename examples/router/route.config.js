@@ -8,7 +8,7 @@ const loadDocs = function(path) {
   return require(`../docs${path}.md`);
 };
 
-const registerRoute = () => {
+const registerComponentRoute = () => {
   let route = [];
   route.push({
     path: `/component`,
@@ -50,48 +50,33 @@ const registerRoute = () => {
 
   return route;
 };
-
-let route = registerRoute();
-
-const generateMiscRoutes = function() {
-  let guideRoute = {
-    path: `/guide`, // 指南
-    redirect: `/guide/design`,
-    component: load('guide'),
-    children: [
-      {
-        path: 'design', // 设计原则
-        name: 'guide-design',
-        meta: {},
-        component: load('design'),
-      },
-      {
-        path: 'nav', // 导航
-        name: 'guide-nav',
-        meta: {},
-        component: load('nav'),
-      },
-    ],
-  };
-
-  let indexRoute = {
-    path: `/`, // 首页
-    meta: {},
-    name: 'home',
-    component: load('home'),
-  };
-
-  return [guideRoute, indexRoute];
+/// 指南
+let guideRoute = {
+  path: `/guide`, // 指南
+  redirect: `/guide/design`,
+  component: load('guide'),
+  children: [
+    {
+      path: 'design', // 设计原则
+      name: 'guide-design',
+      meta: {},
+      component: load('design'),
+    },
+    {
+      path: 'nav', // 导航
+      name: 'guide-nav',
+      meta: {},
+      component: load('nav'),
+    },
+  ],
 };
-route = route.concat(generateMiscRoutes());
-// route = route.concat([
-//   // 首页
-//   {
-//     path: '/',
-//     meta: {},
-//     name: 'home',
-//     redirect: '/component',
-//   },
-// ]);
+/// 首页
+let indexRoute = {
+  path: `/`,
+  meta: {},
+  name: 'home',
+  redirect: '/guide',
+};
 
+let route = registerComponentRoute().concat([guideRoute, indexRoute]);
 export default route;
