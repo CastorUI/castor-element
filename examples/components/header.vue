@@ -295,7 +295,15 @@
           <li class="nav-item">
             <router-link
               active-class="active"
-              :to="`/component`"
+              to="/guide"
+            >
+              {{ navConfig.guide }}
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link
+              active-class="active"
+              to="/component"
             >
               {{ navConfig.components }}
             </router-link>
@@ -350,7 +358,7 @@ export default {
     return {
       active: 'true',
       versions: [],
-      version: '',
+      version: '1.0.0',
       verDropdownVisible: true,
     };
   },
@@ -358,6 +366,7 @@ export default {
   computed: {
     navConfig() {
       return {
+        "guide": "指南",
         "components": "组件",
       };
     },

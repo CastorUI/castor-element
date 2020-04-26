@@ -38,7 +38,7 @@ router.afterEach((route) => {
     }
   }
   document.title = 'Element';
-  ga('send', 'event', 'PageView', route.name);
+  // ga('send', 'event', 'PageView', route.name);
 });
 
 export default router;

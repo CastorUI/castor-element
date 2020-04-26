@@ -12,7 +12,7 @@ const registerRoute = () => {
   let route = [];
   route.push({
     path: `/component`,
-    // redirect: `/component/installation`,
+    redirect: `/component/installation`,
     component: load('component'),
     children: [],
   });
@@ -53,14 +53,45 @@ const registerRoute = () => {
 
 let route = registerRoute();
 
-route = route.concat([
-  // 首页
-  {
-    path: '/',
+const generateMiscRoutes = function() {
+  let guideRoute = {
+    path: `/guide`, // 指南
+    redirect: `/guide/design`,
+    component: load('guide'),
+    children: [
+      {
+        path: 'design', // 设计原则
+        name: 'guide-design',
+        meta: {},
+        component: load('design'),
+      },
+      {
+        path: 'nav', // 导航
+        name: 'guide-nav',
+        meta: {},
+        component: load('nav'),
+      },
+    ],
+  };
+
+  let indexRoute = {
+    path: `/`, // 首页
     meta: {},
     name: 'home',
-    redirect: '/component',
-  },
-]);
+    component: load('home'),
+  };
+
+  return [guideRoute, indexRoute];
+};
+route = route.concat(generateMiscRoutes());
+// route = route.concat([
+//   // 首页
+//   {
+//     path: '/',
+//     meta: {},
+//     name: 'home',
+//     redirect: '/component',
+//   },
+// ]);
 
 export default route;
