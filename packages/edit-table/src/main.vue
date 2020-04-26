@@ -2,14 +2,14 @@
   <div class="common-edit-table-container">
     <div class="table-commands">
       <el-button
-        v-show="addText"
+        v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
         type="text"
-        icon="el-icon-circle-plus-outline"
+        :icon="addCommand.icon"
         class="table-add-command"
-        :disabled="editing || (addTextDisableValidator && addTextDisableValidator.call(this))"
-        @click="handleAdd"
+        :disabled="editing || (addCommand.disableValidator && addCommand.disableValidator.call(this))"
+        @click="$emit(addCommand.command)"
       >
-        {{ addText }}
+        {{ addCommand.text }}
       </el-button>
     </div>
     <el-table
@@ -86,6 +86,10 @@ export default {
       type: Array,
       default: () => []
     },
+    addCommand: {
+      type: Object,
+      default: () => { }
+    },
     editCommand: {
       type: Object,
       default: () => { }
@@ -95,10 +99,6 @@ export default {
       default: () => { }
     },
     rowKey: {
-      type: String,
-      default: ''
-    },
-    addText: {
       type: String,
       default: ''
     },
@@ -127,10 +127,6 @@ export default {
       default: false
     },
     summaryMethod: {
-      type: Function,
-      default: () => { }
-    },
-    addTextDisableValidator: {
       type: Function,
       default: () => { }
     },

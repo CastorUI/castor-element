@@ -2,14 +2,14 @@
   <div class="common-table-container">
     <div class="table-commands">
       <el-button
-        v-show="addText"
+        v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
         type="text"
-        icon="el-icon-circle-plus-outline"
+        :icon="addCommand.icon"
         class="table-add-command"
-        :disabled="addTextDisableValidator && addTextDisableValidator.call(this)"
-        @click="$emit('handleAdd')"
+        :disabled="addCommand.disableValidator && addCommand.disableValidator.call(this)"
+        @click="$emit(addCommand.command)"
       >
-        {{ addText }}
+        {{ addCommand.text }}
       </el-button>
       <el-button-group
         v-show="customTableCommands"
@@ -114,12 +114,8 @@ export default {
         };
       }
     },
-    addText: {
-      type: String,
-      default: undefined
-    },
-    addTextDisableValidator: {
-      type: Function,
+    addCommand: {
+      type: Object,
       default: () => { }
     },
     customTableCommands: {

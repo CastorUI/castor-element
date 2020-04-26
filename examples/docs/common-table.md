@@ -645,7 +645,7 @@
   <ca-common-table
     :dataSource="table.dataList"
     :columns="tableColumns"
-    addText="新增任务"
+    :addCommand="table.addCommand"
     @handleAdd="handleAdd"
   />
 </template>
@@ -672,6 +672,13 @@
               name: '上海燃气三期工程',
             },
           ],
+          addCommand: {
+            text: '新增任务',
+            command: 'handleAdd',
+            icon: 'el-icon-circle-plus-outline',
+            visibleValidator: () => true,
+            disableValidator: () => {},
+          },
         },
       };
     },
@@ -814,8 +821,7 @@
 | dataSource                 | 数据源                         | array    | —      | []     |
 | columns                    | 列集合                         | array    | —      | []     |
 | pagination                 | 分页对象                       | object   | —      | {}     |
-| addText                    | 新增按钮显示文本               | string   | —      | -      |
-| addTextDisableValidator    | 新增禁用校验器                 | function | —      | -      |
+| addCommand                 | 新增事件对象                   | object   | —      | {}     |
 | customTableCommands        | 自定义事件，显示在表格上方右侧 | array    | —      | []     |
 | showVerticalBorder         | 是否显示纵向边框               | boolean  | —      | true   |
 | showStripe                 | 是否显示斑马线                 | boolean  | -      | false  |
