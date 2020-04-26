@@ -99,6 +99,8 @@
             user_type: undefined,
             enabled: false,
             equipment: [],
+            design_cost: undefined,
+            create_date_range: undefined,
           },
           commands: [
             {
@@ -186,6 +188,24 @@
             dataField: 'city',
             columnSpan: 2,
             options: this.optionsMap['city'],
+          },
+          {
+            type: 'inputNumber',
+            label: '设计成本',
+            dataField: 'design_cost',
+            columnSpan: 1,
+            extendProps: {
+              precision: 2,
+              step: 5,
+              min: 100,
+              max: 1000,
+            },
+          },
+          {
+            type: 'dateRange',
+            label: '创建日期区间',
+            dataField: 'create_date_range',
+            columnSpan: 2,
           },
         ];
       },
@@ -616,6 +636,76 @@
         console.log('handleSave,model:', this.form.model);
       },
     },
+  };
+</script>
+```
+
+:::
+
+### 状态校验
+
+所有的表单字段都支持 `visibleValidator` 和 `disableValidator`
+
+:::demo 通过`visibleValidator` 和 `disableValidator`可以实现动态显示或动态控制。
+
+```html
+<template>
+  <ca-common-form
+    :ref="form.formId"
+    :operateType="form.operateType"
+    :model="form.model"
+    :fields="formFields"
+  />
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        optionsMap: {
+          anditor_id: [
+            {
+              value: 1,
+              label: '张三',
+            },
+            {
+              value: 2,
+              label: '李四',
+            },
+          ],
+        },
+        form: {
+          formId: 'editForm',
+          operateType: 'edit',
+          model: {
+            anditor_id: undefined,
+            audit_enabled: false,
+          },
+        },
+      };
+    },
+    computed: {
+      formFields() {
+        return [
+          {
+            type: 'switch',
+            label: '启用审核',
+            dataField: 'audit_enabled',
+            columnSpan: 1,
+            disableValidator: (model) => model.anditor_id,
+          },
+          {
+            type: 'select',
+            label: '审核人',
+            dataField: 'anditor_id',
+            columnSpan: 1,
+            options: this.optionsMap['anditor_id'],
+            visibleValidator: (model) => model.audit_enabled,
+          },
+        ];
+      },
+    },
+    methods: {},
   };
 </script>
 ```
