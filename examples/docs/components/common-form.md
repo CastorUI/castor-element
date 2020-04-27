@@ -326,6 +326,7 @@
             cn_name: undefined,
             valid_end_date: undefined,
             user_type: undefined,
+            user_role: [],
             enabled: false,
             equipment: [],
           },

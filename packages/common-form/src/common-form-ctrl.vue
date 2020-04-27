@@ -32,7 +32,6 @@
       v-model="model[dataField]"
       :placeholder="'选择'+label"
       :disabled="disableValidator && disableValidator.call(this,model)"
-      :multiple="type==='multiSelect'"
       :allow-create="extendProps.allowCreate || false"
       clearable
       filterable
@@ -53,7 +52,6 @@
       v-model="model[dataField]"
       :placeholder="'选择'+label"
       :disabled="disableValidator && disableValidator.call(this,model)"
-      :multiple="type==='multiSelect'"
       clearable
       filterable
       style="width:100%;"
