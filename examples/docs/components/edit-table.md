@@ -498,10 +498,12 @@
 
 常规属性可参考 [通用表格](http://0.0.0.0:8085/#/component/common-table) , 独有属性如下：
 
-| 参数              | 说明                           | 类型    | 可选值                                           | 默认值      |
-| ----------------- | ------------------------------ | ------- | ------------------------------------------------ | ----------- |
-| type              | 类型，较通用表格支持的类型要少 | string  | default / input / index / inputNumber / commands | -           |
-| editTriggerMode   | 编辑状态触发方式               | string  | manual\auto                                      | manual      |
-| addInside         | 是否在表格内部添加新行         | boolean | -                                                | true        |
-| addInsidePosition | 添加新行位置                   | string  | beforeFirst\afterLast                            | beforeFirst |
-| appendContent     | 插入至表格最后一行之后的内容   | string  | -                                                | -           |
+| 参数              | 说明                           | 类型                        | 可选值                                           | 默认值      |
+| ----------------- | ------------------------------ | --------------------------- | ------------------------------------------------ | ----------- |
+| type              | 类型，较通用表格支持的类型要少 | string                      | default / input / index / inputNumber / commands | -           |
+| editTriggerMode   | 编辑状态触发方式               | string                      | manual\auto                                      | manual      |
+| addInside         | 是否在表格内部添加新行         | boolean                     | -                                                | true        |
+| addInsidePosition | 添加新行位置                   | string                      | beforeFirst\afterLast                            | beforeFirst |
+| appendContent     | 插入至表格最后一行之后的内容   | string                      | -                                                | -           |
+| showSummary       | 是否在表尾显示合计行           | boolean                     | -                                                | false       |
+| summaryMethod     | 自定义的合计计算方法           | Function({ columns, data }) | -                                                | -           |
