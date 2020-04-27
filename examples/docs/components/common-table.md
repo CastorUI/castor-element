@@ -820,7 +820,7 @@
 | loading                    | 是否显示 loading                                                                                                 | boolean  | —      | false  |
 | dataSource                 | 数据源                                                                                                           | array    | —      | []     |
 | columns                    | 列集合                                                                                                           | array    | —      | []     |
-| pagination                 | 分页对象                                                                                                         | object   | —      | {}     |
+| pagination                 | 分页对象 [详情](http://0.0.0.0:8085/#/component/sharing-config#pagination-options)                               | object   | —      | {}     |
 | addCommand                 | 新增事件对象 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling)                   | object   | —      | {}     |
 | customTableCommands        | 自定义事件，显示在表格上方右侧 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | —      | []     |
 | showVerticalBorder         | 是否显示纵向边框                                                                                                 | boolean  | —      | true   |
@@ -831,16 +831,6 @@
 | rowKey                     | 行 ID 字段                                                                                                       | string   | -      | -      |
 | extendProps                | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                    | object   | -      | -      |
 | customSelectionChangeEvent | 行多选事件                                                                                                       | function | —      | —      |
-
-### Pagination Options
-
-| 参数      | 说明         | 类型   | 可选值               | 默认值    |
-| --------- | ------------ | ------ | -------------------- | --------- |
-| pageIndex | 分页索引     | number | —                    | 1         |
-| pageSize  | 每页显示条数 | number | —                    | 10        |
-| total     | 数据条数总计 | number | -                    | 0         |
-| sortField | 排序字段     | string | —                    | —         |
-| order     | 排序方式     | string | ascending/descending | ascending |
 
 ### column Options
 

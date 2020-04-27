@@ -47,3 +47,13 @@ command 代表一个可交互的命令或事件，包含两种情况：
       - `type` 为 `checkboxGroup` 时同时参考 `el-checkbox-group`
       - `type` 为 `inputNumberRange` 时同时参考 `el-input-number`
       - `type` 为 `input` 和 `textArea` 时同时参考 `el-input`
+
+### Pagination Options
+
+| 参数      | 说明         | 类型   | 可选值               | 默认值    |
+| --------- | ------------ | ------ | -------------------- | --------- |
+| pageIndex | 分页索引     | number | —                    | 1         |
+| pageSize  | 每页显示条数 | number | —                    | 10        |
+| total     | 数据条数总计 | number | -                    | 0         |
+| sortField | 排序字段     | string | —                    | —         |
+| order     | 排序方式     | string | ascending/descending | ascending |
