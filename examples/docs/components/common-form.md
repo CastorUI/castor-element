@@ -727,10 +727,3 @@
 | commands       | 命令集合，显示在表单底部 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling)         | array   | —      | []     |
 | customCommands | 定制命令集合，显示在表单顶部右侧 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array   | —      | []     |
 | extendProps    | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                      | object  | —      | {}     |
-
-### ExtendProps options
-
-| 参数          | 说明         | 类型   | 可选值         | 默认值 |
-| ------------- | ------------ | ------ | -------------- | ------ |
-| labelWidth    | 标签宽度     | string | —              | 110px  |
-| labelPosition | 标签对齐方式 | string | right\left\top | right  |
