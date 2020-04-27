@@ -18,6 +18,10 @@
       {
         "path": "/convention",
         "name": "约定"
+      },
+      {
+        "path": "/sharing-config",
+        "name": "共享配置"
       }
     ]
   },
