@@ -41,7 +41,7 @@
       size="small"
       @submit.native.prevent
     >
-      <template v-if="!dynamicFieldsBack">
+      <template v-if="dynamicFieldsPosition==='start'">
         <common-query-ctrl
           v-for="item in checkedFields"
           :key="item.dataField"
@@ -66,7 +66,7 @@
         :extend-props="item.extendProps"
         :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
       />
-      <template v-if="dynamicFieldsBack">
+      <template v-if="dynamicFieldsPosition==='end'">
         <common-query-ctrl
           v-for="item in checkedFields"
           :key="item.dataField"
@@ -178,9 +178,9 @@ export default {
         return {};
       }
     },
-    dynamicFieldsBack: {
-      type: Boolean,
-      default: true
+    dynamicFieldsPosition: {
+      type: String,
+      default: 'end'
     },
     loading: {
       type: Boolean,

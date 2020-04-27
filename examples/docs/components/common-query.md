@@ -207,6 +207,7 @@
     :commands="search.commands"
     :fields="searchFields"
     label-width="120px"
+    dynamicFieldsPosition="start"
     @handleFilter="handleFilter"
     @handleReset="handleReset"
   />
@@ -359,14 +360,14 @@
 
 ### Attributes
 
-| 参数              | 说明                       | 类型    | 可选值 | 默认值  |
-| ----------------- | -------------------------- | ------- | ------ | ------- |
-| loading           | 是否显示 loading           | boolean | —      | false   |
-| formId            | 表单 ID                    | string  | —      | null    |
-| model             | 数据源                     | object  | —      | {}      |
-| fields            | 查询字段集合               | array   | —      | []      |
-| commands          | 命令集合                   | array   | —      | []      |
-| labelWidth        | 标签宽度                   | string  | —      | '110px' |
-| extendProps       | 扩展属性                   | object  | —      | {}      |
-| downloadOpt       | 下拉命令项                 | object  | —      | {}      |
-| dynamicFieldsBack | 动态查询字段是否放置在后面 | boolean | —      | true    |
+| 参数                  | 说明                 | 类型    | 可选值    | 默认值  |
+| --------------------- | -------------------- | ------- | --------- | ------- |
+| loading               | 是否显示 loading     | boolean | —         | false   |
+| formId                | 表单 ID              | string  | —         | null    |
+| model                 | 数据源               | object  | —         | {}      |
+| fields                | 查询字段集合         | array   | —         | []      |
+| commands              | 命令集合             | array   | —         | []      |
+| labelWidth            | 标签宽度             | string  | —         | '110px' |
+| extendProps           | 扩展属性             | object  | —         | {}      |
+| downloadOpt           | 下拉命令项           | object  | —         | {}      |
+| dynamicFieldsPosition | 动态查询字段插入位置 | string  | start\end | end     |

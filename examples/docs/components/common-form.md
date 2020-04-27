@@ -719,16 +719,14 @@
 
 ### Attributes
 
-| 参数              | 说明                             | 类型    | 可选值 | 默认值 |
-| ----------------- | -------------------------------- | ------- | ------ | ------ |
-| loading           | 是否显示 loading                 | boolean | —      | false  |
-| model             | 数据源                           | object  | —      | {}     |
-| fields            | 查询字段集合                     | array   | —      | []     |
-| commands          | 命令集合，显示在表单底部         | array   | —      | []     |
-| customCommands    | 定制命令集合，显示在表单顶部右侧 | array   | —      | []     |
-| extendProps       | 扩展属性                         | object  | —      | {}     |
-| downloadOpt       | 下拉命令项                       | object  | —      | {}     |
-| dynamicFieldsBack | 动态查询字段是否放置在后面       | boolean | —      | true   |
+| 参数           | 说明                             | 类型    | 可选值 | 默认值 |
+| -------------- | -------------------------------- | ------- | ------ | ------ |
+| loading        | 是否显示 loading                 | boolean | —      | false  |
+| model          | 数据源                           | object  | —      | {}     |
+| fields         | 查询字段集合                     | array   | —      | []     |
+| commands       | 命令集合，显示在表单底部         | array   | —      | []     |
+| customCommands | 定制命令集合，显示在表单顶部右侧 | array   | —      | []     |
+| extendProps    | 扩展属性                         | object  | —      | {}     |
 
 ### ExtendProps options
 
