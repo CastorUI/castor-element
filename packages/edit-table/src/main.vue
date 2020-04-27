@@ -7,7 +7,7 @@
         :icon="addCommand.icon"
         class="table-add-command"
         :disabled="editing || (addCommand.disableValidator && addCommand.disableValidator.call(this))"
-        @click="$emit(addCommand.command)"
+        @click="handleAdd"
       >
         {{ addCommand.text }}
       </el-button>
@@ -100,7 +100,7 @@ export default {
       type: String,
       default: ''
     },
-    addInside: { type: Boolean,default: true },
+    addInside: { type: Boolean,default: false },
     addInsidePosition: {
       type: String,
       default: 'beforeFirst',
@@ -179,8 +179,9 @@ export default {
           this.dataSource.push(newRow);
         }
         this.editingRow=newRow;
+        event.stopPropagation();
       } else {
-        this.$emit('handleAdd');
+        this.$emit(this.addCommand.command);
       }
     },
     handleRowClick: function(row) {
@@ -205,11 +206,11 @@ export default {
       }
     },
     handleCurrentChange: function(currentRow,oldCurrentRow) {
-      // console.log('handleCurrentChange: ',this.editingRow);
+      console.log('handleCurrentChange: ',this.editingRow);
       this.saveEditingRow();
     },
     handleOuterRowChange(event) {
-      // console.log('handleOuterRowChange',this.editingRow);
+      console.log('handleOuterRowChange',this.editingRow);
       var saveFlag=this.saveEditingRow();
       if(saveFlag) {
         this.editingRow=null;

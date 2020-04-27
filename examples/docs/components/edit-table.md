@@ -494,6 +494,110 @@
 
 :::
 
+### 表格内部-新增
+
+展示新增功能的用法。
+
+:::demo 新增功能约定以链接的形式放在表格的左上角。`addText`属性来控制其是否显示，`handleAdd`方法用来响应新增事件。
+
+```html
+<template>
+  <ca-edit-table
+    editTriggerMode="auto"
+    :addInside="table.addInside"
+    :dataSource="table.dataList"
+    :columns="tableColumns"
+    :addCommand="table.addCommand"
+    :editCommand="rowEditCommand"
+    :saveCommand="rowSaveCommand"
+    @handleEdit="handleEdit"
+    @handleSave="handleSave"
+  />
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        table: {
+          dataList: [
+            {
+              id: 1001,
+              code: 'A1',
+              name: '上海燃气一期工程',
+            },
+            {
+              id: 1002,
+              code: 'A2',
+              name: '上海燃气二期工程',
+            },
+            {
+              id: 1003,
+              code: 'A3',
+              name: '上海燃气三期工程',
+            },
+          ],
+          addInside: true,
+          addCommand: {
+            text: '新增任务',
+            command: 'handleAdd',
+            icon: 'el-icon-circle-plus-outline',
+            visibleValidator: () => true,
+            disableValidator: () => {},
+          },
+        },
+      };
+    },
+    computed: {
+      tableColumns() {
+        return [
+          {
+            type: 'default',
+            label: 'ID',
+            dataField: 'id',
+            columnSpan: 1,
+          },
+          {
+            type: 'default',
+            label: '编号',
+            dataField: 'code',
+            columnSpan: 1,
+          },
+          {
+            type: 'default',
+            label: '名称',
+            dataField: 'name',
+            columnSpan: 2,
+          },
+        ];
+      },
+      rowEditCommand() {
+        return {
+          command: 'handleEdit',
+        };
+      },
+      rowSaveCommand() {
+        return {
+          command: 'handleSave',
+        };
+      },
+    },
+    methods: {
+      handleEdit(index, row) {
+        console.log('handleEdit,', index, row);
+        row.operateType = 'edit';
+      },
+      handleSave(index, row) {
+        console.log('handleSave,', index, row);
+        row.operateType = 'view';
+      },
+    },
+  };
+</script>
+```
+
+:::
+
 ### Attributes
 
 常规属性可参考 [通用表格](http://0.0.0.0:8085/#/component/common-table) , 独有属性如下：
@@ -502,7 +606,7 @@
 | ----------------- | ------------------------------ | --------------------------- | ------------------------------------------------ | ----------- |
 | type              | 类型，较通用表格支持的类型要少 | string                      | default / input / index / inputNumber / commands | -           |
 | editTriggerMode   | 编辑状态触发方式               | string                      | manual\auto                                      | manual      |
-| addInside         | 是否在表格内部添加新行         | boolean                     | -                                                | true        |
+| addInside         | 是否在表格内部添加新行         | boolean                     | -                                                | false       |
 | addInsidePosition | 添加新行位置                   | string                      | beforeFirst\afterLast                            | beforeFirst |
 | appendContent     | 插入至表格最后一行之后的内容   | string                      | -                                                | -           |
 | showSummary       | 是否在表尾显示合计行           | boolean                     | -                                                | false       |
