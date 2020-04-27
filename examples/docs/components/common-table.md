@@ -815,22 +815,22 @@
 
 ### Attributes
 
-| 参数                       | 说明                           | 类型     | 可选值 | 默认值 |
-| -------------------------- | ------------------------------ | -------- | ------ | ------ |
-| loading                    | 是否显示 loading               | boolean  | —      | false  |
-| dataSource                 | 数据源                         | array    | —      | []     |
-| columns                    | 列集合                         | array    | —      | []     |
-| pagination                 | 分页对象                       | object   | —      | {}     |
-| addCommand                 | 新增事件对象                   | object   | —      | {}     |
-| customTableCommands        | 自定义事件，显示在表格上方右侧 | array    | —      | []     |
-| showVerticalBorder         | 是否显示纵向边框               | boolean  | —      | true   |
-| showStripe                 | 是否显示斑马线                 | boolean  | -      | false  |
-| getList                    | 查询数据方法                   | function | —      | —      |
-| spanMethod                 | 合并单元格方法                 | function | —      | —      |
-| tableStyle                 | 自定义表格样式                 | string   | -      | -      |
-| rowKey                     | 行 ID 字段                     | string   | -      | -      |
-| extendProps                | 扩展属性对象                   | object   | -      | -      |
-| customSelectionChangeEvent | 行多选事件                     | function | —      | —      |
+| 参数                       | 说明                                                                                                             | 类型     | 可选值 | 默认值 |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
+| loading                    | 是否显示 loading                                                                                                 | boolean  | —      | false  |
+| dataSource                 | 数据源                                                                                                           | array    | —      | []     |
+| columns                    | 列集合                                                                                                           | array    | —      | []     |
+| pagination                 | 分页对象                                                                                                         | object   | —      | {}     |
+| addCommand                 | 新增事件对象 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling)                   | object   | —      | {}     |
+| customTableCommands        | 自定义事件，显示在表格上方右侧 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | —      | []     |
+| showVerticalBorder         | 是否显示纵向边框                                                                                                 | boolean  | —      | true   |
+| showStripe                 | 是否显示斑马线                                                                                                   | boolean  | -      | false  |
+| getList                    | 查询数据方法                                                                                                     | function | —      | —      |
+| spanMethod                 | 合并单元格方法                                                                                                   | function | —      | —      |
+| tableStyle                 | 自定义表格样式                                                                                                   | string   | -      | -      |
+| rowKey                     | 行 ID 字段                                                                                                       | string   | -      | -      |
+| extendProps                | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                    | object   | -      | -      |
+| customSelectionChangeEvent | 行多选事件                                                                                                       | function | —      | —      |
 
 ### Pagination Options
 
@@ -844,17 +844,17 @@
 
 ### column Options
 
-| 参数        | 说明                                                     | 类型     | 可选值                                                  | 默认值    |
-| ----------- | -------------------------------------------------------- | -------- | ------------------------------------------------------- | --------- |
-| type        | 类型                                                     | string   | default/selection/index/link/keyToValue/status/commands | default   |
-| label       | 标题                                                     | string   | —                                                       | 10        |
-| dataField   | 绑定字段                                                 | string   | —                                                       | 0         |
-| width       | 固定宽度                                                 | string   | -                                                       | -         |
-| columnSpan  | 列宽所占比例                                             | string   | —                                                       | —         |
-| minWidth    | 最小宽度,此属性与 columnSpan 两者二选一使用              | string   |                                                         | -         |
-| commands    | 行事件集合，当 type 为 commands 时使用,详情见 `共享配置` | array    | -                                                       | []        |
-| options     | 数据转换数据源                                           | array    | -                                                       | []        |
-| extendProps | 扩展属性,详情见 `共享配置`                               | string   | -                                                       | ascending |
-| align       | 对齐方式                                                 | string   | -                                                       | center    |
-| sortable    | 是否支持排序                                             | boolean  | -                                                       | false     |
-| linkCommand | 超链接事件，当 type 为 link 时使用                       | function | -                                                       | -         |
+| 参数        | 说明                                                                                                                         | 类型     | 可选值                                                  | 默认值    |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------- | --------- |
+| type        | 类型                                                                                                                         | string   | default/selection/index/link/keyToValue/status/commands | default   |
+| label       | 标题                                                                                                                         | string   | —                                                       | 10        |
+| dataField   | 绑定字段                                                                                                                     | string   | —                                                       | 0         |
+| width       | 固定宽度                                                                                                                     | string   | -                                                       | -         |
+| columnSpan  | 列宽所占比例                                                                                                                 | string   | —                                                       | —         |
+| minWidth    | 最小宽度,此属性与 `columnSpan` 两者二选一使用                                                                                | string   |                                                         | -         |
+| commands    | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | -                                                       | []        |
+| options     | 数据转换数据源                                                                                                               | array    | -                                                       | []        |
+| extendProps | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                                | string   | -                                                       | ascending |
+| align       | 对齐方式                                                                                                                     | string   | -                                                       | center    |
+| sortable    | 是否支持排序                                                                                                                 | boolean  | -                                                       | false     |
+| linkCommand | 超链接事件，当 `type` 为 `link` 时使用                                                                                       | function | -                                                       | -         |
