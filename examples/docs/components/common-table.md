@@ -895,7 +895,7 @@
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
 | loading                    | 是否显示 loading                                                                                                 | boolean  | —      | false  |
 | dataSource                 | 数据源                                                                                                           | array    | —      | []     |
-| columns                    | 列集合                                                                                                           | array    | —      | []     |
+| columns                    | 列集合 [详情](http://0.0.0.0:8085/#/component/common-table#column-options)                                       | array    | —      | []     |
 | pagination                 | 分页对象 [详情](http://0.0.0.0:8085/#/component/sharing-config#pagination-options)                               | object   | —      | {}     |
 | addCommand                 | 新增事件对象 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling)                   | object   | —      | {}     |
 | customCommands             | 自定义事件，显示在表格上方右侧 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | —      | []     |
@@ -905,16 +905,16 @@
 | extendProps                | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                    | object   | -      | -      |
 | customSelectionChangeEvent | 行多选事件                                                                                                       | function | —      | —      |
 
-### column Options
+### Column Options
 
 | 参数        | 说明                                                                                                                           | 类型     | 可选值                                                              | 默认值    |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------- | --------- |
 | type        | 类型                                                                                                                           | string   | default / selection / index / link / keyToValue / status / commands | default   |
 | label       | 标题                                                                                                                           | string   | —                                                                   | 10        |
 | dataField   | 绑定字段                                                                                                                       | string   | —                                                                   | 0         |
-| width       | 固定宽度                                                                                                                       | string   | -                                                                   | -         |
-| columnSpan  | 列宽所占比例                                                                                                                   | string   | —                                                                   | —         |
-| minWidth    | 最小宽度,此属性与 `columnSpan` 两者二选一使用                                                                                  | string   |                                                                     | -         |
+| width       | 固定宽度,此属性与 `minWidth` 和 `columnSpan` 三选一使用                                                                        | string   | -                                                                   | -         |
+| columnSpan  | 列宽所占比例,此属性与 `width` 和 `minWidth` 三选一使用                                                                         | string   | —                                                                   | —         |
+| minWidth    | 最小宽度,此属性与 `width` 和 `columnSpan` 三选一使用                                                                           | string   |                                                                     | -         |
 | commands    | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http: / /0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | -                                                                   | []        |
 | options     | 数据转换数据源                                                                                                                 | array    | -                                                                   | []        |
 | extendProps | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                                  | string   | -                                                                   | ascending |
