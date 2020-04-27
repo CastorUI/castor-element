@@ -71,8 +71,8 @@ export default {
   props: {
     editTriggerMode: {
       type: String,
-      default: 'manual-row',
-      validator: value => ['manual-row','click-row'].indexOf(value)>-1
+      default: 'manual',
+      validator: value => ['manual','auto'].indexOf(value)>-1
     },
     loading: {
       type: Boolean,
@@ -146,12 +146,12 @@ export default {
     }
   },
   created() {
-    if(this.editTriggerMode==='click-row') {
+    if(this.editTriggerMode==='auto') {
       window.addEventListener('click',this.handleOuterRowChange,false);
     }
   },
   destroyed() {
-    if(this.editTriggerMode==='click-row') {
+    if(this.editTriggerMode==='auto') {
       window.removeEventListener('click',this.handleOuterRowChange,false);
     }
   },
@@ -159,7 +159,7 @@ export default {
     handleEmitEvent: function(commandType,command,index,row) {
       this.$emit(command,index,row);
       // console.log('this.dataSource - handleEmitEvent',this.dataSource,row);
-      if(this.editTriggerMode==='manual-row') {
+      if(this.editTriggerMode==='manual') {
         if(row.operateType==='edit') {
           this.editingRow=row;
         } else {
@@ -195,7 +195,7 @@ export default {
       // console.log('handleRowClick',row);
       event.stopPropagation();
       if(
-        this.editTriggerMode==='click-row'&&
+        this.editTriggerMode==='auto'&&
         this.editCommand&&
         this.editCommand.command
       ) {
@@ -225,7 +225,7 @@ export default {
     },
     saveEditingRow() {
       if(
-        this.editTriggerMode==='click-row'&&
+        this.editTriggerMode==='auto'&&
         this.editingRow!=null&&
         this.saveCommand&&
         this.saveCommand.command

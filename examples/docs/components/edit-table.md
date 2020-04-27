@@ -11,7 +11,7 @@
 ```html
 <template>
   <ca-edit-table
-    editTriggerMode="click-row"
+    editTriggerMode="auto"
     :dataSource="table.dataList"
     :columns="tableColumns"
     :editCommand="rowEditCommand"
@@ -117,7 +117,7 @@
 ```html
 <template>
   <ca-edit-table
-    editTriggerMode="click-row"
+    editTriggerMode="auto"
     :dataSource="table.dataList"
     :columns="tableColumns"
     :validateStatus.sync="table.validateStatus"
@@ -228,7 +228,7 @@
 ```html
 <template>
   <ca-edit-table
-    editTriggerMode="manual-row"
+    editTriggerMode="manual"
     :dataSource="table.dataList"
     :columns="tableColumns"
     @handleEdit="handleEdit"
@@ -362,7 +362,7 @@
 ```html
 <template>
   <ca-edit-table
-    editTriggerMode="manual-row"
+    editTriggerMode="manual"
     :dataSource="table.dataList"
     :columns="tableColumns"
     :validateStatus.sync="table.validateStatus"
@@ -493,3 +493,14 @@
 ```
 
 :::
+
+### Attributes
+
+常规属性可参考 [通用表格](http://0.0.0.0:8085/#/component/common-table) , 独有属性如下：
+
+| 参数              | 说明                         | 类型    | 可选值                | 默认值      |
+| ----------------- | ---------------------------- | ------- | --------------------- | ----------- |
+| editTriggerMode   | 编辑状态触发方式             | string  | manual\auto           | manual      |
+| addInside         | 是否在表格内部添加新行       | boolean | -                     | true        |
+| addInsidePosition | 添加新行位置                 | string  | beforeFirst\afterLast | beforeFirst |
+| appendContent     | 插入至表格最后一行之后的内容 | string  | -                     | -           |
