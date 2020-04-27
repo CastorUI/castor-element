@@ -35,9 +35,9 @@
         :data="dataSource"
         :span-method="spanMethod"
         :default-sort="defaultSort"
-        :border="showVerticalBorder"
-        :stripe="showStripe"
-        :style="tableStyle"
+        :border="extendProps.border !== undefined ? extendProps.border : true"
+        :stripe="extendProps.stripe"
+        :style="extendProps.style || 'width:100%;min-width:700px;height:auto;'"
         @row-click="row => $emit('handleRowClick', row)"
         @selection-change="multipleSelection => handleSelectionChange(multipleSelection)"
         @sort-change="args=> handleSortChange(args)"
@@ -188,14 +188,6 @@ export default {
       type: Array,
       default: () => []
     },
-    showVerticalBorder: {
-      type: Boolean,
-      default: false
-    },
-    showStripe: {
-      type: Boolean,
-      default: false
-    },
     defaultSort: {
       type: Object,
       default: () => { }
@@ -212,10 +204,6 @@ export default {
       type: Array,
       default: () => []
     },
-    tableStyle: {
-      type: String,
-      default: 'width:100%;min-width:700px;height:auto;'
-    }
   },
   data() {
     return {

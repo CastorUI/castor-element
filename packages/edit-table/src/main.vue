@@ -17,12 +17,12 @@
       v-loading="loading"
       :data="dataSource"
       :row-key="rowKey"
-      :border="showVerticalBorder"
       :show-header="showHeader"
       :show-summary="showSummary"
       :summary-method="summaryMethod"
       :highlight-current-row="highlightCurrentRow"
-      style="min-width:600px;height:auto;padding:1px;"
+      :border="extendProps.border !== undefined ? extendProps.border : true"
+      :style="extendProps.style || 'min-width:600px;height:auto;padding:1px;'"
       @row-click="handleRowClick"
       @current-change="handleCurrentChange"
     >
@@ -101,10 +101,6 @@ export default {
     rowKey: {
       type: String,
       default: ''
-    },
-    showVerticalBorder: {
-      type: Boolean,
-      default: false
     },
     showHeader: {
       type: Boolean,
