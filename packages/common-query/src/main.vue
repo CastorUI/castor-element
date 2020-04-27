@@ -61,6 +61,8 @@
         :model="model"
         :data-field="item.dataField"
         :options="item.options"
+        :from-field="item.fromField"
+        :to-field="item.toField"
         :extend-props="item.extendProps"
         :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
       />

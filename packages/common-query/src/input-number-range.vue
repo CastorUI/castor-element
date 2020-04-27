@@ -2,22 +2,22 @@
 <template>
   <div>
     <el-input-number
-      v-model="model[extendProps.from.dataField]"
-      :placeholder="'输入'+extendProps.from.label"
-      :min="extendProps.from.min || -Infinity"
-      :max="extendProps.from.max || Infinity"
-      :step="extendProps.from.step || 1"
-      :precision="extendProps.from.precision||0"
+      v-model="model[fromField]"
+      placeholder="起始值"
+      :min="extendProps.min || -Infinity"
+      :max="extendProps.max || Infinity"
+      :step="extendProps.step || 1"
+      :precision="extendProps.precision||0"
       clearable
       style="float:left;width:calc(50% - 10px);"
     />
     <el-input-number
-      v-model="model[extendProps.to.dataField]"
-      :placeholder="'输入'+extendProps.to.label"
-      :min="extendProps.to.min || -Infinity"
-      :max="extendProps.to.max || Infinity"
-      :step="extendProps.to.step || 1"
-      :precision="extendProps.to.precision||0"
+      v-model="model[toField]"
+      placeholder="终止值"
+      :min="extendProps.min || -Infinity"
+      :max="extendProps.max || Infinity"
+      :step="extendProps.step || 1"
+      :precision="extendProps.precision||0"
       clearable
       style="float:right;width:calc(50% - 10px);"
     />
@@ -32,6 +32,14 @@ export default {
   props: {
     model: {
       type: Object,
+      default: undefined
+    },
+    fromField: {
+      type: String,
+      default: undefined
+    },
+    toField: {
+      type: String,
       default: undefined
     },
     extendProps: {

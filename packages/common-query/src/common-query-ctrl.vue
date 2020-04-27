@@ -55,6 +55,8 @@
     <input-number-range
       v-else-if="type==='inputNumberRange'"
       :model="model"
+      :from-field="fromField"
+      :to-field="toField"
       :extend-props="extendProps"
       style="width:100%;"
       class="query-item"
@@ -102,6 +104,14 @@ export default {
     height: {
       type: String,
       default: '36px'
+    },
+    fromField: {
+      type: String,
+      default: undefined
+    },
+    toField: {
+      type: String,
+      default: undefined
     },
     extendProps: {
       type: Object,
