@@ -36,7 +36,7 @@
       id="queryForm"
       ref="form"
       :model="model"
-      :label-width="labelWidth"
+      :label-width="extendProps.labelWidth || '110px'"
       :style="fields.some(r=>r.showType==='dynamic')? 'marginLeft:100px;' : ''"
       size="small"
       @submit.native.prevent
@@ -163,10 +163,6 @@ export default {
       default: function() {
         return {};
       }
-    },
-    labelWidth: {
-      type: String,
-      default: '110px'
     },
     extendProps: {
       type: Object,

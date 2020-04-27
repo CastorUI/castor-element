@@ -360,13 +360,12 @@
 
 ### Attributes
 
-| 参数                  | 说明                 | 类型    | 可选值    | 默认值  |
-| --------------------- | -------------------- | ------- | --------- | ------- |
-| loading               | 是否显示 loading     | boolean | —         | false   |
-| model                 | 数据源               | object  | —         | {}      |
-| fields                | 查询字段集合         | array   | —         | []      |
-| commands              | 命令集合             | array   | —         | []      |
-| labelWidth            | 标签宽度             | string  | —         | '110px' |
-| extendProps           | 扩展属性             | object  | —         | {}      |
-| downloadOpt           | 下拉命令项           | object  | —         | {}      |
-| dynamicFieldsPosition | 动态查询字段插入位置 | string  | start\end | end     |
+| 参数                  | 说明                 | 类型    | 可选值    | 默认值 |
+| --------------------- | -------------------- | ------- | --------- | ------ |
+| loading               | 是否显示 loading     | boolean | —         | false  |
+| model                 | 数据源               | object  | —         | {}     |
+| fields                | 查询字段集合         | array   | —         | []     |
+| commands              | 命令集合             | array   | —         | []     |
+| dynamicFieldsPosition | 动态查询字段插入位置 | string  | start\end | end    |
+| downloadOpt           | 下拉命令项           | object  | —         | {}     |
+| extendProps           | 扩展属性             | object  | —         | {}     |
