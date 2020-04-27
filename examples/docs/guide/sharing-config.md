@@ -21,40 +21,29 @@ command 代表一个可交互的命令或事件，包含两种情况：
 
 配置样式相关的 ElementUI 属性，，采用驼峰命名，与`ElementUI`属性保持一致。
 
-```html
-<template>
-  <ca-common-form
-    :ref="form.formId"
-    :operateType="form.operateType"
-    :model="form.model"
-    :commands="form.commands"
-    :fields="formFields"
-    :extendProps="form.extendProps"
-  />
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        optionsMap: {},
-        form: {
-          formId: 'editForm',
-          operateType: 'add',
-          model: {},
-          commands: [],
-          extendProps: {
-            labelWidth: '110px',
-            labelPosition: 'right',
-          },
-        },
-      };
-    },
-    computed: {
-      formFields() {
-        return [];
-      },
-    },
-  };
-</script>
-```
+- 通用表格
+  - 表格参考 `el-table`
+  - 字段参考 `el-table-column`
+    - `type` 为 `link` 和 `commands` 时同时参考 `el-link`
+- 通用表单
+  - 表单参考 `el-form`
+  - 事件参考 `el-button`
+  - 定制事件参考 `el-button`
+  - 字段参考 `el-form-item`
+    - `type` 为 `select` 和 `multiSelect` 时同时参考 `el-select`
+    - `type` 为 `radioGroup` 时同时参考 `el-radio-group`
+    - `type` 为 `checkboxGroup` 时同时参考 `el-checkbox-group`
+    - `type` 为 `dateTimeRange` 和 `dateRange` 和 `date` 时同时参考 `el-date-picker`
+    - `type` 为 `inputNumber` 时同时参考 `el-input-number`
+    - `type` 为 `cascader` 时同时参考 `el-cascader`
+    - `type` 为 `input` 和 `textArea` 时同时参考 `el-input`
+- 通用查询
+  - 表单参考 `el-form`
+    - 事件参考 `el-button`
+    - 字段参考 `el-form-item`
+      - `type` 为 `select` 和 `multiSelect` 时同时参考 `el-select`
+      - `type` 为 `dateTimeRange` 和 `dateRange` 和 `monthRange` 和 `month` 和 `date` 时同时参考 `el-date-picker`
+      - `type` 为 `switch` 时同时参考 `el-switch`
+      - `type` 为 `checkboxGroup` 时同时参考 `el-checkbox-group`
+      - `type` 为 `inputNumberRange` 时同时参考 `el-input-number`
+      - `type` 为 `input` 和 `textArea` 时同时参考 `el-input`
