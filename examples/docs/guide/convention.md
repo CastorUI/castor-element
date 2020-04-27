@@ -27,7 +27,46 @@
   }
   ```
 
-- ElementUI 相关属性都放在 ExtendProps 中处理
+- 组件中应用到的样式相关的`ElementUI`属性统一放在 `ExtendProps` 中，采用驼峰命名，与`ElementUI`属性保持一致。
+
+  ```html
+  <template>
+    <ca-common-form
+      :ref="form.formId"
+      :operateType="form.operateType"
+      :model="form.model"
+      :commands="form.commands"
+      :fields="formFields"
+      :extendProps="form.extendProps"
+    />
+  </template>
+
+  <script>
+    export default {
+      data() {
+        return {
+          optionsMap: {},
+          form: {
+            formId: 'editForm',
+            operateType: 'add',
+            model: {},
+            commands: [],
+            extendProps: {
+              labelWidth: '110px',
+              labelPosition: 'right',
+            },
+          },
+        };
+      },
+      computed: {
+        formFields() {
+          return [];
+        },
+      },
+    };
+  </script>
+  ```
+
 - 自定义事件以`handle`前缀来命名，如`handleAdd`
 - 每个可以显示的`command`都支持两种校验器：`disableValidator`和`visibleValidator`
   - `disableValidator` 返回 `true` 时禁用

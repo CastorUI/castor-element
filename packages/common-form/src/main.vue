@@ -4,8 +4,8 @@
     class="form"
     :model="model"
     :rules="rules"
-    :label-width="labelWidth"
-    :label-position="labelPosition"
+    :label-width="extendProps.labelWidth || '120px'"
+    :label-position="extendProps.labelPosition || 'right'"
     :disabled="operateType==='view'"
     size="medium"
     style="minWidth:600px;"
@@ -36,7 +36,7 @@
       :data-field="item.dataField"
       :options="item.options"
       :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
-      :height="labelPosition==='top'?'72px':'36px'"
+      :height="extendProps.labelPosition==='top'?'72px':'36px'"
       :group-title="item.groupTitle"
       :current-field="item.currentField"
       :append-field="item.appendField"
@@ -106,14 +106,6 @@ export default {
         return [];
       }
     },
-    labelWidth: {
-      type: String,
-      default: '120px'
-    },
-    labelPosition: {
-      type: String,
-      default: 'right'
-    },
     rowFieldsCount: {
       type: Number,
       default: 2
@@ -123,6 +115,12 @@ export default {
       default: 'add'
     },
     customComponents: {
+      type: Object,
+      default: function() {
+        return {};
+      }
+    },
+    extendProps: {
       type: Object,
       default: function() {
         return {};
