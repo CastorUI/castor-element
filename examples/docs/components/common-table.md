@@ -922,3 +922,9 @@
 | sortable    | 是否支持排序                                                                                                                   | boolean  | -                                                                   | false     |
 | linkCommand | 超链接事件，当 `type` 为 `link` 时使用                                                                                         | function | -                                                                   | -         |
 | reportType  | 报表列类型 , 报表表格组件专用                                                                                                  | string   | data/title                                                          | -         |
+
+### Table Events
+
+| 事件名    | 说明                         | 参数 |
+| --------- | ---------------------------- | ---- |
+| row-click | 当某一行被点击时会触发该事件 | row  |

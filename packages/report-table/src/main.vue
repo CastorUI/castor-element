@@ -38,7 +38,7 @@
         :border="extendProps.border !== undefined ? extendProps.border : true"
         :stripe="extendProps.stripe"
         :style="extendProps.style || 'width:100%;min-width:700px;height:auto;'"
-        @row-click="row => $emit('handleRowClick', row)"
+        @row-click="row => $emit('row-click', row)"
         @selection-change="multipleSelection => handleSelectionChange(multipleSelection)"
         @sort-change="args=> handleSortChange(args)"
       >

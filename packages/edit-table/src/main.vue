@@ -201,7 +201,7 @@ export default {
         this.editingRow=row;
         this.handleEmitEvent('',this.editCommand.command,0,row);
       } else {
-        this.$emit('handleRowClick',row);
+        this.$emit('row-click',row);
       }
     },
     handleCurrentChange: function(currentRow,oldCurrentRow) {
