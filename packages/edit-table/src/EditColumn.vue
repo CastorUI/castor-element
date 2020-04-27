@@ -129,7 +129,7 @@ export default {
   props: {
     type: {
       type: String,
-      default: ''
+      default: 'default'
     },
     label: {
       type: String,

@@ -150,7 +150,7 @@ export default {
   props: {
     type: {
       type: String,
-      default: undefined
+      default: 'default'
     },
     label: {
       type: String,
