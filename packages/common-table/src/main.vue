@@ -134,16 +134,16 @@ export default {
       type: String,
       default: 'id'
     },
+    customSelectionChangeEvent: {
+      type: Function,
+      default: () => { }
+    },
     extendProps: {
       type: Object,
       default: function() {
         return {};
       }
     },
-    customSelectionChangeEvent: {
-      type: Function,
-      default: () => { }
-    }
   },
   data() {
     return {

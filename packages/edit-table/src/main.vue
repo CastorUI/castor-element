@@ -129,7 +129,13 @@ export default {
     appendContent: {
       type: String,
       default: ''
-    }
+    },
+    extendProps: {
+      type: Object,
+      default: function() {
+        return {};
+      }
+    },
   },
   data() {
     return {

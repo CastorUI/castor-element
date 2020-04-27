@@ -204,6 +204,12 @@ export default {
       type: Array,
       default: () => []
     },
+    extendProps: {
+      type: Object,
+      default: function() {
+        return {};
+      }
+    },
   },
   data() {
     return {
