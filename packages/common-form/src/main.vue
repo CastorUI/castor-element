@@ -36,6 +36,7 @@
       :data-field="item.dataField"
       :options="item.options"
       :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
+      :height="labelPosition==='top'?'72px':'36px'"
       :group-title="item.groupTitle"
       :current-field="item.currentField"
       :append-field="item.appendField"
@@ -77,6 +78,10 @@ export default {
     CommonFormCtrl
   },
   props: {
+    loading: {
+      type: Boolean,
+      default: false
+    },
     model: {
       type: Object,
       default: function() {
@@ -123,10 +128,6 @@ export default {
         return {};
       }
     },
-    loading: {
-      type: Boolean,
-      default: false
-    }
   },
   data() {
     const dataRules={};

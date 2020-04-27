@@ -367,7 +367,9 @@ export default {
   },
   computed: {
     heightStyle() {
-      return this.type==='custom'? '':`height:${this.height};`;
+      return (this.type==='custom'||this.type==='groupTitle')
+        ? ''
+        :`height:${this.height};`;
     }
   },
   methods: {
