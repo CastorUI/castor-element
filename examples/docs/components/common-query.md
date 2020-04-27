@@ -363,7 +363,6 @@
 | 参数                  | 说明                 | 类型    | 可选值    | 默认值  |
 | --------------------- | -------------------- | ------- | --------- | ------- |
 | loading               | 是否显示 loading     | boolean | —         | false   |
-| formId                | 表单 ID              | string  | —         | null    |
 | model                 | 数据源               | object  | —         | {}      |
 | fields                | 查询字段集合         | array   | —         | []      |
 | commands              | 命令集合             | array   | —         | []      |

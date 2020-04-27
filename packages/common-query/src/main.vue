@@ -140,10 +140,6 @@ export default {
   },
   directives: { resize },
   props: {
-    formId: {
-      type: String,
-      default: null
-    },
     model: {
       type: Object,
       default: function() {
