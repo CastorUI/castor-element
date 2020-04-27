@@ -721,14 +721,14 @@
 
 展示定制事件的用法。
 
-:::demo 定制事件约定放置在表格的右上角。`customTableCommands`属性用来配置定制事件集合。定制事件一般与多选列配置使用，所以要添加`type`为`selection`的列。
+:::demo 定制事件约定放置在表格的右上角。`customCommands`属性用来配置定制事件集合。定制事件一般与多选列配置使用，所以要添加`type`为`selection`的列。
 
 ```html
 <template>
   <ca-common-table
     :dataSource="table.dataList"
     :columns="tableColumns"
-    :customTableCommands="table.customCommands"
+    :customCommands="table.customCommands"
     @handleStar="handleStar"
     @handleUnstar="handleUnstar"
   />
@@ -813,6 +813,82 @@
 
 :::
 
+### 扩展属性
+
+展示扩展属性的用法。
+
+:::demo
+
+```html
+<template>
+  <ca-common-table
+    :dataSource="table.dataList"
+    :columns="tableColumns"
+    :extendProps="table.extendProps"
+  />
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        table: {
+          dataList: [
+            {
+              id: 1001,
+              code: 'A1',
+              name: '上海燃气一期工程',
+            },
+            {
+              id: 1002,
+              code: 'A2',
+              name: '上海燃气二期工程',
+            },
+            {
+              id: 1003,
+              code: 'A3',
+              name: '上海燃气三期工程',
+            },
+          ],
+          extendProps: {
+            border: false,
+            stripe: true,
+            style: 'width:100%;min-width:720px;height:auto;color:red;',
+          },
+        },
+      };
+    },
+    computed: {
+      tableColumns() {
+        return [
+          {
+            type: 'default',
+            label: 'ID',
+            dataField: 'id',
+            columnSpan: 1,
+          },
+          {
+            type: 'default',
+            label: '编号',
+            dataField: 'code',
+            columnSpan: 1,
+          },
+          {
+            type: 'default',
+            label: '名称',
+            dataField: 'name',
+            columnSpan: 2,
+          },
+        ];
+      },
+    },
+    methods: {},
+  };
+</script>
+```
+
+:::
+
 ### Attributes
 
 | 参数                       | 说明                                                                                                             | 类型     | 可选值 | 默认值 |
@@ -822,12 +898,11 @@
 | columns                    | 列集合                                                                                                           | array    | —      | []     |
 | pagination                 | 分页对象 [详情](http://0.0.0.0:8085/#/component/sharing-config#pagination-options)                               | object   | —      | {}     |
 | addCommand                 | 新增事件对象 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling)                   | object   | —      | {}     |
-| customTableCommands        | 自定义事件，显示在表格上方右侧 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | —      | []     |
+| customCommands             | 自定义事件，显示在表格上方右侧 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | —      | []     |
 | showVerticalBorder         | 是否显示纵向边框                                                                                                 | boolean  | —      | true   |
 | showStripe                 | 是否显示斑马线                                                                                                   | boolean  | -      | false  |
 | getList                    | 查询数据方法                                                                                                     | function | —      | —      |
 | spanMethod                 | 合并单元格方法                                                                                                   | function | —      | —      |
-| tableStyle                 | 自定义表格样式                                                                                                   | string   | -      | -      |
 | rowKey                     | 行 ID 字段                                                                                                       | string   | -      | -      |
 | extendProps                | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                    | object   | -      | -      |
 | customSelectionChangeEvent | 行多选事件                                                                                                       | function | —      | —      |

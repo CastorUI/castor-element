@@ -15,11 +15,11 @@
         {{ addCommand.text }}
       </el-button>
       <el-button-group
-        v-show="customTableCommands"
+        v-show="customCommands"
         class="table-custom-commands"
       >
         <el-button
-          v-for="(item,index) of customTableCommands"
+          v-for="(item,index) of customCommands"
           :key="index"
           :disabled="item.disableValidator &&item.disableValidator.call(this)"
           type="text"
@@ -184,7 +184,7 @@ export default {
       type: Object,
       default: () => { }
     },
-    customTableCommands: {
+    customCommands: {
       type: Array,
       default: () => []
     },
