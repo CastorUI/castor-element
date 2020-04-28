@@ -900,8 +900,6 @@
 | addCommand     | 新增事件对象 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling)                   | object   | —      | {}     |
 | customCommands | 自定义事件，显示在表格上方右侧 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | —      | []     |
 | getList        | 查询数据方法                                                                                                     | function | —      | —      |
-| spanMethod     | 合并单元格方法                                                                                                   | function | —      | —      |
-| rowKey         | 行 ID 字段                                                                                                       | string   | -      | -      |
 | extendProps    | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                    | object   | -      | -      |
 
 ### Column Options
