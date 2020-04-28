@@ -15,12 +15,11 @@
     <el-table
       ref="elTreeTable"
       v-loading="loading"
+      row-key="id"
       :data="dataSource"
-      :row-key="rowKey"
-      :show-summary="showSummary"
-      :summary-method="summaryMethod"
-      :border="extendProps.border !== undefined ? extendProps.border : true"
-      :style="extendProps.style || 'min-width:600px;height:auto;padding:1px;'"
+      :border="true"
+      style="min-width:600px;height:auto;padding:1px;"
+      v-bind="extendProps"
       @row-click="handleRowClick"
       @current-change="handleCurrentChange"
     >
@@ -107,14 +106,6 @@ export default {
       validator: function(value) {
         return ['beforeFirst', 'afterLast'].indexOf(value) > -1;
       }
-    },
-    showSummary: {
-      type: Boolean,
-      default: false
-    },
-    summaryMethod: {
-      type: Function,
-      default: () => {}
     },
     appendContent: {
       type: String,

@@ -609,8 +609,6 @@
 | addInside         | 是否在表格内部添加新行         | boolean                     | -                                                | false       |
 | addInsidePosition | 添加新行位置                   | string                      | beforeFirst\afterLast                            | beforeFirst |
 | appendContent     | 插入至表格最后一行之后的内容   | string                      | -                                                | -           |
-| showSummary       | 是否在表尾显示合计行           | boolean                     | -                                                | false       |
-| summaryMethod     | 自定义的合计计算方法           | Function({ columns, data }) | -                                                | -           |
 
 ### Table Events
 
