@@ -12,6 +12,7 @@
     "sourceType": "module"
   },
   "rules": {
+    "quotes": [1, "single"],
     "vue/html-self-closing": [
       "error",
       {

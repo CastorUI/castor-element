@@ -335,28 +335,28 @@ export default {
           {
             text: '最近一周',
             onClick(picker) {
-              const end=new Date();
-              const start=new Date();
-              start.setTime(start.getTime()-3600*1000*24*7);
-              picker.$emit('pick',[start,end]);
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit('pick', [start, end]);
             }
           },
           {
             text: '最近一个月',
             onClick(picker) {
-              const end=new Date();
-              const start=new Date();
-              start.setTime(start.getTime()-3600*1000*24*30);
-              picker.$emit('pick',[start,end]);
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+              picker.$emit('pick', [start, end]);
             }
           },
           {
             text: '最近三个月',
             onClick(picker) {
-              const end=new Date();
-              const start=new Date();
-              start.setTime(start.getTime()-3600*1000*24*90);
-              picker.$emit('pick',[start,end]);
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+              picker.$emit('pick', [start, end]);
             }
           }
         ]
@@ -365,33 +365,37 @@ export default {
   },
   computed: {
     heightStyle() {
-      return (this.type==='custom'||this.type==='groupTitle')
+      return this.type === 'custom' || this.type === 'groupTitle'
         ? ''
-        :`height:${this.height};`;
+        : `height:${this.height};`;
     }
   },
   methods: {
     handleClear() {
-      this.model[this.dataField]=undefined;
+      this.model[this.dataField] = undefined;
     },
-    handleFilter(query,method,options) {
-      method.call(this,query,options,this.model);
+    handleFilter(query, method, options) {
+      method.call(this, query, options, this.model);
     },
-    querySearch(queryString,cb) {
-      var options=this.options;
-      queryString=this.extendProps.needTrim&&this.trim(queryString);
-      console.log('query',queryString);
-      var results=queryString? options.filter(this.createFilter(queryString)):options;
+    querySearch(queryString, cb) {
+      var options = this.options;
+      queryString = this.extendProps.needTrim && this.trim(queryString);
+      console.log('query', queryString);
+      var results = queryString
+        ? options.filter(this.createFilter(queryString))
+        : options;
       // 调用 callback 返回建议列表的数据
       cb(results);
     },
     createFilter(queryString) {
-      return (option) => {
-        return (option.value.toLowerCase().indexOf(queryString.toLowerCase())>=0);
+      return option => {
+        return (
+          option.value.toLowerCase().indexOf(queryString.toLowerCase()) >= 0
+        );
       };
     },
     trim(str) {
-      return str.replace(/^(\s|\u00A0)+/,'').replace(/(\s|\u00A0)+$/,'');
+      return str.replace(/^(\s|\u00A0)+/, '').replace(/(\s|\u00A0)+$/, '');
     }
   }
 };

@@ -204,7 +204,7 @@ export default {
     },
     indexMethod: {
       type: Function,
-      default: () => { }
+      default: () => {}
     },
     extendProps: {
       type: Object,

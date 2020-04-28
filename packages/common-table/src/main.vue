@@ -116,7 +116,7 @@ export default {
     },
     addCommand: {
       type: Object,
-      default: () => { }
+      default: () => {}
     },
     customCommands: {
       type: Array,
@@ -124,11 +124,11 @@ export default {
     },
     getList: {
       type: Function,
-      default: () => { }
+      default: () => {}
     },
     spanMethod: {
       type: Function,
-      default: () => { }
+      default: () => {}
     },
     rowKey: {
       type: String,
@@ -136,14 +136,14 @@ export default {
     },
     customSelectionChangeEvent: {
       type: Function,
-      default: () => { }
+      default: () => {}
     },
     extendProps: {
       type: Object,
       default: function() {
         return {};
       }
-    },
+    }
   },
   data() {
     return {
@@ -152,43 +152,43 @@ export default {
   },
   computed: {
     pageSizes() {
-      const pageSizeArray=[10,15,20,30,50];
-      return pageSizeArray.indexOf(this.pagination.pageSize)>-1
+      const pageSizeArray = [10, 15, 20, 30, 50];
+      return pageSizeArray.indexOf(this.pagination.pageSize) > -1
         ? pageSizeArray
-        :pageSizeArray.concat(this.pagination.pageSize);
+        : pageSizeArray.concat(this.pagination.pageSize);
     },
     defaultSort() {
       return {
         prop: this.pagination.sortField,
         order: this.pagination.order
-      }
+      };
     }
   },
   methods: {
     handleSelectionChange(multipleSelection) {
-      this.multipleSelection=multipleSelection;
-      if(this.customSelectionChangeEvent) {
+      this.multipleSelection = multipleSelection;
+      if (this.customSelectionChangeEvent) {
         this.customSelectionChangeEvent(multipleSelection);
       }
     },
     handlePageIndexChange(pageIndex) {
-      this.pagination.pageIndex=pageIndex;
+      this.pagination.pageIndex = pageIndex;
       this.getList();
     },
     handlePageSizeChange(pageSize) {
-      this.pagination.pageIndex=1;
-      this.pagination.pageSize=pageSize;
-      this.$store.dispatch('SetPagesize',pageSize);
+      this.pagination.pageIndex = 1;
+      this.pagination.pageSize = pageSize;
+      this.$store.dispatch('SetPagesize', pageSize);
       this.getList();
     },
-    handleSortChange({ prop,order }) {
-      this.pagination.sortField=prop;
-      this.pagination.order=order;
+    handleSortChange({ prop, order }) {
+      this.pagination.sortField = prop;
+      this.pagination.order = order;
       this.getList();
     },
     indexMethod(index) {
       return (
-        this.pagination.pageSize*(this.pagination.pageIndex-1)+index+1
+        this.pagination.pageSize * (this.pagination.pageIndex - 1) + index + 1
       );
     }
   }
@@ -233,7 +233,7 @@ export default {
         color: #ffffff;
       }
       .left-border:after {
-        content: "";
+        content: '';
         position: absolute;
         left: 0;
         top: 28%;

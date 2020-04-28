@@ -125,13 +125,13 @@ export default {
       default: function() {
         return {};
       }
-    },
+    }
   },
   data() {
-    const dataRules={};
+    const dataRules = {};
     this.fields.forEach(r => {
-      if(r.dataField&&r.rules) {
-        dataRules[r.dataField]=r.rules;
+      if (r.dataField && r.rules) {
+        dataRules[r.dataField] = r.rules;
       }
     });
     return {

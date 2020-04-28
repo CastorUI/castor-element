@@ -8,9 +8,11 @@ const cssmin = require('gulp-cssmin');
 function compile() {
   return src('./src/*.scss')
     .pipe(sass.sync())
-    .pipe(autoprefixer({
-      cascade: false
-    }))
+    .pipe(
+      autoprefixer({
+        cascade: false,
+      })
+    )
     .pipe(cssmin())
     .pipe(dest('./lib'));
 }

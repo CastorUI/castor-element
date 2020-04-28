@@ -119,9 +119,9 @@
 export default {
   directives: {
     inputNumberFocus: {
-      inserted: function(el,binding) {
-        if(binding.value) {
-          el.children[2].children[0].focus()
+      inserted: function(el, binding) {
+        if (binding.value) {
+          el.children[2].children[0].focus();
         }
       }
     }
@@ -165,7 +165,7 @@ export default {
     },
     dataTemplate: {
       type: Function,
-      default: () => { }
+      default: () => {}
     },
     align: {
       type: String,
@@ -173,7 +173,7 @@ export default {
     },
     handleEmitEvent: {
       type: Function,
-      default: () => { }
+      default: () => {}
     },
     editable: {
       type: Boolean,
@@ -199,13 +199,13 @@ export default {
     }
   },
   methods: {
-    getFormRules(dataField,rules) {
-      const formRules={};
-      formRules[dataField]=rules;
+    getFormRules(dataField, rules) {
+      const formRules = {};
+      formRules[dataField] = rules;
       return formRules;
     },
-    handleValidateForm(validateField,validateStatus) {
-      this.$emit('update:validateStatus',validateStatus);
+    handleValidateForm(validateField, validateStatus) {
+      this.$emit('update:validateStatus', validateStatus);
     }
   }
 };

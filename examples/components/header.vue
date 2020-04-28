@@ -60,7 +60,7 @@
     &::before,
     &::after {
       display: table;
-      content: "";
+      content: '';
     }
     &::after {
       clear: both;
@@ -74,7 +74,7 @@
     padding: 0 20px;
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       top: calc(50% - 8px);
       width: 1px;
@@ -141,7 +141,7 @@
       }
 
       &.active::after {
-        content: "";
+        content: '';
         display: inline-block;
         position: absolute;
         bottom: 0;
@@ -352,22 +352,21 @@
   </div>
 </template>
 <script>
-
 export default {
   data() {
     return {
       active: 'true',
       versions: [],
       version: '1.0.0',
-      verDropdownVisible: true,
+      verDropdownVisible: true
     };
   },
 
   computed: {
     navConfig() {
       return {
-        "guide": "指南",
-        "components": "组件",
+        guide: '指南',
+        components: '组件'
       };
     },
     isComponentPage() {
@@ -375,27 +374,27 @@ export default {
     }
   },
   created() {
-    const xhr=new XMLHttpRequest();
-    xhr.onreadystatechange=_ => {
-      if(xhr.readyState===4&&xhr.status===200) {
-        const versions=JSON.parse(xhr.responseText);
-        this.versions=Object.keys(versions).reduce((prev,next) => {
-          prev[next]=versions[next];
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = _ => {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        const versions = JSON.parse(xhr.responseText);
+        this.versions = Object.keys(versions).reduce((prev, next) => {
+          prev[next] = versions[next];
           return prev;
-        },{});
+        }, {});
       }
     };
-    xhr.open('GET','/versions.json');
+    xhr.open('GET', '/versions.json');
     xhr.send();
   },
   methods: {
     switchVersion(version) {
-      if(version===this.version) return;
-      location.href=`${location.origin}/${this.versions[version]}/${location.hash} `;
+      if (version === this.version) return;
+      location.href = `${location.origin}/${this.versions[version]}/${location.hash} `;
     },
     handleVerDropdownToggle(visible) {
-      this.verDropdownVisible=visible;
-    },
+      this.verDropdownVisible = visible;
+    }
   }
 };
 </script>

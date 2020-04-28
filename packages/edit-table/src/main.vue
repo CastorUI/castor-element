@@ -70,7 +70,7 @@ export default {
     editTriggerMode: {
       type: String,
       default: 'manual',
-      validator: value => ['manual','auto'].indexOf(value)>-1
+      validator: value => ['manual', 'auto'].indexOf(value) > -1
     },
     loading: {
       type: Boolean,
@@ -86,26 +86,26 @@ export default {
     },
     addCommand: {
       type: Object,
-      default: () => { }
+      default: () => {}
     },
     editCommand: {
       type: Object,
-      default: () => { }
+      default: () => {}
     },
     saveCommand: {
       type: Object,
-      default: () => { }
+      default: () => {}
     },
     rowKey: {
       type: String,
       default: ''
     },
-    addInside: { type: Boolean,default: false },
+    addInside: { type: Boolean, default: false },
     addInsidePosition: {
       type: String,
       default: 'beforeFirst',
       validator: function(value) {
-        return ['beforeFirst','afterLast'].indexOf(value)>-1;
+        return ['beforeFirst', 'afterLast'].indexOf(value) > -1;
       }
     },
     showSummary: {
@@ -114,7 +114,7 @@ export default {
     },
     summaryMethod: {
       type: Function,
-      default: () => { }
+      default: () => {}
     },
     appendContent: {
       type: String,
@@ -125,7 +125,7 @@ export default {
       default: function() {
         return {};
       }
-    },
+    }
   },
   data() {
     return {
@@ -134,51 +134,51 @@ export default {
   },
   computed: {
     editing() {
-      return this.editingRow!=null;
+      return this.editingRow != null;
     }
   },
   created() {
-    if(this.editTriggerMode==='auto') {
-      window.addEventListener('click',this.handleOuterRowChange,false);
+    if (this.editTriggerMode === 'auto') {
+      window.addEventListener('click', this.handleOuterRowChange, false);
     }
   },
   destroyed() {
-    if(this.editTriggerMode==='auto') {
-      window.removeEventListener('click',this.handleOuterRowChange,false);
+    if (this.editTriggerMode === 'auto') {
+      window.removeEventListener('click', this.handleOuterRowChange, false);
     }
   },
   methods: {
-    handleEmitEvent: function(commandType,command,index,row) {
-      this.$emit(command,index,row);
+    handleEmitEvent: function(commandType, command, index, row) {
+      this.$emit(command, index, row);
       // console.log('this.dataSource - handleEmitEvent',this.dataSource,row);
-      if(this.editTriggerMode==='manual') {
-        if(row.operateType==='edit') {
-          this.editingRow=row;
+      if (this.editTriggerMode === 'manual') {
+        if (row.operateType === 'edit') {
+          this.editingRow = row;
         } else {
-          this.editingRow=null;
+          this.editingRow = null;
         }
       }
     },
     handleAdd: function() {
-      let newId=-1;
-      if(
-        this.dataSource&&
-        this.dataSource.length>0&&
-        this.dataSource.some(r => r.id<0)
+      let newId = -1;
+      if (
+        this.dataSource &&
+        this.dataSource.length > 0 &&
+        this.dataSource.some(r => r.id < 0)
       ) {
-        newId=
-          this.dataSource.map(r => r.id).reduce((a,b) => Math.min(a,b))-1;
+        newId =
+          this.dataSource.map(r => r.id).reduce((a, b) => Math.min(a, b)) - 1;
       }
-      if(this.addInside) {
-        const newRow={
+      if (this.addInside) {
+        const newRow = {
           id: newId
         };
-        if(this.addInsidePosition==='beforeFirst') {
+        if (this.addInsidePosition === 'beforeFirst') {
           this.dataSource.unshift(newRow);
         } else {
           this.dataSource.push(newRow);
         }
-        this.editingRow=newRow;
+        this.editingRow = newRow;
         event.stopPropagation();
       } else {
         this.$emit(this.addCommand.command);
@@ -187,50 +187,50 @@ export default {
     handleRowClick: function(row) {
       // console.log('handleRowClick',row);
       event.stopPropagation();
-      if(
-        this.editTriggerMode==='auto'&&
-        this.editCommand&&
+      if (
+        this.editTriggerMode === 'auto' &&
+        this.editCommand &&
         this.editCommand.command
       ) {
-        if(
-          this.editCommand.disableValidator&&
-          this.editCommand.disableValidator.call(this,row)
+        if (
+          this.editCommand.disableValidator &&
+          this.editCommand.disableValidator.call(this, row)
         ) {
           return;
         }
 
-        this.editingRow=row;
-        this.handleEmitEvent('',this.editCommand.command,0,row);
+        this.editingRow = row;
+        this.handleEmitEvent('', this.editCommand.command, 0, row);
       } else {
-        this.$emit('row-click',row);
+        this.$emit('row-click', row);
       }
     },
-    handleCurrentChange: function(currentRow,oldCurrentRow) {
-      console.log('handleCurrentChange: ',this.editingRow);
+    handleCurrentChange: function(currentRow, oldCurrentRow) {
+      console.log('handleCurrentChange: ', this.editingRow);
       this.saveEditingRow();
     },
     handleOuterRowChange(event) {
-      console.log('handleOuterRowChange',this.editingRow);
-      var saveFlag=this.saveEditingRow();
-      if(saveFlag) {
-        this.editingRow=null;
+      console.log('handleOuterRowChange', this.editingRow);
+      var saveFlag = this.saveEditingRow();
+      if (saveFlag) {
+        this.editingRow = null;
       }
     },
     saveEditingRow() {
-      if(
-        this.editTriggerMode==='auto'&&
-        this.editingRow!=null&&
-        this.saveCommand&&
+      if (
+        this.editTriggerMode === 'auto' &&
+        this.editingRow != null &&
+        this.saveCommand &&
         this.saveCommand.command
       ) {
-        if(
-          this.saveCommand.disableValidator&&
-          this.saveCommand.disableValidator.call(this,this.editingRow)
+        if (
+          this.saveCommand.disableValidator &&
+          this.saveCommand.disableValidator.call(this, this.editingRow)
         ) {
           return false;
         }
 
-        this.handleEmitEvent('',this.saveCommand.command,0,this.editingRow);
+        this.handleEmitEvent('', this.saveCommand.command, 0, this.editingRow);
         return true;
       }
     }

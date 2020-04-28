@@ -191,14 +191,14 @@ export default {
     checkedKeys: {
       immediate: true,
       handler() {
-        this.checkedFields=[];
+        this.checkedFields = [];
         this.fields
-          .filter(r => r.showType==='dynamic')
+          .filter(r => r.showType === 'dynamic')
           .forEach(r => {
-            if(this.checkedKeys.indexOf(r.dataField)>-1) {
+            if (this.checkedKeys.indexOf(r.dataField) > -1) {
               this.checkedFields.push(r);
             } else {
-              this.model[r.dataField]=undefined;
+              this.model[r.dataField] = undefined;
             }
           });
       }
@@ -209,9 +209,9 @@ export default {
   },
   methods: {
     handleResize: function() {
-      const form=document.getElementById('queryForm');
-      this.rowFieldsCount=Math.floor(
-        form.getBoundingClientRect().width/this.maxFieldWidth
+      const form = document.getElementById('queryForm');
+      this.rowFieldsCount = Math.floor(
+        form.getBoundingClientRect().width / this.maxFieldWidth
       );
     }
   }

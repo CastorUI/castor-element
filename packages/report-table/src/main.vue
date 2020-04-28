@@ -182,7 +182,7 @@ export default {
     },
     addCommand: {
       type: Object,
-      default: () => { }
+      default: () => {}
     },
     customCommands: {
       type: Array,
@@ -190,15 +190,15 @@ export default {
     },
     defaultSort: {
       type: Object,
-      default: () => { }
+      default: () => {}
     },
     getList: {
       type: Function,
-      default: () => { }
+      default: () => {}
     },
     spanMethod: {
       type: Function,
-      default: () => { }
+      default: () => {}
     },
     dynamicFields: {
       type: Array,
@@ -209,7 +209,7 @@ export default {
       default: function() {
         return {};
       }
-    },
+    }
   },
   data() {
     return {
@@ -220,22 +220,22 @@ export default {
   },
   computed: {
     pageSizes: function() {
-      const pageSizeArray=[10,15,20,30,50];
-      return pageSizeArray.indexOf(this.pagination.pageSize)>-1
+      const pageSizeArray = [10, 15, 20, 30, 50];
+      return pageSizeArray.indexOf(this.pagination.pageSize) > -1
         ? pageSizeArray
-        :pageSizeArray.concat(this.pagination.pageSize);
+        : pageSizeArray.concat(this.pagination.pageSize);
     }
   },
   watch: {
     dynamicFields: {
       handler: function() {
-        this.hackReset=false;
-        this.dynamicCloumns=this.deepCopy(this.columns);
-        this.dynamicCloumns=this.filterColumnsByDynamicFields(
+        this.hackReset = false;
+        this.dynamicCloumns = this.deepCopy(this.columns);
+        this.dynamicCloumns = this.filterColumnsByDynamicFields(
           this.dynamicCloumns
         );
         this.$nextTick(() => {
-          this.hackReset=true;
+          this.hackReset = true;
         });
       },
       immediate: true
@@ -243,49 +243,49 @@ export default {
   },
   methods: {
     filterColumnsByDynamicFields(dynamicCloumns) {
-      dynamicCloumns=dynamicCloumns.filter(
+      dynamicCloumns = dynamicCloumns.filter(
         r =>
-          r.showType!=='dynamic'||
-          (r.showType==='dynamic'&&
-            this.dynamicFields.some(f => f===r.label))
+          r.showType !== 'dynamic' ||
+          (r.showType === 'dynamic' &&
+            this.dynamicFields.some(f => f === r.label))
       );
       dynamicCloumns.forEach(r => {
-        if(r.children) {
-          r.children=this.filterColumnsByDynamicFields(r.children);
+        if (r.children) {
+          r.children = this.filterColumnsByDynamicFields(r.children);
         }
       });
       return dynamicCloumns;
     },
     handleSelectionChange(multipleSelection) {
-      this.multipleSelection=multipleSelection;
+      this.multipleSelection = multipleSelection;
     },
     handlePageIndexChange(pageIndex) {
-      this.pagination.pageIndex=pageIndex;
+      this.pagination.pageIndex = pageIndex;
       this.getList();
     },
     handlePageSizeChange(pageSize) {
-      this.pagination.pageIndex=1;
-      this.pagination.pageSize=pageSize;
+      this.pagination.pageIndex = 1;
+      this.pagination.pageSize = pageSize;
       this.getList();
     },
-    handleSortChange({ prop,order }) {
-      this.pagination.sortField=prop;
-      this.pagination.order=order;
+    handleSortChange({ prop, order }) {
+      this.pagination.sortField = prop;
+      this.pagination.order = order;
       this.getList();
     },
     indexMethod(index) {
       return (
-        this.pagination.pageSize*(this.pagination.pageIndex-1)+index+1
+        this.pagination.pageSize * (this.pagination.pageIndex - 1) + index + 1
       );
     },
     deepCopy(obj) {
-      const result=Array.isArray(obj)? []:{};
-      for(const key in obj) {
-        if(obj.hasOwnProperty(key)) {
-          if(typeof obj[key]==='object') {
-            result[key]=this.deepCopy(obj[key]); // 递归复制
+      const result = Array.isArray(obj) ? [] : {};
+      for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          if (typeof obj[key] === 'object') {
+            result[key] = this.deepCopy(obj[key]); // 递归复制
           } else {
-            result[key]=obj[key];
+            result[key] = obj[key];
           }
         }
       }
@@ -337,7 +337,7 @@ export default {
         color: #ffffff;
       }
       .left-border:after {
-        content: "";
+        content: '';
         position: absolute;
         left: 0;
         top: 28%;

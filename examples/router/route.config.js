@@ -11,8 +11,8 @@ const loadDocs = function(path, modulePath = '') {
 const registerComponentRoute = () => {
   let route = [];
   route.push({
-    path: `/component`,
-    redirect: `/component/installation`,
+    path: '/component',
+    redirect: '/component/installation',
     component: load('component'),
     children: [],
   });
@@ -54,8 +54,8 @@ const registerComponentRoute = () => {
 };
 /// 指南
 let guideRoute = {
-  path: `/guide`, // 指南
-  redirect: `/guide/design`,
+  path: '/guide', // 指南
+  redirect: '/guide/design',
   component: load('guide'),
   children: [
     {
@@ -74,7 +74,7 @@ let guideRoute = {
 };
 /// 首页
 let indexRoute = {
-  path: `/`,
+  path: '/',
   meta: {},
   name: 'home',
   redirect: '/guide',
