@@ -35,10 +35,11 @@
     <el-form
       id="queryForm"
       ref="form"
-      :model="model"
-      :label-width="extendProps.labelWidth || '110px'"
-      :style="fields.some(r=>r.showType==='dynamic')? 'marginLeft:100px;' : ''"
       size="small"
+      label-width="110px"
+      :model="model"
+      :style="fields.some(r=>r.showType==='dynamic')? 'marginLeft:100px;' : ''"
+      v-bind="extendProps"
       @submit.native.prevent
     >
       <template v-if="dynamicFieldsPosition==='start'">

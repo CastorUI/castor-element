@@ -2,13 +2,14 @@
   <el-form
     ref="form"
     class="form"
-    :model="model"
-    :rules="rules"
-    :label-width="extendProps.labelWidth || '120px'"
-    :label-position="extendProps.labelPosition || 'right'"
-    :disabled="operateType==='view'"
+    label-width="120px"
+    label-position="right"
     size="medium"
     style="minWidth:600px;"
+    :model="model"
+    :rules="rules"
+    :disabled="operateType==='view'"
+    v-bind="extendProps"
   >
     <div
       v-if="customCommands"
@@ -43,8 +44,8 @@
       :component-key="item.componentKey"
       :disable-validator="item.disableValidator"
       :visible-validator="item.visibleValidator"
-      :extend-props="item.extendProps"
       :custom-components="customComponents"
+      :extend-props="item.extendProps"
     />
     <el-form-item
       v-if="operateType !== 'view'"
