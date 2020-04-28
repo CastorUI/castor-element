@@ -134,10 +134,6 @@ export default {
       type: String,
       default: 'id'
     },
-    customSelectionChangeEvent: {
-      type: Function,
-      default: () => {}
-    },
     extendProps: {
       type: Object,
       default: function() {
@@ -167,9 +163,7 @@ export default {
   methods: {
     handleSelectionChange(multipleSelection) {
       this.multipleSelection = multipleSelection;
-      if (this.customSelectionChangeEvent) {
-        this.customSelectionChangeEvent(multipleSelection);
-      }
+      this.$emit('selection-change', multipleSelection);
     },
     handlePageIndexChange(pageIndex) {
       this.pagination.pageIndex = pageIndex;

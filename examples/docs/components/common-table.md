@@ -891,19 +891,18 @@
 
 ### Attributes
 
-| 参数                       | 说明                                                                                                             | 类型     | 可选值 | 默认值 |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
-| loading                    | 是否显示 loading                                                                                                 | boolean  | —      | false  |
-| dataSource                 | 数据源                                                                                                           | array    | —      | []     |
-| columns                    | 列集合 [详情](http://0.0.0.0:8085/#/component/common-table#column-options)                                       | array    | —      | []     |
-| pagination                 | 分页对象 [详情](http://0.0.0.0:8085/#/component/sharing-config#pagination-options)                               | object   | —      | {}     |
-| addCommand                 | 新增事件对象 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling)                   | object   | —      | {}     |
-| customCommands             | 自定义事件，显示在表格上方右侧 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | —      | []     |
-| getList                    | 查询数据方法                                                                                                     | function | —      | —      |
-| spanMethod                 | 合并单元格方法                                                                                                   | function | —      | —      |
-| rowKey                     | 行 ID 字段                                                                                                       | string   | -      | -      |
-| extendProps                | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                    | object   | -      | -      |
-| customSelectionChangeEvent | 行多选事件                                                                                                       | function | —      | —      |
+| 参数           | 说明                                                                                                             | 类型     | 可选值 | 默认值 |
+| -------------- | ---------------------------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
+| loading        | 是否显示 loading                                                                                                 | boolean  | —      | false  |
+| dataSource     | 数据源                                                                                                           | array    | —      | []     |
+| columns        | 列集合 [详情](http://0.0.0.0:8085/#/component/common-table#column-options)                                       | array    | —      | []     |
+| pagination     | 分页对象 [详情](http://0.0.0.0:8085/#/component/sharing-config#pagination-options)                               | object   | —      | {}     |
+| addCommand     | 新增事件对象 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling)                   | object   | —      | {}     |
+| customCommands | 自定义事件，显示在表格上方右侧 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | —      | []     |
+| getList        | 查询数据方法                                                                                                     | function | —      | —      |
+| spanMethod     | 合并单元格方法                                                                                                   | function | —      | —      |
+| rowKey         | 行 ID 字段                                                                                                       | string   | -      | -      |
+| extendProps    | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                    | object   | -      | -      |
 
 ### Column Options
 
@@ -925,6 +924,7 @@
 
 ### Table Events
 
-| 事件名    | 说明                         | 参数 |
-| --------- | ---------------------------- | ---- |
-| row-click | 当某一行被点击时会触发该事件 | row  |
+| 事件名           | 说明                                         | 参数              |
+| ---------------- | -------------------------------------------- | ----------------- |
+| row-click        | 当某一行被点击时会触发该事件                 | row               |
+| selection-change | 用于多选表格，当选择项发生变化时会触发该事件 | multipleSelection |
