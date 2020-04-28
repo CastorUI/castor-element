@@ -212,14 +212,14 @@
 
 合并单元法需要设定算法。
 
-:::demo 使用`spanMethod`方法来设置算法。
+:::demo 使用 `el-table` 的 `spanMethod` 方法来设置算法。
 
 ```html
 <template>
   <ca-report-table
     :dataSource="table.dataList"
     :columns="tableColumns"
-    :spanMethod="spanMethod"
+    :extendProps="table.extendProps"
   />
 </template>
 
@@ -251,6 +251,9 @@
               nationality: '香港',
             },
           ],
+          extendProps: {
+            spanMethod: this.spanMethod,
+          },
         },
       };
     },

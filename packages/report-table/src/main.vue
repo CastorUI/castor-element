@@ -33,11 +33,10 @@
       <el-table
         v-loading="loading"
         :data="dataSource"
-        :span-method="spanMethod"
         :default-sort="defaultSort"
-        :border="extendProps.border !== undefined ? extendProps.border : true"
-        :stripe="extendProps.stripe"
-        :style="extendProps.style || 'width:100%;min-width:700px;height:auto;'"
+        :border="true"
+        style="width:100%;min-width:700px;height:auto;"
+        v-bind="extendProps"
         @row-click="row => $emit('row-click', row)"
         @selection-change="multipleSelection => handleSelectionChange(multipleSelection)"
         @sort-change="args=> handleSortChange(args)"
@@ -188,15 +187,7 @@ export default {
       type: Array,
       default: () => []
     },
-    defaultSort: {
-      type: Object,
-      default: () => {}
-    },
     getList: {
-      type: Function,
-      default: () => {}
-    },
-    spanMethod: {
       type: Function,
       default: () => {}
     },
@@ -224,6 +215,12 @@ export default {
       return pageSizeArray.indexOf(this.pagination.pageSize) > -1
         ? pageSizeArray
         : pageSizeArray.concat(this.pagination.pageSize);
+    },
+    defaultSort() {
+      return {
+        prop: this.pagination.sortField,
+        order: this.pagination.order
+      };
     }
   },
   watch: {
