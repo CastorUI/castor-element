@@ -19,7 +19,7 @@ command 代表一个可交互的命令或事件，包含两种情况：
 
 ### extendProps 扩展属性
 
-配置样式相关的 ElementUI 属性，，采用驼峰命名，与`ElementUI`属性保持一致。
+支持所有的`ElementUI`属性，命名与 `ElementUI` 官方文档属性一致，但统一采用驼峰形式。
 
 - 通用表格
   - 表格参考 `el-table`

@@ -95,10 +95,6 @@ export default {
       type: Object,
       default: () => {}
     },
-    rowKey: {
-      type: String,
-      default: ''
-    },
     addInside: { type: Boolean, default: false },
     addInsidePosition: {
       type: String,
