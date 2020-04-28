@@ -906,23 +906,23 @@
 
 ### Column Options
 
-| 参数        | 说明                                                                                                                           | 类型     | 可选值                                                              | 默认值    |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------- | --------- |
-| type        | 类型                                                                                                                           | string   | default / selection / index / link / keyToValue / status / commands | default   |
-| label       | 标题                                                                                                                           | string   | —                                                                   | 10        |
-| dataField   | 绑定字段                                                                                                                       | string   | —                                                                   | 0         |
-| width       | 固定宽度,此属性与 `minWidth` 和 `columnSpan` 三选一使用                                                                        | string   | -                                                                   | -         |
-| columnSpan  | 列宽所占比例,此属性与 `width` 和 `minWidth` 三选一使用                                                                         | string   | —                                                                   | —         |
-| minWidth    | 最小宽度,此属性与 `width` 和 `columnSpan` 三选一使用                                                                           | string   |                                                                     | -         |
-| commands    | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http: / /0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | -                                                                   | []        |
-| options     | 数据转换数据源                                                                                                                 | array    | -                                                                   | []        |
-| extendProps | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                                  | string   | -                                                                   | ascending |
-| align       | 对齐方式                                                                                                                       | string   | -                                                                   | center    |
-| sortable    | 是否支持排序                                                                                                                   | boolean  | -                                                                   | false     |
-| linkCommand | 超链接事件，当 `type` 为 `link` 时使用                                                                                         | function | -                                                                   | -         |
-| reportType  | 报表列类型 , 报表表格组件专用                                                                                                  | string   | data/title                                                          | -         |
+| 参数        | 说明                                                                                                                         | 类型     | 可选值                                                              | 默认值    |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------- | --------- |
+| type        | 类型                                                                                                                         | string   | default / selection / index / link / keyToValue / status / commands | default   |
+| label       | 标题                                                                                                                         | string   | —                                                                   | 10        |
+| dataField   | 绑定字段                                                                                                                     | string   | —                                                                   | 0         |
+| width       | 固定宽度,此属性与 `minWidth` 和 `columnSpan` 三选一使用                                                                      | string   | -                                                                   | -         |
+| columnSpan  | 列宽所占比例,此属性与 `width` 和 `minWidth` 三选一使用                                                                       | string   | —                                                                   | —         |
+| minWidth    | 最小宽度,此属性与 `width` 和 `columnSpan` 三选一使用                                                                         | string   |                                                                     | -         |
+| commands    | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | -                                                                   | []        |
+| options     | 数据转换数据源                                                                                                               | array    | -                                                                   | []        |
+| extendProps | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                                | string   | -                                                                   | ascending |
+| align       | 对齐方式                                                                                                                     | string   | -                                                                   | center    |
+| sortable    | 是否支持排序                                                                                                                 | boolean  | -                                                                   | false     |
+| linkCommand | 超链接事件，当 `type` 为 `link` 时使用                                                                                       | function | -                                                                   | -         |
+| reportType  | 报表列类型 , 报表表格组件专用                                                                                                | string   | data/title                                                          | -         |
 
-### Table Events
+### Events
 
 | 事件名           | 说明                                         | 参数              |
 | ---------------- | -------------------------------------------- | ----------------- |
