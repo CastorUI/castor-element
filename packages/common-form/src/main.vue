@@ -2,14 +2,10 @@
   <el-form
     ref="form"
     class="form"
-    label-width="120px"
-    label-position="right"
-    size="medium"
-    style="minWidth:600px;"
     :model="model"
     :rules="rules"
     :disabled="operateType==='view'"
-    v-bind="extendProps"
+    v-bind="{size: 'medium',labelWidth: '120px', labelPosition: 'right', style: 'minWidth:600px;', ...extendProps}"
   >
     <div
       v-if="customCommands"
@@ -18,11 +14,8 @@
       <el-button
         v-for="(item,index) of customCommands"
         :key="index"
-        :icon="item.icon"
-        :type="item.linkType || 'primary'"
-        size="small"
-        :underline="true"
         :disabled="item.disableValidator && item.disableValidator.call(this,model)"
+        v-bind="{size:'small',type: 'primary',underline: true, ...item.extendProps}"
         @click.stop="$emit(item.command,model)"
       >
         {{ item.text }}
@@ -42,9 +35,9 @@
       :current-field="item.currentField"
       :append-field="item.appendField"
       :component-key="item.componentKey"
+      :custom-components="customComponents"
       :disable-validator="item.disableValidator"
       :visible-validator="item.visibleValidator"
-      :custom-components="customComponents"
       :extend-props="item.extendProps"
     />
     <el-form-item
@@ -57,13 +50,9 @@
         v-show="!item.visibleValidator || item.visibleValidator.call(this,model)"
         :key="index"
         class="command"
-        :icon="item.icon"
-        :disabled="item.disableValidator && item.disableValidator.call(this,model)"
-        :type="item.styleType || 'primary'"
         :loading="item.loading && loading"
-        :plain="item.extendProps && item.extendProps.plain"
-        :circle="item.extendProps && item.extendProps.circle"
-        :round="item.extendProps && item.extendProps.round"
+        :disabled="item.disableValidator && item.disableValidator.call(this,model)"
+        v-bind="{type: 'primary', ...item.extendProps}"
         @click="$emit(item.command)"
       >
         {{ item.text }}
