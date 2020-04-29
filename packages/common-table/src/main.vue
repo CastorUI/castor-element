@@ -4,8 +4,8 @@
       <el-button
         v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
         type="text"
-        :icon="addCommand.icon"
         class="table-add-command"
+        :icon="addCommand.icon"
         :disabled="addCommand.disableValidator && addCommand.disableValidator.call(this)"
         @click="$emit(addCommand.command)"
       >
@@ -50,7 +50,6 @@
           :link-command="item.linkCommand"
           :index-method="indexMethod"
           :width="item.width"
-          :align="item.align"
           :column-span="item.columnSpan"
           :min-width="item.minWidth"
           :fixed="item.fixed"
@@ -70,8 +69,8 @@
         :page-size="pagination.pageSize"
         :page-sizes="pageSizes"
         :total="pagination.total"
-        :background="pagination.background"
         layout="total,sizes, prev, pager, next"
+        v-bind="pagination.extendProps"
         @size-change="pageSize => handlePageSizeChange(pageSize)"
         @current-change="pageIndex => handlePageIndexChange(pageIndex)"
       />

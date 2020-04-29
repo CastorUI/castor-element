@@ -25,6 +25,7 @@ command 代表一个可交互的命令或事件，包含两种情况：
   - 表格参考 `el-table`
   - 字段参考 `el-table-column`
     - `type` 为 `link` 和 `commands` 时同时参考 `el-link`
+  - 分页参考 `el-pagination`
 - 通用表单
   - 表单参考 `el-form`
   - 事件参考 `el-button`

@@ -4,7 +4,8 @@
     :label="label"
     :width="width"
     :fixed="fixed"
-    :align="align"
+    align="center"
+    v-bind="extendProps"
   />
   <el-table-column
     v-else-if="type==='index'"
@@ -12,6 +13,7 @@
     :label="label"
     :width="width"
     align="center"
+    v-bind="extendProps"
   />
   <!-- <el-table-column
     v-else-if="type==='custom'"
@@ -19,8 +21,9 @@
     :width="width"
     :min-width="minWidth"
     :fixed="fixed"
-    :align="align"
     :prop="dataField"
+    align="center"
+    v-bind="extendProps"
   >
     <template slot-scope="scope">
       <div v-html="dataTemplate(scope.row)" />
@@ -31,7 +34,8 @@
     :label="label"
     :width="width"
     :fixed="fixed"
-    :align="align"
+    align="center"
+    v-bind="extendProps"
   >
     <template slot-scope="scope">
       <template v-if="editingRow != null && editingRow.id === scope.row.id">
@@ -66,9 +70,10 @@
     :width="width"
     :min-width="minWidth"
     :fixed="fixed"
-    :align="align"
+    align="center"
     :prop="dataField"
-    show-overflow-tooltip
+    :show-overflow-tooltip="true"
+    v-bind="extendProps"
   >
     <template slot-scope="scope">
       <template v-if="editingRow!=null && scope.row.id === editingRow.id && editable">

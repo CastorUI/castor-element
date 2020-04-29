@@ -3,17 +3,17 @@
     v-if="type==='selection'"
     :type="type"
     :width="width"
-    :align="align"
-    :reserve-selection="extendProps.reserveSelection || false"
-    :selectable="extendProps.selectable"
+    align="center"
+    v-bind="extendProps"
   />
   <el-table-column
     v-else-if="type==='index'"
     :type="type"
     :label="label"
     :width="width"
-    :align="align"
+    align="center"
     :index="indexMethod"
+    v-bind="extendProps"
   />
   <el-table-column
     v-else-if="type==='custom'"
@@ -22,8 +22,9 @@
     :min-width="minWidth || columnSpan"
     :fixed="fixed"
     :sortable="sortable?'custom':false"
-    :align="align"
-    show-overflow-tooltip
+    align="center"
+    :show-overflow-tooltip="true"
+    v-bind="extendProps"
   >
     <!-- <template slot-scope="scope">
       // eslint-disable-next-line vue/no-v-html
@@ -36,7 +37,8 @@
     :width="width"
     :min-width="minWidth || columnSpan"
     :fixed="fixed"
-    :align="align"
+    align="center"
+    v-bind="extendProps"
   >
     <template slot-scope="scope">
       <el-link
@@ -57,8 +59,9 @@
     :width="width"
     :min-width="minWidth || columnSpan"
     :fixed="fixed"
-    :align="align"
-    show-overflow-tooltip
+    align="center"
+    :show-overflow-tooltip="true"
+    v-bind="extendProps"
   >
     <template slot-scope="scope">
       <el-link
@@ -71,12 +74,13 @@
   </el-table-column>
   <el-table-column
     v-else-if="type==='status'"
+    :show-overflow-tooltip="true"
     :label="label"
     :width="width"
     :min-width="minWidth || columnSpan"
     :fixed="fixed"
-    :align="align"
-    show-overflow-tooltip
+    align="center"
+    v-bind="extendProps"
   >
     <template slot-scope="scope">
       <span
@@ -103,8 +107,9 @@
     :width="width"
     :min-width="minWidth || columnSpan"
     :fixed="fixed"
-    :align="align"
-    show-overflow-tooltip
+    align="center"
+    :show-overflow-tooltip="true"
+    v-bind="extendProps"
   >
     <template slot-scope="scope">
       <span
@@ -122,8 +127,9 @@
     :width="width"
     :min-width="minWidth || columnSpan"
     :fixed="fixed"
-    :align="align"
-    show-overflow-tooltip
+    align="center"
+    :show-overflow-tooltip="true"
+    v-bind="extendProps"
   >
     <template slot-scope="scope">
       <span v-if="options.some(r=>r.value === scope.row[dataField])">{{ options.filter(r=>r.value === scope.row[dataField])[0].label }}</span>
@@ -137,8 +143,9 @@
     :min-width="minWidth || columnSpan"
     :fixed="fixed"
     :sortable="sortable?'custom':false"
-    :align="align"
-    show-overflow-tooltip
+    align="center"
+    :show-overflow-tooltip="true"
+    v-bind="extendProps"
   >
     <template slot-scope="scope">
       {{ scope.row[dataField] || '/' }}

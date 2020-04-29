@@ -46,21 +46,24 @@
             v-if="item.reportType==='title' && item.children && item.children.length > 0"
             :key="index"
             :label="item.label"
-            :align="item.align"
+            align="center"
+            v-bind="item.extendProps"
           >
             <template v-for="(childItem,childIndex) of item.children">
               <el-table-column
                 v-if="childItem.reportType==='title' && childItem.children && childItem.children.length > 0"
                 :key="'childIndex' + childIndex"
                 :label="childItem.label"
-                :align="childItem.align"
+                align="center"
+                v-bind="childItem.extendProps"
               >
                 <template v-for="(grandChildItem,grandChildIndex) of childItem.children">
                   <el-table-column
                     v-if="grandChildItem.reportType==='title'"
                     :key="'grandChild' + grandChildIndex"
                     :label="grandChildItem.label"
-                    :align="grandChildItem.align"
+                    align="center"
+                    v-bind="grandChildItem.extendProps"
                   />
                   <common-column
                     v-if="grandChildItem.reportType==='data'"
@@ -73,7 +76,6 @@
                     :link-command="grandChildItem.linkCommand"
                     :index-method="indexMethod"
                     :width="grandChildItem.width"
-                    :align="grandChildItem.align"
                     :column-span="grandChildItem.columnSpan"
                     :min-width="grandChildItem.minWidth"
                     :fixed="grandChildItem.fixed"
@@ -95,7 +97,6 @@
                 :link-command="childItem.linkCommand"
                 :index-method="indexMethod"
                 :width="childItem.width"
-                :align="childItem.align"
                 :column-span="childItem.columnSpan"
                 :min-width="childItem.minWidth"
                 :fixed="childItem.fixed"
@@ -117,7 +118,6 @@
             :link-command="item.linkCommand"
             :index-method="indexMethod"
             :width="item.width"
-            :align="item.align"
             :column-span="item.columnSpan"
             :min-width="item.minWidth"
             :fixed="item.fixed"
@@ -138,8 +138,8 @@
         :page-size="pagination.pageSize"
         :page-sizes="pageSizes"
         :total="pagination.total"
-        :background="pagination.background"
         layout="total,sizes, prev, pager, next"
+        v-bind="pagination.extendProps"
         @size-change="pageSize => handlePageSizeChange(pageSize)"
         @current-change="pageIndex => handlePageIndexChange(pageIndex)"
       />

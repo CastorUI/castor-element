@@ -36,13 +36,12 @@
         :min-width="item.minWidth"
         :fixed="item.fixed"
         :data-template="item.dataTemplate"
-        :align="item.align"
         :editable="item.editable"
         :editing="editing"
         :editing-row="editingRow"
-        :extend-props="item.extendProps"
         :handle-emit-event="handleEmitEvent"
         :auto-focus="item.autoFocus"
+        :extend-props="item.extendProps"
         v-on="$listeners"
       />
       <template
