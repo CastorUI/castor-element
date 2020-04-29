@@ -852,6 +852,8 @@
             {
               text: '关注',
               command: 'handleStar',
+              disableValidator: (multipleSelection) =>
+                !(multipleSelection && multipleSelection.length),
               extendProps: {
                 icon: 'el-icon-star-on',
               },
