@@ -23,9 +23,11 @@ command 代表一个可交互的命令或事件，包含两种情况：
 
 - 通用表格
   - 表格参考 `el-table`
-  - 字段参考 `el-table-column`
-    - `type` 为 `link` 和 `commands` 时同时参考 `el-link`
+  - 表格各列参考 `el-table-column`
   - 分页参考 `el-pagination`
+  - 事件（命令）参考 `el-button` 或 `el-link`
+    - 新增事件和定制事件参考 `el-button`
+    - `type` 为 `link` 和 `commands` 的行内事件参考 `el-link`
 - 通用表单
   - 表单参考 `el-form`
   - 事件参考 `el-button`
