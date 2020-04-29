@@ -34,7 +34,6 @@
         :editable-commands="item.editableCommands"
         :width="item.width"
         :min-width="item.minWidth"
-        :fixed="item.fixed"
         :data-template="item.dataTemplate"
         :editable="item.editable"
         :editing="editing"

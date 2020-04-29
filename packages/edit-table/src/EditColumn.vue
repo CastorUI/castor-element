@@ -3,7 +3,6 @@
     v-if="type==='expand'"
     :label="label"
     :width="width"
-    :fixed="fixed"
     align="center"
     v-bind="extendProps"
   />
@@ -20,7 +19,6 @@
     :label="label"
     :width="width"
     :min-width="minWidth"
-    :fixed="fixed"
     :prop="dataField"
     align="center"
     v-bind="extendProps"
@@ -33,7 +31,6 @@
     v-else-if="type==='commands'"
     :label="label"
     :width="width"
-    :fixed="fixed"
     align="center"
     v-bind="extendProps"
   >
@@ -69,7 +66,6 @@
     :label="label"
     :width="width"
     :min-width="minWidth"
-    :fixed="fixed"
     align="center"
     :prop="dataField"
     :show-overflow-tooltip="true"
@@ -163,10 +159,6 @@ export default {
     minWidth: {
       type: String,
       default: '1'
-    },
-    fixed: {
-      type: String,
-      default: ''
     },
     dataTemplate: {
       type: Function,

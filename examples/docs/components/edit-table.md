@@ -301,7 +301,6 @@
             type: 'commands',
             label: '操作',
             width: '200px',
-            fixed: 'right',
             commands: [
               {
                 text: '编辑',
@@ -326,6 +325,9 @@
                 linkType: 'primary',
               },
             ],
+            extendProps: {
+              fixed: 'right',
+            },
           },
         ];
       },
@@ -438,7 +440,6 @@
             type: 'commands',
             label: '操作',
             width: '200px',
-            fixed: 'right',
             commands: [
               {
                 text: '编辑',
@@ -467,6 +468,9 @@
                 disableValidator: () => !this.table.validateStatus,
               },
             ],
+            extendProps: {
+              fixed: 'right',
+            },
           },
         ];
       },

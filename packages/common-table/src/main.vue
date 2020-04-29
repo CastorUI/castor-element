@@ -52,7 +52,6 @@
           :width="item.width"
           :column-span="item.columnSpan"
           :min-width="item.minWidth"
-          :fixed="item.fixed"
           :data-template="item.dataTemplate"
           :sortable="item.sortable"
           :extend-props="item.extendProps"

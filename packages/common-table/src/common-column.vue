@@ -20,7 +20,6 @@
     :label="label"
     :width="width"
     :min-width="minWidth || columnSpan"
-    :fixed="fixed"
     :sortable="sortable?'custom':false"
     align="center"
     :show-overflow-tooltip="true"
@@ -36,7 +35,6 @@
     :label="label"
     :width="width"
     :min-width="minWidth || columnSpan"
-    :fixed="fixed"
     align="center"
     v-bind="extendProps"
   >
@@ -58,7 +56,6 @@
     :label="label"
     :width="width"
     :min-width="minWidth || columnSpan"
-    :fixed="fixed"
     align="center"
     :show-overflow-tooltip="true"
     v-bind="extendProps"
@@ -78,7 +75,6 @@
     :label="label"
     :width="width"
     :min-width="minWidth || columnSpan"
-    :fixed="fixed"
     align="center"
     v-bind="extendProps"
   >
@@ -106,7 +102,6 @@
     :label="label"
     :width="width"
     :min-width="minWidth || columnSpan"
-    :fixed="fixed"
     align="center"
     :show-overflow-tooltip="true"
     v-bind="extendProps"
@@ -126,7 +121,6 @@
     :label="label"
     :width="width"
     :min-width="minWidth || columnSpan"
-    :fixed="fixed"
     align="center"
     :show-overflow-tooltip="true"
     v-bind="extendProps"
@@ -141,7 +135,6 @@
     :prop="dataField"
     :width="width"
     :min-width="minWidth || columnSpan"
-    :fixed="fixed"
     :sortable="sortable?'custom':false"
     align="center"
     :show-overflow-tooltip="true"
@@ -190,10 +183,6 @@ export default {
       default: 1
     },
     minWidth: {
-      type: String,
-      default: undefined
-    },
-    fixed: {
       type: String,
       default: undefined
     },
