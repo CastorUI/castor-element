@@ -50,7 +50,6 @@
             type: 'default',
             label: 'ID',
             dataField: 'id',
-            columnSpan: 1,
           },
           {
             reportType: 'title',
@@ -62,7 +61,6 @@
                 type: 'default',
                 label: '编号',
                 dataField: 'code',
-                columnSpan: 1,
               },
               {
                 reportType: 'title',
@@ -70,21 +68,18 @@
                 label: '名称',
                 dataField: '',
                 align: 'center',
-                columnSpan: 2,
                 children: [
                   {
                     reportType: 'data',
                     type: 'default',
                     label: '英文名',
                     dataField: 'en_name',
-                    columnSpan: 1,
                   },
                   {
                     reportType: 'data',
                     type: 'default',
                     label: '汉语名',
                     dataField: 'cn_name',
-                    columnSpan: 1,
                   },
                 ],
               },
@@ -153,7 +148,6 @@
             type: 'default',
             label: 'ID',
             dataField: 'id',
-            columnSpan: 1,
           },
           {
             reportType: 'title',
@@ -167,7 +161,6 @@
                 type: 'default',
                 label: '编号',
                 dataField: 'code',
-                columnSpan: 1,
               },
               {
                 reportType: 'title',
@@ -176,7 +169,6 @@
                 label: '名称',
                 dataField: '',
                 align: 'center',
-                columnSpan: 2,
                 children: [
                   {
                     reportType: 'data',
@@ -184,7 +176,6 @@
                     type: 'default',
                     label: '英文名',
                     dataField: 'en_name',
-                    columnSpan: 1,
                   },
                   {
                     reportType: 'data',
@@ -192,7 +183,6 @@
                     type: 'default',
                     label: '汉语名',
                     dataField: 'cn_name',
-                    columnSpan: 1,
                   },
                 ],
               },
@@ -265,7 +255,6 @@
             type: 'default',
             label: 'ID',
             dataField: 'id',
-            columnSpan: 1,
           },
           {
             reportType: 'title',
@@ -277,7 +266,6 @@
                 type: 'default',
                 label: '编号',
                 dataField: 'code',
-                columnSpan: 1,
               },
               {
                 reportType: 'title',
@@ -285,28 +273,24 @@
                 label: '名称',
                 dataField: '',
                 align: 'center',
-                columnSpan: 2,
                 children: [
                   {
                     reportType: 'data',
                     type: 'default',
                     label: '国籍',
                     dataField: 'nationality',
-                    columnSpan: 1,
                   },
                   {
                     reportType: 'data',
                     type: 'default',
                     label: '英文名',
                     dataField: 'en_name',
-                    columnSpan: 1,
                   },
                   {
                     reportType: 'data',
                     type: 'default',
                     label: '汉语名',
                     dataField: 'cn_name',
-                    columnSpan: 1,
                   },
                 ],
               },

@@ -57,8 +57,7 @@
     v-else
     :label="label"
     :prop="dataField"
-    :show-overflow-tooltip="true"
-    v-bind="{minWidth: 1, align: 'center', ...extendProps}"
+    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...extendProps}"
   >
     <template slot-scope="scope">
       <template v-if="editingRow!=null && scope.row.id === editingRow.id && editable">

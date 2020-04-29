@@ -15,8 +15,7 @@
     v-else-if="type==='custom'"
     :label="label"
     :sortable="sortable?'custom':false"
-    :show-overflow-tooltip="true"
-    v-bind="{minWidth: 1, align: 'center', ...extendProps}"
+    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...extendProps}"
   >
     <!-- <template slot-scope="scope">
       // eslint-disable-next-line vue/no-v-html
@@ -44,8 +43,7 @@
   <el-table-column
     v-else-if="type==='link'"
     :label="label"
-    :show-overflow-tooltip="true"
-    v-bind="{minWidth: 1, align: 'center', ...extendProps}"
+    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...extendProps}"
   >
     <template slot-scope="scope">
       <el-link
@@ -58,9 +56,8 @@
   </el-table-column>
   <el-table-column
     v-else-if="type==='status'"
-    :show-overflow-tooltip="true"
     :label="label"
-    v-bind="{minWidth: 1, align: 'center', ...extendProps}"
+    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...extendProps}"
   >
     <template slot-scope="scope">
       <span
@@ -84,8 +81,7 @@
   <el-table-column
     v-else-if="type==='dot-status'"
     :label="label"
-    :show-overflow-tooltip="true"
-    v-bind="{minWidth: 1, align: 'center', ...extendProps}"
+    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...extendProps}"
   >
     <template slot-scope="scope">
       <span
@@ -100,8 +96,7 @@
   <el-table-column
     v-else-if="type==='keyToValue'"
     :label="label"
-    :show-overflow-tooltip="true"
-    v-bind="{minWidth: 1, align: 'center', ...extendProps}"
+    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...extendProps}"
   >
     <template slot-scope="scope">
       <span v-if="options.some(r=>r.value === scope.row[dataField])">{{ options.filter(r=>r.value === scope.row[dataField])[0].label }}</span>
@@ -112,8 +107,7 @@
     :label="label"
     :prop="dataField"
     :sortable="sortable?'custom':false"
-    :show-overflow-tooltip="true"
-    v-bind="{minWidth: 1, align: 'center', ...extendProps}"
+    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...extendProps}"
   >
     <template slot-scope="scope">
       {{ scope.row[dataField] || '/' }}

@@ -6,7 +6,7 @@
 
 展示表格的基础用法。
 
-:::demo 当`ca-common-table`元素中注入`dataList`对象数组和`tableColumns`列数组后即可填入数据。在列数组中，`type`属性用来定义列类型，`label`属性用来定义列名，`dataField`属性用来定义数据字段，`columnSpan`属性用来定义列占用的宽度占比。
+:::demo 当`ca-common-table`元素中注入`dataList`对象数组和`tableColumns`列数组后即可填入数据。在列数组中，`type`属性用来定义列类型，`label`属性用来定义列名，`dataField`属性用来定义数据字段。
 
 ```html
 <template>
@@ -45,19 +45,19 @@
             type: 'default',
             label: 'ID',
             dataField: 'id',
-            columnSpan: 1,
           },
           {
             type: 'default',
             label: '编号',
             dataField: 'code',
-            columnSpan: 1,
           },
           {
             type: 'default',
             label: '名称',
             dataField: 'name',
-            columnSpan: 2,
+            extendProps: {
+              minWidth: 2,
+            },
           },
         ];
       },
@@ -191,13 +191,11 @@
             type: 'default',
             label: 'ID',
             dataField: 'id',
-            columnSpan: 1,
           },
           {
             type: 'link',
             label: '编号',
             dataField: 'code',
-            columnSpan: 1,
             linkCommand: 'handleLink',
             extendProps: {
               type: 'primary',
@@ -207,7 +205,9 @@
             type: 'default',
             label: '名称',
             dataField: 'name',
-            columnSpan: 2,
+            extendProps: {
+              minWidth: 2,
+            },
           },
         ];
       },
@@ -285,19 +285,19 @@
             type: 'default',
             label: 'ID',
             dataField: 'id',
-            columnSpan: 1,
           },
           {
             type: 'default',
             label: '编号',
             dataField: 'code',
-            columnSpan: 1,
           },
           {
             type: 'default',
             label: '名称',
             dataField: 'name',
-            columnSpan: 2,
+            extendProps: {
+              minWidth: 2,
+            },
           },
           {
             type: 'keyToValue',
@@ -392,19 +392,19 @@
             type: 'default',
             label: 'ID',
             dataField: 'id',
-            columnSpan: 1,
           },
           {
             type: 'default',
             label: '编号',
             dataField: 'code',
-            columnSpan: 1,
           },
           {
             type: 'default',
             label: '名称',
             dataField: 'name',
-            columnSpan: 2,
+            extendProps: {
+              minWidth: 2,
+            },
           },
           {
             type: 'status',
@@ -473,19 +473,19 @@
             type: 'default',
             label: 'ID',
             dataField: 'id',
-            columnSpan: 1,
           },
           {
             type: 'default',
             label: '编号',
             dataField: 'code',
-            columnSpan: 1,
           },
           {
             type: 'default',
             label: '名称',
             dataField: 'name',
-            columnSpan: 2,
+            extendProps: {
+              minWidth: 2,
+            },
           },
           {
             type: 'commands',
@@ -615,19 +615,19 @@
             type: 'default',
             label: 'ID',
             dataField: 'id',
-            columnSpan: 1,
           },
           {
             type: 'default',
             label: '编号',
             dataField: 'code',
-            columnSpan: 1,
           },
           {
             type: 'default',
             label: '名称',
             dataField: 'name',
-            columnSpan: 2,
+            extendProps: {
+              minWidth: 2,
+            },
           },
         ];
       },
@@ -698,19 +698,19 @@
             type: 'default',
             label: 'ID',
             dataField: 'id',
-            columnSpan: 1,
           },
           {
             type: 'default',
             label: '编号',
             dataField: 'code',
-            columnSpan: 1,
           },
           {
             type: 'default',
             label: '名称',
             dataField: 'name',
-            columnSpan: 2,
+            extendProps: {
+              minWidth: 2,
+            },
           },
         ];
       },
@@ -793,19 +793,19 @@
             type: 'default',
             label: 'ID',
             dataField: 'id',
-            columnSpan: 1,
           },
           {
             type: 'default',
             label: '编号',
             dataField: 'code',
-            columnSpan: 1,
           },
           {
             type: 'default',
             label: '名称',
             dataField: 'name',
-            columnSpan: 2,
+            extendProps: {
+              minWidth: 2,
+            },
           },
         ];
       },
@@ -876,19 +876,86 @@
             type: 'default',
             label: 'ID',
             dataField: 'id',
-            columnSpan: 1,
           },
           {
             type: 'default',
             label: '编号',
             dataField: 'code',
-            columnSpan: 1,
           },
           {
             type: 'default',
             label: '名称',
             dataField: 'name',
-            columnSpan: 2,
+            extendProps: {
+              minWidth: 2,
+            },
+          },
+        ];
+      },
+    },
+    methods: {},
+  };
+</script>
+```
+
+:::
+
+### Tootip
+
+展示列过长时 Tootip 的基础用法。
+
+:::demo
+
+```html
+<template>
+  <ca-common-table :dataSource="table.dataList" :columns="tableColumns" />
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        table: {
+          dataList: [
+            {
+              id: 1001,
+              code: 'A1',
+              name: '上海燃气一期工程',
+            },
+            {
+              id: 1002,
+              code: 'A2',
+              name: '上海燃气二期工程',
+            },
+            {
+              id: 1003,
+              code: 'A3',
+              name: '上海燃气三期工程',
+            },
+          ],
+        },
+      };
+    },
+    computed: {
+      tableColumns() {
+        return [
+          {
+            type: 'default',
+            label: 'ID',
+            dataField: 'id',
+          },
+          {
+            type: 'default',
+            label: '编号',
+            dataField: 'code',
+          },
+          {
+            type: 'default',
+            label: '名称',
+            dataField: 'name',
+            extendProps: {
+              minWidth: 2,
+            },
           },
         ];
       },
