@@ -32,7 +32,7 @@
         v-show="!item.visibleValidator || item.visibleValidator.call(this, scope.row)"
         :key="index"
         :disabled="item.disableValidator && item.disableValidator.call(this,scope.row)"
-        v-bind="extendProps"
+        v-bind="item.extendProps"
         @click.stop="$emit(item.command,scope.$index,scope.row)"
       >
         {{ item.text }}

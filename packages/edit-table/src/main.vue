@@ -3,23 +3,20 @@
     <div class="table-commands">
       <el-button
         v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
-        type="text"
-        :icon="addCommand.icon"
         class="table-add-command"
         :disabled="editing || (addCommand.disableValidator && addCommand.disableValidator.call(this))"
+        v-bind="{type: 'text', icon: 'el-icon-circle-plus-outline', ...addCommand.extendProps}"
         @click="handleAdd"
       >
         {{ addCommand.text }}
       </el-button>
     </div>
     <el-table
-      ref="elTreeTable"
       v-loading="loading"
       row-key="id"
       :data="dataSource"
-      :border="true"
       style="min-width:600px;height:auto;padding:1px;"
-      v-bind="extendProps"
+      v-bind="{border: true, ...extendProps}"
       @row-click="handleRowClick"
       @current-change="handleCurrentChange"
     >

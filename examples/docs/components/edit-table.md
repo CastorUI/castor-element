@@ -1,10 +1,10 @@
 ## EditTable 可编辑表格
 
-可编辑表格支持两种模式，手动触发和点击触发两种。手动触发模式需要手动点击编辑按钮才能触发，而点击触发则在点击行时即触发。
+可编辑表格支持两种模式，手动触发和自动触发两种。手动触发模式需要手动点击编辑按钮才能触发，而自动触发则在点击行时即触发。
 
-### 点击触发-基础
+### 自动触发-基础
 
-展示点击触发的基本效果。选中行进入到编辑状态，当前行失去焦点时恢复到原始状态。
+展示自动触发的基本效果。选中行进入到编辑状态，当前行失去焦点时恢复到原始状态。
 
 :::demo `editTriggerMode`属性用于配置触发模式，`editCommand`属性用于配置行编辑事件，`saveCommand`用于配置行保存事件。
 
@@ -32,18 +32,21 @@
               code: 'A1',
               en_name: 'Jack Li',
               cn_name: '李连杰',
+              age: 30,
             },
             {
               id: 1002,
               code: 'A2',
               en_name: 'Jack Chen',
               cn_name: '成龙',
+              age: 30,
             },
             {
               id: 1003,
               code: 'A3',
               en_name: 'Donnie Yen',
               cn_name: '甄子丹',
+              age: 30,
             },
           ],
         },
@@ -76,6 +79,15 @@
             dataField: 'cn_name',
             editable: true,
           },
+          {
+            type: 'inputNumber',
+            label: '年龄',
+            dataField: 'age',
+            editable: true,
+            extendProps: {
+              width: '140px',
+            },
+          },
         ];
       },
       rowEditCommand() {
@@ -104,7 +116,7 @@
 
 :::
 
-### 点击触发-校验
+### 自动触发-校验
 
 校验功能用于在保存前检查行数据。如果校验不通过，则当前行保持编辑状态，且控件显示错误提示。
 
@@ -136,18 +148,21 @@
               code: 'A1',
               en_name: 'Jack Li',
               cn_name: '李连杰',
+              age: 30,
             },
             {
               id: 1002,
               code: 'A2',
               en_name: 'Jack Chen',
               cn_name: '成龙',
+              age: 30,
             },
             {
               id: 1003,
               code: 'A3',
               en_name: 'Donnie Yen',
               cn_name: '甄子丹',
+              age: 30,
             },
           ],
         },
@@ -180,6 +195,15 @@
             label: '汉语名',
             dataField: 'cn_name',
             editable: true,
+          },
+          {
+            type: 'inputNumber',
+            label: '年龄',
+            dataField: 'age',
+            editable: true,
+            extendProps: {
+              width: '140px',
+            },
           },
         ];
       },
@@ -241,18 +265,21 @@
               code: 'A1',
               en_name: 'Jack Li',
               cn_name: '李连杰',
+              age: 30,
             },
             {
               id: 1002,
               code: 'A2',
               en_name: 'Jack Chen',
               cn_name: '成龙',
+              age: 30,
             },
             {
               id: 1003,
               code: 'A3',
               en_name: 'Donnie Yen',
               cn_name: '甄子丹',
+              age: 30,
             },
           ],
         },
@@ -286,30 +313,47 @@
             editable: true,
           },
           {
+            type: 'inputNumber',
+            label: '年龄',
+            dataField: 'age',
+            editable: true,
+            extendProps: {
+              width: '140px',
+            },
+          },
+          {
             type: 'commands',
             label: '操作',
             commands: [
               {
                 text: '编辑',
                 command: 'handleEdit',
-                linkType: 'primary',
+                extendProps: {
+                  type: 'primary',
+                },
               },
               {
                 text: '删除',
                 command: 'handleDelete',
-                linkType: 'danger',
+                extendProps: {
+                  type: 'danger',
+                },
               },
             ],
             editableCommands: [
               {
                 text: '保存',
                 command: 'handleSave',
-                linkType: 'primary',
+                extendProps: {
+                  type: 'primary',
+                },
               },
               {
                 text: '取消',
                 command: 'handleCancel',
-                linkType: 'primary',
+                extendProps: {
+                  type: 'primary',
+                },
               },
             ],
             extendProps: {
@@ -375,18 +419,21 @@
               code: 'A1',
               en_name: 'Jack Li',
               cn_name: '李连杰',
+              age: 30,
             },
             {
               id: 1002,
               code: 'A2',
               en_name: 'Jack Chen',
               cn_name: '成龙',
+              age: 30,
             },
             {
               id: 1003,
               code: 'A3',
               en_name: 'Donnie Yen',
               cn_name: '甄子丹',
+              age: 30,
             },
           ],
         },
@@ -421,34 +468,51 @@
             editable: true,
           },
           {
+            type: 'inputNumber',
+            label: '年龄',
+            dataField: 'age',
+            editable: true,
+            extendProps: {
+              width: '140px',
+            },
+          },
+          {
             type: 'commands',
             label: '操作',
             commands: [
               {
                 text: '编辑',
                 command: 'handleEdit',
-                linkType: 'primary',
                 disableValidator: () => !this.table.validateStatus,
+                extendProps: {
+                  type: 'primary',
+                },
               },
               {
                 text: '删除',
                 command: 'handleDelete',
-                linkType: 'danger',
                 disableValidator: () => !this.table.validateStatus,
+                extendProps: {
+                  type: 'danger',
+                },
               },
             ],
             editableCommands: [
               {
                 text: '保存',
                 command: 'handleSave',
-                linkType: 'primary',
                 disableValidator: () => !this.table.validateStatus,
+                extendProps: {
+                  type: 'primary',
+                },
               },
               {
                 text: '取消',
                 command: 'handleCancel',
-                linkType: 'primary',
                 disableValidator: () => !this.table.validateStatus,
+                extendProps: {
+                  type: 'primary',
+                },
               },
             ],
             extendProps: {

@@ -813,7 +813,7 @@
 
 展示定制事件的用法。
 
-:::demo 定制事件约定放置在表格的右上角。`customCommands`属性用来配置定制事件集合。定制事件一般与多选列配置使用，所以要添加`type`为`selection`的列。
+:::demo 定制事件约定放置在表格的右上角,一般与多选列配置使用，所以要添加`type`为`selection`的列。`customCommands`属性用来配置定制事件集合
 
 ```html
 <template>
@@ -1014,7 +1014,6 @@
 | commands    | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | -                                                                   | []        |
 | options     | 数据转换数据源                                                                                                               | array    | -                                                                   | []        |
 | extendProps | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                                | string   | -                                                                   | ascending |
-| align       | 对齐方式                                                                                                                     | string   | -                                                                   | center    |
 | linkCommand | 超链接事件，当 `type` 为 `link` 时使用                                                                                       | function | -                                                                   | -         |
 | reportType  | 报表列类型 , 报表表格组件专用                                                                                                | string   | data/title                                                          | -         |
 

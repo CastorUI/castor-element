@@ -5,7 +5,7 @@
         v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
         class="table-add-command"
         :disabled="addCommand.disableValidator && addCommand.disableValidator.call(this)"
-        v-bind="{type: 'text', ...addCommand.extendProps}"
+        v-bind="{type: 'text', icon: 'el-icon-circle-plus-outline', ...addCommand.extendProps}"
         @click="$emit(addCommand.command)"
       >
         {{ addCommand.text }}
@@ -31,9 +31,8 @@
         row-key="id"
         :data="dataSource"
         :default-sort="defaultSort"
-        :border="true"
         style="width:100%;min-width:700px;height:auto;"
-        v-bind="extendProps"
+        v-bind="{border: true, ...extendProps}"
         @row-click="row => $emit('row-click', row)"
         @selection-change="multipleSelection => handleSelectionChange(multipleSelection)"
         @sort-change="args=> handleSortChange(args)"

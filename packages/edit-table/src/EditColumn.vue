@@ -2,8 +2,7 @@
   <el-table-column
     v-if="type==='expand'"
     :label="label"
-    align="center"
-    v-bind="extendProps"
+    v-bind="{align: 'center', ...extendProps}"
   />
   <el-table-column
     v-else-if="type==='index'"
@@ -32,8 +31,8 @@
           v-for="(item,index) of editableCommands"
           :key="index"
           class="command-link"
-          :type="item.linkType"
           :disabled="item.disableValidator && item.disableValidator.call(this,scope.row)"
+          v-bind="item.extendProps"
           @click.stop="handleEmitEvent(item.commandType,item.command,scope.$index,scope.row)"
         >
           {{ item.text }}
@@ -44,8 +43,8 @@
           v-for="(item,index) of commands.filter(r =>r.maxLevel===undefined|| r.maxLevel >= scope.row.dataLevel)"
           :key="index"
           class="command-link"
-          :type="item.linkType"
           :disabled="item.disableValidator && item.disableValidator.call(this,scope.row)"
+          v-bind="item.extendProps"
           @click.stop="handleEmitEvent(item.commandType,item.command,scope.$index,scope.row)"
         >
           {{ item.text }}
@@ -87,12 +86,7 @@
               v-else-if="type==='inputNumber'"
               v-model="editingRow[dataField]"
               v-inputNumberFocus="autoFocus"
-              :size="extendProps.size"
-              :min="extendProps.min"
-              :max="extendProps.max"
-              :step="extendProps.step || 1"
-              :precision="extendProps.precision||0"
-              style="width:100%;"
+              v-bind="{precision: 0, style: 'width:100%;', ...extendProps}"
               @focus="$event.target.select()"
             />
           </el-form-item>

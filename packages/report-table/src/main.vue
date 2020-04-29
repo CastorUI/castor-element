@@ -6,10 +6,9 @@
     <div class="table-commands">
       <el-button
         v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
-        type="text"
-        :icon="addCommand.icon"
         class="table-add-command"
         :disabled="addCommand.disableValidator && addCommand.disableValidator.call(this)"
+        v-bind="{type: 'text', icon: 'el-icon-circle-plus-outline', ...addCommand.extendProps}"
         @click="$emit(addCommand.command)"
       >
         {{ addCommand.text }}
@@ -21,8 +20,8 @@
         <el-button
           v-for="(item,index) of customCommands"
           :key="index"
-          :disabled="item.disableValidator &&item.disableValidator.call(this)"
-          type="text"
+          :disabled="item.disableValidator &&item.disableValidator.call(this,multipleSelection)"
+          v-bind="{type: 'text', ...item.extendProps}"
           @click="$emit(item.command,multipleSelection)"
         >
           {{ item.text }}
@@ -34,9 +33,8 @@
         v-loading="loading"
         :data="dataSource"
         :default-sort="defaultSort"
-        :border="true"
         style="width:100%;min-width:700px;height:auto;"
-        v-bind="extendProps"
+        v-bind="{border: true, ...extendProps}"
         @row-click="row => $emit('row-click', row)"
         @selection-change="multipleSelection => handleSelectionChange(multipleSelection)"
         @sort-change="args=> handleSortChange(args)"
@@ -46,32 +44,29 @@
             v-if="item.reportType==='title' && item.children && item.children.length > 0"
             :key="index"
             :label="item.label"
-            align="center"
-            v-bind="item.extendProps"
+            v-bind="{align: 'center', ...item.extendProps}"
           >
             <template v-for="(childItem,childIndex) of item.children">
               <el-table-column
                 v-if="childItem.reportType==='title' && childItem.children && childItem.children.length > 0"
                 :key="'childIndex' + childIndex"
                 :label="childItem.label"
-                align="center"
-                v-bind="childItem.extendProps"
+                v-bind="{align: 'center', ...childItem.extendProps}"
               >
                 <template v-for="(grandChildItem,grandChildIndex) of childItem.children">
                   <el-table-column
                     v-if="grandChildItem.reportType==='title'"
                     :key="'grandChild' + grandChildIndex"
                     :label="grandChildItem.label"
-                    align="center"
-                    v-bind="grandChildItem.extendProps"
+                    v-bind="{align: 'center', ...grandChildItem.extendProps}"
                   />
                   <common-column
                     v-if="grandChildItem.reportType==='data'"
                     :key="grandChildItem.dataField"
+                    :type="grandChildItem.type"
                     :label="grandChildItem.label"
                     :data-field="grandChildItem.dataField"
                     :options="grandChildItem.options"
-                    :type="grandChildItem.type"
                     :commands="grandChildItem.commands"
                     :link-command="grandChildItem.linkCommand"
                     :index-method="indexMethod"
@@ -84,10 +79,10 @@
               <common-column
                 v-if="childItem.reportType==='data'"
                 :key="childItem.dataField"
+                :type="childItem.type"
                 :label="childItem.label"
                 :data-field="childItem.dataField"
                 :options="childItem.options"
-                :type="childItem.type"
                 :commands="childItem.commands"
                 :link-command="childItem.linkCommand"
                 :index-method="indexMethod"
@@ -100,10 +95,10 @@
           <common-column
             v-if="item.reportType==='data'"
             :key="item.dataField"
+            :type="item.type"
             :label="item.label"
             :data-field="item.dataField"
             :options="item.options"
-            :type="item.type"
             :commands="item.commands"
             :link-command="item.linkCommand"
             :index-method="indexMethod"
@@ -114,17 +109,13 @@
         </template>
       </el-table>
     </div>
-    <div
-      v-if="pagination.total > 10"
-      class="common-pagination-container"
-    >
+    <div class="common-pagination-container">
       <el-pagination
         :current-page="pagination.pageIndex"
         :page-size="pagination.pageSize"
         :page-sizes="pageSizes"
         :total="pagination.total"
-        layout="total,sizes, prev, pager, next"
-        v-bind="pagination.extendProps"
+        v-bind="{layout: 'total,sizes, prev, pager, next', hideOnSinglePage: true, ...pagination.extendProps}"
         @size-change="pageSize => handlePageSizeChange(pageSize)"
         @current-change="pageIndex => handlePageIndexChange(pageIndex)"
       />
