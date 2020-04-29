@@ -300,7 +300,6 @@
           {
             type: 'commands',
             label: '操作',
-            width: '200px',
             commands: [
               {
                 text: '编辑',
@@ -327,6 +326,7 @@
             ],
             extendProps: {
               fixed: 'right',
+              width: '200px',
             },
           },
         ];
@@ -439,7 +439,6 @@
           {
             type: 'commands',
             label: '操作',
-            width: '200px',
             commands: [
               {
                 text: '编辑',
@@ -470,6 +469,7 @@
             ],
             extendProps: {
               fixed: 'right',
+              width: '200px',
             },
           },
         ];

@@ -2,28 +2,21 @@
   <el-table-column
     v-if="type==='selection'"
     :type="type"
-    :width="width"
-    align="center"
-    v-bind="extendProps"
+    v-bind="{align: 'center', ...extendProps}"
   />
   <el-table-column
     v-else-if="type==='index'"
     :type="type"
     :label="label"
-    :width="width"
-    align="center"
     :index="indexMethod"
-    v-bind="extendProps"
+    v-bind="{align: 'center', ...extendProps}"
   />
   <el-table-column
     v-else-if="type==='custom'"
     :label="label"
-    :width="width"
-    :min-width="minWidth || columnSpan"
     :sortable="sortable?'custom':false"
-    align="center"
     :show-overflow-tooltip="true"
-    v-bind="extendProps"
+    v-bind="{minWidth: 1, align: 'center', ...extendProps}"
   >
     <!-- <template slot-scope="scope">
       // eslint-disable-next-line vue/no-v-html
@@ -33,10 +26,7 @@
   <el-table-column
     v-else-if="type==='commands'"
     :label="label"
-    :width="width"
-    :min-width="minWidth || columnSpan"
-    align="center"
-    v-bind="extendProps"
+    v-bind="{minWidth: 1, align: 'center', ...extendProps}"
   >
     <template slot-scope="scope">
       <el-link
@@ -54,11 +44,8 @@
   <el-table-column
     v-else-if="type==='link'"
     :label="label"
-    :width="width"
-    :min-width="minWidth || columnSpan"
-    align="center"
     :show-overflow-tooltip="true"
-    v-bind="extendProps"
+    v-bind="{minWidth: 1, align: 'center', ...extendProps}"
   >
     <template slot-scope="scope">
       <el-link
@@ -73,10 +60,7 @@
     v-else-if="type==='status'"
     :show-overflow-tooltip="true"
     :label="label"
-    :width="width"
-    :min-width="minWidth || columnSpan"
-    align="center"
-    v-bind="extendProps"
+    v-bind="{minWidth: 1, align: 'center', ...extendProps}"
   >
     <template slot-scope="scope">
       <span
@@ -100,11 +84,8 @@
   <el-table-column
     v-else-if="type==='dot-status'"
     :label="label"
-    :width="width"
-    :min-width="minWidth || columnSpan"
-    align="center"
     :show-overflow-tooltip="true"
-    v-bind="extendProps"
+    v-bind="{minWidth: 1, align: 'center', ...extendProps}"
   >
     <template slot-scope="scope">
       <span
@@ -119,11 +100,8 @@
   <el-table-column
     v-else-if="type==='keyToValue'"
     :label="label"
-    :width="width"
-    :min-width="minWidth || columnSpan"
-    align="center"
     :show-overflow-tooltip="true"
-    v-bind="extendProps"
+    v-bind="{minWidth: 1, align: 'center', ...extendProps}"
   >
     <template slot-scope="scope">
       <span v-if="options.some(r=>r.value === scope.row[dataField])">{{ options.filter(r=>r.value === scope.row[dataField])[0].label }}</span>
@@ -133,12 +111,9 @@
     v-else
     :label="label"
     :prop="dataField"
-    :width="width"
-    :min-width="minWidth || columnSpan"
     :sortable="sortable?'custom':false"
-    align="center"
     :show-overflow-tooltip="true"
-    v-bind="extendProps"
+    v-bind="{minWidth: 1, align: 'center', ...extendProps}"
   >
     <template slot-scope="scope">
       {{ scope.row[dataField] || '/' }}
@@ -169,22 +144,6 @@ export default {
       default: function() {
         return [];
       }
-    },
-    width: {
-      type: String,
-      default: undefined
-    },
-    align: {
-      type: String,
-      default: 'center'
-    },
-    columnSpan: {
-      type: Number,
-      default: 1
-    },
-    minWidth: {
-      type: String,
-      default: undefined
     },
     dataTemplate: {
       type: Function,

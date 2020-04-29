@@ -2,7 +2,6 @@
   <el-table-column
     v-if="type==='expand'"
     :label="label"
-    :width="width"
     align="center"
     v-bind="extendProps"
   />
@@ -10,18 +9,13 @@
     v-else-if="type==='index'"
     :type="type"
     :label="label"
-    :width="width"
-    align="center"
-    v-bind="extendProps"
+    v-bind="{align: 'center', ...extendProps}"
   />
   <!-- <el-table-column
     v-else-if="type==='custom'"
     :label="label"
-    :width="width"
-    :min-width="minWidth"
     :prop="dataField"
-    align="center"
-    v-bind="extendProps"
+    v-bind="{minWidth: 1, align: 'center', ...extendProps}"
   >
     <template slot-scope="scope">
       <div v-html="dataTemplate(scope.row)" />
@@ -30,9 +24,7 @@
   <el-table-column
     v-else-if="type==='commands'"
     :label="label"
-    :width="width"
-    align="center"
-    v-bind="extendProps"
+    v-bind="{align: 'center', ...extendProps}"
   >
     <template slot-scope="scope">
       <template v-if="editingRow != null && editingRow.id === scope.row.id">
@@ -64,12 +56,9 @@
   <el-table-column
     v-else
     :label="label"
-    :width="width"
-    :min-width="minWidth"
-    align="center"
     :prop="dataField"
     :show-overflow-tooltip="true"
-    v-bind="extendProps"
+    v-bind="{minWidth: 1, align: 'center', ...extendProps}"
   >
     <template slot-scope="scope">
       <template v-if="editingRow!=null && scope.row.id === editingRow.id && editable">
@@ -152,21 +141,9 @@ export default {
       type: Array,
       default: () => []
     },
-    width: {
-      type: String,
-      default: ''
-    },
-    minWidth: {
-      type: String,
-      default: '1'
-    },
     dataTemplate: {
       type: Function,
       default: () => {}
-    },
-    align: {
-      type: String,
-      default: 'center'
     },
     handleEmitEvent: {
       type: Function,

@@ -32,8 +32,6 @@
         :type="item.type"
         :commands="item.commands"
         :editable-commands="item.editableCommands"
-        :width="item.width"
-        :min-width="item.minWidth"
         :data-template="item.dataTemplate"
         :editable="item.editable"
         :editing="editing"
