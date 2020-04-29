@@ -643,6 +643,87 @@
 
 :::
 
+### 分页-数据不足一页
+
+展示表格分页的用法。
+
+:::demo 在`pagination`中配置分页相关属性，包含`pageIndex`和`pageSize`和`total`。这里的分页用于后台分页，所以需要配置`getList`方法用于调用后台接口，每次切换分页时都会调用此方法。当后台返回`total`值大于设置的`pageSize`属性值时，会自动显示分页组件。
+
+```html
+<template>
+  <ca-common-table
+    :dataSource="table.dataList"
+    :columns="tableColumns"
+    :pagination="table.pagination"
+    :getList="getList"
+  />
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        table: {
+          dataList: [
+            {
+              id: 1001,
+              code: 'A1',
+              name: '上海燃气一期工程',
+            },
+            {
+              id: 1002,
+              code: 'A2',
+              name: '上海燃气二期工程',
+            },
+            {
+              id: 1003,
+              code: 'A3',
+              name: '上海燃气三期工程',
+            },
+          ],
+          pagination: {
+            pageIndex: 1,
+            pageSize: 10,
+            total: 3,
+          },
+        },
+      };
+    },
+    computed: {
+      tableColumns() {
+        return [
+          {
+            type: 'default',
+            label: 'ID',
+            dataField: 'id',
+          },
+          {
+            type: 'default',
+            label: '编号',
+            dataField: 'code',
+          },
+          {
+            type: 'default',
+            label: '名称',
+            dataField: 'name',
+            extendProps: {
+              minWidth: 2,
+            },
+          },
+        ];
+      },
+    },
+    methods: {
+      getList() {
+        console.log('this.table.pagination', this.table.pagination);
+      },
+    },
+  };
+</script>
+```
+
+:::
+
 ### 新增
 
 展示新增功能的用法。
@@ -684,9 +765,11 @@
           addCommand: {
             text: '新增任务',
             command: 'handleAdd',
-            icon: 'el-icon-circle-plus-outline',
             visibleValidator: () => true,
             disableValidator: () => {},
+            extendProps: {
+              icon: 'el-icon-circle-plus-outline',
+            },
           },
         },
       };
@@ -769,10 +852,16 @@
             {
               text: '关注',
               command: 'handleStar',
+              extendProps: {
+                icon: 'el-icon-star-on',
+              },
             },
             {
               text: '取消关注',
               command: 'handleUnstar',
+              extendProps: {
+                icon: 'el-icon-star-off',
+              },
             },
           ],
         },

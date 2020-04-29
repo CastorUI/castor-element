@@ -3,10 +3,9 @@
     <div class="table-commands">
       <el-button
         v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
-        type="text"
         class="table-add-command"
-        :icon="addCommand.icon"
         :disabled="addCommand.disableValidator && addCommand.disableValidator.call(this)"
+        v-bind="{type: 'text', ...addCommand.extendProps}"
         @click="$emit(addCommand.command)"
       >
         {{ addCommand.text }}
@@ -18,8 +17,8 @@
         <el-button
           v-for="(item,index) of customCommands"
           :key="index"
-          :disabled="item.disableValidator && item.disableValidator.call(this)"
-          type="text"
+          :disabled="item.disableValidator && item.disableValidator.call(this,multipleSelection)"
+          v-bind="{type: 'text', ...item.extendProps}"
           @click="$emit(item.command,multipleSelection)"
         >
           {{ item.text }}
@@ -42,10 +41,10 @@
         <common-column
           v-for="(item,index) of columns"
           :key="index"
+          :type="item.type"
           :label="item.label"
           :data-field="item.dataField"
           :options="item.options"
-          :type="item.type"
           :commands="item.commands"
           :link-command="item.linkCommand"
           :index-method="indexMethod"
@@ -55,17 +54,13 @@
         />
       </el-table>
     </div>
-    <div
-      v-if="pagination.total > pagination.pageSize"
-      class="common-pagination-container"
-    >
+    <div class="common-pagination-container">
       <el-pagination
         :current-page="pagination.pageIndex"
         :page-size="pagination.pageSize"
         :page-sizes="pageSizes"
         :total="pagination.total"
-        layout="total,sizes, prev, pager, next"
-        v-bind="pagination.extendProps"
+        v-bind="{layout: 'total,sizes, prev, pager, next',hideOnSinglePage: true, ...pagination.extendProps}"
         @size-change="pageSize => handlePageSizeChange(pageSize)"
         @current-change="pageIndex => handlePageIndexChange(pageIndex)"
       />
@@ -146,6 +141,11 @@ export default {
     }
   },
   methods: {
+    indexMethod(index) {
+      return (
+        this.pagination.pageSize * (this.pagination.pageIndex - 1) + index + 1
+      );
+    },
     handleSelectionChange(multipleSelection) {
       this.multipleSelection = multipleSelection;
       this.$emit('selection-change', multipleSelection);
@@ -164,11 +164,6 @@ export default {
       this.pagination.sortField = prop;
       this.pagination.order = order;
       this.getList();
-    },
-    indexMethod(index) {
-      return (
-        this.pagination.pageSize * (this.pagination.pageIndex - 1) + index + 1
-      );
     }
   }
 };
@@ -224,6 +219,9 @@ export default {
       }
       .no-border {
         border: none;
+      }
+      .el-button span {
+        margin-left: 0;
       }
     }
   }
