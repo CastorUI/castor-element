@@ -76,7 +76,6 @@
                     :link-command="grandChildItem.linkCommand"
                     :index-method="indexMethod"
                     :data-template="grandChildItem.dataTemplate"
-                    :sortable="grandChildItem.sortable"
                     :extend-props="grandChildItem.extendProps"
                     v-on="$listeners"
                   />
@@ -93,7 +92,6 @@
                 :link-command="childItem.linkCommand"
                 :index-method="indexMethod"
                 :data-template="childItem.dataTemplate"
-                :sortable="childItem.sortable"
                 :extend-props="childItem.extendProps"
                 v-on="$listeners"
               />
@@ -110,7 +108,6 @@
             :link-command="item.linkCommand"
             :index-method="indexMethod"
             :data-template="item.dataTemplate"
-            :sortable="item.sortable"
             :extend-props="item.extendProps"
             v-on="$listeners"
           />

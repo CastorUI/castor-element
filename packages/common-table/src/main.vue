@@ -50,7 +50,6 @@
           :link-command="item.linkCommand"
           :index-method="indexMethod"
           :data-template="item.dataTemplate"
-          :sortable="item.sortable"
           :extend-props="item.extendProps"
           v-on="$listeners"
         />

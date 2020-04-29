@@ -14,7 +14,6 @@
   <el-table-column
     v-else-if="type==='custom'"
     :label="label"
-    :sortable="sortable?'custom':false"
     v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...extendProps}"
   >
     <!-- <template slot-scope="scope">
@@ -32,8 +31,8 @@
         v-for="(item,index) of commands"
         v-show="!item.visibleValidator || item.visibleValidator.call(this, scope.row)"
         :key="index"
-        :type="item.extendProps.type"
         :disabled="item.disableValidator && item.disableValidator.call(this,scope.row)"
+        v-bind="extendProps"
         @click.stop="$emit(item.command,scope.$index,scope.row)"
       >
         {{ item.text }}
@@ -47,7 +46,7 @@
   >
     <template slot-scope="scope">
       <el-link
-        :type="extendProps.type"
+        v-bind="extendProps"
         @click.stop="$emit(linkCommand,scope.$index,scope.row)"
       >
         {{ scope.row[dataField] }}
@@ -106,7 +105,6 @@
     v-else
     :label="label"
     :prop="dataField"
-    :sortable="sortable?'custom':false"
     v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...extendProps}"
   >
     <template slot-scope="scope">
@@ -142,10 +140,6 @@ export default {
     dataTemplate: {
       type: Function,
       default: undefined
-    },
-    sortable: {
-      type: Boolean,
-      default: false
     },
     linkCommand: {
       type: String,
