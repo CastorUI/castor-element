@@ -167,21 +167,7 @@
       v-bind="extendProps"
     />
     <el-input
-      v-else-if="type==='textArea' && extendProps.needTrim"
-      v-model.trim="model[dataField]"
-      type="textarea"
-      :disabled="disableValidator && disableValidator.call(this,model)"
-      v-bind="{
-        placeholder: `输入${label}`,
-        clearable: true,
-        rows: 2,
-        style: 'width:100%;',
-        ...extendProps
-      }"
-      @change="onChange && onChange.call(this,model)"
-    />
-    <el-input
-      v-else-if="type==='textArea' && !extendProps.needTrim"
+      v-else-if="type==='textArea'"
       v-model="model[dataField]"
       type="textarea"
       :disabled="disableValidator && disableValidator.call(this,model)"
@@ -206,18 +192,6 @@
         ...extendProps
       }"
       @select="onChange && onChange.call(this,model)"
-    />
-    <el-input
-      v-else-if="type==='input' && extendProps.needTrim"
-      v-model.trim="model[dataField]"
-      :disabled="disableValidator && disableValidator.call(this,model)"
-      v-bind="{
-        placeholder: `输入${label}`,
-        clearable: true,
-        style: 'width:100%;',
-        ...extendProps
-      }"
-      @change="onChange && onChange.call(this,model)"
     />
     <el-input
       v-else
