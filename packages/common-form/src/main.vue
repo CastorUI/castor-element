@@ -38,7 +38,8 @@
       :custom-components="customComponents"
       :disable-validator="item.disableValidator"
       :visible-validator="item.visibleValidator"
-      :extend-props="item.extendProps"
+      :extend-props="item.extendProps || {}"
+      :on-change="item.onChange"
     />
     <el-form-item
       v-if="operateType !== 'view'"

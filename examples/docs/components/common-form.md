@@ -102,6 +102,7 @@
             equipment: [],
             design_cost: undefined,
             create_date_range: undefined,
+            remarks: undefined,
           },
           commands: [
             {
@@ -211,6 +212,15 @@
             label: '创建日期区间',
             dataField: 'create_date_range',
             columnSpan: 2,
+          },
+          {
+            type: 'textArea',
+            label: '备注',
+            dataField: 'remarks',
+            columnSpan: 2,
+            extendProps: {
+              needTrim: true,
+            },
           },
         ];
       },
@@ -720,11 +730,49 @@
 
 ### Attributes
 
-| 参数           | 说明                                                                                                               | 类型    | 可选值 | 默认值 |
-| -------------- | ------------------------------------------------------------------------------------------------------------------ | ------- | ------ | ------ |
-| loading        | 是否显示 loading                                                                                                   | boolean | —      | false  |
-| model          | 数据源                                                                                                             | object  | —      | {}     |
-| fields         | 查询字段集合                                                                                                       | array   | —      | []     |
-| commands       | 命令集合，显示在表单底部 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling)         | array   | —      | []     |
-| customCommands | 定制命令集合，显示在表单顶部右侧 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array   | —      | []     |
-| extendProps    | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                      | object  | —      | {}     |
+| 参数             | 说明                                                                                                               | 类型    | 可选值        | 默认值 |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------ | ------- | ------------- | ------ |
+| loading          | 是否显示 loading                                                                                                   | boolean | —             | false  |
+| operateType      | 表单操作类型                                                                                                       | string  | add/edit/view | add    |
+| model            | 数据源                                                                                                             | object  | —             | {}     |
+| fields           | 查询字段集合,见 `Field Options`                                                                                    | array   | —             | []     |
+| rowFieldsCount   | 每行显示字段数                                                                                                     | number  | —             | 2      |
+| commands         | 命令集合，显示在表单底部 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling)         | array   | —             | []     |
+| customCommands   | 定制命令集合，显示在表单顶部右侧 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array   | —             | []     |
+| customComponents | 定制组件集合                                                                                                       | array   | —             | []     |
+| extendProps      | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                      | object  | —             | {}     |
+
+### Field Options
+
+| 参数        | 说明                                                                                                                         | 类型   | 可选值 | 默认值    |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------- | ------ | ------ | --------- |
+| type        | 类型, 见 `Field Type Options`                                                                                                | string | —      | input     |
+| label       | 标签                                                                                                                         | string | —      | 10        |
+| dataField   | 绑定字段                                                                                                                     | string | —      | 0         |
+| commands    | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array  | -      | []        |
+| options     | 选项数据源                                                                                                                   | array  | -      | []        |
+| extendProps | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                                | string | -      | ascending |
+
+### Field Type Options
+
+| 类型          | 说明           |
+| ------------- | -------------- |
+| text          | 只读文本       |
+| input         | 输入框         |
+| autocomplete  | 自动填充输入框 |
+| inputNumber   | 数字输入框     |
+| textArea      | 多行文本       |
+| select        | 下拉框         |
+| multiSelect   | 多选下拉框     |
+| groupedSelect | 分组选择下拉框 |
+| cascader      | 级联选择器     |
+| switch        | 开关           |
+| radioGroup    | 单选框组       |
+| checkboxGroup | 复选框组       |
+| date          | 日期选择器     |
+| dateRange     | 日期区间选择器 |
+| dateTimeRange | 时间区间选择器 |
+| hr            | 分行           |
+| groupTitle    | 组标题         |
+| complexInput  | 组合输入框     |
+| custom        | 定制组件       |

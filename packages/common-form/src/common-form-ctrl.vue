@@ -11,7 +11,7 @@
       :disabled="disableValidator && disableValidator.call(this,model)"
       :multiple="type==='multiSelect'"
       v-bind="{clearable: true, filterable: true,style: 'width:100%;',allowCreate: false, placeholder: `选择${label}`, ...extendProps}"
-      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+      @change="onChange && onChange.call(this,model)"
       @clear="handleClear"
     >
       <el-option
@@ -26,7 +26,7 @@
       v-model="model[dataField]"
       :disabled="disableValidator && disableValidator.call(this,model)"
       v-bind="{clearable: true, filterable: true,style: 'width:100%;',allowCreate: false, placeholder: `选择${label}`, ...extendProps}"
-      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+      @change="onChange && onChange.call(this,model)"
       @clear="handleClear"
     >
       <el-option-group
@@ -46,6 +46,7 @@
       v-else-if="type==='radioGroup'"
       v-model="model[dataField]"
       v-bind="extendProps"
+      @change="onChange && onChange.call(this,model)"
     >
       <el-radio
         v-for="option in options"
@@ -60,6 +61,7 @@
       v-model="model[dataField]"
       :disabled="disableValidator && disableValidator.call(this,model)"
       v-bind="{style: 'width:100%; height: 36px;', ...extendProps}"
+      @change="onChange && onChange.call(this,model)"
     >
       <el-checkbox
         v-for="option in options"
@@ -92,7 +94,7 @@
       v-model="model[dataField]"
       :disabled="disableValidator && disableValidator.call(this,model)"
       v-bind="extendProps"
-      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+      @change="onChange && onChange.call(this,model)"
     />
     <el-date-picker
       v-else-if="type==='dateTimeRange' || type==='dateRange' || type==='date'"
@@ -108,6 +110,7 @@
         style: 'width:100%;',
         ...extendProps
       }"
+      @change="onChange && onChange.call(this,model)"
     />
     <el-input-number
       v-else-if="type==='inputNumber'"
@@ -120,6 +123,7 @@
         style: 'width:100%;',
         ...extendProps
       }"
+      @change="onChange && onChange.call(this,model)"
     />
     <el-cascader
       v-else-if="type==='cascader'"
@@ -132,6 +136,7 @@
         style: 'width:100%;',
         ...extendProps
       }"
+      @change="onChange && onChange.call(this,model)"
     />
     <el-input
       v-else-if="type==='complexInput' && currentField.options.filter(r=>r.value === model[currentField.dataField]).length > 0"
@@ -142,6 +147,7 @@
         style: 'width:100%;',
         ...extendProps
       }"
+      @change="onChange && onChange.call(this,model)"
     >
       <template slot="append">
         <span
@@ -172,6 +178,7 @@
         style: 'width:100%;',
         ...extendProps
       }"
+      @change="onChange && onChange.call(this,model)"
     />
     <el-input
       v-else-if="type==='textArea' && !extendProps.needTrim"
@@ -185,9 +192,10 @@
         style: 'width:100%;',
         ...extendProps
       }"
+      @change="onChange && onChange.call(this,model)"
     />
     <el-autocomplete
-      v-else-if="type==='input' && extendProps.autocomplete && !extendProps.needTrim"
+      v-else-if="type==='autocomplete'"
       v-model="model[dataField]"
       :disabled="disableValidator && disableValidator.call(this,model)"
       :fetch-suggestions="querySearch"
@@ -197,20 +205,7 @@
         style: 'width:100%;',
         ...extendProps
       }"
-      @select="extendProps.onChange && extendProps.onChange.call(this,model)"
-    />
-    <el-autocomplete
-      v-else-if="type==='input' && extendProps.autocomplete && extendProps.needTrim"
-      v-model.trim="model[dataField]"
-      :disabled="disableValidator && disableValidator.call(this,model)"
-      :fetch-suggestions="querySearch"
-      v-bind="{
-        placeholder: `输入${label}`,
-        clearable: true,
-        style: 'width:100%;',
-        ...extendProps
-      }"
-      @select="extendProps.onChange && extendProps.onChange.call(this,model)"
+      @select="onChange && onChange.call(this,model)"
     />
     <el-input
       v-else-if="type==='input' && extendProps.needTrim"
@@ -222,7 +217,7 @@
         style: 'width:100%;',
         ...extendProps
       }"
-      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+      @change="onChange && onChange.call(this,model)"
     />
     <el-input
       v-else
@@ -234,7 +229,7 @@
         style: 'width:100%;',
         ...extendProps
       }"
-      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+      @change="onChange && onChange.call(this,model)"
     >
       <template
         v-if="extendProps.appendText"
@@ -313,6 +308,10 @@ export default {
     extendProps: {
       type: Object,
       default: () => {}
+    },
+    onChange: {
+      type: Function,
+      default: undefined
     }
   },
   data() {
@@ -352,7 +351,7 @@ export default {
   },
   computed: {
     heightStyle() {
-      return this.type === 'custom' || this.type === 'groupTitle'
+      return ['custom', 'groupTitle', 'textArea'].indexOf(this.type) > -1
         ? ''
         : `height:${this.height};`;
     }
@@ -366,7 +365,7 @@ export default {
     },
     querySearch(queryString, cb) {
       var options = this.options;
-      queryString = this.extendProps.needTrim && this.trim(queryString);
+      queryString = this.trim(queryString);
       console.log('query', queryString);
       var results = queryString
         ? options.filter(this.createFilter(queryString))
