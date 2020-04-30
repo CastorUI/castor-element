@@ -30,7 +30,7 @@
       :data-field="item.dataField"
       :options="item.options"
       :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
-      :height="extendProps.labelPosition==='top'?'72px':'36px'"
+      :height="`${rowHeight * (extendProps.labelPosition==='top'? 2 : 1)}px`"
       :group-title="item.groupTitle"
       :current-field="item.currentField"
       :append-field="item.appendField"
@@ -100,6 +100,10 @@ export default {
     rowFieldsCount: {
       type: Number,
       default: 2
+    },
+    rowHeight: {
+      type: Number,
+      default: 36
     },
     operateType: {
       type: String,

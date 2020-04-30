@@ -734,6 +734,7 @@
 | model            | 数据源                                                                                                             | object  | —             | {}     |
 | fields           | 查询字段集合,见 `Field Options`                                                                                    | array   | —             | []     |
 | rowFieldsCount   | 每行显示字段数                                                                                                     | number  | —             | 2      |
+| rowHeight        | 行高                                                                                                               | number  | —             | 36     |
 | commands         | 命令集合，显示在表单底部 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling)         | array   | —             | []     |
 | customCommands   | 定制命令集合，显示在表单顶部右侧 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array   | —             | []     |
 | customComponents | 定制组件集合                                                                                                       | array   | —             | []     |
@@ -745,7 +746,9 @@
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------- | ------ | ------ | --------- |
 | type        | 类型, 见 `Field Type Options`                                                                                                | string | —      | input     |
 | label       | 标签                                                                                                                         | string | —      | 10        |
+| model       | 表单数据源                                                                                                                   | object | —      | {}        |
 | dataField   | 绑定字段                                                                                                                     | string | —      | 0         |
+| columnSpan  | 字段所占列数                                                                                                                 | number | —      | 1         |
 | commands    | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array  | -      | []        |
 | options     | 选项数据源                                                                                                                   | array  | -      | []        |
 | extendProps | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                                | string | -      | ascending |

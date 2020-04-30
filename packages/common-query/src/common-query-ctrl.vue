@@ -7,13 +7,15 @@
     <el-select
       v-if="type === 'select' || type === 'multiSelect'"
       v-model="model[dataField]"
-      :placeholder="'查询'+label"
       :multiple="type==='multiSelect'"
-      :allow-create="extendProps.allowCreate || false"
-      clearable
-      filterable
-      style="width:100%; "
-      size="small"
+      v-bind="{
+        placeholder:`查询${label}`,
+        size:'small',
+        style:'width:100%;',
+        clearable:true,
+        filterable: true,
+        ...extendProps
+      }"
     >
       <el-option
         v-for="option in options"
@@ -25,25 +27,28 @@
     <el-date-picker
       v-else-if="type==='dateTimeRange' || type==='dateRange' || type==='monthRange'|| type==='date' || type==='month'"
       v-model="model[dataField]"
-      :value-format="extendProps.valueFormat"
       :type="type.toLocaleLowerCase()"
-      :picker-options="pickerOptions"
-      range-separator="至"
-      start-placeholder="开始日期"
-      end-placeholder="结束日期"
-      style="width:100%;"
-      size="small"
+      v-bind="{
+        size:'small',
+        startPlaceholder: '开始日期', 
+        rangeSeparator: '至', 
+        endPlaceholder: '结束日期', 
+        valueFormat: 'yyyy-MM-dd',
+        pickerOptions: pickerOptions,
+        style: 'width:100%;',
+        ...extendProps
+      }"
     />
     <el-switch
       v-else-if="type==='switch'"
       v-model="model[dataField]"
-      style="width:40px;"
+      v-bind="{style: 'width:40px;', ...extendProps}"
     />
     <el-checkbox-group
       v-else-if="type==='checkboxGroup'"
       v-model="model[dataField]"
-      style="width:100%;"
       class="query-item"
+      v-bind="{style: 'width:100%;', ...extendProps}"
     >
       <el-checkbox
         v-for="option in options"
@@ -54,21 +59,23 @@
     </el-checkbox-group>
     <input-number-range
       v-else-if="type==='inputNumberRange'"
+      class="query-item"
+      style="width:100%;"
       :model="model"
       :from-field="fromField"
       :to-field="toField"
       :extend-props="extendProps"
-      style="width:100%;"
-      class="query-item"
-      size="small"
     />
     <el-input
       v-else
       v-model="model[dataField]"
-      :placeholder="'查询'+label"
       class="filter-item filter-list query-item"
-      clearable
-      size="small"
+      v-bind="{
+        size: 'small',
+        placeholder: `查询${label}`,
+        clearable: true,
+        ...extendProps
+      }"
     />
   </el-form-item>
 </template>
@@ -123,6 +130,9 @@ export default {
     }
   },
   computed: {
+    heightStyle() {
+      return `height:${this.height};`;
+    },
     pickerOptions: function() {
       if (this.type === 'dateTimeRange' || this.type === 'dateRange') {
         return (

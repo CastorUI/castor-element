@@ -93,20 +93,20 @@
       v-else-if="type==='switch'"
       v-model="model[dataField]"
       :disabled="disableValidator && disableValidator.call(this,model)"
-      v-bind="extendProps"
+      
       @change="onChange && onChange.call(this,model)"
     />
     <el-date-picker
-      v-else-if="type==='dateTimeRange' || type==='dateRange' || type==='date'"
+      v-else-if="type==='dateTimeRange' || type==='dateRange' || type==='monthRange'|| type==='date' || type==='month'"
       v-model="model[dataField]"
       :disabled="disableValidator && disableValidator.call(this,model)"
       :type="type.toLocaleLowerCase()"
-      :picker-options="type==='date' ? '' : (extendProps.pickerOptions || pickerOptions)"
       v-bind="{
         startPlaceholder: '开始日期', 
         rangeSeparator: '至', 
         endPlaceholder: '结束日期', 
         valueFormat: 'yyyy-MM-dd',
+        pickerOptions: pickerOptions,
         style: 'width:100%;',
         ...extendProps
       }"
@@ -288,46 +288,80 @@ export default {
       default: undefined
     }
   },
-  data() {
-    return {
-      pickerOptions: {
-        shortcuts: [
-          {
-            text: '最近一周',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit('pick', [start, end]);
-            }
-          },
-          {
-            text: '最近一个月',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-              picker.$emit('pick', [start, end]);
-            }
-          },
-          {
-            text: '最近三个月',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-              picker.$emit('pick', [start, end]);
-            }
-          }
-        ]
-      }
-    };
-  },
   computed: {
     heightStyle() {
       return ['custom', 'groupTitle', 'textArea'].indexOf(this.type) > -1
         ? ''
         : `height:${this.height};`;
+    },
+    pickerOptions() {
+      if (this.type === 'dateTimeRange' || this.type === 'dateRange') {
+        return (
+          this.extendProps.pickerOptions || {
+            shortcuts: [
+              {
+                text: '最近一周',
+                onClick(picker) {
+                  const end = new Date();
+                  const start = new Date();
+                  start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                  picker.$emit('pick', [start, end]);
+                }
+              },
+              {
+                text: '最近一个月',
+                onClick(picker) {
+                  const end = new Date();
+                  const start = new Date();
+                  start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                  picker.$emit('pick', [start, end]);
+                }
+              },
+              {
+                text: '最近三个月',
+                onClick(picker) {
+                  const end = new Date();
+                  const start = new Date();
+                  start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                  picker.$emit('pick', [start, end]);
+                }
+              }
+            ]
+          }
+        );
+      } else if (this.type === 'monthRange') {
+        return (
+          this.extendProps.pickerOptions || {
+            shortcuts: [
+              {
+                text: '本月',
+                onClick(picker) {
+                  picker.$emit('pick', [new Date(), new Date()]);
+                }
+              },
+              {
+                text: '今年至今',
+                onClick(picker) {
+                  const end = new Date();
+                  const start = new Date(new Date().getFullYear(), 0);
+                  picker.$emit('pick', [start, end]);
+                }
+              },
+              {
+                text: '最近六个月',
+                onClick(picker) {
+                  const end = new Date();
+                  const start = new Date();
+                  start.setMonth(start.getMonth() - 6);
+                  picker.$emit('pick', [start, end]);
+                }
+              }
+            ]
+          }
+        );
+      } else {
+        return {};
+      }
     }
   },
   methods: {

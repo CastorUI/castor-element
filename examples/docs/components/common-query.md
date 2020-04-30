@@ -13,7 +13,7 @@
     :model="search.model"
     :commands="search.commands"
     :fields="searchFields"
-    label-width="120px"
+    :extendProps="search.extendProps"
     @handleFilter="handleFilter"
     @handleReset="handleReset"
   />
@@ -91,6 +91,9 @@
               icon: 'el-icon-refresh',
             },
           ],
+          extendProps: {
+            labelWidth: '120px',
+          },
         },
       };
     },
@@ -159,16 +162,22 @@
           },
           {
             type: 'monthRange',
-            label: '创建月份',
+            label: '创建月份区间',
             dataField: 'create_month_range',
             columnSpan: 2,
             showType: 'static',
+            extendProps: {
+              valueFormat: 'yyyy-MM',
+            },
           },
           {
             type: 'month',
             label: '创建月份',
             dataField: 'create_month',
             showType: 'static',
+            extendProps: {
+              valueFormat: 'yyyy-MM',
+            },
           },
           {
             type: 'checkboxGroup',
@@ -363,9 +372,48 @@
 | 参数                  | 说明                                                                                          | 类型    | 可选值    | 默认值 |
 | --------------------- | --------------------------------------------------------------------------------------------- | ------- | --------- | ------ |
 | loading               | 是否显示 loading                                                                              | boolean | —         | false  |
-| model                 | 数据源                                                                                        | object  | —         | {}     |
-| fields                | 查询字段集合                                                                                  | array   | —         | []     |
+| model                 | 表单数据源                                                                                    | object  | —         | {}     |
+| fields                | 查询字段集合,见 `Field Options`                                                               | array   | —         | []     |
+| rowHeight             | 行高                                                                                          | number  | —         | 36     |
 | commands              | 命令集合 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling)    | array   | —         | []     |
 | dynamicFieldsPosition | 动态查询字段插入位置                                                                          | string  | start\end | end    |
 | downloadOpt           | 下拉命令项                                                                                    | object  | —         | {}     |
 | extendProps           | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing) | object  | —         | {}     |
+
+### Field Options
+
+| 参数        | 说明                                                                                          | 类型   | 可选值 | 默认值    |
+| ----------- | --------------------------------------------------------------------------------------------- | ------ | ------ | --------- |
+| type        | 类型, 见 `Field Type Options`                                                                 | string | —      | input     |
+| label       | 标签                                                                                          | string | —      | 10        |
+| model       | 表单数据源                                                                                    | object | —      | {}        |
+| dataField   | 绑定字段                                                                                      | string | —      | 0         |
+| columnSpan  | 字段所占列数                                                                                  | number | —      | 1         |
+| fromField   | 起始值绑定字段，inputNumberRange 专用                                                         | string | —      | 0         |
+| toField     | 绑定字段                                                                                      | string | —      | 0         |
+| options     | 选项数据源                                                                                    | array  | -      | []        |
+| extendProps | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing) | string | -      | ascending |
+
+### Field Type Options
+
+| 类型          | 说明           |
+| ------------- | -------------- |
+| text          | 只读文本       |
+| input         | 输入框         |
+| autocomplete  | 自动填充输入框 |
+| inputNumber   | 数字输入框     |
+| textArea      | 多行文本       |
+| select        | 下拉框         |
+| multiSelect   | 多选下拉框     |
+| groupedSelect | 分组选择下拉框 |
+| cascader      | 级联选择器     |
+| switch        | 开关           |
+| radioGroup    | 单选框组       |
+| checkboxGroup | 复选框组       |
+| date          | 日期选择器     |
+| dateRange     | 日期区间选择器 |
+| dateTimeRange | 时间区间选择器 |
+| hr            | 分行           |
+| groupTitle    | 组标题         |
+| complexInput  | 组合输入框     |
+| custom        | 定制组件       |

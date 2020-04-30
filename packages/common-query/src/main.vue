@@ -35,11 +35,13 @@
     <el-form
       id="queryForm"
       ref="form"
-      size="small"
-      label-width="110px"
       :model="model"
       :style="fields.some(r=>r.showType==='dynamic')? 'marginLeft:100px;' : ''"
-      v-bind="extendProps"
+      v-bind="{
+        labelWidth:'110px',
+        size:'small',
+        ...extendProps
+      }"
       @submit.native.prevent
     >
       <template v-if="dynamicFieldsPosition==='start'">
@@ -52,6 +54,8 @@
           :data-field="item.dataField"
           :options="item.options"
           :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
+          :height="`${rowHeight}px`"
+          :extend-props="item.extendProps || {}"
         />
       </template>
       <common-query-ctrl
@@ -64,8 +68,9 @@
         :options="item.options"
         :from-field="item.fromField"
         :to-field="item.toField"
-        :extend-props="item.extendProps"
         :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
+        :height="`${rowHeight}px`"
+        :extend-props="item.extendProps || {}"
       />
       <template v-if="dynamicFieldsPosition==='end'">
         <common-query-ctrl
@@ -77,6 +82,8 @@
           :data-field="item.dataField"
           :options="item.options"
           :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
+          :height="`${rowHeight}px`"
+          :extend-props="item.extendProps || {}"
         />
       </template>
       <el-form-item
@@ -86,15 +93,10 @@
         <el-button
           v-for="(item,index) of commands"
           :key="index"
-          :icon="item.icon"
-          :disabled="item.disableValidator && item.disableValidator.call(this)"
-          :type="item.styleType || 'primary'"
-          class="filter-item"
           :loading="item.loading && loading"
-          :plain="item.extendProps && item.extendProps.plain"
-          :circle="item.extendProps && item.extendProps.circle"
-          :round="item.extendProps && item.extendProps.round"
-          size="medium"
+          :disabled="item.disableValidator && item.disableValidator.call(this)"
+          class="filter-item"
+          v-bind="{type: 'primary', size: 'medium', ...item.extendProps}"
           @click="$emit(item.command)"
         >
           {{ item.text }}
@@ -141,6 +143,10 @@ export default {
   },
   directives: { resize },
   props: {
+    loading: {
+      type: Boolean,
+      default: false
+    },
     model: {
       type: Object,
       default: function() {
@@ -175,9 +181,9 @@ export default {
       type: String,
       default: 'end'
     },
-    loading: {
-      type: Boolean,
-      default: false
+    rowHeight: {
+      type: Number,
+      default: 36
     }
   },
   data() {
