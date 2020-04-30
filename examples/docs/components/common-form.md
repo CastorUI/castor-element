@@ -218,9 +218,6 @@
             label: '备注',
             dataField: 'remarks',
             columnSpan: 2,
-            extendProps: {
-              needTrim: true,
-            },
           },
         ];
       },
