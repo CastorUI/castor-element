@@ -114,7 +114,7 @@
             },
           ],
           extendProps: {
-            labelWidth: '110px',
+            labelWidth: '120px',
             labelPosition: 'right',
           },
         },

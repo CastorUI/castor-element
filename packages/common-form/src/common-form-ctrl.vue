@@ -1,10 +1,9 @@
 <template>
   <el-form-item
     v-if="!visibleValidator || visibleValidator.call(this,model)"
-    :label="label?(label+' :'):''"
     :prop="dataField"
-    :label-width="label?labelWidth:'0'"
     :style="'float:left;padding-right:10px;minWidth:300px;width:'+width+';'+ heightStyle"
+    v-bind="{ ...(label ? {label: `${label} :`} : {labelWidth: '0'})}"
   >
     <el-select
       v-if="type === 'select' || type === 'multiSelect'"
@@ -105,6 +104,7 @@
         startPlaceholder: '开始日期', 
         rangeSeparator: '至', 
         endPlaceholder: '结束日期', 
+        valueFormat: 'yyyy-MM-dd',
         style: 'width:100%;',
         ...extendProps
       }"
@@ -288,10 +288,6 @@ export default {
       type: Function,
       default: () => true
     },
-    labelWidth: {
-      type: String,
-      default: '120px'
-    },
     currentField: {
       type: Object,
       default: function() {
@@ -308,19 +304,15 @@ export default {
       type: String,
       default: ''
     },
-    extendProps: {
-      type: Object,
-      default: function() {
-        return {
-          valueFormat: 'yyyy-MM-dd'
-        };
-      }
-    },
     customComponents: {
       type: Object,
       default: function() {
         return {};
       }
+    },
+    extendProps: {
+      type: Object,
+      default: () => {}
     }
   },
   data() {
