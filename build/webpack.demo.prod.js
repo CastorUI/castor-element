@@ -28,12 +28,6 @@ const webpackConfig = {
     },
     modules: ['node_modules'],
   },
-  devServer: {
-    host: '0.0.0.0',
-    port: 8085,
-    publicPath: '/',
-    hot: true,
-  },
   performance: {
     hints: false,
   },
@@ -89,7 +83,6 @@ const webpackConfig = {
     ],
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: 'public/index.html',
       filename: 'index.html',
