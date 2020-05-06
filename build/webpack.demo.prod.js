@@ -6,24 +6,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-
-const isProd = process.env.NODE_ENV === 'production';
-const isPlay = !!process.env.PLAY_ENV;
+const TerserPlugin = require('terser-webpack-plugin');
 
 const webpackConfig = {
   mode: process.env.NODE_ENV,
-  entry: isProd
-    ? {
-        docs: './examples/main.js',
-        'castor-ui': './packages/index.js',
-      }
-    : './examples/main.js',
+  entry: {
+    docs: './examples/main.js',
+    'castor-ui': './packages/index.js',
+  },
   output: {
-    path: path.resolve(process.cwd(), './examples/castor-ui/'),
-    publicPath: process.env.CI_ENV || '',
+    path: path.resolve(process.cwd(), './dist'),
     filename: '[name].[hash:7].js',
-    chunkFilename: isProd ? '[name].[hash:7].js' : '[name].js',
+    chunkFilename: '[name].[hash:7].js',
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
@@ -65,11 +59,7 @@ const webpackConfig = {
       },
       {
         test: /\.(scss|css)$/,
-        use: [
-          isProd ? MiniCssExtractPlugin.loader : 'style-loader',
-          'css-loader',
-          'sass-loader',
-        ],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
         test: /\.md$/,
@@ -117,33 +107,29 @@ const webpackConfig = {
         },
       },
     }),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash:7].css',
+    }),
   ],
   optimization: {
-    minimizer: [],
+    minimizer: [
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true,
+      }),
+      new OptimizeCSSAssetsPlugin({}),
+    ],
   },
   devtool: '#eval-source-map',
 };
 
-if (isProd) {
-  webpackConfig.externals = {
-    vue: 'Vue',
-    'vue-router': 'VueRouter',
-    'highlight.js': 'hljs',
-  };
-  webpackConfig.plugins.push(
-    new MiniCssExtractPlugin({
-      filename: '[name].[contenthash:7].css',
-    })
-  );
-  webpackConfig.optimization.minimizer.push(
-    new UglifyJsPlugin({
-      cache: true,
-      parallel: true,
-      sourceMap: false,
-    }),
-    new OptimizeCSSAssetsPlugin({})
-  );
-  webpackConfig.devtool = false;
-}
+webpackConfig.externals = {
+  vue: 'Vue',
+  'vue-router': 'VueRouter',
+  'highlight.js': 'hljs',
+};
+
+webpackConfig.devtool = false;
 
 module.exports = webpackConfig;
