@@ -76,6 +76,10 @@
                       value: '111',
                       label: '江宁区',
                     },
+                    {
+                      value: '112',
+                      label: '江阴区',
+                    },
                   ],
                 },
                 {
@@ -100,6 +104,8 @@
             user_type: undefined,
             enabled: false,
             equipment: [],
+            city: undefined,
+            lazy_city: undefined,
             design_cost: undefined,
             create_date_range: undefined,
             remarks: undefined,
@@ -196,6 +202,18 @@
             options: this.optionsMap['city'],
           },
           {
+            type: 'cascader',
+            label: '区域（lazy）',
+            dataField: 'lazy_city',
+            columnSpan: 2,
+            extendProps: {
+              props: {
+                lazy: true,
+                lazyLoad: this.handleCityLazyLoad,
+              },
+            },
+          },
+          {
             type: 'inputNumber',
             label: '设计成本',
             dataField: 'design_cost',
@@ -228,6 +246,44 @@
       },
       handleSave() {
         console.log('handleSave,model:', this.form.model);
+      },
+      handleCityLazyLoad(node, resolve) {
+        console.log('handleCityLazyLoad,node:', node);
+        setTimeout(() => {
+          if (node.level === 0) {
+            const nodes = this.optionsMap['city'].map((r) => {
+              return {
+                value: r.value,
+                label: r.label,
+                leaf: !r.children,
+              };
+            });
+            resolve(nodes);
+          } else if (node.level == 1) {
+            const nodes = this.optionsMap['city']
+              .filter((r) => r.value === node.value)[0]
+              .children.map((r) => {
+                return {
+                  value: r.value,
+                  label: r.label,
+                  leaf: !r.children,
+                };
+              });
+            resolve(nodes);
+          } else if (node.level == 2) {
+            const nodes = this.optionsMap['city']
+              .filter((r) => r.value === node.parent.value)[0]
+              .children.filter((r) => r.value === node.value)[0]
+              .children.map((r) => {
+                return {
+                  value: r.value,
+                  label: r.label,
+                  leaf: !r.children,
+                };
+              });
+            resolve(nodes);
+          }
+        }, 1000);
       },
     },
   };
