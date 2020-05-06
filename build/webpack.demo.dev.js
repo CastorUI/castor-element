@@ -9,7 +9,6 @@ const webpackConfig = {
   mode: process.env.NODE_ENV,
   entry: './examples/main.js',
   output: {
-    path: __dirname + '/dist',
     filename: '[name].[hash:7].js',
     chunkFilename: '[name].js',
   },

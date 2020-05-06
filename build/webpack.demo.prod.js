@@ -124,12 +124,6 @@ const webpackConfig = {
   devtool: '#eval-source-map',
 };
 
-webpackConfig.externals = {
-  vue: 'Vue',
-  'vue-router': 'VueRouter',
-  'highlight.js': 'hljs',
-};
-
 webpackConfig.devtool = false;
 
 module.exports = webpackConfig;
