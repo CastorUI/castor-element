@@ -55,7 +55,7 @@ const registerComponentRoute = () => {
 /// 指南
 let guideRoute = {
   path: '/guide', // 指南
-  redirect: '/guide/design',
+  redirect: '/guide/aim',
   component: load('guide'),
   children: [
     {
