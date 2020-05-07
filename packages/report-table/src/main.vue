@@ -289,26 +289,6 @@ export default {
       button:last-child {
         padding-right: 0;
       }
-      .default-color {
-        color: #909399;
-      }
-      .default-color:hover {
-        background-color: #909399;
-        color: #ffffff;
-      }
-      .default-color:focus,
-      .default-bg:focus {
-        border-color: #dcdfe6;
-      }
-      .default-bg {
-        background: #ffffff;
-        color: #009944;
-        border-left: none;
-      }
-      .default-bg:hover {
-        background: #67c23a;
-        color: #ffffff;
-      }
       .left-border:after {
         content: '';
         position: absolute;

@@ -70,10 +70,13 @@
         :disabled="option.disabled"
       />
     </el-checkbox-group>
-    <span
+    <el-button
       v-else-if="type==='groupTitle'"
-      v-bind="{style: 'font-size:16px;font-weight:bold;color:#006934FF;', ...extendProps}"
-    >{{ groupTitle }}</span>
+      type="text"
+      v-bind="{style: 'font-size:16px;font-weight:bold;', ...extendProps}"
+    >
+      {{ groupTitle }}
+    </el-button>
     <span
       v-else-if="type==='text'"
       v-bind="{style: 'display:inline-block;font-size:14px;height: 36px;line-height: 36px;', ...extendProps}"
@@ -93,7 +96,6 @@
       v-else-if="type==='switch'"
       v-model="model[dataField]"
       :disabled="disableValidator && disableValidator.call(this,model)"
-      
       @change="onChange && onChange.call(this,model)"
     />
     <el-date-picker

@@ -170,7 +170,6 @@ export default {
 
 <style lang="scss">
 .common-table-container {
-  background: #fff;
   padding: 0 24px;
   overflow: hidden;
   margin-bottom: 10px;
@@ -184,26 +183,6 @@ export default {
       button {
         font-size: 14px;
         padding: 14px 10px;
-      }
-      .default-color {
-        color: #909399;
-      }
-      .default-color:hover {
-        background-color: #909399;
-        color: #ffffff;
-      }
-      .default-color:focus,
-      .default-bg:focus {
-        border-color: #dcdfe6;
-      }
-      .default-bg {
-        background: #ffffff;
-        color: #009944;
-        border-left: none;
-      }
-      .default-bg:hover {
-        background: #67c23a;
-        color: #ffffff;
       }
       .left-border:after {
         content: '';
