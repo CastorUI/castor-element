@@ -1,0 +1,59 @@
+# This file is a template, and might need editing before it works on your project.
+# Full project: https://gitlab.com/pages/plain-html
+
+variables:
+  NODE_MODULES_VERSION: 'fe-components-static-1.0.0' # node_modules版本号，每次升级依赖改一下这里的数值
+  CURRENT_BRANCH: $CI_COMMIT_REF_NAME
+  NODE_VERSION: 'v10.19.0'
+  SCRIPT_DIR: "/home/liwp/script"
+
+# 缓存目录文件
+# key是唯一值，重名会覆盖上一次的缓存
+cache:
+#  key: '$NODE_MODULES_VERSION'
+  paths:
+    - node_modules/
+
+stages:
+  - build_install
+  - build_run
+  - deploy_prod
+
+
+node_install:
+  stage: build_install
+  script:
+    - nvm use $NODE_VERSION
+    - npm install -g mirror-config-china --registry=http://registry.npm.taobao.org
+    - npm install --slient
+
+node_run:
+  stage: build_run
+  script:
+    - npm run build
+
+deploy_prod:
+  stage: deploy_prod
+  environment:
+    name: Production
+  before_script:
+    - nvm use $NODE_VERSION
+    - npm install -g mirror-config-china --registry=http://registry.npm.taobao.org
+    - npm install  --silent
+    - npm run build
+
+  script:
+    - tar -czf dist.tar.gz dist
+    - scp  dist.tar.gz liwp@39.104.69.145:/home/liwp/project/castor/
+    - ssh -o stricthostkeychecking=no liwp@39.104.69.145 /bin/tar -xzf /home/liwp/project/castor/dist.tar.gz -C /home/liwp/project/castor/
+
+  # only:
+  #   - develop
+
+  artifacts:
+    name: 'dist_prod'
+    expire_in: 30 days
+    paths:
+      - dist
+  when: manual
+
