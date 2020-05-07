@@ -5,8 +5,7 @@
   "main": "lib/castor-ui.umd.min.js",
   "scripts": {
     "lint": "eslint examples/ packages/ --ext .vue,.js --fix",
-    "build-lib": "vue-cli-service build --target lib --name castor-ui --dest lib packages/index.js  && npm run build-theme",
-    "build-theme": "gulp build --gulpfile packages/theme-default/gulpfile.js && cp-cli packages/theme-default/lib lib/theme-default",
+    "build-lib": "vue-cli-service build --target lib --name castor-ui --dest lib packages/index.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.demo.dev.js",
     "prod": "cross-env NODE_ENV=production webpack --config build/webpack.demo.prod.js"
   },
