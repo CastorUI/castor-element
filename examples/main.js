@@ -5,10 +5,7 @@ import CastorUI from './../packages/index';
 
 import './../node_modules/highlight.js/styles/color-brewer.css';
 import './assets/styles/index.scss';
-import './../packages/theme-default/src/index.scss';
 import './demo-styles/index.scss';
-import './assets/styles/common.scss';
-import './assets/styles/fonts/style.css';
 
 import App from './App.vue';
 import router from './router';
