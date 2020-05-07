@@ -30,7 +30,7 @@ node_install:
 node_run:
   stage: build_run
   script:
-    - npm run build
+    - npm run prod
 
 deploy_prod:
   stage: deploy_prod
