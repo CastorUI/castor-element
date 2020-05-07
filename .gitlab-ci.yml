@@ -30,7 +30,7 @@ node_install:
 node_run:
   stage: build_run
   script:
-    - nvm current
+    - nvm use $NODE_VERSION
     - npm run prod
 
 deploy_prod:
