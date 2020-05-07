@@ -5,7 +5,7 @@ const load = function(path) {
 };
 
 const loadDocs = function(path, modulePath = '') {
-  return require(`../docs${modulePath}${path}.md`);
+  return require(`../docs/${modulePath}${path}.md`);
 };
 
 const registerComponentRoute = () => {
@@ -21,12 +21,12 @@ const registerComponentRoute = () => {
     if (nav.groups) {
       nav.groups.forEach((group) => {
         group.list.forEach((item) => {
-          addRoute(item, nav.path);
+          addRoute(item, nav.code);
         });
       });
     } else if (nav.children) {
       nav.children.forEach((child) => {
-        addRoute(child, nav.path);
+        addRoute(child, nav.code);
       });
     } else {
       addRoute(nav);
