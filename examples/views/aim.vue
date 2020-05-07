@@ -1,0 +1,26 @@
+<style lang="scss" scoped>
+</style>
+<template>
+  <div>
+    <h2>设计目标</h2>
+    <p>我们的目标是：基于ElementUI组件库，结合公司的常用业务场景，提取一套适合公司业务的能够快速迭代的组件库。</p>
+    <p>这套组件库具有以下特点：</p>
+    <h3>一致性</h3>
+    <ul>
+      <li><strong>样式一致：</strong>统一的样式体验，避免不同页面的不同展示效果</li>
+      <li><strong>交互一致：</strong>统一的交互体验，降低用户学习成本</li>
+      <li><strong>代码一致：</strong>统一的代码结构，除低维护成本</li>
+    </ul>
+    <h3>效率</h3>
+    <ul>
+      <li><strong>只开发一次：</strong>同样的功能只开发一次，不再重复造轮子</li>
+      <li><strong>快速构建：</strong>基于组件库开发，不再从零起步</li>
+      <li><strong>专注业务：</strong>将工作重心从重复开发中释放，转换到业务上来</li>
+    </ul>
+    <h3>扩展性</h3>
+    <ul>
+      <li><strong>完善老组件：</strong>通过项目来验证并完善老的组件</li>
+      <li><strong>积累新组件：</strong>将新项目中创建的具备复用价值的组件</li>
+    </ul>
+  </div>
+</template>

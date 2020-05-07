@@ -1,0 +1,14 @@
+<template>
+  <div>
+    <h2>适用场景</h2>
+    <h3>做什么</h3>
+    <ul>
+      <li><strong>标准化的企业后台应用：</strong>专注企业应用，提供标准化、一致性的用户体验和准确的数据展示。</li>
+    </ul>
+    <h3>不做什么</h3>
+    <ul>
+      <li><strong>独特的业务场景：</strong>非后台的业务场景往往需要单独定制</li>
+      <li><strong>个性化的交互体验：</strong>高度个性化的交互体验，可以通过要底层的组件来实现，如ElementUI组件或原生HTML组件来实现</li>
+    </ul>
+  </div>
+</template>
