@@ -389,8 +389,8 @@
 | model       | 表单数据源                                                                                    | object | —      | {}        |
 | dataField   | 绑定字段                                                                                      | string | —      | 0         |
 | columnSpan  | 字段所占列数                                                                                  | number | —      | 1         |
-| fromField   | 起始值绑定字段，inputNumberRange 专用                                                         | string | —      | 0         |
-| toField     | 绑定字段                                                                                      | string | —      | 0         |
+| fromField   | 最小值绑定字段，`inputNumberRange` 专用                                                       | string | —      | 0         |
+| toField     | 最大值绑定字段，`inputNumberRange` 专用                                                       | string | —      | 0         |
 | options     | 选项数据源                                                                                    | array  | -      | []        |
 | extendProps | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing) | string | -      | ascending |
 

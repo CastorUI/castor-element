@@ -31,6 +31,7 @@
         v-for="(item,index) of commands"
         v-show="!item.visibleValidator || item.visibleValidator.call(this, scope.row)"
         :key="index"
+        type="primary"
         :disabled="item.disableValidator && item.disableValidator.call(this,scope.row)"
         v-bind="item.extendProps"
         @click.stop="$emit(item.command,scope.$index,scope.row)"
