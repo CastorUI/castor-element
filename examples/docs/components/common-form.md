@@ -798,16 +798,18 @@
 
 ### Field Options
 
-| 参数        | 说明                                                                                                                         | 类型   | 可选值 | 默认值    |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------- | ------ | ------ | --------- |
-| type        | 类型, 见 `Field Type Options`                                                                                                | string | —      | input     |
-| label       | 标签                                                                                                                         | string | —      | 10        |
-| model       | 表单数据源                                                                                                                   | object | —      | {}        |
-| dataField   | 绑定字段                                                                                                                     | string | —      | 0         |
-| columnSpan  | 字段所占列数                                                                                                                 | number | —      | 1         |
-| commands    | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array  | -      | []        |
-| options     | 选项数据源                                                                                                                   | array  | -      | []        |
-| extendProps | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                                | string | -      | ascending |
+| 参数             | 说明                                                                                                                         | 类型     | 可选值 | 默认值    |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------- | ------ | --------- |
+| type             | 类型, 见 `Field Type Options`                                                                                                | string   | —      | input     |
+| label            | 标签                                                                                                                         | string   | —      | 10        |
+| model            | 表单数据源                                                                                                                   | object   | —      | {}        |
+| dataField        | 绑定字段                                                                                                                     | string   | —      | 0         |
+| columnSpan       | 字段所占列数                                                                                                                 | number   | —      | 1         |
+| commands         | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | -      | []        |
+| options          | 选项数据源                                                                                                                   | array    | -      | []        |
+| visibleValidator | 可见性校验,返回 `true` 时可见                                                                                                | function | —      | —         |
+| disableValidator | 可用性校验,返回 `true` 时禁用                                                                                                | function | —      | —         |
+| extendProps      | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                                | string   | -      | ascending |
 
 ### Field Type Options
 

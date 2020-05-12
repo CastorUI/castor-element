@@ -13,8 +13,8 @@ command 代表一个可交互的命令或事件，包含两种情况：
 | ---------------- | --------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
 | text             | 显示文本                                                                                      | string   | —      | —      |
 | command          | 绑定事件名称                                                                                  | string   | —      | —      |
-| visibleValidator | 显示校验,返回 `true` 时可见                                                                   | function | —      | —      |
-| disableValidator | 可用校验,返回 `true` 时禁用                                                                   | function | —      | —      |
+| visibleValidator | 可见性校验,返回 `true` 时可见                                                                   | function | —      | —      |
+| disableValidator | 可用性校验,返回 `true` 时禁用                                                                   | function | —      | —      |
 | extendProps      | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing) | object   | —      | —      |
 
 ### extendProps 扩展属性
