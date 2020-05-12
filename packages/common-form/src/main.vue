@@ -9,17 +9,18 @@
   >
     <div
       v-if="customCommands"
-      style="position: absolute;top: 28px;right: 20px;z-index:99;"
+      style="position: absolute;top: 60px;right: 20px;z-index:99;"
     >
-      <el-button
+      <el-link
         v-for="(item,index) of customCommands"
         :key="index"
+        type="primary"
         :disabled="item.disableValidator && item.disableValidator.call(this,model)"
         v-bind="{size:'small',type: 'primary',underline: true, ...item.extendProps}"
         @click.stop="$emit(item.command,model)"
       >
         {{ item.text }}
-      </el-button>
+      </el-link>
     </div>
     <common-form-ctrl
       v-for="item in fields"
