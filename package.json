@@ -1,11 +1,11 @@
 {
   "name": "castor-ui",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": false,
   "main": "lib/castor-ui.umd.min.js",
   "scripts": {
     "lint": "eslint examples/ packages/ --ext .vue,.js --fix",
-    "build-lib": "vue-cli-service build --target lib --name castor-ui --dest lib packages/index.js",
+    "build": "vue-cli-service build --target lib --name castor-ui --dest lib packages/index.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.demo.dev.js",
     "prod": "cross-env NODE_ENV=production webpack --config build/webpack.demo.prod.js"
   },
