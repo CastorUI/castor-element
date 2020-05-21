@@ -1,4 +1,4 @@
-# castor-ui
+# @polarwin/castor-ui
 
 ## 一. 组件库发布
 
@@ -15,8 +15,8 @@ npm profile set password --registry http://verdaccio.polarwin.cn
 
 ```
 {
-  "name": "castor-ui",
-  "version": "1.0.4",
+  "name": "@polarwin/castor-ui",
+  "version": "1.0.5",
 }
 ```
 
@@ -55,4 +55,5 @@ npm run prod
 ## 三. 版本说明
 
 - node 版本 >= 10.19.0
+- npm 版本 >= 6.13.4
 - element-ui 版本 >=2.10.1
