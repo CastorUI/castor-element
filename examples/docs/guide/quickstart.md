@@ -10,10 +10,10 @@
 import Vue from 'vue';
 import Element from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/zh-CN';
-import CastorUI from 'castor-ui';
+import CastorUI from '@polarwin/castor-ui';
 import App from './App.vue';
 
-import 'castor-ui/lib/castor-ui.css';
+import '@polarwin/castor-ui/lib/castor-ui.css';
 
 Vue.use(Element, {
   locale,

@@ -1,7 +1,8 @@
 {
   "name": "@polarwin/castor-ui",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "private": false,
+  "author": "heke",
   "main": "lib/castor-ui.umd.min.js",
   "scripts": {
     "lint": "eslint examples/ packages/ --ext .vue,.js --fix",
