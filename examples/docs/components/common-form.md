@@ -135,7 +135,9 @@
             label: '',
             dataField: '',
             columnSpan: 2,
-            groupTitle: '1、基本信息',
+            extendProps: {
+              groupTitle: '1、基本信息',
+            },
           },
           {
             type: 'text',
@@ -166,7 +168,9 @@
             label: '角色',
             dataField: 'user_role',
             columnSpan: 1,
-            options: this.optionsMap['user_role'],
+            extendProps: {
+              options: this.optionsMap['user_role'],
+            },
           },
           {
             type: 'switch',
@@ -179,27 +183,35 @@
             label: '',
             dataField: '',
             columnSpan: 2,
-            groupTitle: '2、业务信息',
+            extendProps: {
+              groupTitle: '2、业务信息',
+            },
           },
           {
             type: 'select',
             label: '业务类型',
             dataField: 'user_type',
             columnSpan: 1,
-            options: this.optionsMap['user_type'],
+            extendProps: {
+              options: this.optionsMap['user_type'],
+            },
           },
           {
             type: 'checkboxGroup',
             label: '主打产品',
             dataField: 'equipment',
-            options: this.optionsMap['equipment'],
+            extendProps: {
+              options: this.optionsMap['equipment'],
+            },
           },
           {
             type: 'cascader',
             label: '所属区域',
             dataField: 'city',
             columnSpan: 2,
-            options: this.optionsMap['city'],
+            extendProps: {
+              options: this.optionsMap['city'],
+            },
           },
           {
             type: 'cascader',
@@ -414,7 +426,9 @@
             label: '',
             dataField: '',
             columnSpan: 2,
-            groupTitle: '1、基本信息',
+            extendProps: {
+              groupTitle: '1、基本信息',
+            },
           },
           {
             type: 'text',
@@ -448,8 +462,10 @@
             label: '角色',
             dataField: 'user_role',
             columnSpan: 1,
-            options: this.optionsMap['user_role'],
             rules: [{ required: true, message: '不能为空' }],
+            extendProps: {
+              options: this.optionsMap['user_role'],
+            },
           },
           {
             type: 'switch',
@@ -462,30 +478,38 @@
             label: '',
             dataField: '',
             columnSpan: 2,
-            groupTitle: '2、业务信息',
+            extendProps: {
+              groupTitle: '2、业务信息',
+            },
           },
           {
             type: 'select',
             label: '业务类型',
             dataField: 'user_type',
             columnSpan: 1,
-            options: this.optionsMap['user_type'],
             rules: [{ required: true, message: '不能为空' }],
+            extendProps: {
+              options: this.optionsMap['user_type'],
+            },
           },
           {
             type: 'checkboxGroup',
             label: '主打产品',
             dataField: 'equipment',
-            options: this.optionsMap['equipment'],
             rules: [{ required: true, message: '不能为空' }],
+            extendProps: {
+              options: this.optionsMap['equipment'],
+            },
           },
           {
             type: 'cascader',
             label: '所属区域',
             dataField: 'city',
             columnSpan: 2,
-            options: this.optionsMap['city'],
             rules: [{ required: true, message: '不能为空' }],
+            extendProps: {
+              options: this.optionsMap['city'],
+            },
           },
         ];
       },
@@ -628,7 +652,9 @@
             label: '',
             dataField: '',
             columnSpan: 2,
-            groupTitle: '1、基本信息',
+            extendProps: {
+              groupTitle: '1、基本信息',
+            },
           },
           {
             type: 'text',
@@ -659,7 +685,9 @@
             label: '角色',
             dataField: 'user_role',
             columnSpan: 1,
-            options: this.optionsMap['user_role'],
+            extendProps: {
+              options: this.optionsMap['user_role'],
+            },
           },
           {
             type: 'switch',
@@ -672,27 +700,35 @@
             label: '',
             dataField: '',
             columnSpan: 2,
-            groupTitle: '2、业务信息',
+            extendProps: {
+              groupTitle: '2、业务信息',
+            },
           },
           {
             type: 'select',
             label: '业务类型',
             dataField: 'user_type',
             columnSpan: 1,
-            options: this.optionsMap['user_type'],
+            extendProps: {
+              options: this.optionsMap['user_type'],
+            },
           },
           {
             type: 'checkboxGroup',
             label: '主打产品',
             dataField: 'equipment',
-            options: this.optionsMap['equipment'],
+            extendProps: {
+              options: this.optionsMap['equipment'],
+            },
           },
           {
             type: 'cascader',
             label: '所属区域',
             dataField: 'city',
             columnSpan: 2,
-            options: this.optionsMap['city'],
+            extendProps: {
+              options: this.optionsMap['city'],
+            },
           },
         ];
       },
@@ -761,15 +797,17 @@
             label: '启用审核',
             dataField: 'audit_enabled',
             columnSpan: 1,
-            disableValidator: (model) => model.anditor_id,
+            disableValidator: (model) => model.anditor_id > 0,
           },
           {
             type: 'select',
             label: '审核人',
             dataField: 'anditor_id',
             columnSpan: 1,
-            options: this.optionsMap['anditor_id'],
             visibleValidator: (model) => model.audit_enabled,
+            extendProps: {
+              options: this.optionsMap['anditor_id'],
+            },
           },
         ];
       },
@@ -806,12 +844,18 @@
 | dataField        | 绑定字段                                                                                             | string   | —      | 0         |
 | columnSpan       | 字段所占列数                                                                                         | number   | —      | 1         |
 | rules            | 字段校验规则                                                                                         | array    | -      | []        |
-| options          | 选项数据源                                                                                           | array    | -      | []        |
 | visibleValidator | 可见性校验,返回 `true` 时可见                                                                        | function | —      | —         |
 | disableValidator | 可用性校验,返回 `true` 时禁用                                                                        | function | —      | —         |
-| componentKey     | 自定义组件名称，只限于 `type` 为 `custom`                                                            | string   | -      | —         |
-| groupTitle       | 分组标题名称，只限于 `type` 为 `groupTitle`                                                          | string   | -      | —         |
 | elementProps     | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing) | string   | -      | ascending |
+| extendProps      | 扩展属性 [详情](http://0.0.0.0:8085/#/component/common-table#column-extendprops-options)             | object   | -      | {}        |
+
+### Field ExtendProps Options
+
+| 参数         | 说明                                                                                    | 类型   | 可选值 | 默认值 |
+| ------------ | --------------------------------------------------------------------------------------- | ------ | ------ | ------ |
+| groupTitle   | 分组标题名称，只限于 `type` 为 `groupTitle`                                             | string | -      | —      |
+| componentKey | 自定义组件名称，只限于 `type` 为 `custom`                                               | string | -      | —      |
+| options      | 选项数据源,用于`select multiSelect groupedSelect radioGroup checkboxGroup text cascade` | array  | -      | []     |
 
 ### Field Type Options
 

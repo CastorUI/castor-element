@@ -30,17 +30,15 @@
       :operate-type="operateType"
       :model="model"
       :data-field="item.dataField"
-      :options="item.options"
       :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
       :height="`${rowHeight * (elementProps.labelPosition==='top'? 2 : 1)}px`"
-      :group-title="item.groupTitle"
       :current-field="item.currentField"
       :append-field="item.appendField"
-      :component-key="item.componentKey"
       :custom-components="customComponents"
       :disable-validator="item.disableValidator"
       :visible-validator="item.visibleValidator"
       :element-props="item.elementProps || {}"
+      :extend-props="item.extendProps || {}"
       :on-change="item.onChange"
     />
     <el-form-item

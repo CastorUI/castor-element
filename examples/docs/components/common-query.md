@@ -414,6 +414,5 @@
 | dateRange     | 日期区间选择器 |
 | dateTimeRange | 时间区间选择器 |
 | hr            | 分行           |
-| groupTitle    | 组标题         |
 | complexInput  | 组合输入框     |
 | custom        | 定制组件       |

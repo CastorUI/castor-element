@@ -15,7 +15,7 @@
       @clear="handleClear"
     >
       <el-option
-        v-for="option in options"
+        v-for="option in extendProps.options"
         :key="option.value"
         :label="option.label"
         :value="option.value"
@@ -30,7 +30,7 @@
       @clear="handleClear"
     >
       <el-option-group
-        v-for="group in options"
+        v-for="group in extendProps.options"
         :key="group.label"
         :label="group.label"
       >
@@ -49,7 +49,7 @@
       @change="onChange && onChange.call(this,model)"
     >
       <el-radio
-        v-for="option in options"
+        v-for="option in extendProps.options"
         :key="option.value"
         :label="option.value"
       >
@@ -64,7 +64,7 @@
       @change="onChange && onChange.call(this,model)"
     >
       <el-checkbox
-        v-for="option in options"
+        v-for="option in extendProps.options"
         :key="option.label"
         :label="option.label"
         :disabled="option.disabled"
@@ -75,12 +75,12 @@
       type="text"
       v-bind="{style: 'font-size:16px;font-weight:bold;', ...elementProps}"
     >
-      {{ groupTitle }}
+      {{ extendProps.groupTitle }}
     </el-button>
     <span
       v-else-if="type==='text'"
       v-bind="{style: 'display:inline-block;font-size:14px;height: 36px;line-height: 36px;', ...elementProps}"
-    >{{ options ? options.filter(r => r.value === model[dataField])[0].label : model[dataField] }}</span>
+    >{{ extendProps.options ? extendProps.options.filter(r => r.value === model[dataField])[0].label : model[dataField] }}</span>
     <hr
       v-else-if="type==='hr'"
       v-bind="elementProps"
@@ -131,7 +131,7 @@
       v-else-if="type==='cascader'"
       v-model="model[dataField]"
       :disabled="disableValidator && disableValidator.call(this,model)"
-      :options="options"
+      :options="extendProps.options"
       v-bind="{
         placeholder: `输入${label}`,
         clearable: true,
@@ -162,7 +162,7 @@
       </template>
     </el-input>
     <component
-      :is="customComponents[componentKey]"
+      :is="customComponents[extendProps.componentKey]"
       v-else-if="type==='custom'"
       :component-data.sync="model[dataField]"
       :model="model"
@@ -240,10 +240,6 @@ export default {
       type: String,
       default: undefined
     },
-    options: {
-      type: Array,
-      default: undefined
-    },
     width: {
       type: String,
       default: undefined
@@ -251,10 +247,6 @@ export default {
     height: {
       type: String,
       default: '36px'
-    },
-    groupTitle: {
-      type: String,
-      default: undefined
     },
     disableValidator: {
       type: Function,
@@ -276,10 +268,6 @@ export default {
         return {};
       }
     },
-    componentKey: {
-      type: String,
-      default: ''
-    },
     customComponents: {
       type: Object,
       default: function() {
@@ -287,6 +275,10 @@ export default {
       }
     },
     elementProps: {
+      type: Object,
+      default: () => {}
+    },
+    extendProps: {
       type: Object,
       default: () => {}
     },
@@ -379,7 +371,7 @@ export default {
       method.call(this, query, options, this.model);
     },
     querySearch(queryString, cb) {
-      var options = this.options;
+      var options = this.extendProps.options;
       queryString = this.trim(queryString);
       console.log('query', queryString);
       var results = queryString
