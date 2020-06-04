@@ -45,10 +45,10 @@
           :data-field="item.dataField"
           :options="item.options"
           :commands="item.commands"
-          :link-command="item.linkCommand"
           :index-method="indexMethod"
           :data-template="item.dataTemplate"
           :element-props="item.elementProps"
+          :extend-props="item.extendProps"
           v-on="$listeners"
         />
       </el-table>

@@ -48,7 +48,7 @@
     <template slot-scope="scope">
       <el-link
         v-bind="elementProps"
-        @click.stop="$emit(linkCommand,scope.$index,scope.row)"
+        @click.stop="$emit(extendProps.linkCommand,scope.$index,scope.row)"
       >
         {{ scope.row[dataField] }}
       </el-link>
@@ -142,15 +142,17 @@ export default {
       type: Function,
       default: undefined
     },
-    linkCommand: {
-      type: String,
-      default: ''
-    },
     indexMethod: {
       type: Function,
       default: () => {}
     },
     elementProps: {
+      type: Object,
+      default: function() {
+        return {};
+      }
+    },
+    extendProps: {
       type: Object,
       default: function() {
         return {};

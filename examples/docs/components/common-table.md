@@ -148,7 +148,7 @@
 
 展示超链接列的用法。
 
-:::demo 在`tableColumns`中添加`type`为`link`的对象，并在`linkCommand`中绑定事件。通过在`elementProps`中添加`type`属性值设置样式。
+:::demo 在`tableColumns`中添加`type`为`link`的对象，并在`elementProps`中添加`linkCommand`属性值中绑定事件。通过在`elementProps`中添加`type`属性值设置样式。
 
 ```html
 <template>
@@ -196,9 +196,11 @@
             type: 'link',
             label: '编号',
             dataField: 'code',
-            linkCommand: 'handleLink',
             elementProps: {
               type: 'primary',
+            },
+            extendProps: {
+              linkCommand: 'handleLink',
             },
           },
           {
@@ -991,7 +993,7 @@
 
 :::
 
-### Attributes
+### Table Attributes
 
 | 参数           | 说明                                                                                                             | 类型     | 可选值 | 默认值 |
 | -------------- | ---------------------------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
@@ -1006,18 +1008,24 @@
 
 ### Column Options
 
-| 参数         | 说明                                                                                                                         | 类型     | 可选值                                                              | 默认值    |
-| ------------ | ---------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------- | --------- |
-| type         | 类型                                                                                                                         | string   | default / selection / index / link / keyToValue / status / commands | default   |
-| label        | 标题                                                                                                                         | string   | —                                                                   | 10        |
-| dataField    | 绑定字段                                                                                                                     | string   | —                                                                   | 0         |
-| commands     | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | -                                                                   | []        |
-| options      | 数据转换数据源                                                                                                               | array    | -                                                                   | []        |
-| elementProps | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing)                         | string   | -                                                                   | ascending |
-| linkCommand  | 超链接事件，当 `type` 为 `link` 时使用                                                                                       | function | -                                                                   | -         |
-| reportType   | 报表列类型 , 报表表格组件专用                                                                                                | string   | data/title                                                          | -         |
+| 参数         | 说明                                                                                                 | 类型   | 可选值                                                              | 默认值  |
+| ------------ | ---------------------------------------------------------------------------------------------------- | ------ | ------------------------------------------------------------------- | ------- |
+| type         | 类型                                                                                                 | string | default / selection / index / link / keyToValue / status / commands | default |
+| label        | 标题                                                                                                 | string | —                                                                   | 10      |
+| dataField    | 绑定字段                                                                                             | string | —                                                                   | 0       |
+| elementProps | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing) | object | -                                                                   | {}      |
+| extendProps  | 扩展属性 [详情](http://0.0.0.0:8085/#/component/common-table#column-extendprops-options)             | object | -                                                                   | {}      |
 
-### Events
+### Column ExtendProps Options
+
+| 参数        | 说明                                                                                                                         | 类型     | 可选值     | 默认值 |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------- | -------- | ---------- | ------ |
+| commands    | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | -          | []     |
+| options     | 数据转换数据源 ，当 `type` 为 `keyToValue` 或 `status` 时使用                                                                | array    | -          | []     |
+| linkCommand | 超链接事件，当 `type` 为 `link` 时使用                                                                                       | function | -          | -      |
+| reportType  | 报表列类型 , 报表表格组件专用                                                                                                | string   | data/title | -      |
+
+### Table Events
 
 | 事件名           | 说明                                         | 参数              |
 | ---------------- | -------------------------------------------- | ----------------- |

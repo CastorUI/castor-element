@@ -68,10 +68,10 @@
                     :data-field="grandChildItem.dataField"
                     :options="grandChildItem.options"
                     :commands="grandChildItem.commands"
-                    :link-command="grandChildItem.linkCommand"
                     :index-method="indexMethod"
                     :data-template="grandChildItem.dataTemplate"
                     :element-props="grandChildItem.elementProps"
+                    :extend-props="grandChildItem.extendProps"
                     v-on="$listeners"
                   />
                 </template>
@@ -84,7 +84,6 @@
                 :data-field="childItem.dataField"
                 :options="childItem.options"
                 :commands="childItem.commands"
-                :link-command="childItem.linkCommand"
                 :index-method="indexMethod"
                 :data-template="childItem.dataTemplate"
                 :element-props="childItem.elementProps"
@@ -100,7 +99,6 @@
             :data-field="item.dataField"
             :options="item.options"
             :commands="item.commands"
-            :link-command="item.linkCommand"
             :index-method="indexMethod"
             :data-template="item.dataTemplate"
             :element-props="item.elementProps"
