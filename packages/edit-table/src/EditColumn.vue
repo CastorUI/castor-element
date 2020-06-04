@@ -28,7 +28,7 @@
     <template slot-scope="scope">
       <template v-if="editingRow != null && editingRow.id === scope.row.id">
         <el-link
-          v-for="(item,index) of editableCommands"
+          v-for="(item,index) of extendProps.editableCommands"
           :key="index"
           class="command-link"
           :disabled="item.disableValidator && item.disableValidator.call(this,scope.row)"
@@ -40,7 +40,7 @@
       </template>
       <template v-else>
         <el-link
-          v-for="(item,index) of commands.filter(r =>r.maxLevel===undefined|| r.maxLevel >= scope.row.dataLevel)"
+          v-for="(item,index) of extendProps.commands.filter(r =>r.maxLevel===undefined|| r.maxLevel >= scope.row.dataLevel)"
           :key="index"
           class="command-link"
           :disabled="item.disableValidator && item.disableValidator.call(this,scope.row)"
@@ -126,14 +126,6 @@ export default {
       type: Array,
       default: () => []
     },
-    commands: {
-      type: Array,
-      default: () => []
-    },
-    editableCommands: {
-      type: Array,
-      default: () => []
-    },
     dataTemplate: {
       type: Function,
       default: () => {}
@@ -159,6 +151,12 @@ export default {
       default: null
     },
     elementProps: {
+      type: Object,
+      default: function() {
+        return {};
+      }
+    },
+    extendProps: {
       type: Object,
       default: function() {
         return {};

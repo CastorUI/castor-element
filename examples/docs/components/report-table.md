@@ -46,10 +46,10 @@
       tableColumns() {
         return [
           {
-            reportType: 'data',
             type: 'default',
             label: 'ID',
             dataField: 'id',
+            reportType: 'data',
           },
           {
             reportType: 'title',
@@ -57,10 +57,10 @@
             align: 'center',
             children: [
               {
-                reportType: 'data',
                 type: 'default',
                 label: '编号',
                 dataField: 'code',
+                reportType: 'data',
               },
               {
                 reportType: 'title',
@@ -70,16 +70,16 @@
                 align: 'center',
                 children: [
                   {
-                    reportType: 'data',
                     type: 'default',
                     label: '英文名',
                     dataField: 'en_name',
+                    reportType: 'data',
                   },
                   {
-                    reportType: 'data',
                     type: 'default',
                     label: '汉语名',
                     dataField: 'cn_name',
+                    reportType: 'data',
                   },
                 ],
               },
@@ -143,46 +143,46 @@
       tableColumns() {
         return [
           {
-            reportType: 'data',
-            showType: 'static',
             type: 'default',
             label: 'ID',
             dataField: 'id',
+            reportType: 'data',
+            showType: 'static',
           },
           {
-            reportType: 'title',
-            showType: 'static',
             label: '项目信息',
             align: 'center',
+            reportType: 'title',
+            showType: 'static',
             children: [
               {
-                reportType: 'data',
-                showType: 'static',
                 type: 'default',
                 label: '编号',
                 dataField: 'code',
+                reportType: 'data',
+                showType: 'static',
               },
               {
-                reportType: 'title',
-                showType: 'static',
                 type: 'default',
                 label: '名称',
                 dataField: '',
+                reportType: 'title',
+                showType: 'static',
                 align: 'center',
                 children: [
                   {
-                    reportType: 'data',
-                    showType: 'dynamic',
                     type: 'default',
                     label: '英文名',
                     dataField: 'en_name',
-                  },
-                  {
                     reportType: 'data',
                     showType: 'dynamic',
+                  },
+                  {
                     type: 'default',
                     label: '汉语名',
                     dataField: 'cn_name',
+                    reportType: 'data',
+                    showType: 'dynamic',
                   },
                 ],
               },
@@ -251,46 +251,46 @@
       tableColumns() {
         return [
           {
-            reportType: 'data',
             type: 'default',
             label: 'ID',
             dataField: 'id',
+            reportType: 'data',
           },
           {
-            reportType: 'title',
             label: '项目信息',
             align: 'center',
+            reportType: 'title',
             children: [
               {
-                reportType: 'data',
                 type: 'default',
                 label: '编号',
                 dataField: 'code',
+                reportType: 'data',
               },
               {
-                reportType: 'title',
                 type: 'default',
                 label: '名称',
                 dataField: '',
+                reportType: 'title',
                 align: 'center',
                 children: [
                   {
-                    reportType: 'data',
                     type: 'default',
                     label: '国籍',
                     dataField: 'nationality',
+                    reportType: 'data',
                   },
                   {
-                    reportType: 'data',
                     type: 'default',
                     label: '英文名',
                     dataField: 'en_name',
+                    reportType: 'data',
                   },
                   {
-                    reportType: 'data',
                     type: 'default',
                     label: '汉语名',
                     dataField: 'cn_name',
+                    reportType: 'data',
                   },
                 ],
               },
@@ -329,6 +329,26 @@
 | 参数          | 说明             | 类型  | 可选值 | 默认值 |
 | ------------- | ---------------- | ----- | ------ | ------ |
 | dynamicFields | 动态字段名称集合 | array | -      | []     |
+
+### Column Options
+
+| 参数         | 说明                                                                                                 | 类型   | 可选值                                                              | 默认值  |
+| ------------ | ---------------------------------------------------------------------------------------------------- | ------ | ------------------------------------------------------------------- | ------- |
+| type         | 类型                                                                                                 | string | default / selection / index / link / keyToValue / status / commands | default |
+| label        | 标题                                                                                                 | string | —                                                                   | 10      |
+| dataField    | 绑定字段                                                                                             | string | —                                                                   | 0       |
+| reportType   | 报表列类型                                                                                           | string | data/title                                                          | -       |
+| showType     | 展示方式                                                                                             | string | static/dynamic                                                      | static       |
+| elementProps | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing) | object | -                                                                   | {}      |
+| extendProps  | 扩展属性 [详情](http://0.0.0.0:8085/#/component/common-table#column-extendprops-options)             | object | -                                                                   | {}      |
+
+### Column ExtendProps Options
+
+| 参数        | 说明                                                                                                                         | 类型     | 可选值 | 默认值 |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
+| commands    | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | -      | []     |
+| options     | 数据转换数据源 ，当 `type` 为 `keyToValue` 或 `status` 时使用                                                                | array    | -      | []     |
+| linkCommand | 超链接事件，当 `type` 为 `link` 时使用                                                                                       | function | -      | -      |
 
 ### Table Events
 

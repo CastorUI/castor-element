@@ -492,22 +492,25 @@
           {
             type: 'commands',
             label: '操作',
-            commands: [
-              {
-                text: '编辑',
-                command: 'handleEdit',
-                elementProps: {
-                  type: 'primary',
+            dataField: '',
+            extendProps: {
+              commands: [
+                {
+                  text: '编辑',
+                  command: 'handleEdit',
+                  elementProps: {
+                    type: 'primary',
+                  },
                 },
-              },
-              {
-                text: '删除',
-                command: 'handleDelete',
-                elementProps: {
-                  type: 'danger',
+                {
+                  text: '删除',
+                  command: 'handleDelete',
+                  elementProps: {
+                    type: 'danger',
+                  },
                 },
-              },
-            ],
+              ],
+            },
             elementProps: {
               width: '180px',
             },
@@ -1023,7 +1026,6 @@
 | commands    | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | -          | []     |
 | options     | 数据转换数据源 ，当 `type` 为 `keyToValue` 或 `status` 时使用                                                                | array    | -          | []     |
 | linkCommand | 超链接事件，当 `type` 为 `link` 时使用                                                                                       | function | -          | -      |
-| reportType  | 报表列类型 , 报表表格组件专用                                                                                                | string   | data/title | -      |
 
 ### Table Events
 

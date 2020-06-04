@@ -28,7 +28,7 @@
   >
     <template slot-scope="scope">
       <el-link
-        v-for="(item,index) of commands"
+        v-for="(item,index) of extendProps.commands"
         v-show="!item.visibleValidator || item.visibleValidator.call(this, scope.row)"
         :key="index"
         type="primary"
@@ -131,12 +131,6 @@ export default {
     options: {
       type: Array,
       default: undefined
-    },
-    commands: {
-      type: Array,
-      default: function() {
-        return [];
-      }
     },
     dataTemplate: {
       type: Function,

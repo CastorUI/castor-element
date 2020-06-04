@@ -27,8 +27,6 @@
         :data-field="item.dataField"
         :rules="item.rules"
         :type="item.type"
-        :commands="item.commands"
-        :editable-commands="item.editableCommands"
         :data-template="item.dataTemplate"
         :editable="item.editable"
         :editing="editing"
@@ -36,6 +34,7 @@
         :handle-emit-event="handleEmitEvent"
         :auto-focus="item.autoFocus"
         :element-props="item.elementProps"
+        :extend-props="item.extendProps"
         v-on="$listeners"
       />
       <template

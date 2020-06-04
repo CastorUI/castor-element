@@ -324,38 +324,41 @@
           {
             type: 'commands',
             label: '操作',
-            commands: [
-              {
-                text: '编辑',
-                command: 'handleEdit',
-                elementProps: {
-                  type: 'primary',
+            dataField: '',
+            extendProps: {
+              commands: [
+                {
+                  text: '编辑',
+                  command: 'handleEdit',
+                  elementProps: {
+                    type: 'primary',
+                  },
                 },
-              },
-              {
-                text: '删除',
-                command: 'handleDelete',
-                elementProps: {
-                  type: 'danger',
+                {
+                  text: '删除',
+                  command: 'handleDelete',
+                  elementProps: {
+                    type: 'danger',
+                  },
                 },
-              },
-            ],
-            editableCommands: [
-              {
-                text: '保存',
-                command: 'handleSave',
-                elementProps: {
-                  type: 'primary',
+              ],
+              editableCommands: [
+                {
+                  text: '保存',
+                  command: 'handleSave',
+                  elementProps: {
+                    type: 'primary',
+                  },
                 },
-              },
-              {
-                text: '取消',
-                command: 'handleCancel',
-                elementProps: {
-                  type: 'primary',
+                {
+                  text: '取消',
+                  command: 'handleCancel',
+                  elementProps: {
+                    type: 'primary',
+                  },
                 },
-              },
-            ],
+              ],
+            },
             elementProps: {
               fixed: 'right',
               width: '200px',
@@ -479,45 +482,49 @@
           {
             type: 'commands',
             label: '操作',
-            commands: [
-              {
-                text: '编辑',
-                command: 'handleEdit',
-                disableValidator: () => !this.table.validateStatus,
-                elementProps: {
-                  type: 'primary',
-                },
-              },
-              {
-                text: '删除',
-                command: 'handleDelete',
-                disableValidator: () => !this.table.validateStatus,
-                elementProps: {
-                  type: 'danger',
-                },
-              },
-            ],
-            editableCommands: [
-              {
-                text: '保存',
-                command: 'handleSave',
-                disableValidator: () => !this.table.validateStatus,
-                elementProps: {
-                  type: 'primary',
-                },
-              },
-              {
-                text: '取消',
-                command: 'handleCancel',
-                disableValidator: () => !this.table.validateStatus,
-                elementProps: {
-                  type: 'primary',
-                },
-              },
-            ],
+            dataField: '',
+            editable: false,
             elementProps: {
               fixed: 'right',
               width: '200px',
+            },
+            extendProps: {
+              commands: [
+                {
+                  text: '编辑',
+                  command: 'handleEdit',
+                  disableValidator: () => !this.table.validateStatus,
+                  elementProps: {
+                    type: 'primary',
+                  },
+                },
+                {
+                  text: '删除',
+                  command: 'handleDelete',
+                  disableValidator: () => !this.table.validateStatus,
+                  elementProps: {
+                    type: 'danger',
+                  },
+                },
+              ],
+              editableCommands: [
+                {
+                  text: '保存',
+                  command: 'handleSave',
+                  disableValidator: () => !this.table.validateStatus,
+                  elementProps: {
+                    type: 'primary',
+                  },
+                },
+                {
+                  text: '取消',
+                  command: 'handleCancel',
+                  disableValidator: () => !this.table.validateStatus,
+                  elementProps: {
+                    type: 'primary',
+                  },
+                },
+              ],
             },
           },
         ];
@@ -650,7 +657,7 @@
 
 :::
 
-### Attributes
+### Table Attributes
 
 常规属性可参考 [通用表格](http://0.0.0.0:8085/#/component/common-table) , 独有属性如下：
 
@@ -662,6 +669,23 @@
 | addInsidePosition | 添加新行位置                                                                                         | string  | beforeFirst\afterLast                            | beforeFirst |
 | appendContent     | 插入至表格最后一行之后的内容                                                                         | string  | —                                                | —           |
 | elementProps      | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing) | object  | —                                                | {}          |
+
+### Column Options
+
+| 参数         | 说明                                                                                                 | 类型   | 可选值                                                              | 默认值  |
+| ------------ | ---------------------------------------------------------------------------------------------------- | ------ | ------------------------------------------------------------------- | ------- |
+| type         | 类型                                                                                                 | string | default / selection / index / link / keyToValue / status / commands | default |
+| label        | 标题                                                                                                 | string | —                                                                   | 10      |
+| dataField    | 绑定字段                                                                                             | string | —                                                                   | 0       |
+| editable         | 是否可编辑                                                                               | boolean | —                                                | false       |
+| elementProps | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing) | object | -                                                                   | {}      |
+| extendProps  | 扩展属性 [详情](http://0.0.0.0:8085/#/component/common-table#column-extendprops-options)             | object | -                                                                   | {}      |
+
+### Column ExtendProps Options
+
+| 参数        | 说明                                                                                                                         | 类型     | 可选值     | 默认值 |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------- | -------- | ---------- | ------ |
+| commands    | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | -          | []     |
 
 ### Table Events
 
