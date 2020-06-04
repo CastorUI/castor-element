@@ -65,7 +65,7 @@
     >
       <el-checkbox
         v-for="option in options"
-        :key="option.value"
+        :key="option.label"
         :label="option.label"
         :disabled="option.disabled"
       />
@@ -166,6 +166,7 @@
       v-else-if="type==='custom'"
       :component-data.sync="model[dataField]"
       :model="model"
+      :operate-type="operateType"
       v-bind="extendProps"
     />
     <el-input
@@ -226,6 +227,10 @@ export default {
     label: {
       type: String,
       default: undefined
+    },
+    operateType: {
+      type: String,
+      default: 'add'
     },
     model: {
       type: Object,

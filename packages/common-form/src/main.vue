@@ -27,6 +27,7 @@
       :key="item.dataField?item.dataField:undefined"
       :type="item.type"
       :label="item.label"
+      :operate-type="operateType"
       :model="model"
       :data-field="item.dataField"
       :options="item.options"
