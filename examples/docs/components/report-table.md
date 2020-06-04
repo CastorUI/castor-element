@@ -342,14 +342,6 @@
 | elementProps | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing) | object | -                                                                   | {}      |
 | extendProps  | 扩展属性 [详情](http://0.0.0.0:8085/#/component/common-table#column-extendprops-options)             | object | -                                                                   | {}      |
 
-### Column ExtendProps Options
-
-| 参数        | 说明                                                                                                                         | 类型     | 可选值 | 默认值 |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
-| commands    | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | -      | []     |
-| options     | 数据转换数据源 ，当 `type` 为 `keyToValue` 或 `status` 时使用                                                                | array    | -      | []     |
-| linkCommand | 超链接事件，当 `type` 为 `link` 时使用                                                                                       | function | -      | -      |
-
 ### Table Events
 
 | 事件名    | 说明                         | 参数 |

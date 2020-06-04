@@ -61,11 +61,11 @@
   >
     <template slot-scope="scope">
       <span
-        v-if="options.some(r=>r.value === scope.row[dataField])"
-        :style="'color:'+options.filter(r=>r.value === scope.row[dataField])[0].color+';'"
+        v-if="extendProps.options.some(r=>r.value === scope.row[dataField])"
+        :style="'color:'+extendProps.options.filter(r=>r.value === scope.row[dataField])[0].color+';'"
       >
-        <i :class="options.filter(r=>r.value === scope.row[dataField])[0].icon" />
-        {{ options.filter(r=>r.value === scope.row[dataField])[0].label }}
+        <i :class="extendProps.options.filter(r=>r.value === scope.row[dataField])[0].icon" />
+        {{ extendProps.options.filter(r=>r.value === scope.row[dataField])[0].label }}
         <el-tooltip
           v-if="elementProps.showTips === scope.row[dataField] && scope.row[elementProps.tipsContent]"
           class="item"
@@ -73,7 +73,7 @@
           placement="bottom"
         >
           <div slot="content">{{ scope.row[elementProps.tipsContent] }}</div>
-          <i :class="options.filter(r=>r.value === scope.row[dataField])[0].tipsIcon" />
+          <i :class="extendProps.options.filter(r=>r.value === scope.row[dataField])[0].tipsIcon" />
         </el-tooltip>
       </span>
     </template>
@@ -85,11 +85,11 @@
   >
     <template slot-scope="scope">
       <span
-        v-if="options.some(r=>r.value === scope.row[dataField])"
+        v-if="extendProps.options.some(r=>r.value === scope.row[dataField])"
         class="dot-status"
       >
-        <span :style="`display:inline-block; width: 10px;height:10px;border-radius:50%; background: ${options.filter(r=>r.value === scope.row[dataField])[0].color}`" />
-        {{ options.filter(r=>r.value === scope.row[dataField])[0].label }}
+        <span :style="`display:inline-block; width: 10px;height:10px;border-radius:50%; background: ${extendProps.options.filter(r=>r.value === scope.row[dataField])[0].color}`" />
+        {{ extendProps.options.filter(r=>r.value === scope.row[dataField])[0].label }}
       </span>
     </template>
   </el-table-column>
@@ -99,7 +99,7 @@
     v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...elementProps}"
   >
     <template slot-scope="scope">
-      <span v-if="options.some(r=>r.value === scope.row[dataField])">{{ options.filter(r=>r.value === scope.row[dataField])[0].label }}</span>
+      <span v-if="extendProps.options.some(r=>r.value === scope.row[dataField])">{{ extendProps.options.filter(r=>r.value === scope.row[dataField])[0].label }}</span>
     </template>
   </el-table-column>
   <el-table-column
@@ -126,10 +126,6 @@ export default {
     },
     dataField: {
       type: String,
-      default: undefined
-    },
-    options: {
-      type: Array,
       default: undefined
     },
     dataTemplate: {

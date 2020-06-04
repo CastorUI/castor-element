@@ -43,7 +43,6 @@
           :type="item.type"
           :label="item.label"
           :data-field="item.dataField"
-          :options="item.options"
           :index-method="indexMethod"
           :data-template="item.dataTemplate"
           :element-props="item.elementProps"

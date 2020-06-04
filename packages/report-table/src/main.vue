@@ -66,7 +66,6 @@
                     :type="grandChildItem.type"
                     :label="grandChildItem.label"
                     :data-field="grandChildItem.dataField"
-                    :options="grandChildItem.options"
                     :index-method="indexMethod"
                     :data-template="grandChildItem.dataTemplate"
                     :element-props="grandChildItem.elementProps"
@@ -81,10 +80,10 @@
                 :type="childItem.type"
                 :label="childItem.label"
                 :data-field="childItem.dataField"
-                :options="childItem.options"
                 :index-method="indexMethod"
                 :data-template="childItem.dataTemplate"
                 :element-props="childItem.elementProps"
+                :extend-props="childItem.extendProps"
                 v-on="$listeners"
               />
             </template>
@@ -95,10 +94,10 @@
             :type="item.type"
             :label="item.label"
             :data-field="item.dataField"
-            :options="item.options"
             :index-method="indexMethod"
             :data-template="item.dataTemplate"
             :element-props="item.elementProps"
+            :extend-props="item.extendProps"
             v-on="$listeners"
           />
         </template>
