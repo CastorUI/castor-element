@@ -8,7 +8,7 @@
         v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
         class="table-add-command"
         :disabled="addCommand.disableValidator && addCommand.disableValidator.call(this)"
-        v-bind="{type: 'text', icon: 'el-icon-circle-plus-outline', ...addCommand.extendProps}"
+        v-bind="{type: 'text', icon: 'el-icon-circle-plus-outline', ...addCommand.elementProps}"
         @click="$emit(addCommand.command)"
       >
         {{ addCommand.text }}
@@ -21,7 +21,7 @@
           v-for="(item,index) of customCommands"
           :key="index"
           :disabled="item.disableValidator &&item.disableValidator.call(this,multipleSelection)"
-          v-bind="{type: 'text', ...item.extendProps}"
+          v-bind="{type: 'text', ...item.elementProps}"
           @click="$emit(item.command,multipleSelection)"
         >
           {{ item.text }}
@@ -34,7 +34,7 @@
         :data="dataSource"
         :default-sort="defaultSort"
         style="width:100%;min-width:700px;height:auto;"
-        v-bind="{border: true, ...extendProps}"
+        v-bind="{border: true, ...elementProps}"
         @row-click="row => $emit('row-click', row)"
         @selection-change="multipleSelection => handleSelectionChange(multipleSelection)"
         @sort-change="args=> handleSortChange(args)"
@@ -44,21 +44,21 @@
             v-if="item.reportType==='title' && item.children && item.children.length > 0"
             :key="index"
             :label="item.label"
-            v-bind="{align: 'center', ...item.extendProps}"
+            v-bind="{align: 'center', ...item.elementProps}"
           >
             <template v-for="(childItem,childIndex) of item.children">
               <el-table-column
                 v-if="childItem.reportType==='title' && childItem.children && childItem.children.length > 0"
                 :key="'childIndex' + childIndex"
                 :label="childItem.label"
-                v-bind="{align: 'center', ...childItem.extendProps}"
+                v-bind="{align: 'center', ...childItem.elementProps}"
               >
                 <template v-for="(grandChildItem,grandChildIndex) of childItem.children">
                   <el-table-column
                     v-if="grandChildItem.reportType==='title'"
                     :key="'grandChild' + grandChildIndex"
                     :label="grandChildItem.label"
-                    v-bind="{align: 'center', ...grandChildItem.extendProps}"
+                    v-bind="{align: 'center', ...grandChildItem.elementProps}"
                   />
                   <common-column
                     v-if="grandChildItem.reportType==='data'"
@@ -71,7 +71,7 @@
                     :link-command="grandChildItem.linkCommand"
                     :index-method="indexMethod"
                     :data-template="grandChildItem.dataTemplate"
-                    :extend-props="grandChildItem.extendProps"
+                    :element-props="grandChildItem.elementProps"
                     v-on="$listeners"
                   />
                 </template>
@@ -87,7 +87,7 @@
                 :link-command="childItem.linkCommand"
                 :index-method="indexMethod"
                 :data-template="childItem.dataTemplate"
-                :extend-props="childItem.extendProps"
+                :element-props="childItem.elementProps"
                 v-on="$listeners"
               />
             </template>
@@ -103,7 +103,7 @@
             :link-command="item.linkCommand"
             :index-method="indexMethod"
             :data-template="item.dataTemplate"
-            :extend-props="item.extendProps"
+            :element-props="item.elementProps"
             v-on="$listeners"
           />
         </template>
@@ -115,7 +115,7 @@
         :page-size="pagination.pageSize"
         :page-sizes="pageSizes"
         :total="pagination.total"
-        v-bind="{layout: 'total,sizes, prev, pager, next', hideOnSinglePage: true, ...pagination.extendProps}"
+        v-bind="{layout: 'total,sizes, prev, pager, next', hideOnSinglePage: true, ...pagination.elementProps}"
         @size-change="pageSize => handlePageSizeChange(pageSize)"
         @current-change="pageIndex => handlePageIndexChange(pageIndex)"
       />
@@ -171,7 +171,7 @@ export default {
       type: Array,
       default: () => []
     },
-    extendProps: {
+    elementProps: {
       type: Object,
       default: function() {
         return {};

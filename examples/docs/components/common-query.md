@@ -13,7 +13,7 @@
     :model="search.model"
     :commands="search.commands"
     :fields="searchFields"
-    :extendProps="search.extendProps"
+    :elementProps="search.elementProps"
     @handleFilter="handleFilter"
     @handleReset="handleReset"
   />
@@ -91,7 +91,7 @@
               icon: 'el-icon-refresh',
             },
           ],
-          extendProps: {
+          elementProps: {
             labelWidth: '120px',
           },
         },
@@ -146,7 +146,7 @@
             columnSpan: 2,
             fromField: 'from_num',
             toField: 'to_num',
-            extendProps: {
+            elementProps: {
               precision: 2,
               step: 5,
               min: 100,
@@ -166,7 +166,7 @@
             dataField: 'create_month_range',
             columnSpan: 2,
             showType: 'static',
-            extendProps: {
+            elementProps: {
               valueFormat: 'yyyy-MM',
             },
           },
@@ -175,7 +175,7 @@
             label: '创建月份',
             dataField: 'create_month',
             showType: 'static',
-            extendProps: {
+            elementProps: {
               valueFormat: 'yyyy-MM',
             },
           },
@@ -369,30 +369,30 @@
 
 ### Attributes
 
-| 参数                  | 说明                                                                                          | 类型    | 可选值    | 默认值 |
-| --------------------- | --------------------------------------------------------------------------------------------- | ------- | --------- | ------ |
-| loading               | 是否显示 loading                                                                              | boolean | —         | false  |
-| model                 | 表单数据源                                                                                    | object  | —         | {}     |
-| fields                | 查询字段集合,见 `Field Options`                                                               | array   | —         | []     |
-| rowHeight             | 行高                                                                                          | number  | —         | 36     |
-| commands              | 命令集合 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling)    | array   | —         | []     |
-| dynamicFieldsPosition | 动态查询字段插入位置                                                                          | string  | start\end | end    |
-| downloadOpt           | 下拉命令项                                                                                    | object  | —         | {}     |
-| extendProps           | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing) | object  | —         | {}     |
+| 参数                  | 说明                                                                                                 | 类型    | 可选值    | 默认值 |
+| --------------------- | ---------------------------------------------------------------------------------------------------- | ------- | --------- | ------ |
+| loading               | 是否显示 loading                                                                                     | boolean | —         | false  |
+| model                 | 表单数据源                                                                                           | object  | —         | {}     |
+| fields                | 查询字段集合,见 `Field Options`                                                                      | array   | —         | []     |
+| rowHeight             | 行高                                                                                                 | number  | —         | 36     |
+| commands              | 命令集合 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling)           | array   | —         | []     |
+| dynamicFieldsPosition | 动态查询字段插入位置                                                                                 | string  | start\end | end    |
+| downloadOpt           | 下拉命令项                                                                                           | object  | —         | {}     |
+| elementProps          | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing) | object  | —         | {}     |
 
 ### Field Options
 
-| 参数        | 说明                                                                                          | 类型   | 可选值 | 默认值    |
-| ----------- | --------------------------------------------------------------------------------------------- | ------ | ------ | --------- |
-| type        | 类型, 见 `Field Type Options`                                                                 | string | —      | input     |
-| label       | 标签                                                                                          | string | —      | 10        |
-| model       | 表单数据源                                                                                    | object | —      | {}        |
-| dataField   | 绑定字段                                                                                      | string | —      | 0         |
-| columnSpan  | 字段所占列数                                                                                  | number | —      | 1         |
-| fromField   | 最小值绑定字段，`inputNumberRange` 专用                                                       | string | —      | 0         |
-| toField     | 最大值绑定字段，`inputNumberRange` 专用                                                       | string | —      | 0         |
-| options     | 选项数据源                                                                                    | array  | -      | []        |
-| extendProps | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing) | string | -      | ascending |
+| 参数         | 说明                                                                                                 | 类型   | 可选值 | 默认值    |
+| ------------ | ---------------------------------------------------------------------------------------------------- | ------ | ------ | --------- |
+| type         | 类型, 见 `Field Type Options`                                                                        | string | —      | input     |
+| label        | 标签                                                                                                 | string | —      | 10        |
+| model        | 表单数据源                                                                                           | object | —      | {}        |
+| dataField    | 绑定字段                                                                                             | string | —      | 0         |
+| columnSpan   | 字段所占列数                                                                                         | number | —      | 1         |
+| fromField    | 最小值绑定字段，`inputNumberRange` 专用                                                              | string | —      | 0         |
+| toField      | 最大值绑定字段，`inputNumberRange` 专用                                                              | string | —      | 0         |
+| options      | 选项数据源                                                                                           | array  | -      | []        |
+| elementProps | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing) | string | -      | ascending |
 
 ### Field Type Options
 

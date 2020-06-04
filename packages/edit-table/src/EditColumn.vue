@@ -2,19 +2,19 @@
   <el-table-column
     v-if="type==='expand'"
     :label="label"
-    v-bind="{align: 'center', ...extendProps}"
+    v-bind="{align: 'center', ...elementProps}"
   />
   <el-table-column
     v-else-if="type==='index'"
     :type="type"
     :label="label"
-    v-bind="{align: 'center', ...extendProps}"
+    v-bind="{align: 'center', ...elementProps}"
   />
   <!-- <el-table-column
     v-else-if="type==='custom'"
     :label="label"
     :prop="dataField"
-    v-bind="{minWidth: 1, align: 'center', ...extendProps}"
+    v-bind="{minWidth: 1, align: 'center', ...elementProps}"
   >
     <template slot-scope="scope">
       <div v-html="dataTemplate(scope.row)" />
@@ -23,7 +23,7 @@
   <el-table-column
     v-else-if="type==='commands'"
     :label="label"
-    v-bind="{align: 'center', ...extendProps}"
+    v-bind="{align: 'center', ...elementProps}"
   >
     <template slot-scope="scope">
       <template v-if="editingRow != null && editingRow.id === scope.row.id">
@@ -32,7 +32,7 @@
           :key="index"
           class="command-link"
           :disabled="item.disableValidator && item.disableValidator.call(this,scope.row)"
-          v-bind="item.extendProps"
+          v-bind="item.elementProps"
           @click.stop="handleEmitEvent(item.commandType,item.command,scope.$index,scope.row)"
         >
           {{ item.text }}
@@ -44,7 +44,7 @@
           :key="index"
           class="command-link"
           :disabled="item.disableValidator && item.disableValidator.call(this,scope.row)"
-          v-bind="item.extendProps"
+          v-bind="item.elementProps"
           @click.stop="handleEmitEvent(item.commandType,item.command,scope.$index,scope.row)"
         >
           {{ item.text }}
@@ -56,7 +56,7 @@
     v-else
     :label="label"
     :prop="dataField"
-    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...extendProps}"
+    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...elementProps}"
   >
     <template slot-scope="scope">
       <template v-if="editingRow!=null && scope.row.id === editingRow.id && editable">
@@ -86,7 +86,7 @@
               v-else-if="type==='inputNumber'"
               v-model="editingRow[dataField]"
               v-inputNumberFocus="autoFocus"
-              v-bind="{precision: 0, style: 'width:100%;', ...extendProps}"
+              v-bind="{precision: 0, style: 'width:100%;', ...elementProps}"
               @focus="$event.target.select()"
             />
           </el-form-item>
@@ -158,7 +158,7 @@ export default {
       type: Object,
       default: null
     },
-    extendProps: {
+    elementProps: {
       type: Object,
       default: function() {
         return {};

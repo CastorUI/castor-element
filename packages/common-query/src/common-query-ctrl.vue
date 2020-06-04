@@ -14,7 +14,7 @@
         style:'width:100%;',
         clearable:true,
         filterable: true,
-        ...extendProps
+        ...elementProps
       }"
     >
       <el-option
@@ -36,19 +36,19 @@
         valueFormat: 'yyyy-MM-dd',
         pickerOptions: pickerOptions,
         style: 'width:100%;',
-        ...extendProps
+        ...elementProps
       }"
     />
     <el-switch
       v-else-if="type==='switch'"
       v-model="model[dataField]"
-      v-bind="{style: 'width:40px;', ...extendProps}"
+      v-bind="{style: 'width:40px;', ...elementProps}"
     />
     <el-checkbox-group
       v-else-if="type==='checkboxGroup'"
       v-model="model[dataField]"
       class="query-item"
-      v-bind="{style: 'width:100%;', ...extendProps}"
+      v-bind="{style: 'width:100%;', ...elementProps}"
     >
       <el-checkbox
         v-for="option in options"
@@ -64,7 +64,7 @@
       :model="model"
       :from-field="fromField"
       :to-field="toField"
-      :extend-props="extendProps"
+      :element-props="elementProps"
     />
     <el-input
       v-else
@@ -74,7 +74,7 @@
         size: 'small',
         placeholder: `查询${label}`,
         clearable: true,
-        ...extendProps
+        ...elementProps
       }"
     />
   </el-form-item>
@@ -120,7 +120,7 @@ export default {
       type: String,
       default: undefined
     },
-    extendProps: {
+    elementProps: {
       type: Object,
       default: function() {
         return {
@@ -136,7 +136,7 @@ export default {
     pickerOptions: function() {
       if (this.type === 'dateTimeRange' || this.type === 'dateRange') {
         return (
-          this.extendProps.pickerOptions || {
+          this.elementProps.pickerOptions || {
             shortcuts: [
               {
                 text: '最近一周',
@@ -170,7 +170,7 @@ export default {
         );
       } else if (this.type === 'monthRange') {
         return (
-          this.extendProps.pickerOptions || {
+          this.elementProps.pickerOptions || {
             shortcuts: [
               {
                 text: '本月',

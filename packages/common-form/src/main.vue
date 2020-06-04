@@ -5,7 +5,7 @@
     :model="model"
     :rules="rules"
     :disabled="operateType==='view'"
-    v-bind="{size: 'medium',labelWidth: '120px', labelPosition: 'right', style: 'minWidth:600px;', ...extendProps}"
+    v-bind="{size: 'medium',labelWidth: '120px', labelPosition: 'right', style: 'minWidth:600px;', ...elementProps}"
   >
     <div
       v-if="customCommands"
@@ -16,7 +16,7 @@
         :key="index"
         type="primary"
         :disabled="item.disableValidator && item.disableValidator.call(this,model)"
-        v-bind="{size:'small',type: 'primary',underline: true, ...item.extendProps}"
+        v-bind="{size:'small',type: 'primary',underline: true, ...item.elementProps}"
         @click.stop="$emit(item.command,model)"
       >
         {{ item.text }}
@@ -32,7 +32,7 @@
       :data-field="item.dataField"
       :options="item.options"
       :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
-      :height="`${rowHeight * (extendProps.labelPosition==='top'? 2 : 1)}px`"
+      :height="`${rowHeight * (elementProps.labelPosition==='top'? 2 : 1)}px`"
       :group-title="item.groupTitle"
       :current-field="item.currentField"
       :append-field="item.appendField"
@@ -40,7 +40,7 @@
       :custom-components="customComponents"
       :disable-validator="item.disableValidator"
       :visible-validator="item.visibleValidator"
-      :extend-props="item.extendProps || {}"
+      :element-props="item.elementProps || {}"
       :on-change="item.onChange"
     />
     <el-form-item
@@ -55,7 +55,7 @@
         class="command"
         :loading="item.loading && loading"
         :disabled="item.disableValidator && item.disableValidator.call(this,model)"
-        v-bind="{type: 'primary', ...item.extendProps}"
+        v-bind="{type: 'primary', ...item.elementProps}"
         @click="$emit(item.command)"
       >
         {{ item.text }}
@@ -117,7 +117,7 @@ export default {
         return {};
       }
     },
-    extendProps: {
+    elementProps: {
       type: Object,
       default: function() {
         return {};

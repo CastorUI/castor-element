@@ -9,7 +9,7 @@
         precision:0,
         clearable: true,
         style: 'float:left;width:calc(50% - 10px);',
-        ...extendProps
+        ...elementProps
       }"
     />
     <el-input-number
@@ -20,7 +20,7 @@
         precision:0,
         clearable: true,
         style: 'float:right;width:calc(50% - 10px);',
-        ...extendProps
+        ...elementProps
       }"
     />
     <div style="width:20px;margin: 0 calc(50% - 10px);text-align:center;">
@@ -44,7 +44,7 @@ export default {
       type: String,
       default: undefined
     },
-    extendProps: {
+    elementProps: {
       type: Object,
       default: function() {
         return {};

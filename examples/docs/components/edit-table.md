@@ -84,7 +84,7 @@
             label: '年龄',
             dataField: 'age',
             editable: true,
-            extendProps: {
+            elementProps: {
               width: '140px',
             },
           },
@@ -201,7 +201,7 @@
             label: '年龄',
             dataField: 'age',
             editable: true,
-            extendProps: {
+            elementProps: {
               width: '140px',
             },
           },
@@ -317,7 +317,7 @@
             label: '年龄',
             dataField: 'age',
             editable: true,
-            extendProps: {
+            elementProps: {
               width: '140px',
             },
           },
@@ -328,14 +328,14 @@
               {
                 text: '编辑',
                 command: 'handleEdit',
-                extendProps: {
+                elementProps: {
                   type: 'primary',
                 },
               },
               {
                 text: '删除',
                 command: 'handleDelete',
-                extendProps: {
+                elementProps: {
                   type: 'danger',
                 },
               },
@@ -344,19 +344,19 @@
               {
                 text: '保存',
                 command: 'handleSave',
-                extendProps: {
+                elementProps: {
                   type: 'primary',
                 },
               },
               {
                 text: '取消',
                 command: 'handleCancel',
-                extendProps: {
+                elementProps: {
                   type: 'primary',
                 },
               },
             ],
-            extendProps: {
+            elementProps: {
               fixed: 'right',
               width: '200px',
             },
@@ -472,7 +472,7 @@
             label: '年龄',
             dataField: 'age',
             editable: true,
-            extendProps: {
+            elementProps: {
               width: '140px',
             },
           },
@@ -484,7 +484,7 @@
                 text: '编辑',
                 command: 'handleEdit',
                 disableValidator: () => !this.table.validateStatus,
-                extendProps: {
+                elementProps: {
                   type: 'primary',
                 },
               },
@@ -492,7 +492,7 @@
                 text: '删除',
                 command: 'handleDelete',
                 disableValidator: () => !this.table.validateStatus,
-                extendProps: {
+                elementProps: {
                   type: 'danger',
                 },
               },
@@ -502,7 +502,7 @@
                 text: '保存',
                 command: 'handleSave',
                 disableValidator: () => !this.table.validateStatus,
-                extendProps: {
+                elementProps: {
                   type: 'primary',
                 },
               },
@@ -510,12 +510,12 @@
                 text: '取消',
                 command: 'handleCancel',
                 disableValidator: () => !this.table.validateStatus,
-                extendProps: {
+                elementProps: {
                   type: 'primary',
                 },
               },
             ],
-            extendProps: {
+            elementProps: {
               fixed: 'right',
               width: '200px',
             },
@@ -617,7 +617,7 @@
             type: 'default',
             label: '名称',
             dataField: 'name',
-            extendProps: {
+            elementProps: {
               minWidth: 2,
             },
           },
@@ -654,14 +654,14 @@
 
 常规属性可参考 [通用表格](http://0.0.0.0:8085/#/component/common-table) , 独有属性如下：
 
-| 参数              | 说明                                                                                          | 类型    | 可选值                                           | 默认值      |
-| ----------------- | --------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------ | ----------- |
-| type              | 类型，较通用表格支持的类型要少                                                                | string  | default / input / index / inputNumber / commands | —           |
-| editTriggerMode   | 编辑状态触发方式                                                                              | string  | manual\auto                                      | manual      |
-| addInside         | 是否在表格内部添加新行                                                                        | boolean | —                                                | false       |
-| addInsidePosition | 添加新行位置                                                                                  | string  | beforeFirst\afterLast                            | beforeFirst |
-| appendContent     | 插入至表格最后一行之后的内容                                                                  | string  | —                                                | —           |
-| extendProps       | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing) | object  | —                                                | {}          |
+| 参数              | 说明                                                                                                 | 类型    | 可选值                                           | 默认值      |
+| ----------------- | ---------------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------ | ----------- |
+| type              | 类型，较通用表格支持的类型要少                                                                       | string  | default / input / index / inputNumber / commands | —           |
+| editTriggerMode   | 编辑状态触发方式                                                                                     | string  | manual\auto                                      | manual      |
+| addInside         | 是否在表格内部添加新行                                                                               | boolean | —                                                | false       |
+| addInsidePosition | 添加新行位置                                                                                         | string  | beforeFirst\afterLast                            | beforeFirst |
+| appendContent     | 插入至表格最后一行之后的内容                                                                         | string  | —                                                | —           |
+| elementProps      | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing) | object  | —                                                | {}          |
 
 ### Table Events
 

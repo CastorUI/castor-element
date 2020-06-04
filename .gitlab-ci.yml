@@ -31,7 +31,7 @@ node_run:
   stage: build_run
   script:
     - nvm use $NODE_VERSION
-    - npm run prod
+    - npm run build-examples
 
 deploy_prod:
   stage: deploy_prod
@@ -41,7 +41,7 @@ deploy_prod:
     - nvm use $NODE_VERSION
     - npm install -g mirror-config-china --registry=http://registry.npm.taobao.org
     - npm install  --silent
-    - npm run prod
+    - npm run build-examples
 
   script:
     - tar -czf dist.tar.gz dist

@@ -2,19 +2,19 @@
   <el-table-column
     v-if="type==='selection'"
     :type="type"
-    v-bind="{align: 'center', ...extendProps}"
+    v-bind="{align: 'center', ...elementProps}"
   />
   <el-table-column
     v-else-if="type==='index'"
     :type="type"
     :label="label"
     :index="indexMethod"
-    v-bind="{align: 'center', ...extendProps}"
+    v-bind="{align: 'center', ...elementProps}"
   />
   <el-table-column
     v-else-if="type==='custom'"
     :label="label"
-    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...extendProps}"
+    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...elementProps}"
   >
     <!-- <template slot-scope="scope">
       // eslint-disable-next-line vue/no-v-html
@@ -24,7 +24,7 @@
   <el-table-column
     v-else-if="type==='commands'"
     :label="label"
-    v-bind="{minWidth: 1, align: 'center', ...extendProps}"
+    v-bind="{minWidth: 1, align: 'center', ...elementProps}"
   >
     <template slot-scope="scope">
       <el-link
@@ -33,7 +33,7 @@
         :key="index"
         type="primary"
         :disabled="item.disableValidator && item.disableValidator.call(this,scope.row)"
-        v-bind="item.extendProps"
+        v-bind="item.elementProps"
         @click.stop="$emit(item.command,scope.$index,scope.row)"
       >
         {{ item.text }}
@@ -43,11 +43,11 @@
   <el-table-column
     v-else-if="type==='link'"
     :label="label"
-    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...extendProps}"
+    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...elementProps}"
   >
     <template slot-scope="scope">
       <el-link
-        v-bind="extendProps"
+        v-bind="elementProps"
         @click.stop="$emit(linkCommand,scope.$index,scope.row)"
       >
         {{ scope.row[dataField] }}
@@ -57,7 +57,7 @@
   <el-table-column
     v-else-if="type==='status'"
     :label="label"
-    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...extendProps}"
+    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...elementProps}"
   >
     <template slot-scope="scope">
       <span
@@ -67,12 +67,12 @@
         <i :class="options.filter(r=>r.value === scope.row[dataField])[0].icon" />
         {{ options.filter(r=>r.value === scope.row[dataField])[0].label }}
         <el-tooltip
-          v-if="extendProps.showTips === scope.row[dataField] && scope.row[extendProps.tipsContent]"
+          v-if="elementProps.showTips === scope.row[dataField] && scope.row[elementProps.tipsContent]"
           class="item"
           effect="dark"
           placement="bottom"
         >
-          <div slot="content">{{ scope.row[extendProps.tipsContent] }}</div>
+          <div slot="content">{{ scope.row[elementProps.tipsContent] }}</div>
           <i :class="options.filter(r=>r.value === scope.row[dataField])[0].tipsIcon" />
         </el-tooltip>
       </span>
@@ -81,7 +81,7 @@
   <el-table-column
     v-else-if="type==='dot-status'"
     :label="label"
-    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...extendProps}"
+    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...elementProps}"
   >
     <template slot-scope="scope">
       <span
@@ -96,7 +96,7 @@
   <el-table-column
     v-else-if="type==='keyToValue'"
     :label="label"
-    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...extendProps}"
+    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...elementProps}"
   >
     <template slot-scope="scope">
       <span v-if="options.some(r=>r.value === scope.row[dataField])">{{ options.filter(r=>r.value === scope.row[dataField])[0].label }}</span>
@@ -106,7 +106,7 @@
     v-else
     :label="label"
     :prop="dataField"
-    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...extendProps}"
+    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...elementProps}"
   >
     <template slot-scope="scope">
       {{ scope.row[dataField] || '/' }}
@@ -150,7 +150,7 @@ export default {
       type: Function,
       default: () => {}
     },
-    extendProps: {
+    elementProps: {
       type: Object,
       default: function() {
         return {};

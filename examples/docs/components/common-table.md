@@ -55,7 +55,7 @@
             type: 'default',
             label: '名称',
             dataField: 'name',
-            extendProps: {
+            elementProps: {
               minWidth: 2,
             },
           },
@@ -112,7 +112,7 @@
             type: 'index',
             label: '序号',
             dataField: '',
-            extendProps: {
+            elementProps: {
               width: '80px',
             },
           },
@@ -130,7 +130,7 @@
             type: 'default',
             label: '名称',
             dataField: 'name',
-            extendProps: {
+            elementProps: {
               minWidth: 4,
               align: 'left',
             },
@@ -148,7 +148,7 @@
 
 展示超链接列的用法。
 
-:::demo 在`tableColumns`中添加`type`为`link`的对象，并在`linkCommand`中绑定事件。通过在`extendProps`中添加`type`属性值设置样式。
+:::demo 在`tableColumns`中添加`type`为`link`的对象，并在`linkCommand`中绑定事件。通过在`elementProps`中添加`type`属性值设置样式。
 
 ```html
 <template>
@@ -197,7 +197,7 @@
             label: '编号',
             dataField: 'code',
             linkCommand: 'handleLink',
-            extendProps: {
+            elementProps: {
               type: 'primary',
             },
           },
@@ -205,7 +205,7 @@
             type: 'default',
             label: '名称',
             dataField: 'name',
-            extendProps: {
+            elementProps: {
               minWidth: 2,
             },
           },
@@ -295,7 +295,7 @@
             type: 'default',
             label: '名称',
             dataField: 'name',
-            extendProps: {
+            elementProps: {
               minWidth: 2,
             },
           },
@@ -304,7 +304,7 @@
             label: '项目类型',
             dataField: 'type',
             options: this.optionsMap['type'],
-            extendProps: {
+            elementProps: {
               width: '120px',
             },
           },
@@ -402,7 +402,7 @@
             type: 'default',
             label: '名称',
             dataField: 'name',
-            extendProps: {
+            elementProps: {
               minWidth: 2,
             },
           },
@@ -411,7 +411,7 @@
             label: '项目类型',
             dataField: 'type',
             options: this.optionsMap['type'],
-            extendProps: {
+            elementProps: {
               width: '140px',
             },
           },
@@ -483,7 +483,7 @@
             type: 'default',
             label: '名称',
             dataField: 'name',
-            extendProps: {
+            elementProps: {
               minWidth: 2,
             },
           },
@@ -494,19 +494,19 @@
               {
                 text: '编辑',
                 command: 'handleEdit',
-                extendProps: {
+                elementProps: {
                   type: 'primary',
                 },
               },
               {
                 text: '删除',
                 command: 'handleDelete',
-                extendProps: {
+                elementProps: {
                   type: 'danger',
                 },
               },
             ],
-            extendProps: {
+            elementProps: {
               width: '180px',
             },
           },
@@ -625,7 +625,7 @@
             type: 'default',
             label: '名称',
             dataField: 'name',
-            extendProps: {
+            elementProps: {
               minWidth: 2,
             },
           },
@@ -706,7 +706,7 @@
             type: 'default',
             label: '名称',
             dataField: 'name',
-            extendProps: {
+            elementProps: {
               minWidth: 2,
             },
           },
@@ -767,7 +767,7 @@
             command: 'handleAdd',
             visibleValidator: () => true,
             disableValidator: () => {},
-            extendProps: {
+            elementProps: {
               icon: 'el-icon-circle-plus-outline',
             },
           },
@@ -791,7 +791,7 @@
             type: 'default',
             label: '名称',
             dataField: 'name',
-            extendProps: {
+            elementProps: {
               minWidth: 2,
             },
           },
@@ -854,14 +854,14 @@
               command: 'handleStar',
               disableValidator: (multipleSelection) =>
                 !(multipleSelection && multipleSelection.length),
-              extendProps: {
+              elementProps: {
                 icon: 'el-icon-star-on',
               },
             },
             {
               text: '取消关注',
               command: 'handleUnstar',
-              extendProps: {
+              elementProps: {
                 icon: 'el-icon-star-off',
               },
             },
@@ -876,7 +876,7 @@
             type: 'selection',
             label: '',
             dataField: '',
-            extendProps: {
+            elementProps: {
               width: '40px',
             },
           },
@@ -894,7 +894,7 @@
             type: 'default',
             label: '名称',
             dataField: 'name',
-            extendProps: {
+            elementProps: {
               minWidth: 2,
             },
           },
@@ -915,9 +915,9 @@
 
 :::
 
-### 扩展属性
+### ElementUI 属性
 
-展示扩展属性的用法。
+展示 ElementUI 属性的用法。
 
 :::demo
 
@@ -926,7 +926,7 @@
   <ca-common-table
     :dataSource="table.dataList"
     :columns="tableColumns"
-    :extendProps="table.extendProps"
+    :elementProps="table.elementProps"
   />
 </template>
 
@@ -952,7 +952,7 @@
               name: '上海燃气三期工程',
             },
           ],
-          extendProps: {
+          elementProps: {
             border: false,
             stripe: true,
             style: 'width:100%;min-width:720px;height:auto;color:red;',
@@ -977,7 +977,7 @@
             type: 'default',
             label: '名称',
             dataField: 'name',
-            extendProps: {
+            elementProps: {
               minWidth: 2,
             },
           },
@@ -1002,20 +1002,20 @@
 | addCommand     | 新增事件对象 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling)                   | object   | —      | {}     |
 | customCommands | 自定义事件，显示在表格上方右侧 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | —      | []     |
 | getList        | 查询数据方法                                                                                                     | function | —      | —      |
-| extendProps    | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                    | object   | -      | -      |
+| elementProps   | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing)             | object   | -      | -      |
 
 ### Column Options
 
-| 参数        | 说明                                                                                                                         | 类型     | 可选值                                                              | 默认值    |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------- | --------- |
-| type        | 类型                                                                                                                         | string   | default / selection / index / link / keyToValue / status / commands | default   |
-| label       | 标题                                                                                                                         | string   | —                                                                   | 10        |
-| dataField   | 绑定字段                                                                                                                     | string   | —                                                                   | 0         |
-| commands    | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | -                                                                   | []        |
-| options     | 数据转换数据源                                                                                                               | array    | -                                                                   | []        |
-| extendProps | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                                | string   | -                                                                   | ascending |
-| linkCommand | 超链接事件，当 `type` 为 `link` 时使用                                                                                       | function | -                                                                   | -         |
-| reportType  | 报表列类型 , 报表表格组件专用                                                                                                | string   | data/title                                                          | -         |
+| 参数         | 说明                                                                                                                         | 类型     | 可选值                                                              | 默认值    |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------- | --------- |
+| type         | 类型                                                                                                                         | string   | default / selection / index / link / keyToValue / status / commands | default   |
+| label        | 标题                                                                                                                         | string   | —                                                                   | 10        |
+| dataField    | 绑定字段                                                                                                                     | string   | —                                                                   | 0         |
+| commands     | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | -                                                                   | []        |
+| options      | 数据转换数据源                                                                                                               | array    | -                                                                   | []        |
+| elementProps | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing)                         | string   | -                                                                   | ascending |
+| linkCommand  | 超链接事件，当 `type` 为 `link` 时使用                                                                                       | function | -                                                                   | -         |
+| reportType   | 报表列类型 , 报表表格组件专用                                                                                                | string   | data/title                                                          | -         |
 
 ### Events
 

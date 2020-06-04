@@ -209,7 +209,7 @@
   <ca-report-table
     :dataSource="table.dataList"
     :columns="tableColumns"
-    :extendProps="table.extendProps"
+    :elementProps="table.elementProps"
   />
 </template>
 
@@ -241,7 +241,7 @@
               nationality: '香港',
             },
           ],
-          extendProps: {
+          elementProps: {
             spanMethod: this.spanMethod,
           },
         },

@@ -5,7 +5,7 @@
         v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
         class="table-add-command"
         :disabled="addCommand.disableValidator && addCommand.disableValidator.call(this)"
-        v-bind="{type: 'text', icon: 'el-icon-circle-plus-outline', ...addCommand.extendProps}"
+        v-bind="{type: 'text', icon: 'el-icon-circle-plus-outline', ...addCommand.elementProps}"
         @click="$emit(addCommand.command)"
       >
         {{ addCommand.text }}
@@ -18,7 +18,7 @@
           v-for="(item,index) of customCommands"
           :key="index"
           :disabled="item.disableValidator && item.disableValidator.call(this,multipleSelection)"
-          v-bind="{type: 'text', ...item.extendProps}"
+          v-bind="{type: 'text', ...item.elementProps}"
           @click="$emit(item.command,multipleSelection)"
         >
           {{ item.text }}
@@ -32,7 +32,7 @@
         :data="dataSource"
         :default-sort="defaultSort"
         style="width:100%;min-width:700px;height:auto;"
-        v-bind="{border: true, ...extendProps}"
+        v-bind="{border: true, ...elementProps}"
         @row-click="row => $emit('row-click', row)"
         @selection-change="multipleSelection => handleSelectionChange(multipleSelection)"
         @sort-change="args=> handleSortChange(args)"
@@ -48,7 +48,7 @@
           :link-command="item.linkCommand"
           :index-method="indexMethod"
           :data-template="item.dataTemplate"
-          :extend-props="item.extendProps"
+          :element-props="item.elementProps"
           v-on="$listeners"
         />
       </el-table>
@@ -59,7 +59,7 @@
         :page-size="pagination.pageSize"
         :page-sizes="pageSizes"
         :total="pagination.total"
-        v-bind="{layout: 'total,sizes, prev, pager, next',hideOnSinglePage: true, ...pagination.extendProps}"
+        v-bind="{layout: 'total,sizes, prev, pager, next',hideOnSinglePage: true, ...pagination.elementProps}"
         @size-change="pageSize => handlePageSizeChange(pageSize)"
         @current-change="pageIndex => handlePageIndexChange(pageIndex)"
       />
@@ -113,7 +113,7 @@ export default {
       type: Function,
       default: () => {}
     },
-    extendProps: {
+    elementProps: {
       type: Object,
       default: function() {
         return {};

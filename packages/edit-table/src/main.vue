@@ -5,7 +5,7 @@
         v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
         class="table-add-command"
         :disabled="editing || (addCommand.disableValidator && addCommand.disableValidator.call(this))"
-        v-bind="{type: 'text', icon: 'el-icon-circle-plus-outline', ...addCommand.extendProps}"
+        v-bind="{type: 'text', icon: 'el-icon-circle-plus-outline', ...addCommand.elementProps}"
         @click="handleAdd"
       >
         {{ addCommand.text }}
@@ -16,7 +16,7 @@
       row-key="id"
       :data="dataSource"
       style="min-width:600px;height:auto;padding:1px;"
-      v-bind="{border: true, ...extendProps}"
+      v-bind="{border: true, ...elementProps}"
       @row-click="handleRowClick"
       @current-change="handleCurrentChange"
     >
@@ -35,7 +35,7 @@
         :editing-row="editingRow"
         :handle-emit-event="handleEmitEvent"
         :auto-focus="item.autoFocus"
-        :extend-props="item.extendProps"
+        :element-props="item.elementProps"
         v-on="$listeners"
       />
       <template
@@ -100,7 +100,7 @@ export default {
       type: String,
       default: ''
     },
-    extendProps: {
+    elementProps: {
       type: Object,
       default: function() {
         return {};

@@ -40,7 +40,7 @@
       v-bind="{
         labelWidth:'110px',
         size:'small',
-        ...extendProps
+        ...elementProps
       }"
       @submit.native.prevent
     >
@@ -55,7 +55,7 @@
           :options="item.options"
           :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
           :height="`${rowHeight}px`"
-          :extend-props="item.extendProps || {}"
+          :element-props="item.elementProps || {}"
         />
       </template>
       <common-query-ctrl
@@ -70,7 +70,7 @@
         :to-field="item.toField"
         :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
         :height="`${rowHeight}px`"
-        :extend-props="item.extendProps || {}"
+        :element-props="item.elementProps || {}"
       />
       <template v-if="dynamicFieldsPosition==='end'">
         <common-query-ctrl
@@ -83,7 +83,7 @@
           :options="item.options"
           :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
           :height="`${rowHeight}px`"
-          :extend-props="item.extendProps || {}"
+          :element-props="item.elementProps || {}"
         />
       </template>
       <el-form-item
@@ -96,7 +96,7 @@
           :loading="item.loading && loading"
           :disabled="item.disableValidator && item.disableValidator.call(this)"
           class="filter-item"
-          v-bind="{type: 'primary', size: 'medium', ...item.extendProps}"
+          v-bind="{type: 'primary', size: 'medium', ...item.elementProps}"
           @click="$emit(item.command)"
         >
           {{ item.text }}
@@ -111,7 +111,7 @@
             icon="el-icon-document"
             size="medium"
             :loading="downloadOpt.loading && loading"
-            :plain="downloadOpt.extendProps && downloadOpt.extendProps.plain"
+            :plain="downloadOpt.elementProps && downloadOpt.elementProps.plain"
           >
             导出<i class="el-icon-arrow-down el-icon--right" />
           </el-button>
@@ -171,7 +171,7 @@ export default {
         return {};
       }
     },
-    extendProps: {
+    elementProps: {
       type: Object,
       default: function() {
         return {};

@@ -14,7 +14,7 @@
     :model="form.model"
     :commands="form.commands"
     :fields="formFields"
-    :extendProps="form.extendProps"
+    :elementProps="form.elementProps"
     @handleCancel="handleCancel"
     @handleSave="handleSave"
   />
@@ -120,7 +120,7 @@
               command: 'handleSave',
             },
           ],
-          extendProps: {
+          elementProps: {
             labelWidth: '120px',
             labelPosition: 'right',
           },
@@ -206,7 +206,7 @@
             label: '区域（lazy）',
             dataField: 'lazy_city',
             columnSpan: 2,
-            extendProps: {
+            elementProps: {
               props: {
                 lazy: true,
                 lazyLoad: this.handleCityLazyLoad,
@@ -218,7 +218,7 @@
             label: '设计成本',
             dataField: 'design_cost',
             columnSpan: 1,
-            extendProps: {
+            elementProps: {
               precision: 2,
               step: 5,
               min: 100,
@@ -794,24 +794,24 @@
 | commands         | 命令集合，显示在表单底部 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling)         | array   | —             | []     |
 | customCommands   | 定制命令集合，显示在表单顶部右侧 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array   | —             | []     |
 | customComponents | 定制组件集合                                                                                                       | array   | —             | []     |
-| extendProps      | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                      | object  | —             | {}     |
+| elementProps     | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing)               | object  | —             | {}     |
 
 ### Field Options
 
-| 参数             | 说明                                                                                          | 类型     | 可选值 | 默认值    |
-| ---------------- | --------------------------------------------------------------------------------------------- | -------- | ------ | --------- |
-| type             | 类型, 见 `Field Type Options`                                                                 | string   | —      | input     |
-| model            | 表单数据源                                                                                    | object   | —      | {}        |
-| label            | 标签                                                                                          | string   | —      | 10        |
-| dataField        | 绑定字段                                                                                      | string   | —      | 0         |
-| columnSpan       | 字段所占列数                                                                                  | number   | —      | 1         |
-| rules            | 字段校验规则                                                                                  | array    | -      | []        |
-| options          | 选项数据源                                                                                    | array    | -      | []        |
-| visibleValidator | 可见性校验,返回 `true` 时可见                                                                 | function | —      | —         |
-| disableValidator | 可用性校验,返回 `true` 时禁用                                                                 | function | —      | —         |
-| componentKey     | 自定义组件名称，只限于 `type` 为 `custom`                                                     | string   | -      | —         |
-| groupTitle       | 分组标题名称，只限于 `type` 为 `groupTitle`                                                   | string   | -      | —         |
-| extendProps      | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing) | string   | -      | ascending |
+| 参数             | 说明                                                                                                 | 类型     | 可选值 | 默认值    |
+| ---------------- | ---------------------------------------------------------------------------------------------------- | -------- | ------ | --------- |
+| type             | 类型, 见 `Field Type Options`                                                                        | string   | —      | input     |
+| model            | 表单数据源                                                                                           | object   | —      | {}        |
+| label            | 标签                                                                                                 | string   | —      | 10        |
+| dataField        | 绑定字段                                                                                             | string   | —      | 0         |
+| columnSpan       | 字段所占列数                                                                                         | number   | —      | 1         |
+| rules            | 字段校验规则                                                                                         | array    | -      | []        |
+| options          | 选项数据源                                                                                           | array    | -      | []        |
+| visibleValidator | 可见性校验,返回 `true` 时可见                                                                        | function | —      | —         |
+| disableValidator | 可用性校验,返回 `true` 时禁用                                                                        | function | —      | —         |
+| componentKey     | 自定义组件名称，只限于 `type` 为 `custom`                                                            | string   | -      | —         |
+| groupTitle       | 分组标题名称，只限于 `type` 为 `groupTitle`                                                          | string   | -      | —         |
+| elementProps     | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing) | string   | -      | ascending |
 
 ### Field Type Options
 
