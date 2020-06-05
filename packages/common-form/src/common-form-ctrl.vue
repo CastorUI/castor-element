@@ -141,8 +141,8 @@
       @change="onChange && onChange.call(this,model)"
     />
     <el-input
-      v-else-if="type==='complexInput' && currentField.options.filter(r=>r.value === model[currentField.dataField]).length > 0"
-      v-model="currentField.options.filter(r=>r.value === model[currentField.dataField])[0].label"
+      v-else-if="type==='complexInput' && extendProps.currentField.options.filter(r=>r.value === model[extendProps.currentField.dataField]).length > 0"
+      v-model="extendProps.currentField.options.filter(r=>r.value === model[extendProps.currentField.dataField])[0].label"
       :class="['complexInput']"
       v-bind="{
         disabled: true,
@@ -153,11 +153,11 @@
     >
       <template slot="append">
         <span
-          v-if="appendField.options && model[appendField.dataField]"
-          :style="'color:'+appendField.options.filter(r=>r.value === model[appendField.dataField])[0].color+';'"
+          v-if="extendProps.appendField.options && model[extendProps.appendField.dataField]"
+          :style="'color:'+extendProps.appendField.options.filter(r=>r.value === model[extendProps.appendField.dataField])[0].color+';'"
         >
-          <i :class="appendField.options.filter(r=>r.value === model[appendField.dataField])[0].icon" />
-          {{ appendField.options.filter(r=>r.value === model[appendField.dataField])[0].label.slice(0,5) }}
+          <i :class="extendProps.appendField.options.filter(r=>r.value === model[extendProps.appendField.dataField])[0].icon" />
+          {{ extendProps.appendField.options.filter(r=>r.value === model[extendProps.appendField.dataField])[0].label.slice(0,5) }}
         </span>
       </template>
     </el-input>
@@ -255,18 +255,6 @@ export default {
     visibleValidator: {
       type: Function,
       default: () => true
-    },
-    currentField: {
-      type: Object,
-      default: function() {
-        return {};
-      }
-    },
-    appendField: {
-      type: Object,
-      default: function() {
-        return {};
-      }
     },
     customComponents: {
       type: Object,

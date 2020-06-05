@@ -43,6 +43,16 @@
               label: '管理员',
             },
           ],
+          user: [
+            {
+              value: 1,
+              label: '张三',
+            },
+            {
+              value: 2,
+              label: '李四',
+            },
+          ],
           user_type: [
             {
               value: 1,
@@ -101,7 +111,8 @@
             en_name: undefined,
             cn_name: undefined,
             valid_end_date: undefined,
-            user_type: undefined,
+            user: 1,
+            user_type: 2,
             enabled: false,
             equipment: [],
             city: undefined,
@@ -248,6 +259,23 @@
             label: '备注',
             dataField: 'remarks',
             columnSpan: 2,
+          },
+          {
+            type: 'complexInput',
+            label: '审核人',
+            dataField: '',
+            columnSpan: 1,
+            visibleValidator: (model) => model.user && model.user_type,
+            extendProps: {
+              currentField: {
+                dataField: 'user',
+                options: this.optionsMap['user'],
+              },
+              appendField: {
+                dataField: 'user_type',
+                options: this.optionsMap['user_type'],
+              },
+            },
           },
         ];
       },
@@ -855,7 +883,9 @@
 | ------------ | --------------------------------------------------------------------------------------- | ------ | ------ | ------ |
 | groupTitle   | 分组标题名称，只限于 `type` 为 `groupTitle`                                             | string | -      | —      |
 | componentKey | 自定义组件名称，只限于 `type` 为 `custom`                                               | string | -      | —      |
-| options      | 选项数据源,用于`select multiSelect groupedSelect radioGroup checkboxGroup text cascade` | array  | -      | []     |
+| options      | 选项数据源,用于`type` 为 `select multiSelect groupedSelect radioGroup checkboxGroup text cascade` | array  | -      | []     |
+| currentField   | 当前字段，只限于 `type` 为 `complexInput`                                             | object | -      | —      |
+| appendField   | 附加字段，只限于 `type` 为 `complexInput`                                             | object | -      | —      |
 
 ### Field Type Options
 
