@@ -371,7 +371,7 @@
 
 | 参数                  | 说明                                                                                                 | 类型    | 可选值    | 默认值 |
 | --------------------- | ---------------------------------------------------------------------------------------------------- | ------- | --------- | ------ |
-| loading               | 是否显示 loading                                                                                     | boolean | —         | false  |
+| loading               | 命令按钮是否显示 loading                                                                             | boolean | —         | false  |
 | model                 | 表单数据源                                                                                           | object  | —         | {}     |
 | fields                | 查询字段集合,见 `Field Options`                                                                      | array   | —         | []     |
 | rowHeight             | 行高                                                                                                 | number  | —         | 36     |
@@ -389,30 +389,29 @@
 | model        | 表单数据源                                                                                           | object | —      | {}        |
 | dataField    | 绑定字段                                                                                             | string | —      | 0         |
 | columnSpan   | 字段所占列数                                                                                         | number | —      | 1         |
-| fromField    | 最小值绑定字段，`inputNumberRange` 专用                                                              | string | —      | 0         |
-| toField      | 最大值绑定字段，`inputNumberRange` 专用                                                              | string | —      | 0         |
-| options      | 选项数据源                                                                                           | array  | -      | []        |
 | elementProps | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing) | string | -      | ascending |
+| extendProps  | 扩展属性 [详情](http://0.0.0.0:8085/#/component/common-table#column-extendprops-options)             | object | -      | {}        |
+
+### Field ExtendProps Options
+
+| 参数      | 说明                                                        | 类型   | 可选值 | 默认值 |
+| --------- | ----------------------------------------------------------- | ------ | ------ | ------ |
+| fromField | 最小值绑定字段，只限于 `type` 为`inputNumberRange`          | string | —      | 0      |
+| toField   | 最大值绑定字段，只限于 `type` 为`inputNumberRange`          | string | —      | 0      |
+| options   | 选项数据源,限于`type` 为 `select multiSelect checkboxGroup` | array  | -      | []     |
 
 ### Field Type Options
 
-| 类型          | 说明           |
-| ------------- | -------------- |
-| text          | 只读文本       |
-| input         | 输入框         |
-| autocomplete  | 自动填充输入框 |
-| inputNumber   | 数字输入框     |
-| textArea      | 多行文本       |
-| select        | 下拉框         |
-| multiSelect   | 多选下拉框     |
-| groupedSelect | 分组选择下拉框 |
-| cascader      | 级联选择器     |
-| switch        | 开关           |
-| radioGroup    | 单选框组       |
-| checkboxGroup | 复选框组       |
-| date          | 日期选择器     |
-| dateRange     | 日期区间选择器 |
-| dateTimeRange | 时间区间选择器 |
-| hr            | 分行           |
-| complexInput  | 组合输入框     |
-| custom        | 定制组件       |
+| 类型             | 说明           |
+| ---------------- | -------------- |
+| input            | 输入框         |
+| select           | 下拉框         |
+| multiSelect      | 多选下拉框     |
+| date             | 日期选择器     |
+| month            | 月份选择器     |
+| dateRange        | 日期区间选择器 |
+| dateTimeRange    | 时间区间选择器 |
+| monthRange       | 月份区间选择器 |
+| switch           | 开关           |
+| checkboxGroup    | 复选框组       |
+| inputNumberRange | 数字区间选择器 |
