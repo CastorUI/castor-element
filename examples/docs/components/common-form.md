@@ -849,42 +849,42 @@
 
 ### Attributes
 
-| 参数             | 说明                                                                                                               | 类型    | 可选值        | 默认值 |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------ | ------- | ------------- | ------ |
-| loading          | 是否显示 loading                                                                                                   | boolean | —             | false  |
-| operateType      | 表单操作类型                                                                                                       | string  | add/edit/view | add    |
-| model            | 数据源                                                                                                             | object  | —             | {}     |
-| fields           | 查询字段集合,见 `Field Options`                                                                                    | array   | —             | []     |
-| rowFieldsCount   | 每行显示字段数                                                                                                     | number  | —             | 2      |
-| rowHeight        | 行高                                                                                                               | number  | —             | 36     |
-| commands         | 命令集合，显示在表单底部 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling)         | array   | —             | []     |
-| customCommands   | 定制命令集合，显示在表单顶部右侧 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array   | —             | []     |
-| customComponents | 定制组件集合                                                                                                       | array   | —             | []     |
-| elementProps     | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing)               | object  | —             | {}     |
+| 参数             | 说明                                                                                                                     | 类型    | 可选值        | 默认值 |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------ | ------- | ------------- | ------ |
+| loading          | 是否显示 loading                                                                                                         | boolean | —             | false  |
+| operateType      | 表单操作类型                                                                                                             | string  | add/edit/view | add    |
+| model            | 数据源                                                                                                                   | object  | —             | {}     |
+| fields           | 查询字段集合,见 `Field Options`                                                                                          | array   | —             | []     |
+| rowFieldsCount   | 每行显示字段数                                                                                                           | number  | —             | 2      |
+| rowHeight        | 行高                                                                                                                     | number  | —             | 36     |
+| commands         | 命令集合，显示在表单底部 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling)         | array   | —             | []     |
+| customCommands   | 定制命令集合，显示在表单顶部右侧 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling) | array   | —             | []     |
+| customComponents | 定制组件集合                                                                                                             | array   | —             | []     |
+| elementProps     | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing)              | object  | —             | {}     |
 
 ### Field Options
 
-| 参数             | 说明                                                                                                 | 类型     | 可选值 | 默认值    |
-| ---------------- | ---------------------------------------------------------------------------------------------------- | -------- | ------ | --------- |
-| type             | 类型, 见 `Field Type Options`                                                                        | string   | —      | input     |
-| label            | 标签                                                                                                 | string   | —      | 10        |
-| dataField        | 绑定字段                                                                                             | string   | —      | 0         |
-| columnSpan       | 字段所占列数                                                                                         | number   | —      | 1         |
-| rules            | 字段校验规则                                                                                         | array    | -      | []        |
-| visibleValidator | 可见性校验,返回 `true` 时可见                                                                        | function | —      | —         |
-| disableValidator | 可用性校验,返回 `true` 时禁用                                                                        | function | —      | —         |
-| elementProps     | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing) | string   | -      | ascending |
-| extendProps      | 扩展属性，参考 `Field ExtendProps Options`              | object   | -      | {}        |
+| 参数             | 说明                                                                                                        | 类型     | 可选值 | 默认值    |
+| ---------------- | ----------------------------------------------------------------------------------------------------------- | -------- | ------ | --------- |
+| type             | 类型, 见 `Field Type Options`                                                                               | string   | —      | input     |
+| label            | 标签                                                                                                        | string   | —      | 10        |
+| dataField        | 绑定字段                                                                                                    | string   | —      | 0         |
+| columnSpan       | 字段所占列数                                                                                                | number   | —      | 1         |
+| rules            | 字段校验规则                                                                                                | array    | -      | []        |
+| visibleValidator | 可见性校验,返回 `true` 时可见                                                                               | function | —      | —         |
+| disableValidator | 可用性校验,返回 `true` 时禁用                                                                               | function | —      | —         |
+| elementProps     | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | string   | -      | ascending |
+| extendProps      | 扩展属性，参考 `Field ExtendProps Options`                                                                  | object   | -      | {}        |
 
 ### Field ExtendProps Options
 
-| 参数         | 说明                                                                                    | 类型   | 可选值 | 默认值 |
-| ------------ | --------------------------------------------------------------------------------------- | ------ | ------ | ------ |
-| groupTitle   | 分组标题名称，只限于 `type` 为 `groupTitle`                                             | string | -      | —      |
-| componentKey | 自定义组件名称，只限于 `type` 为 `custom`                                               | string | -      | —      |
+| 参数         | 说明                                                                                              | 类型   | 可选值 | 默认值 |
+| ------------ | ------------------------------------------------------------------------------------------------- | ------ | ------ | ------ |
+| groupTitle   | 分组标题名称，只限于 `type` 为 `groupTitle`                                                       | string | -      | —      |
+| componentKey | 自定义组件名称，只限于 `type` 为 `custom`                                                         | string | -      | —      |
 | options      | 选项数据源,用于`type` 为 `select multiSelect groupedSelect radioGroup checkboxGroup text cascade` | array  | -      | []     |
-| currentField   | 当前字段，只限于 `type` 为 `complexInput`                                             | object | -      | —      |
-| appendField   | 附加字段，只限于 `type` 为 `complexInput`                                             | object | -      | —      |
+| currentField | 当前字段，只限于 `type` 为 `complexInput`                                                         | object | -      | —      |
+| appendField  | 附加字段，只限于 `type` 为 `complexInput`                                                         | object | -      | —      |
 
 ### Field Type Options
 

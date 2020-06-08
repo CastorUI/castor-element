@@ -1002,34 +1002,34 @@
 
 ### Table Attributes
 
-| 参数           | 说明                                                                                                             | 类型     | 可选值 | 默认值 |
-| -------------- | ---------------------------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
-| loading        | 是否显示 loading                                                                                                 | boolean  | —      | false  |
-| dataSource     | 数据源                                                                                                           | array    | —      | []     |
-| columns        | 列集合 [详情](http://0.0.0.0:8085/#/component/common-table#column-options)                                       | array    | —      | []     |
-| pagination     | 分页对象 [详情](http://0.0.0.0:8085/#/component/sharing-config#pagination-options)                               | object   | —      | {}     |
-| addCommand     | 新增事件对象 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling)                   | object   | —      | {}     |
-| customCommands | 自定义事件，显示在表格上方右侧 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | —      | []     |
-| getList        | 查询数据方法                                                                                                     | function | —      | —      |
-| elementProps   | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing)             | object   | -      | -      |
+| 参数           | 说明                                                                                                                   | 类型     | 可选值 | 默认值 |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
+| loading        | 是否显示 loading                                                                                                       | boolean  | —      | false  |
+| dataSource     | 数据源                                                                                                                 | array    | —      | []     |
+| columns        | 列集合 [详情](http://castor.polarwin.cn/#/component/common-table#column-options)                                       | array    | —      | []     |
+| pagination     | 分页对象 [详情](http://castor.polarwin.cn/#/component/sharing-config#pagination-options)                               | object   | —      | {}     |
+| addCommand     | 新增事件对象 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling)                   | object   | —      | {}     |
+| customCommands | 自定义事件，显示在表格上方右侧 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling) | array    | —      | []     |
+| getList        | 查询数据方法                                                                                                           | function | —      | —      |
+| elementProps   | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing)            | object   | -      | -      |
 
 ### Column Options
 
-| 参数         | 说明                                                                                                 | 类型   | 可选值                                                              | 默认值  |
-| ------------ | ---------------------------------------------------------------------------------------------------- | ------ | ------------------------------------------------------------------- | ------- |
-| type         | 类型                                                                                                 | string | default / selection / index / link / keyToValue / status / commands | default |
-| label        | 标题                                                                                                 | string | —                                                                   | 10      |
-| dataField    | 绑定字段                                                                                             | string | —                                                                   | 0       |
-| elementProps | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing) | object | -                                                                   | {}      |
-| extendProps  | 扩展属性，参考 `Column ExtendProps Options`              | object | -                                                                   | {}      |
+| 参数         | 说明                                                                                                        | 类型   | 可选值                                                              | 默认值  |
+| ------------ | ----------------------------------------------------------------------------------------------------------- | ------ | ------------------------------------------------------------------- | ------- |
+| type         | 类型                                                                                                        | string | default / selection / index / link / keyToValue / status / commands | default |
+| label        | 标题                                                                                                        | string | —                                                                   | 10      |
+| dataField    | 绑定字段                                                                                                    | string | —                                                                   | 0       |
+| elementProps | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object | -                                                                   | {}      |
+| extendProps  | 扩展属性，参考 `Column ExtendProps Options`                                                                 | object | -                                                                   | {}      |
 
 ### Column ExtendProps Options
 
-| 参数        | 说明                                                                                                                         | 类型     | 可选值 | 默认值 |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
-| commands    | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array    | -      | []     |
-| options     | 数据转换数据源 ，当 `type` 为 `keyToValue` 或 `status` 时使用                                                                | array    | -      | []     |
-| linkCommand | 超链接事件，当 `type` 为 `link` 时使用                                                                                       | function | -      | -      |
+| 参数        | 说明                                                                                                                               | 类型     | 可选值 | 默认值 |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
+| commands    | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling) | array    | -      | []     |
+| options     | 数据转换数据源 ，当 `type` 为 `keyToValue` 或 `status` 时使用                                                                      | array    | -      | []     |
+| linkCommand | 超链接事件，当 `type` 为 `link` 时使用                                                                                             | function | -      | -      |
 
 ### Table Events
 

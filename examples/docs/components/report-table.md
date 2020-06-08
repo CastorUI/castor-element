@@ -324,7 +324,7 @@
 
 ### Attributes
 
-常规属性可参考 [通用表格](http://0.0.0.0:8085/#/component/common-table) , 独有属性如下：
+常规属性可参考 [通用表格](http://castor.polarwin.cn/#/component/common-table) , 独有属性如下：
 
 | 参数          | 说明             | 类型  | 可选值 | 默认值 |
 | ------------- | ---------------- | ----- | ------ | ------ |
@@ -332,15 +332,15 @@
 
 ### Column Options
 
-| 参数         | 说明                                                                                                 | 类型   | 可选值                                                              | 默认值  |
-| ------------ | ---------------------------------------------------------------------------------------------------- | ------ | ------------------------------------------------------------------- | ------- |
-| type         | 类型                                                                                                 | string | default / selection / index / link / keyToValue / status / commands | default |
-| label        | 标题                                                                                                 | string | —                                                                   | 10      |
-| dataField    | 绑定字段                                                                                             | string | —                                                                   | 0       |
-| reportType   | 报表列类型                                                                                           | string | data/title                                                          | -       |
-| showType     | 展示方式                                                                                             | string | static/dynamic                                                      | static  |
-| elementProps | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing) | object | -                                                                   | {}      |
-| extendProps  | 扩展属性 [详情](http://0.0.0.0:8085/#/component/common-table#column-extendprops-options)             | object | -                                                                   | {}      |
+| 参数         | 说明                                                                                                        | 类型   | 可选值                                                              | 默认值  |
+| ------------ | ----------------------------------------------------------------------------------------------------------- | ------ | ------------------------------------------------------------------- | ------- |
+| type         | 类型                                                                                                        | string | default / selection / index / link / keyToValue / status / commands | default |
+| label        | 标题                                                                                                        | string | —                                                                   | 10      |
+| dataField    | 绑定字段                                                                                                    | string | —                                                                   | 0       |
+| reportType   | 报表列类型                                                                                                  | string | data/title                                                          | -       |
+| showType     | 展示方式                                                                                                    | string | static/dynamic                                                      | static  |
+| elementProps | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object | -                                                                   | {}      |
+| extendProps  | 扩展属性 [详情](http://castor.polarwin.cn/#/component/common-table#column-extendprops-options)              | object | -                                                                   | {}      |
 
 ### Table Events
 
