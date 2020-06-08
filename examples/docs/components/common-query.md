@@ -123,7 +123,9 @@
             label: '角色',
             dataField: 'user_role',
             columnSpan: 1,
-            options: this.optionsMap['user_role'],
+            extendProps: {
+              options: this.optionsMap['user_role'],
+            },
           },
           {
             type: 'switch',
@@ -136,21 +138,25 @@
             label: '业务类型',
             dataField: 'user_type',
             columnSpan: 1,
-            options: this.optionsMap['user_type'],
+            extendProps: {
+              options: this.optionsMap['user_type'],
+            },
           },
           {
+            type: 'inputNumberRange',
             dataField: '',
             label: '工程编号',
-            type: 'inputNumberRange',
-            showType: 'static',
             columnSpan: 2,
-            fromField: 'from_num',
-            toField: 'to_num',
+            showType: 'static',
             elementProps: {
               precision: 2,
               step: 5,
               min: 100,
               max: 1000,
+            },
+            extendProps: {
+              fromField: 'from_num',
+              toField: 'to_num',
             },
           },
           {
@@ -183,7 +189,9 @@
             type: 'checkboxGroup',
             label: '主打产品',
             dataField: 'equipment',
-            options: this.optionsMap['equipment'],
+            extendProps: {
+              options: this.optionsMap['equipment'],
+            },
           },
         ];
       },
@@ -328,7 +336,9 @@
             label: '角色',
             dataField: 'user_role',
             columnSpan: 1,
-            options: this.optionsMap['user_role'],
+            extendProps: {
+              options: this.optionsMap['user_role'],
+            },
           },
           {
             type: 'switch',
@@ -341,14 +351,18 @@
             label: '业务类型',
             dataField: 'user_type',
             columnSpan: 1,
-            options: this.optionsMap['user_type'],
+            extendProps: {
+              options: this.optionsMap['user_type'],
+            },
           },
           {
             type: 'checkboxGroup',
             label: '主打产品',
             dataField: 'equipment',
             columnSpan: 2,
-            options: this.optionsMap['equipment'],
+            extendProps: {
+              options: this.optionsMap['equipment'],
+            },
           },
         ];
       },
