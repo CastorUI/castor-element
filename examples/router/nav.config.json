@@ -22,6 +22,10 @@
       {
         "path": "/sharing-config",
         "name": "共享配置"
+      },
+      {
+        "path": "/interaction",
+        "name": "前后端交互"
       }
     ]
   },
