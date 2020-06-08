@@ -874,7 +874,7 @@
 | visibleValidator | 可见性校验,返回 `true` 时可见                                                                        | function | —      | —         |
 | disableValidator | 可用性校验,返回 `true` 时禁用                                                                        | function | —      | —         |
 | elementProps     | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing) | string   | -      | ascending |
-| extendProps      | 扩展属性 [详情](http://0.0.0.0:8085/#/component/common-table#column-extendprops-options)             | object   | -      | {}        |
+| extendProps      | 扩展属性，参考 `Field ExtendProps Options`              | object   | -      | {}        |
 
 ### Field ExtendProps Options
 

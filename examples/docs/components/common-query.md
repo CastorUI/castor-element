@@ -391,7 +391,7 @@
 | columnSpan   | 字段所占列数                                                                                         | number | —      | 1         |
 | showType     | 展示方式                                                                                             | string | static/dynamic                                                      | static       |
 | elementProps | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing) | string | -      | ascending |
-| extendProps  | 扩展属性 [详情](http://0.0.0.0:8085/#/component/common-table#column-extendprops-options)             | object | -      | {}        |
+| extendProps  | 扩展属性，参考 `Field ExtendProps Options`              | object | -      | {}        |
 
 ### Field ExtendProps Options
 

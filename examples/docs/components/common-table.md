@@ -1021,7 +1021,7 @@
 | label        | 标题                                                                                                 | string | —                                                                   | 10      |
 | dataField    | 绑定字段                                                                                             | string | —                                                                   | 0       |
 | elementProps | ElementUI 属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#elementProps-kuo-zhan-shu-xing) | object | -                                                                   | {}      |
-| extendProps  | 扩展属性 [详情](http://0.0.0.0:8085/#/component/common-table#column-extendprops-options)             | object | -                                                                   | {}      |
+| extendProps  | 扩展属性，参考 `Column ExtendProps Options`              | object | -                                                                   | {}      |
 
 ### Column ExtendProps Options
 
