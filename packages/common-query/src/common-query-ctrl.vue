@@ -18,7 +18,7 @@
       }"
     >
       <el-option
-        v-for="option in options"
+        v-for="option in extendProps.options"
         :key="option.value"
         :label="option.label"
         :value="option.value"
@@ -51,7 +51,7 @@
       v-bind="{style: 'width:100%;', ...elementProps}"
     >
       <el-checkbox
-        v-for="option in options"
+        v-for="option in extendProps.options"
         :key="option.value"
         :label="option.label"
         :disabled="option.disabled"
@@ -62,8 +62,8 @@
       class="query-item"
       style="width:100%;"
       :model="model"
-      :from-field="fromField"
-      :to-field="toField"
+      :from-field="extendProps.fromField"
+      :to-field="extendProps.toField"
       :element-props="elementProps"
     />
     <el-input
@@ -100,10 +100,6 @@ export default {
       type: String,
       default: undefined
     },
-    options: {
-      type: Array,
-      default: undefined
-    },
     width: {
       type: String,
       default: undefined
@@ -112,14 +108,6 @@ export default {
       type: String,
       default: '36px'
     },
-    fromField: {
-      type: String,
-      default: undefined
-    },
-    toField: {
-      type: String,
-      default: undefined
-    },
     elementProps: {
       type: Object,
       default: function() {
@@ -127,6 +115,10 @@ export default {
           valueFormat: 'yyyy-MM-dd'
         };
       }
+    },
+    extendProps: {
+      type: Object,
+      default: () => {}
     }
   },
   computed: {

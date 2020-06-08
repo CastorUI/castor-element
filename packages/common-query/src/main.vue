@@ -52,10 +52,10 @@
           :label="item.label"
           :model="model"
           :data-field="item.dataField"
-          :options="item.options"
           :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
           :height="`${rowHeight}px`"
           :element-props="item.elementProps || {}"
+          :extend-props="item.extendProps || {}"
         />
       </template>
       <common-query-ctrl
@@ -65,12 +65,10 @@
         :label="item.label"
         :model="model"
         :data-field="item.dataField"
-        :options="item.options"
-        :from-field="item.fromField"
-        :to-field="item.toField"
         :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
         :height="`${rowHeight}px`"
         :element-props="item.elementProps || {}"
+        :extend-props="item.extendProps || {}"
       />
       <template v-if="dynamicFieldsPosition==='end'">
         <common-query-ctrl
@@ -80,10 +78,10 @@
           :label="item.label"
           :model="model"
           :data-field="item.dataField"
-          :options="item.options"
           :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
           :height="`${rowHeight}px`"
           :element-props="item.elementProps || {}"
+          :extend-props="item.extendProps || {}"
         />
       </template>
       <el-form-item
