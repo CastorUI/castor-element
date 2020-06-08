@@ -5,33 +5,17 @@ variables:
   NODE_MODULES_VERSION: 'fe-components-static-1.0.0' # node_modules版本号，每次升级依赖改一下这里的数值
   CURRENT_BRANCH: $CI_COMMIT_REF_NAME
   NODE_VERSION: 'v10.19.0'
-  SCRIPT_DIR: "/home/liwp/script"
+  SCRIPT_DIR: '/home/liwp/script'
 
 # 缓存目录文件
 # key是唯一值，重名会覆盖上一次的缓存
 cache:
-#  key: '$NODE_MODULES_VERSION'
+  #  key: '$NODE_MODULES_VERSION'
   paths:
     - node_modules/
 
 stages:
-  - build_install
-  - build_run
   - deploy_prod
-
-
-node_install:
-  stage: build_install
-  script:
-    - nvm use $NODE_VERSION
-    - npm install -g mirror-config-china --registry=http://registry.npm.taobao.org
-    - npm install --slient
-
-node_run:
-  stage: build_run
-  script:
-    - nvm use $NODE_VERSION
-    - npm run build-examples
 
 deploy_prod:
   stage: deploy_prod
@@ -57,4 +41,3 @@ deploy_prod:
     paths:
       - dist
   when: manual
-
