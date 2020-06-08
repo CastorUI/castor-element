@@ -229,7 +229,7 @@ export default {
     top: 10px;
     left: 10px;
     visibility: hidden;
-    width: 88px;
+    width: 148px;
     overflow: hidden;
   }
   .dynamic-select-options {
