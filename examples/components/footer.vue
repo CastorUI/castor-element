@@ -14,7 +14,7 @@
           target="_blank"
         >{{ config.starterGitLab }}</a>
         <a
-          href="http://gitlab.polarwin.cn/frontend-group/vue-template"
+          href="http://gitlab.polarwin.cn/components/vue-template"
           class="footer-main-link"
           target="_blank"
         >{{ config.templateGitLab }}</a>
