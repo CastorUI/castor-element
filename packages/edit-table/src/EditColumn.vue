@@ -43,7 +43,7 @@
           v-for="(item,index) of extendProps.commands.filter(r =>r.maxLevel===undefined|| r.maxLevel >= scope.row.dataLevel)"
           :key="index"
           class="command-link"
-          :disabled="item.disableValidator && item.disableValidator.call(this,scope.row)"
+          :disabled="editing || (item.disableValidator && item.disableValidator.call(this,scope.row))"
           v-bind="item.elementProps"
           @click.stop="handleEmitEvent(item.commandType,item.command,scope.$index,scope.row)"
         >

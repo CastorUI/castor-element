@@ -746,6 +746,122 @@
 
 :::
 
+### 行内事件
+
+展示行内事件的用法。
+
+:::demo 行内事件分为两种状态：`常规态`和`编辑态`。`常规态`的事件`extendProps.commands`中，`编辑态`的事件`extendProps.editableCommands`中。
+
+```html
+<template>
+  <ca-edit-table
+    editTriggerMode="auto"
+    :dataSource="table.dataList"
+    :columns="tableColumns"
+    :editCommand="rowEditCommand"
+    :saveCommand="rowSaveCommand"
+    @handleEdit="handleEdit"
+    @handleSave="handleSave"
+    @handleDelete="handleDelete"
+  />
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        table: {
+          dataList: [
+            {
+              id: 1001,
+              code: 'A1',
+              name: '上海燃气一期工程',
+            },
+            {
+              id: 1002,
+              code: 'A2',
+              name: '上海燃气二期工程',
+            },
+            {
+              id: 1003,
+              code: 'A3',
+              name: '上海燃气三期工程',
+            },
+          ],
+        },
+      };
+    },
+    computed: {
+      tableColumns() {
+        return [
+          {
+            type: 'default',
+            label: 'ID',
+            dataField: 'id',
+          },
+          {
+            type: 'default',
+            label: '编号',
+            dataField: 'code',
+          },
+          {
+            type: 'default',
+            label: '名称',
+            dataField: 'name',
+            elementProps: {
+              minWidth: 2,
+            },
+          },
+          {
+            type: 'commands',
+            label: '操作',
+            elementProps: {
+              width: '140px',
+            },
+            extendProps: {
+              commands: [
+                {
+                  text: '删除',
+                  command: 'handleDelete',
+                  elementProps: {
+                    type: 'danger',
+                  },
+                },
+              ],
+            },
+          },
+        ];
+      },
+      rowEditCommand() {
+        return {
+          command: 'handleEdit',
+        };
+      },
+      rowSaveCommand() {
+        return {
+          command: 'handleSave',
+        };
+      },
+    },
+    methods: {
+      handleEdit(index, row) {
+        console.log('handleEdit,', index, row);
+        row.operateType = 'edit';
+      },
+      handleSave(index, row) {
+        console.log('handleSave,', index, row);
+        row.operateType = 'view';
+      },
+      handleDelete(index, row) {
+        console.log('handleDelete,', index, row);
+      },
+    },
+  };
+</script>
+```
+
+:::
+
 ### Table Attributes
 
 常规属性可参考 [通用表格](http://castor.polarwin.cn/#/component/common-table) , 独有属性如下：
