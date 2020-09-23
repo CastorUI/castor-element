@@ -40,16 +40,27 @@
               label: '电影演员',
             },
           ],
+          sex: [
+            {
+              value: 0,
+              label: '男',
+            },
+            {
+              value: 1,
+              label: '女',
+            },
+          ],
         },
         table: {
           dataList: [
             {
               id: 1001,
               code: 'A1',
-              en_name: 'Jack Li',
-              cn_name: '李连杰',
+              en_name: 'Karen Mok',
+              cn_name: '莫文蔚',
               age: 30,
               role: [1, 3],
+              sex: 1,
             },
             {
               id: 1002,
@@ -58,6 +69,7 @@
               cn_name: '成龙',
               age: 30,
               role: [1, 3],
+              sex: 0,
             },
             {
               id: 1003,
@@ -66,6 +78,7 @@
               cn_name: '甄子丹',
               age: 30,
               role: [1, 2, 3],
+              sex: 0,
             },
           ],
         },
@@ -110,9 +123,20 @@
           {
             type: 'select',
             label: '角色',
+            dataField: 'sex',
+            columnSpan: 1,
+            elementProps: {
+              width: '140px',
+            },
+            extendProps: {
+              options: this.optionsMap['sex'],
+            },
+          },
+          {
+            type: 'select',
+            label: '角色',
             dataField: 'role',
             columnSpan: 1,
-            rules: [{ required: true, message: '不能为空' }],
             elementProps: {
               multiple: true,
               width: '240px',

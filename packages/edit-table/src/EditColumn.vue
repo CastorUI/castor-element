@@ -111,7 +111,7 @@
             {{ extendProps.options.filter(r=>scope.row[dataField].some(t=>t==r.value)).map(r=>r.label).join() }}
           </template>
           <template v-else>
-            {{ extendProps.options.filter(r=>r.value == scope.row[dataField]).map(r=>r.label).length }}
+            {{ (extendProps.options.filter(r=>r.value == scope.row[dataField])[0]||{}).label || '' }}
           </template>
         </template>
         <template v-else>
