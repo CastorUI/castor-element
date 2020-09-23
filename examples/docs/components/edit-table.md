@@ -25,6 +25,22 @@
   export default {
     data() {
       return {
+        optionsMap: {
+          role: [
+            {
+              value: 1,
+              label: '歌星',
+            },
+            {
+              value: 2,
+              label: '电视剧演员',
+            },
+            {
+              value: 3,
+              label: '电影演员',
+            },
+          ],
+        },
         table: {
           dataList: [
             {
@@ -33,6 +49,7 @@
               en_name: 'Jack Li',
               cn_name: '李连杰',
               age: 30,
+              role: [1, 3],
             },
             {
               id: 1002,
@@ -40,6 +57,7 @@
               en_name: 'Jack Chen',
               cn_name: '成龙',
               age: 30,
+              role: [1, 3],
             },
             {
               id: 1003,
@@ -47,6 +65,7 @@
               en_name: 'Donnie Yen',
               cn_name: '甄子丹',
               age: 30,
+              role: [1, 2, 3],
             },
           ],
         },
@@ -86,6 +105,20 @@
             editable: true,
             elementProps: {
               width: '140px',
+            },
+          },
+          {
+            type: 'select',
+            label: '角色',
+            dataField: 'role',
+            columnSpan: 1,
+            rules: [{ required: true, message: '不能为空' }],
+            elementProps: {
+              multiple: true,
+              width: '240px',
+            },
+            extendProps: {
+              options: this.optionsMap['role'],
             },
           },
         ];
@@ -140,6 +173,22 @@
   export default {
     data() {
       return {
+        optionsMap: {
+          role: [
+            {
+              value: 1,
+              label: '歌星',
+            },
+            {
+              value: 2,
+              label: '电视剧演员',
+            },
+            {
+              value: 3,
+              label: '电影演员',
+            },
+          ],
+        },
         table: {
           validateStatus: true,
           dataList: [
@@ -149,6 +198,7 @@
               en_name: 'Jack Li',
               cn_name: '李连杰',
               age: 30,
+              role: [1, 3],
             },
             {
               id: 1002,
@@ -156,6 +206,7 @@
               en_name: 'Jack Chen',
               cn_name: '成龙',
               age: 30,
+              role: [1, 3],
             },
             {
               id: 1003,
@@ -163,6 +214,7 @@
               en_name: 'Donnie Yen',
               cn_name: '甄子丹',
               age: 30,
+              role: [1, 2, 3],
             },
           ],
         },
@@ -203,6 +255,19 @@
             editable: true,
             elementProps: {
               width: '140px',
+            },
+          },
+          {
+            type: 'select',
+            label: '角色',
+            dataField: 'role',
+            columnSpan: 1,
+            rules: [{ required: true, message: '不能为空' }],
+            elementProps: {
+              multiple: true,
+            },
+            extendProps: {
+              options: this.optionsMap['role'],
             },
           },
         ];

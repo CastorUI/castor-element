@@ -89,11 +89,34 @@
               v-bind="{precision: 0, style: 'width:100%;', ...elementProps}"
               @focus="$event.target.select()"
             />
+            <el-select
+              v-if="type === 'select'"
+              v-model="editingRow[dataField]"
+              v-bind="{clearable: true, filterable: true,style: 'width:100%;',allowCreate: false, placeholder: `选择${label}`, ...elementProps}"
+              @clear="editingRow[dataField]=undefined"
+            >
+              <el-option
+                v-for="option in extendProps.options"
+                :key="option.value"
+                :label="option.label"
+                :value="option.value"
+              />
+            </el-select>
           </el-form-item>
         </el-form>
       </template>
       <template v-else>
-        {{ scope.row[dataField] }}
+        <template v-if="type === 'select'">
+          <template v-if=" elementProps.multiple">
+            {{ extendProps.options.filter(r=>scope.row[dataField].some(t=>t==r.value)).map(r=>r.label).join() }}
+          </template>
+          <template v-else>
+            {{ extendProps.options.filter(r=>r.value == scope.row[dataField]).map(r=>r.label).length }}
+          </template>
+        </template>
+        <template v-else>
+          {{ scope.row[dataField] }}
+        </template>
       </template>
     </template>
   </el-table-column>
@@ -102,66 +125,66 @@
 export default {
   directives: {
     inputNumberFocus: {
-      inserted: function(el, binding) {
+      inserted: function (el, binding) {
         if (binding.value) {
           el.children[2].children[0].focus();
         }
-      }
-    }
+      },
+    },
   },
   props: {
     type: {
       type: String,
-      default: 'default'
+      default: 'default',
     },
     label: {
       type: String,
-      default: ''
+      default: '',
     },
     dataField: {
       type: String,
-      default: ''
+      default: '',
     },
     rules: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     dataTemplate: {
       type: Function,
-      default: () => {}
+      default: () => {},
     },
     handleEmitEvent: {
       type: Function,
-      default: () => {}
+      default: () => {},
     },
     editable: {
       type: Boolean,
-      default: true
+      default: true,
     },
     autoFocus: {
       type: Boolean,
-      default: false
+      default: false,
     },
     editing: {
       type: Boolean,
-      default: false
+      default: false,
     },
     editingRow: {
       type: Object,
-      default: null
+      default: null,
     },
     elementProps: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
-      }
+      },
     },
     extendProps: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
-      }
-    }
+      },
+    },
   },
   methods: {
     getFormRules(dataField, rules) {
@@ -171,8 +194,8 @@ export default {
     },
     handleValidateForm(validateField, validateStatus) {
       this.$emit('update:validateStatus', validateStatus);
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">
