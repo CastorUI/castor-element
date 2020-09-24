@@ -157,6 +157,10 @@ export default {
       type: Function,
       default: () => {},
     },
+    handleValidateForm: {
+      type: Function,
+      default: () => {},
+    },
     editable: {
       type: Boolean,
       default: true,
@@ -191,9 +195,6 @@ export default {
       const formRules = {};
       formRules[dataField] = rules;
       return formRules;
-    },
-    handleValidateForm(validateField, validateStatus) {
-      this.$emit('update:validateStatus', validateStatus);
     },
   },
 };

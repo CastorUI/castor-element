@@ -32,6 +32,7 @@
         :editing="editing"
         :editing-row="editingRow"
         :handle-emit-event="handleEmitEvent"
+        :handle-validate-form="handleValidateForm"
         :auto-focus="item.autoFocus"
         :element-props="item.elementProps"
         :extend-props="item.extendProps"
@@ -55,66 +56,67 @@ import EditColumn from './EditColumn';
 export default {
   name: 'CaEditTable',
   components: {
-    'edit-column': EditColumn
+    'edit-column': EditColumn,
   },
   props: {
     editTriggerMode: {
       type: String,
       default: 'manual',
-      validator: value => ['manual', 'auto'].indexOf(value) > -1
+      validator: (value) => ['manual', 'auto'].indexOf(value) > -1,
     },
     loading: {
       type: Boolean,
-      default: false
+      default: false,
     },
     dataSource: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     columns: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     addCommand: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     editCommand: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     saveCommand: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     addInside: { type: Boolean, default: false },
     addInsidePosition: {
       type: String,
       default: 'beforeFirst',
-      validator: function(value) {
+      validator: function (value) {
         return ['beforeFirst', 'afterLast'].indexOf(value) > -1;
-      }
+      },
     },
     appendContent: {
       type: String,
-      default: ''
+      default: '',
     },
     elementProps: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
-      }
-    }
+      },
+    },
   },
   data() {
     return {
-      editingRow: null
+      editingRow: null,
+      formValidateResult: {},
     };
   },
   computed: {
     editing() {
       return this.editingRow != null;
-    }
+    },
   },
   created() {
     if (this.editTriggerMode === 'auto') {
@@ -127,7 +129,7 @@ export default {
     }
   },
   methods: {
-    handleEmitEvent: function(commandType, command, index, row) {
+    handleEmitEvent: function (commandType, command, index, row) {
       this.$emit(command, index, row);
       // console.log('this.dataSource - handleEmitEvent',this.dataSource,row);
       if (this.editTriggerMode === 'manual') {
@@ -138,19 +140,19 @@ export default {
         }
       }
     },
-    handleAdd: function() {
+    handleAdd: function () {
       let newId = -1;
       if (
         this.dataSource &&
         this.dataSource.length > 0 &&
-        this.dataSource.some(r => r.id < 0)
+        this.dataSource.some((r) => r.id < 0)
       ) {
         newId =
-          this.dataSource.map(r => r.id).reduce((a, b) => Math.min(a, b)) - 1;
+          this.dataSource.map((r) => r.id).reduce((a, b) => Math.min(a, b)) - 1;
       }
       if (this.addInside) {
         const newRow = {
-          id: newId
+          id: newId,
         };
         if (this.addInsidePosition === 'beforeFirst') {
           this.dataSource.unshift(newRow);
@@ -163,7 +165,7 @@ export default {
         this.$emit(this.addCommand.command);
       }
     },
-    handleRowClick: function(row) {
+    handleRowClick: function (row) {
       // console.log('handleRowClick',row);
       event.stopPropagation();
       if (
@@ -184,7 +186,7 @@ export default {
         this.$emit('row-click', row);
       }
     },
-    handleCurrentChange: function(currentRow, oldCurrentRow) {
+    handleCurrentChange: function (currentRow, oldCurrentRow) {
       console.log('handleCurrentChange: ', this.editingRow);
       this.saveEditingRow();
     },
@@ -212,8 +214,16 @@ export default {
         this.handleEmitEvent('', this.saveCommand.command, 0, this.editingRow);
         return true;
       }
-    }
-  }
+    },
+    handleValidateForm(validateField, validateStatus) {
+      console.log('handleValidateForm', validateField, validateStatus);
+      this.formValidateResult[validateField] = validateStatus;
+      let formValidateStatus = Object.values(this.formValidateResult).every(
+        (r) => r
+      );
+      this.$emit('update:validateStatus', formValidateStatus);
+    },
+  },
 };
 </script>
 
