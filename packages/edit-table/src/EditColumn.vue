@@ -29,6 +29,7 @@
       <template v-if="editingRow != null && editingRow.id === scope.row.id">
         <el-link
           v-for="(item,index) of extendProps.editableCommands"
+          v-show="!item.visibleValidator || item.visibleValidator.call(this, scope.row)"
           :key="index"
           class="command-link"
           :disabled="item.disableValidator && item.disableValidator.call(this,scope.row)"
@@ -41,6 +42,7 @@
       <template v-else>
         <el-link
           v-for="(item,index) of extendProps.commands.filter(r =>r.maxLevel===undefined|| r.maxLevel >= scope.row.dataLevel)"
+          v-show="!item.visibleValidator || item.visibleValidator.call(this, scope.row)"
           :key="index"
           class="command-link"
           :disabled="editing || (item.disableValidator && item.disableValidator.call(this,scope.row))"
