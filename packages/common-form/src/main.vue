@@ -5,7 +5,7 @@
     :model="model"
     :rules="rules"
     :disabled="operateType==='view'"
-    v-bind="{size: 'medium',labelWidth: '120px', labelPosition: 'right', style: 'minWidth:600px;', ...elementProps}"
+    v-bind="{size: 'medium',labelWidth: '120px', labelPosition: 'right', ...elementProps}"
   >
     <div
       v-if="customCommands"
@@ -64,73 +64,73 @@ import CommonFormCtrl from './common-form-ctrl';
 export default {
   name: 'CaCommonForm',
   components: {
-    CommonFormCtrl
+    CommonFormCtrl,
   },
   props: {
     loading: {
       type: Boolean,
-      default: false
+      default: false,
     },
     model: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
-      }
+      },
     },
     fields: {
       type: Array,
-      default: function() {
+      default: function () {
         return [];
-      }
+      },
     },
     commands: {
       type: Array,
-      default: function() {
+      default: function () {
         return [];
-      }
+      },
     },
     customCommands: {
       type: Array,
-      default: function() {
+      default: function () {
         return [];
-      }
+      },
     },
     rowFieldsCount: {
       type: Number,
-      default: 2
+      default: 2,
     },
     rowHeight: {
       type: Number,
-      default: 36
+      default: 36,
     },
     operateType: {
       type: String,
-      default: 'add'
+      default: 'add',
     },
     customComponents: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
-      }
+      },
     },
     elementProps: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
-      }
-    }
+      },
+    },
   },
   data() {
     const dataRules = {};
-    this.fields.forEach(r => {
+    this.fields.forEach((r) => {
       if (r.dataField && r.rules) {
         dataRules[r.dataField] = r.rules;
       }
     });
     return {
-      rules: dataRules
+      rules: dataRules,
     };
-  }
+  },
 };
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
