@@ -82,12 +82,13 @@
             <el-input
               v-if="type==='default' || type==='input'"
               v-model="editingRow[dataField]"
+              v-inputFocus="extendProps.autoFocus"
               class="edit-table-input"
             />
             <el-input-number
               v-else-if="type==='inputNumber'"
               v-model="editingRow[dataField]"
-              v-inputNumberFocus="autoFocus"
+              v-inputNumberFocus="extendProps.autoFocus"
               v-bind="{precision: 0, style: 'width:100%;', ...elementProps}"
               @focus="$event.target.select()"
             />
@@ -133,6 +134,13 @@ export default {
         }
       },
     },
+    inputFocus: {
+      inserted: function (el, binding) {
+        if (binding.value) {
+          el.children[0].focus();
+        }
+      },
+    },
   },
   props: {
     type: {
@@ -166,10 +174,6 @@ export default {
     editable: {
       type: Boolean,
       default: true,
-    },
-    autoFocus: {
-      type: Boolean,
-      default: false,
     },
     editing: {
       type: Boolean,

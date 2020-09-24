@@ -655,6 +655,7 @@
     :addInside="table.addInside"
     :dataSource="table.dataList"
     :columns="tableColumns"
+    :validateStatus.sync="table.validateStatus"
     :addCommand="table.addCommand"
     :editCommand="rowEditCommand"
     :saveCommand="rowSaveCommand"
@@ -667,22 +668,42 @@
   export default {
     data() {
       return {
+        optionsMap: {
+          role: [
+            {
+              value: 1,
+              label: '歌星',
+            },
+            {
+              value: 2,
+              label: '电视剧演员',
+            },
+            {
+              value: 3,
+              label: '电影演员',
+            },
+          ],
+        },
         table: {
+          validateStatus: true,
           dataList: [
             {
               id: 1001,
               code: 'A1',
               name: '上海燃气一期工程',
+              role: [1, 3],
             },
             {
               id: 1002,
               code: 'A2',
               name: '上海燃气二期工程',
+              role: [1, 3],
             },
             {
               id: 1003,
               code: 'A3',
               name: '上海燃气三期工程',
+              role: [1, 3],
             },
           ],
           addInside: true,
@@ -708,6 +729,9 @@
             type: 'default',
             label: '编号',
             dataField: 'code',
+            extendProps: {
+              autoFocus: true,
+            },
           },
           {
             type: 'default',
@@ -717,16 +741,31 @@
               minWidth: 2,
             },
           },
+          {
+            type: 'select',
+            label: '角色',
+            dataField: 'role',
+            columnSpan: 1,
+            rules: [{ required: true, message: '不能为空' }],
+            elementProps: {
+              multiple: true,
+            },
+            extendProps: {
+              options: this.optionsMap['role'],
+            },
+          },
         ];
       },
       rowEditCommand() {
         return {
           command: 'handleEdit',
+          disableValidator: () => !this.table.validateStatus,
         };
       },
       rowSaveCommand() {
         return {
           command: 'handleSave',
+          disableValidator: () => !this.table.validateStatus,
         };
       },
     },
@@ -888,9 +927,10 @@
 
 ### Column ExtendProps Options
 
-| 参数     | 说明                                                                                                                               | 类型  | 可选值 | 默认值 |
-| -------- | ---------------------------------------------------------------------------------------------------------------------------------- | ----- | ------ | ------ |
-| commands | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling) | array | -      | []     |
+| 参数      | 说明                                                                                                                               | 类型    | 可选值 | 默认值 |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------- | ------ | ------ |
+| autoFocus | 当行处于编辑状态时，是否默认选中当前列（只设置一列）                                                                               | boolean | -      | false  |
+| commands  | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling) | array   | -      | []     |
 
 ### Table Events
 
