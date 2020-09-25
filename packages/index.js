@@ -3,6 +3,7 @@ import ReportTable from './report-table';
 import EditTable from './edit-table';
 import CommonForm from './common-form';
 import CommonQuery from './common-query';
+import TreeEditTable from './tree-edit-table';
 
 // 存储组件列表
 const components = [
@@ -11,6 +12,7 @@ const components = [
   EditTable,
   CommonForm,
   CommonQuery,
+  TreeEditTable
 ];
 
 /**
