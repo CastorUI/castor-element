@@ -156,7 +156,11 @@ export default {
     if (this.editTriggerMode === 'auto') {
       window.addEventListener('click', this.handleOuterRowChange, false);
     }
-    this.decoratedDataSource = this.decorateTreeListData(this.dataSource, 1);
+    this.decoratedDataSource = this.decorateTreeListData(
+      this.dataSource,
+      1,
+      null
+    );
   },
   destroyed() {
     if (this.editTriggerMode === 'auto') {
@@ -164,14 +168,15 @@ export default {
     }
   },
   methods: {
-    decorateTreeListData(dataList, dataLevel) {
+    decorateTreeListData(dataList, dataLevel, parentRow) {
       return dataList.map((r) => {
         if (r.children && r.children.length) {
           return {
             ...r,
             operateType: r.operateType || 'view',
             dataLevel,
-            children: this.decorateTreeListData(r.children, dataLevel + 1),
+            children: this.decorateTreeListData(r.children, dataLevel + 1, r),
+            parentRow,
           };
         } else {
           return {
@@ -179,17 +184,18 @@ export default {
             operateType: r.operateType || 'view',
             dataLevel,
             children: [],
+            parentRow,
           };
         }
       });
     },
     addSubRow: function (row, index) {
-      debugger;
       const newRow = {
         id: this.newId,
         operateType: 'add',
         dataLevel: row.dataLevel + 1,
         children: [],
+        parentRow: row,
       };
       this.newId = this.newId - 1;
       row.children.push(newRow);
@@ -198,8 +204,19 @@ export default {
       this.$nextTick(() => {
         this.tableHackVisible = true;
         this.$nextTick(() => {
-          this.$refs['elTreeTable'].toggleRowExpansion(row);
+          this.expandRows();
         });
+      });
+    },
+    expandRows: function () {
+      let expandRows = [this.editingRow];
+      let tempParentRow = this.editingRow.parentRow;
+      while (tempParentRow) {
+        expandRows.unshift(tempParentRow);
+        tempParentRow = tempParentRow.parentRow;
+      }
+      expandRows.forEach((row) => {
+        this.$refs['elTreeTable'].toggleRowExpansion(row);
       });
     },
     handleEmitEvent: function (commandType, command, index, row) {
@@ -224,6 +241,7 @@ export default {
           operateType: 'add',
           dataLevel: 1,
           children: [],
+          parentRow: null,
         };
         this.newId = this.newId - 1;
         if (this.addInsidePosition === 'beforeFirst') {
