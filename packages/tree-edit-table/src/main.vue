@@ -16,9 +16,8 @@
       ref="elTreeTable"
       v-loading="loading"
       :data="decoratedDataSource"
-      row-key="id"
       style="min-width:600px;height:auto;padding:1px;"
-      v-bind="{border: true, ...elementProps}"
+      v-bind="{border: true,rowKey:'id', ...elementProps}"
       @row-click="handleRowClick"
       @current-change="handleCurrentChange"
     >
@@ -75,31 +74,6 @@ export default {
       type: Array,
       default: () => [],
     },
-    hiddenCommands: {
-      type: Object,
-      default: () => {
-        return {
-          editCommand: undefined,
-          saveCommand: undefined,
-        };
-      },
-    },
-    rowKey: {
-      type: String,
-      default: 'id',
-    },
-    showVerticalBorder: {
-      type: Boolean,
-      default: false,
-    },
-    showHeader: {
-      type: Boolean,
-      default: true,
-    },
-    highlightCurrentRow: {
-      type: Boolean,
-      default: false,
-    },
     addInside: { type: Boolean, default: true },
     addInsidePosition: {
       type: String,
@@ -118,14 +92,6 @@ export default {
     },
     saveCommand: {
       type: Object,
-      default: () => {},
-    },
-    showSummary: {
-      type: Boolean,
-      default: false,
-    },
-    summaryMethod: {
-      type: Function,
       default: () => {},
     },
     appendContent: {

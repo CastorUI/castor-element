@@ -905,14 +905,16 @@
 
 常规属性可参考 [通用表格](http://castor.polarwin.cn/#/component/common-table) , 独有属性如下：
 
-| 参数              | 说明                                                                                                        | 类型    | 可选值                                           | 默认值      |
-| ----------------- | ----------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------ | ----------- |
-| type              | 类型，较通用表格支持的类型要少                                                                              | string  | default / input / index / inputNumber / commands | —           |
-| editTriggerMode   | 编辑状态触发方式                                                                                            | string  | manual\auto                                      | manual      |
-| addInside         | 是否在表格内部添加新行                                                                                      | boolean | —                                                | false       |
-| addInsidePosition | 添加新行位置                                                                                                | string  | beforeFirst\afterLast                            | beforeFirst |
-| appendContent     | 插入至表格最后一行之后的内容                                                                                | string  | —                                                | —           |
-| elementProps      | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object  | —                                                | {}          |
+| 参数              | 说明                                                                                                        | 类型    | 可选值                | 默认值      |
+| ----------------- | ----------------------------------------------------------------------------------------------------------- | ------- | --------------------- | ----------- |
+| editTriggerMode   | 编辑状态触发方式                                                                                            | string  | manual\auto           | manual      |
+| addInside         | 是否在表格内部添加新行                                                                                      | boolean | —                     | false       |
+| addInsidePosition | 添加新行位置                                                                                                | string  | beforeFirst\afterLast | beforeFirst |
+| addCommand        | 新增命令                                                                                                    | {}      | —                     | —           |
+| editCommand       | 单行编辑命令，仅限 editTriggerMode 为 auto 时使用                                                           | {}      | —                     | —           |
+| saveCommand       | 单行保存命令，仅限 editTriggerMode 为 auto 时使用                                                           | {}      | —                     | —           |
+| appendContent     | 插入至表格最后一行之后的内容                                                                                | string  | —                     | —           |
+| elementProps      | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object  | —                     | {}          |
 
 ### Column Options
 
