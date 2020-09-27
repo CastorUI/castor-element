@@ -17,7 +17,6 @@
       v-loading="loading"
       :data="decoratedDataSource"
       row-key="id"
-      expand-row-keys="expandRowKeys"
       style="min-width:600px;height:auto;padding:1px;"
       v-bind="{border: true, ...elementProps}"
       @row-click="handleRowClick"
@@ -144,16 +143,8 @@ export default {
     return {
       tableHackVisible: true,
       decoratedDataSource: [],
-      addedSubRow: {
-        addingFlag: false,
-        parentRowKeyValue: undefined,
-        parentRowIndex: undefined,
-        index: undefined,
-      },
       editingRow: null,
-      // needRefreshDataSource: true,
       newId: -1,
-      expandRowKeys: null,
     };
   },
   computed: {
@@ -161,21 +152,6 @@ export default {
       return this.editingRow != null;
     },
   },
-  // watch: {
-  //   dataSource: {
-  //     handler: function () {
-  //       console.log('this.dataSource - decoratedDataSource', this.dataSource);
-  // if (this.needRefreshDataSource) {
-  //         this.decoratedDataSource = this.decorateTreeListData(
-  //           this.dataSource,
-  //           1
-  //         );
-  //       }
-  //     },
-  //     deep: true,
-  //     immediate: true,
-  //   },
-  // },
   created() {
     if (this.editTriggerMode === 'auto') {
       window.addEventListener('click', this.handleOuterRowChange, false);
@@ -207,16 +183,13 @@ export default {
       });
     },
     addSubRow: function (row, index) {
-      this.addedSubRow.addingFlag = true;
-      this.addedSubRow.parentRowKeyValue = row[this.rowKey];
-      this.addedSubRow.index =
-        index + (row.children ? row.children.length : 0) + 1;
       const currentRowData = this.decoratedDataSource.filter(
         (r) => r.id === row.id
       )[0];
       const newRow = {
         id: this.newId,
         operateType: 'add',
+        dataLevel: row.dataLevel + 1,
       };
       this.newId = this.newId - 1;
       currentRowData.children
@@ -224,7 +197,6 @@ export default {
         : (currentRowData.children = [newRow]);
       this.editingRow = newRow;
       this.tableHackVisible = false;
-      this.expandRowKeys = [row[this.rowKey], this.newId];
       this.$nextTick(() => {
         this.tableHackVisible = true;
         this.$nextTick(() => {
@@ -272,13 +244,12 @@ export default {
         this.editCommand.command
       ) {
         if (
-          this.editCommand.statusValidator &&
-          !this.editCommand.statusValidator.call(this, row)
+          this.editCommand.disableValidator &&
+          this.editCommand.disableValidator.call(this, row)
         ) {
           return;
         }
         this.editingRow = row;
-        // this.needRefreshDataSource = false;
         this.handleEmitEvent('', this.editCommand.command, 0, row);
       } else {
         this.$emit('row-click', row);
@@ -290,26 +261,27 @@ export default {
     },
     handleOuterRowChange(event) {
       console.log('handleOuterRowChange', this.editingRow);
-      this.saveEditingRow();
+      var saveFlag = this.saveEditingRow();
+      if (saveFlag) {
+        this.editingRow = null;
+      }
     },
     saveEditingRow() {
-      var rowSaveCommand = this.hiddenCommands.saveCommand;
       if (
         this.editTriggerMode === 'auto' &&
         this.editingRow != null &&
-        rowSaveCommand &&
-        rowSaveCommand.command
+        this.saveCommand &&
+        this.saveCommand.command
       ) {
         if (
-          rowSaveCommand.statusValidator &&
-          !rowSaveCommand.statusValidator.call(this, this.editingRow)
+          this.saveCommand.disableValidator &&
+          this.saveCommand.disableValidator.call(this, this.editingRow)
         ) {
-          return;
+          return false;
         }
 
-        // this.needRefreshDataSource = true;
-        this.handleEmitEvent('', rowSaveCommand.command, 0, this.editingRow);
-        this.editingRow = null;
+        this.handleEmitEvent('', this.saveCommand.command, 0, this.editingRow);
+        return true;
       }
     },
     handleValidateForm(validateField, validateStatus) {
