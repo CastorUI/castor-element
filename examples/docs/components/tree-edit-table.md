@@ -14,8 +14,6 @@
     editTriggerMode="manual"
     :dataSource="table.dataList"
     :columns="tableColumns"
-    rowKey="id"
-    addText="添加类别"
     :addInside="table.addInside"
     :addCommand="table.addCommand"
     @handleEdit="handleEdit"
@@ -130,7 +128,7 @@
                   elementProps: {
                     type: 'primary',
                   },
-                  visibleValidator: (row) => row.dataLevel < 3,
+                  visibleValidator: (row) => row.dataLevel < 10,
                 },
                 {
                   text: '删除',
@@ -204,7 +202,7 @@
 | 参数              | 说明                                                                                                        | 类型    | 可选值                | 默认值      |
 | ----------------- | ----------------------------------------------------------------------------------------------------------- | ------- | --------------------- | ----------- |
 | editTriggerMode   | 编辑状态触发方式                                                                                            | string  | manual\auto           | manual      |
-| addInside         | 是否在表格内部添加新行（此时不需要使用表单，也不需要指定新增事件handleAdd）                                                                                      | boolean | —                     | false       |
+| addInside         | 是否在表格内部添加新行（此时不需要使用表单，也不需要指定新增事件 handleAdd）                                | boolean | —                     | false       |
 | addInsidePosition | 添加新行位置                                                                                                | string  | beforeFirst\afterLast | beforeFirst |
 | addCommand        | 新增命令                                                                                                    | {}      | —                     | —           |
 | editCommand       | 单行编辑命令，仅限 editTriggerMode 为 auto 时使用                                                           | {}      | —                     | —           |
