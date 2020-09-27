@@ -184,16 +184,15 @@ export default {
       });
     },
     addSubRow: function (row, index) {
-      const currentRowData = this.decoratedDataSource.filter(
-        (r) => r.id === row.id
-      )[0];
+      debugger;
       const newRow = {
         id: this.newId,
         operateType: 'add',
         dataLevel: row.dataLevel + 1,
+        children: [],
       };
       this.newId = this.newId - 1;
-      currentRowData.children.push(newRow);
+      row.children.push(newRow);
       this.editingRow = newRow;
       this.tableHackVisible = false;
       this.$nextTick(() => {
@@ -223,6 +222,8 @@ export default {
         const newRow = {
           id: this.newId,
           operateType: 'add',
+          dataLevel: 1,
+          children: [],
         };
         this.newId = this.newId - 1;
         if (this.addInsidePosition === 'beforeFirst') {
