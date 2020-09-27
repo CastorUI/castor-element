@@ -135,10 +135,10 @@
                 {
                   text: '添加子类',
                   commandType: 'addSub',
-                  maxLevel: 1,
                   elementProps: {
                     type: 'primary',
                   },
+                  visibleValidator: (row) => row.dataLevel < 3,
                 },
                 {
                   text: '删除',

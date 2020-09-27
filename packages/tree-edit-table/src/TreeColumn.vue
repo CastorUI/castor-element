@@ -41,7 +41,7 @@
       </template>
       <template v-else>
         <el-link
-          v-for="(item,index) of extendProps.commands.filter(r =>r.maxLevel===undefined|| r.maxLevel >= scope.row.dataLevel)"
+          v-for="(item,index) of extendProps.commands"
           v-show="!item.visibleValidator || item.visibleValidator.call(this, scope.row)"
           :key="index"
           class="command-link"

@@ -166,7 +166,7 @@ export default {
   methods: {
     decorateTreeListData(dataList, dataLevel) {
       return dataList.map((r) => {
-        if (r.children) {
+        if (r.children && r.children.length) {
           return {
             ...r,
             operateType: r.operateType || 'view',
@@ -178,6 +178,7 @@ export default {
             ...r,
             operateType: r.operateType || 'view',
             dataLevel,
+            children: [],
           };
         }
       });
@@ -192,9 +193,7 @@ export default {
         dataLevel: row.dataLevel + 1,
       };
       this.newId = this.newId - 1;
-      currentRowData.children
-        ? currentRowData.children.push(newRow)
-        : (currentRowData.children = [newRow]);
+      currentRowData.children.push(newRow);
       this.editingRow = newRow;
       this.tableHackVisible = false;
       this.$nextTick(() => {
