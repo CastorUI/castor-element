@@ -70,7 +70,7 @@
           :rules="getFormRules(dataField, rules)"
           label-width="0px"
           size="medium"
-          style="width:100%;"
+          :style="'display:inline-block; width:calc(100% - ' + (editingRow.dataLevel||0) * 16 + 'px)'"
           @validate="handleValidateForm"
         >
           <el-form-item

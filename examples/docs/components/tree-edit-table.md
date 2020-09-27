@@ -88,7 +88,7 @@
             label: '日期',
             dataField: 'date',
             elementProps: {
-              width: '500px',
+              width: '200px',
               align: 'left',
             },
           },
