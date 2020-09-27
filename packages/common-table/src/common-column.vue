@@ -103,6 +103,18 @@
     </template>
   </el-table-column>
   <el-table-column
+    v-else-if="type==='multiKeyToValue'"
+    :label="label"
+    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...elementProps}"
+  >
+    <template slot-scope="scope">
+      <span>{{ ((extendProps.options
+        .filter(r=>(scope.row[dataField]||[]).some(t=>t==r.value))||[])
+        .map(r=>r.label)||[])
+        .join() }}</span>
+    </template>
+  </el-table-column>
+  <el-table-column
     v-else
     :label="label"
     :prop="dataField"
@@ -118,37 +130,37 @@ export default {
   props: {
     type: {
       type: String,
-      default: 'default'
+      default: 'default',
     },
     label: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     dataField: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     dataTemplate: {
       type: Function,
-      default: undefined
+      default: undefined,
     },
     indexMethod: {
       type: Function,
-      default: () => {}
+      default: () => {},
     },
     elementProps: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
-      }
+      },
     },
     extendProps: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>
 <style>

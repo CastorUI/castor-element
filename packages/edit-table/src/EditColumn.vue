@@ -111,7 +111,10 @@
       <template v-else>
         <template v-if="type === 'select'">
           <template v-if=" elementProps.multiple">
-            {{ extendProps.options.filter(r=>(scope.row[dataField]||[]).some(t=>t==r.value)).map(r=>r.label).join() }}
+            {{ ((extendProps.options
+              .filter(r=>(scope.row[dataField]||[]).some(t=>t==r.value))||[])
+              .map(r=>r.label)||[])
+              .join() }}
           </template>
           <template v-else>
             {{ (extendProps.options.filter(r=>r.value == scope.row[dataField])[0]||{}).label || '' }}

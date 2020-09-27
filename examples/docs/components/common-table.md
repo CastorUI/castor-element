@@ -322,6 +322,103 @@
 
 :::
 
+### 数据转换列(多选)
+
+展示数据转换列的用法。
+
+:::demo 在`tableColumns`中添加`type`为`multiKeyToValue`的对象，并在`options`中绑定数据源。
+
+```html
+<template>
+  <ca-common-table :dataSource="table.dataList" :columns="tableColumns" />
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        optionsMap: {
+          type: [
+            {
+              value: 1,
+              label: '住宅配套项目',
+            },
+            {
+              value: 2,
+              label: '工营事业项目',
+            },
+            {
+              value: 3,
+              label: '道路工程项目',
+            },
+          ],
+        },
+        table: {
+          dataList: [
+            {
+              id: 1001,
+              code: 'A1',
+              name: '上海燃气一期工程',
+              type: [1],
+            },
+            {
+              id: 1002,
+              code: 'A2',
+              name: '上海燃气二期工程',
+              type: [1, 2],
+            },
+            {
+              id: 1003,
+              code: 'A3',
+              name: '上海燃气三期工程',
+              type: [1, 2, 3],
+            },
+          ],
+        },
+      };
+    },
+    computed: {
+      tableColumns() {
+        return [
+          {
+            type: 'default',
+            label: 'ID',
+            dataField: 'id',
+          },
+          {
+            type: 'default',
+            label: '编号',
+            dataField: 'code',
+          },
+          {
+            type: 'default',
+            label: '名称',
+            dataField: 'name',
+            elementProps: {
+              minWidth: 2,
+            },
+          },
+          {
+            type: 'multiKeyToValue',
+            label: '项目类型',
+            dataField: 'type',
+            elementProps: {
+              width: '240px',
+            },
+            extendProps: {
+              options: this.optionsMap['type'],
+            },
+          },
+        ];
+      },
+    },
+    methods: {},
+  };
+</script>
+```
+
+:::
+
 ### 状态列
 
 展示状态列的用法。
