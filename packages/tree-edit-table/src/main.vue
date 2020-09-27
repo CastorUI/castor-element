@@ -144,6 +144,7 @@ export default {
       tableHackVisible: true,
       decoratedDataSource: [],
       editingRow: null,
+      formValidateResult: {},
       newId: -1,
     };
   },

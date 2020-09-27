@@ -84,19 +84,11 @@
       tableColumns() {
         return [
           {
-            type: 'expand',
-            label: '',
-            dataField: '',
-            elementProps: {
-              width: '60px',
-            },
-          },
-          {
             type: 'default',
             label: '日期',
             dataField: 'date',
             elementProps: {
-              width: '140px',
+              width: '500px',
               align: 'left',
             },
           },
