@@ -11,7 +11,7 @@
 ```html
 <template>
   <ca-tree-edit-table
-    editTriggerMode="auto"
+    editTriggerMode="manual"
     :dataSource="table.dataList"
     :columns="tableColumns"
     rowKey="id"

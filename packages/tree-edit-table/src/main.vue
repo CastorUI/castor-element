@@ -12,10 +12,12 @@
       </el-button>
     </div>
     <el-table
+      v-if="tableHackVisible"
       ref="elTreeTable"
       v-loading="loading"
       :data="decoratedDataSource"
       row-key="id"
+      expand-row-keys="expandRowKeys"
       style="min-width:600px;height:auto;padding:1px;"
       v-bind="{border: true, ...elementProps}"
       @row-click="handleRowClick"
@@ -85,7 +87,7 @@ export default {
     },
     rowKey: {
       type: String,
-      default: '',
+      default: 'id',
     },
     showVerticalBorder: {
       type: Boolean,
@@ -111,6 +113,14 @@ export default {
       type: Object,
       default: () => {},
     },
+    editCommand: {
+      type: Object,
+      default: () => {},
+    },
+    saveCommand: {
+      type: Object,
+      default: () => {},
+    },
     showSummary: {
       type: Boolean,
       default: false,
@@ -132,65 +142,48 @@ export default {
   },
   data() {
     return {
+      tableHackVisible: true,
       decoratedDataSource: [],
       addedSubRow: {
         addingFlag: false,
         parentRowKeyValue: undefined,
         parentRowIndex: undefined,
         index: undefined,
-        defaultRowKeyValue: -1,
       },
       editingRow: null,
-      needRefreshDataSource: true,
+      // needRefreshDataSource: true,
+      newId: -1,
+      expandRowKeys: null,
     };
   },
   computed: {
     editing() {
-      return this.decoratedDataSource.some(
-        (r) => r.operateType && ['edit', 'add'].indexOf(r.operateType) > -1
-      );
+      return this.editingRow != null;
     },
   },
-  watch: {
-    dataSource: {
-      handler: function () {
-        console.log('this.dataSource - decoratedDataSource', this.dataSource);
-        if (this.needRefreshDataSource) {
-          this.decoratedDataSource = this.decorateTreeListData(
-            this.dataSource,
-            1
-          );
-        }
-      },
-      deep: true,
-      immediate: true,
-    },
-  },
+  // watch: {
+  //   dataSource: {
+  //     handler: function () {
+  //       console.log('this.dataSource - decoratedDataSource', this.dataSource);
+  // if (this.needRefreshDataSource) {
+  //         this.decoratedDataSource = this.decorateTreeListData(
+  //           this.dataSource,
+  //           1
+  //         );
+  //       }
+  //     },
+  //     deep: true,
+  //     immediate: true,
+  //   },
+  // },
   created() {
-    if (this.editTriggerMode === 'click-row') {
+    if (this.editTriggerMode === 'auto') {
       window.addEventListener('click', this.handleOuterRowChange, false);
     }
-  },
-  updated() {
-    if (this.addedSubRow.addingFlag) {
-      console.log('elTreeTable', this.$refs['elTreeTable']);
-      console.log(
-        'treeData',
-        this.$refs['elTreeTable'].store &&
-          this.$refs['elTreeTable'].store.states.treeData
-      );
-      this.$refs['elTreeTable'].store.toggleTreeExpansion(
-        this.addedSubRow.parentRowKeyValue
-      );
-      console.log('this.addedSubRow', this.addedSubRow);
-      this.$refs['elTreeTable'].store.commit(
-        'setHoverRow',
-        this.addedSubRow.index
-      );
-    }
+    this.decoratedDataSource = this.decorateTreeListData(this.dataSource, 1);
   },
   destroyed() {
-    if (this.editTriggerMode === 'click-row') {
+    if (this.editTriggerMode === 'auto') {
       window.removeEventListener('click', this.handleOuterRowChange, false);
     }
   },
@@ -218,59 +211,53 @@ export default {
       this.addedSubRow.parentRowKeyValue = row[this.rowKey];
       this.addedSubRow.index =
         index + (row.children ? row.children.length : 0) + 1;
-      this.dataSource.push({ id: -2 });
-      this.dataSource.pop();
-      const currentRowData = this.dataSource.filter((r) => r.id === row.id)[0];
+      const currentRowData = this.decoratedDataSource.filter(
+        (r) => r.id === row.id
+      )[0];
       const newRow = {
-        id: this.addedSubRow.defaultRowKeyValue,
+        id: this.newId,
         operateType: 'add',
       };
+      this.newId = this.newId - 1;
       currentRowData.children
         ? currentRowData.children.push(newRow)
         : (currentRowData.children = [newRow]);
+      this.editingRow = newRow;
+      this.tableHackVisible = false;
+      this.expandRowKeys = [row[this.rowKey], this.newId];
+      this.$nextTick(() => {
+        this.tableHackVisible = true;
+        this.$nextTick(() => {
+          this.$refs['elTreeTable'].toggleRowExpansion(row);
+        });
+      });
     },
     handleEmitEvent: function (commandType, command, index, row) {
       if (commandType === 'addSub') {
         console.log('add new sub row');
         this.addSubRow(row, index);
       } else {
-        if (['add', 'edit'].indexOf(row.operateType) > -1) {
-          row.operateType = 'view';
-        }
         this.$emit(command, index, row);
-        const originRow = this.dataSource.filter((r) => r.id === row.id)[0];
-        for (const prop in row) {
-          if (row.hasOwnProperty(prop)) {
-            originRow[prop] = row[prop];
+        if (this.editTriggerMode === 'manual') {
+          if (['add', 'edit'].indexOf(row.operateType) > -1) {
+            this.editingRow = row;
+          } else {
+            this.editingRow = null;
           }
         }
-        console.log(
-          'this.dataSource - handleEmitEvent',
-          this.dataSource,
-          this.decoratedDataSource,
-          row
-        );
       }
     },
     handleAdd: function () {
-      let newId = this.addedSubRow.defaultRowKeyValue;
-      if (
-        this.dataSource &&
-        this.dataSource.length > 0 &&
-        this.dataSource.some((r) => r.id < 0)
-      ) {
-        newId =
-          this.dataSource.map((r) => r.id).reduce((a, b) => Math.min(a, b)) - 1;
-      }
       if (this.addInside) {
         const newRow = {
-          id: newId,
+          id: this.newId,
           operateType: 'add',
         };
+        this.newId = this.newId - 1;
         if (this.addInsidePosition === 'beforeFirst') {
-          this.dataSource.unshift(newRow);
+          this.decoratedDataSource.unshift(newRow);
         } else {
-          this.dataSource.push(newRow);
+          this.decoratedDataSource.push(newRow);
         }
       } else {
         this.$emit('handleAdd');
@@ -279,25 +266,22 @@ export default {
     handleRowClick: function (row) {
       console.log('handleRowClick', row);
       event.stopPropagation();
-      var rowEditCommand = this.hiddenCommands.editCommand;
       if (
-        this.editTriggerMode === 'click-row' &&
-        rowEditCommand &&
-        rowEditCommand.command
+        this.editTriggerMode === 'auto' &&
+        this.editCommand &&
+        this.editCommand.command
       ) {
-        if (row.operateType === 'view') {
-          if (
-            rowEditCommand.statusValidator &&
-            !rowEditCommand.statusValidator.call(this, row)
-          ) {
-            return;
-          }
-          this.editingRow = row;
-          this.needRefreshDataSource = false;
-          this.handleEmitEvent('', rowEditCommand.command, 0, row);
+        if (
+          this.editCommand.statusValidator &&
+          !this.editCommand.statusValidator.call(this, row)
+        ) {
+          return;
         }
+        this.editingRow = row;
+        // this.needRefreshDataSource = false;
+        this.handleEmitEvent('', this.editCommand.command, 0, row);
       } else {
-        this.$emit('handleRowClick', row);
+        this.$emit('row-click', row);
       }
     },
     handleCurrentChange: function (currentRow, oldCurrentRow) {
@@ -311,7 +295,7 @@ export default {
     saveEditingRow() {
       var rowSaveCommand = this.hiddenCommands.saveCommand;
       if (
-        this.editTriggerMode === 'click-row' &&
+        this.editTriggerMode === 'auto' &&
         this.editingRow != null &&
         rowSaveCommand &&
         rowSaveCommand.command
@@ -323,7 +307,7 @@ export default {
           return;
         }
 
-        this.needRefreshDataSource = true;
+        // this.needRefreshDataSource = true;
         this.handleEmitEvent('', rowSaveCommand.command, 0, this.editingRow);
         this.editingRow = null;
       }
