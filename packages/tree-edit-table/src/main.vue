@@ -51,11 +51,11 @@
 </template>
 
 <script>
-import TreeColumn from './TreeColumn';
+import EditColumn from './../../edit-table/src/EditColumn';
 export default {
   name: 'CaTreeEditTable',
   components: {
-    'tree-column': TreeColumn,
+    'tree-column': EditColumn,
   },
   props: {
     editTriggerMode: {
