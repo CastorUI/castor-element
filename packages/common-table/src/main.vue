@@ -45,6 +45,7 @@
           :data-field="item.dataField"
           :index-method="indexMethod"
           :data-template="item.dataTemplate"
+          :custom-components="customComponents"
           :element-props="item.elementProps"
           :extend-props="item.extendProps"
           v-on="$listeners"
@@ -70,57 +71,63 @@ import CommonColumn from './common-column';
 export default {
   name: 'CaCommonTable',
   components: {
-    'common-column': CommonColumn
+    'common-column': CommonColumn,
   },
   props: {
     loading: {
       type: Boolean,
-      default: false
+      default: false,
     },
     dataSource: {
       type: Array,
-      default: function() {
+      default: function () {
         return [];
-      }
+      },
     },
     columns: {
       type: Array,
-      default: function() {
+      default: function () {
         return [];
-      }
+      },
     },
     pagination: {
       type: Object,
-      default: function() {
+      default: function () {
         return {
           pageIndex: 1,
           pageSize: 10,
-          total: 0
+          total: 0,
         };
-      }
+      },
     },
     addCommand: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     customCommands: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     getList: {
       type: Function,
-      default: () => {}
+      default: () => {},
+    },
+    customComponents: {
+      type: Object,
+      default: function () {
+        return {};
+      },
     },
     elementProps: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
-      }
-    }
+      },
+    },
   },
   data() {
     return {
-      multipleSelection: []
+      multipleSelection: [],
     };
   },
   computed: {
@@ -133,9 +140,9 @@ export default {
     defaultSort() {
       return {
         prop: this.pagination.sortField,
-        order: this.pagination.order
+        order: this.pagination.order,
       };
-    }
+    },
   },
   methods: {
     indexMethod(index) {
@@ -161,8 +168,8 @@ export default {
       this.pagination.sortField = prop;
       this.pagination.order = order;
       this.getList();
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -115,6 +115,20 @@
     </template>
   </el-table-column>
   <el-table-column
+    v-else-if="type==='expand'"
+    type="expand"
+    v-bind="elementProps"
+  >
+    <template slot-scope="scope">
+      <component
+        :is="customComponents[extendProps.componentKey]"
+        :component-data.sync="scope.row[dataField]"
+        :model="scope.row"
+        v-bind="elementProps"
+      />
+    </template>
+  </el-table-column>
+  <el-table-column
     v-else
     :label="label"
     :prop="dataField"
@@ -147,6 +161,12 @@ export default {
     indexMethod: {
       type: Function,
       default: () => {},
+    },
+    customComponents: {
+      type: Object,
+      default: function () {
+        return {};
+      },
     },
     elementProps: {
       type: Object,
