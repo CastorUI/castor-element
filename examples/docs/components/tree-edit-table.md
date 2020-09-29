@@ -1,4 +1,4 @@
-## EditTable 可编辑表格
+## TreeEditTable 树形可编辑表格
 
 可编辑表格支持两种模式，手动触发和自动触发两种。手动触发模式需要手动点击编辑按钮才能触发，而自动触发则在点击行时即触发。
 
@@ -88,6 +88,10 @@
             elementProps: {
               width: '200px',
               align: 'left',
+            },
+            extendProps: {
+              autoFocus: true,
+              isExpandColumn: true,
             },
           },
           {
@@ -223,10 +227,11 @@
 
 ### Column ExtendProps Options
 
-| 参数      | 说明                                                                                                                               | 类型    | 可选值 | 默认值 |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------- | ------ | ------ |
-| autoFocus | 当行处于编辑状态时，是否默认选中当前列（只设置一列）                                                                               | boolean | -      | false  |
-| commands  | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling) | array   | -      | []     |
+| 参数           | 说明                                                                                                                               | 类型    | 可选值 | 默认值 |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------- | ------ | ------ |
+| autoFocus      | 当行处于编辑状态时，是否默认选中当前列（只设置一列）                                                                               | boolean | -      | false  |
+| isExpandColumn | 是否折叠列                                                                                                                         | boolean | -      | false  |
+| commands       | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling) | array   | -      | []     |
 
 ### Table Events
 
