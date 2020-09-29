@@ -72,7 +72,7 @@
           size="medium"
           :style="{
             display:'inline-block' , 
-            width: 'calc(100% - ' + (extendProps.isExpandColumn? (editingRow.dataLevel||0):0) * 16 + 'px)'
+            width: 'calc(100% - ' + (extendProps.isExpandColumn && editingRow.children && editingRow.children.length>0 ? (editingRow.dataLevel||0) : 0) * 16 + 'px)'
           }"
           @validate="handleValidateForm"
         >
@@ -86,7 +86,7 @@
               v-if="type==='default' || type==='input'"
               v-model="editingRow[dataField]"
               v-inputFocus="extendProps.autoFocus"
-              class="edit-table-input"
+              v-bind="{style: 'width:100%;', ...elementProps}"
             />
             <el-input-number
               v-else-if="type==='inputNumber'"
@@ -218,11 +218,6 @@ export default {
 .tree-column-form {
   .el-form-item {
     margin-bottom: 0;
-    .edit-table-input {
-      .el-input__inner {
-        padding: 1px;
-      }
-    }
   }
 }
 </style>

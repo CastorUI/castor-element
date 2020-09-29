@@ -2,7 +2,7 @@
 
 可编辑表格支持两种模式，手动触发和自动触发两种。手动触发模式需要手动点击编辑按钮才能触发，而自动触发则在点击行时即触发。
 
-### 自动触发-基础
+### 手动触发-基础
 
 展示自动触发的基本效果。选中行进入到编辑状态，当前行失去焦点时恢复到原始状态。
 
@@ -16,6 +16,7 @@
     :columns="tableColumns"
     :addInside="table.addInside"
     :addCommand="table.addCommand"
+    :validateStatus.sync="table.validateStatus"
     @handleEdit="handleEdit"
     @handleDelete="handleDelete"
     @handleSave="handleSave"
@@ -28,6 +29,7 @@
     data() {
       return {
         table: {
+          validateStatus: true,
           dataList: [
             {
               id: 1,
@@ -122,6 +124,7 @@
                 {
                   text: '编辑',
                   command: 'handleEdit',
+                  disableValidator: () => !this.table.validateStatus,
                   elementProps: {
                     type: 'primary',
                   },
@@ -133,10 +136,12 @@
                     type: 'primary',
                   },
                   visibleValidator: (row) => row.dataLevel < 10,
+                  disableValidator: () => !this.table.validateStatus,
                 },
                 {
                   text: '删除',
                   command: 'handleDelete',
+                  disableValidator: () => !this.table.validateStatus,
                   elementProps: {
                     type: 'danger',
                   },
@@ -146,6 +151,7 @@
                 {
                   text: '保存',
                   command: 'handleSave',
+                  disableValidator: () => !this.table.validateStatus,
                   elementProps: {
                     type: 'primary',
                   },
@@ -153,6 +159,214 @@
                 {
                   text: '取消',
                   command: 'handleCancel',
+                  disableValidator: () => !this.table.validateStatus,
+                  elementProps: {
+                    type: 'primary',
+                  },
+                },
+              ],
+            },
+          },
+        ];
+      },
+      rowEditCommand() {
+        return {
+          command: 'handleEdit',
+        };
+      },
+      rowSaveCommand() {
+        return {
+          command: 'handleSave',
+        };
+      },
+    },
+    methods: {
+      handleAdd() {
+        console.log('add new record');
+      },
+      handleEdit(index, row) {
+        row.operateType = 'edit';
+        console.log('handleEdit', index, row);
+      },
+      handleDelete(index, row) {
+        console.log('handleDelete', index, row);
+      },
+      handleSave(index, row) {
+        row.operateType = 'view';
+        console.log('handleSave', index, row);
+      },
+      handleCancel(index, row) {
+        row.operateType = 'view';
+        console.log('handleCancel', index, row);
+      },
+    },
+  };
+</script>
+```
+
+:::
+
+### 手动触发-校验
+
+展示自动触发的基本效果。选中行进入到编辑状态，当前行失去焦点时恢复到原始状态。
+
+:::demo `editTriggerMode`属性用于配置触发模式，`editCommand`属性用于配置行编辑事件，`saveCommand`用于配置行保存事件。
+
+```html
+<template>
+  <ca-tree-edit-table
+    editTriggerMode="manual"
+    :dataSource="table.dataList"
+    :columns="tableColumns"
+    :addInside="table.addInside"
+    :addCommand="table.addCommand"
+    :validateStatus.sync="table.validateStatus"
+    @handleEdit="handleEdit"
+    @handleDelete="handleDelete"
+    @handleSave="handleSave"
+    @handleCancel="handleCancel"
+  />
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        table: {
+          validateStatus: true,
+          dataList: [
+            {
+              id: 1,
+              date: '2016-05-02',
+              name: '王小虎',
+              address: '上海市普陀区金沙江路 1518 弄',
+            },
+            {
+              id: 2,
+              date: '2016-05-04',
+              name: '王小虎',
+              address: '上海市普陀区金沙江路 1517 弄',
+            },
+            {
+              id: 3,
+              date: '2016-05-01',
+              name: '王小虎',
+              address: '上海市普陀区金沙江路 1519 弄',
+              children: [
+                {
+                  id: 31,
+                  date: '2016-05-01',
+                  name: '王小虎',
+                  address: '上海市普陀区金沙江路 1519 弄',
+                },
+                {
+                  id: 32,
+                  date: '2016-05-01',
+                  name: '王小虎',
+                  address: '上海市普陀区金沙江路 1519 弄',
+                },
+              ],
+            },
+            {
+              id: 4,
+              date: '2016-05-03',
+              name: '王小虎',
+              address: '上海市普陀区金沙江路 1516 弄',
+            },
+          ],
+          addInside: true,
+          addCommand: {
+            text: '新增类别',
+            icon: 'el-icon-circle-plus-outline',
+            visibleValidator: () => true,
+            disableValidator: () => {},
+          },
+        },
+      };
+    },
+    computed: {
+      tableColumns() {
+        return [
+          {
+            type: 'default',
+            label: '日期',
+            dataField: 'date',
+            rules: [{ required: true, message: '不能为空', trigger: 'blur' }],
+            elementProps: {
+              width: '200px',
+              align: 'left',
+            },
+            extendProps: {
+              autoFocus: true,
+              isExpandColumn: true,
+            },
+          },
+          {
+            type: 'default',
+            label: '姓名',
+            dataField: 'name',
+            rules: [{ required: true, message: '不能为空', trigger: 'blur' }],
+            elementProps: {
+              minWidth: '2',
+            },
+          },
+          {
+            type: 'default',
+            label: '地址',
+            dataField: 'address',
+            rules: [{ required: true, message: '不能为空', trigger: 'blur' }],
+            elementProps: {
+              minWidth: '2',
+            },
+          },
+          {
+            type: 'commands',
+            label: '操作',
+            elementProps: {
+              width: '200px',
+              fixed: 'right',
+            },
+            extendProps: {
+              commands: [
+                {
+                  text: '编辑',
+                  command: 'handleEdit',
+                  disableValidator: () => !this.table.validateStatus,
+                  elementProps: {
+                    type: 'primary',
+                  },
+                },
+                {
+                  text: '添加子类',
+                  commandType: 'addSub',
+                  disableValidator: () => !this.table.validateStatus,
+                  elementProps: {
+                    type: 'primary',
+                  },
+                  visibleValidator: (row) => row.dataLevel < 10,
+                },
+                {
+                  text: '删除',
+                  command: 'handleDelete',
+                  disableValidator: () => !this.table.validateStatus,
+                  elementProps: {
+                    type: 'danger',
+                  },
+                },
+              ],
+              editableCommands: [
+                {
+                  text: '保存',
+                  command: 'handleSave',
+                  disableValidator: () => !this.table.validateStatus,
+                  elementProps: {
+                    type: 'primary',
+                  },
+                },
+                {
+                  text: '取消',
+                  command: 'handleCancel',
+                  disableValidator: () => !this.table.validateStatus,
                   elementProps: {
                     type: 'primary',
                   },
