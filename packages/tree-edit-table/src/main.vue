@@ -166,11 +166,11 @@ export default {
       };
       this.newId = this.newId - 1;
       row.children.push(newRow);
-      this.editingRow = newRow;
       this.tableHackVisible = false;
       this.$nextTick(() => {
         this.tableHackVisible = true;
         this.$nextTick(() => {
+          this.editingRow = newRow;
           this.expandRows();
         });
       });
@@ -210,6 +210,7 @@ export default {
           children: [],
           parentRow: null,
         };
+        this.editingRow = newRow;
         this.newId = this.newId - 1;
         if (this.addInsidePosition === 'beforeFirst') {
           this.decoratedDataSource.unshift(newRow);
