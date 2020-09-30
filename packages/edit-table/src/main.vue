@@ -34,6 +34,7 @@
           :editing-row="editingRow"
           :handle-emit-event="handleEmitEvent"
           :handle-validate-form="handleValidateForm"
+          :custom-components="customComponents"
           :element-props="item.elementProps"
           :extend-props="item.extendProps"
           v-on="$listeners"
@@ -125,6 +126,12 @@ export default {
     getList: {
       type: Function,
       default: () => {},
+    },
+    customComponents: {
+      type: Object,
+      default: function () {
+        return {};
+      },
     },
     elementProps: {
       type: Object,

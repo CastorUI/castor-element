@@ -1,9 +1,18 @@
 <template>
   <el-table-column
     v-if="type==='expand'"
-    :label="label"
-    v-bind="{align: 'center', ...elementProps}"
-  />
+    type="expand"
+    v-bind="elementProps"
+  >
+    <template slot-scope="scope">
+      <component
+        :is="customComponents[extendProps.componentKey]"
+        :component-data.sync="scope.row[dataField]"
+        :model="scope.row"
+        v-bind="elementProps"
+      />
+    </template>
+  </el-table-column>
   <el-table-column
     v-else-if="type==='index'"
     :type="type"
@@ -188,6 +197,12 @@ export default {
     editingRow: {
       type: Object,
       default: null,
+    },
+    customComponents: {
+      type: Object,
+      default: function () {
+        return {};
+      },
     },
     elementProps: {
       type: Object,
