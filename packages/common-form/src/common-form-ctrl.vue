@@ -196,6 +196,24 @@
       }"
       @select="onChange && onChange.call(this,model)"
     />
+    <el-upload
+      v-else-if="type==='avatarUploader'"
+      class="avatar-uploader"
+      v-bind="elementProps"
+    >
+      <img
+        v-if="model[dataField]"
+        :src="model[dataField]"
+        :style="{
+          height: extendProps.height || '178px',
+          width: extendProps.width || '178px',
+        }"
+      >
+      <i
+        v-else
+        class="el-icon-plus avatar-uploader-icon"
+      />
+    </el-upload>
     <el-input
       v-else
       v-model="model[dataField]"
@@ -222,62 +240,64 @@ export default {
   props: {
     type: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     label: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     operateType: {
       type: String,
-      default: 'add'
+      default: 'add',
     },
     model: {
       type: Object,
-      default: undefined
+      default: undefined,
     },
     dataField: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     width: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     height: {
       type: String,
-      default: '36px'
+      default: '36px',
     },
     disableValidator: {
       type: Function,
-      default: undefined
+      default: undefined,
     },
     visibleValidator: {
       type: Function,
-      default: () => true
+      default: () => true,
     },
     customComponents: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
-      }
+      },
     },
     elementProps: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     extendProps: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     onChange: {
       type: Function,
-      default: undefined
-    }
+      default: undefined,
+    },
   },
   computed: {
     heightStyle() {
-      return ['custom', 'groupTitle', 'textArea'].indexOf(this.type) > -1
+      return ['custom', 'groupTitle', 'textArea', 'avatarUploader'].indexOf(
+        this.type
+      ) > -1
         ? ''
         : `height:${this.height};`;
     },
@@ -293,7 +313,7 @@ export default {
                   const start = new Date();
                   start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
                   picker.$emit('pick', [start, end]);
-                }
+                },
               },
               {
                 text: '最近一个月',
@@ -302,7 +322,7 @@ export default {
                   const start = new Date();
                   start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
                   picker.$emit('pick', [start, end]);
-                }
+                },
               },
               {
                 text: '最近三个月',
@@ -311,9 +331,9 @@ export default {
                   const start = new Date();
                   start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
                   picker.$emit('pick', [start, end]);
-                }
-              }
-            ]
+                },
+              },
+            ],
           }
         );
       } else if (this.type === 'monthRange') {
@@ -324,7 +344,7 @@ export default {
                 text: '本月',
                 onClick(picker) {
                   picker.$emit('pick', [new Date(), new Date()]);
-                }
+                },
               },
               {
                 text: '今年至今',
@@ -332,7 +352,7 @@ export default {
                   const end = new Date();
                   const start = new Date(new Date().getFullYear(), 0);
                   picker.$emit('pick', [start, end]);
-                }
+                },
               },
               {
                 text: '最近六个月',
@@ -341,15 +361,15 @@ export default {
                   const start = new Date();
                   start.setMonth(start.getMonth() - 6);
                   picker.$emit('pick', [start, end]);
-                }
-              }
-            ]
+                },
+              },
+            ],
           }
         );
       } else {
         return {};
       }
-    }
+    },
   },
   methods: {
     handleClear() {
@@ -369,7 +389,7 @@ export default {
       cb(results);
     },
     createFilter(queryString) {
-      return option => {
+      return (option) => {
         return (
           option.value.toLowerCase().indexOf(queryString.toLowerCase()) >= 0
         );
@@ -377,14 +397,38 @@ export default {
     },
     trim(str) {
       return str.replace(/^(\s|\u00A0)+/, '').replace(/(\s|\u00A0)+$/, '');
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">
 .complexInput {
   .el-input-group__append {
     padding: 0 5px;
+  }
+}
+.avatar-uploader {
+  // width: 178px;
+  // height: 178px;
+  // display: block;
+  overflow: hidden;
+  .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    .avatar-uploader-icon {
+      font-size: 28px;
+      color: #8c939d;
+      width: 178px;
+      height: 178px;
+      line-height: 178px;
+      text-align: center;
+    }
+    &:hover {
+      border-color: #409eff;
+    }
   }
 }
 </style>

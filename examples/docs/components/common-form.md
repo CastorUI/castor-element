@@ -120,6 +120,8 @@
             design_cost: undefined,
             create_date_range: undefined,
             remarks: undefined,
+            user_avatar:
+              'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
           },
           commands: [
             {
@@ -275,6 +277,19 @@
                 dataField: 'user_type',
                 options: this.optionsMap['user_type'],
               },
+            },
+          },
+          {
+            type: 'avatarUploader',
+            label: '用户头像',
+            dataField: 'user_avatar',
+            columnSpan: 2,
+            elementProps: {
+              action: 'https://jsonplaceholder.typicode.com/posts/',
+            },
+            extendProps: {
+              width: '300px',
+              height: '300px',
             },
           },
         ];
@@ -888,24 +903,25 @@
 
 ### Field Type Options
 
-| 类型          | 说明           |
-| ------------- | -------------- |
-| text          | 只读文本       |
-| input         | 输入框         |
-| autocomplete  | 自动填充输入框 |
-| inputNumber   | 数字输入框     |
-| textArea      | 多行文本       |
-| select        | 下拉框         |
-| multiSelect   | 多选下拉框     |
-| groupedSelect | 分组选择下拉框 |
-| cascader      | 级联选择器     |
-| switch        | 开关           |
-| radioGroup    | 单选框组       |
-| checkboxGroup | 复选框组       |
-| date          | 日期选择器     |
-| dateRange     | 日期区间选择器 |
-| dateTimeRange | 时间区间选择器 |
-| hr            | 分行           |
-| groupTitle    | 组标题         |
-| complexInput  | 组合输入框     |
-| custom        | 定制组件       |
+| 类型           | 说明           |
+| -------------- | -------------- |
+| text           | 只读文本       |
+| input          | 输入框         |
+| autocomplete   | 自动填充输入框 |
+| inputNumber    | 数字输入框     |
+| textArea       | 多行文本       |
+| select         | 下拉框         |
+| multiSelect    | 多选下拉框     |
+| groupedSelect  | 分组选择下拉框 |
+| cascader       | 级联选择器     |
+| switch         | 开关           |
+| radioGroup     | 单选框组       |
+| checkboxGroup  | 复选框组       |
+| date           | 日期选择器     |
+| dateRange      | 日期区间选择器 |
+| dateTimeRange  | 时间区间选择器 |
+| hr             | 分行           |
+| groupTitle     | 组标题         |
+| complexInput   | 组合输入框     |
+| custom         | 定制组件       |
+| avatarUploader | 用户头像上传   |
