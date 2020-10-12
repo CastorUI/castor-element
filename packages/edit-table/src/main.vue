@@ -1,11 +1,10 @@
 <template>
   <div class="common-edit-table-container">
-    <div class="table-commands">
+    <div class="table-add-command">
       <el-button
         v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
-        class="table-add-command"
         :disabled="editing || (addCommand.disableValidator && addCommand.disableValidator.call(this))"
-        v-bind="{type: 'text', icon: 'el-icon-circle-plus-outline', ...addCommand.elementProps}"
+        v-bind="{type: 'primary', icon: 'el-icon-plus', ...addCommand.elementProps}"
         @click="handleAdd"
       >
         {{ addCommand.text }}
@@ -297,11 +296,15 @@ export default {
     padding-left: 5px;
   }
 
-  .table-commands {
-    .table-add-command {
+  .table-add-command {
+    float: right;
+    margin: 6px;
+    button {
       font-size: 14px;
+      padding: 8px 10px;
     }
   }
+
   .table-content {
     .append-content {
       font-weight: 500;
