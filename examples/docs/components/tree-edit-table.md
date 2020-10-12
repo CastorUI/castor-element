@@ -430,14 +430,14 @@
 
 ### Column Options
 
-| 参数         | 说明                                                                                                        | 类型    | 可选值                                                              | 默认值  |
-| ------------ | ----------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------- | ------- |
-| type         | 类型                                                                                                        | string  | default / selection / index / link / keyToValue / status / commands | default |
-| label        | 标题                                                                                                        | string  | —                                                                   | 10      |
-| dataField    | 绑定字段                                                                                                    | string  | —                                                                   | 0       |
-| editable     | 是否可编辑                                                                                                  | boolean | —                                                                   | false   |
-| elementProps | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object  | -                                                                   | {}      |
-| extendProps  | 扩展属性，参考 `Column ExtendProps Options`                                                                 | object  | -                                                                   | {}      |
+| 参数         | 说明                                                                                                        | 类型    | 可选值                                                             | 默认值  |
+| ------------ | ----------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------ | ------- |
+| type         | 类型                                                                                                        | string  | default / index / expand / input / inputNumber / select / commands | default |
+| label        | 标题                                                                                                        | string  | —                                                                  | 10      |
+| dataField    | 绑定字段                                                                                                    | string  | —                                                                  | 0       |
+| editable     | 是否可编辑                                                                                                  | boolean | —                                                                  | false   |
+| elementProps | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object  | -                                                                  | {}      |
+| extendProps  | 扩展属性，参考 `Column ExtendProps Options`                                                                 | object  | -                                                                  | {}      |
 
 ### Column ExtendProps Options
 
