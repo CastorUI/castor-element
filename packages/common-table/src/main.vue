@@ -1,17 +1,8 @@
 <template>
   <div class="common-table-container">
     <div class="table-commands">
-      <el-button
-        v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
-        class="table-add-command"
-        :disabled="addCommand.disableValidator && addCommand.disableValidator.call(this)"
-        v-bind="{type: 'text', icon: 'el-icon-circle-plus-outline', ...addCommand.elementProps}"
-        @click="$emit(addCommand.command)"
-      >
-        {{ addCommand.text }}
-      </el-button>
       <el-button-group
-        v-show="customCommands"
+        v-show="customCommands && customCommands.length"
         class="table-custom-commands"
       >
         <el-button
@@ -24,6 +15,21 @@
           {{ item.text }}
         </el-button>
       </el-button-group>
+      <div
+        class="table-add-command"
+        :class="{
+          'add-divider':addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this)) && customCommands && customCommands.length
+        }"
+      >
+        <el-button
+          v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
+          :disabled="addCommand.disableValidator && addCommand.disableValidator.call(this)"
+          v-bind="{type: 'primary', icon: 'el-icon-plus', ...addCommand.elementProps}"
+          @click="$emit(addCommand.command)"
+        >
+          {{ addCommand.text }}
+        </el-button>
+      </div>
     </div>
     <div class="table-content">
       <el-table
@@ -180,8 +186,18 @@ export default {
   margin-bottom: 10px;
   .table-commands {
     margin-top: 10px;
+    overflow: hidden;
     .table-add-command {
-      font-size: 14px;
+      float: right;
+      margin: 6px;
+      button {
+        font-size: 14px;
+        padding: 8px 10px;
+      }
+      &.add-divider {
+        padding-right: 20px;
+        border-right: 1px solid rgba(0, 0, 0, 0.06);
+      }
     }
     .table-custom-commands {
       float: right;

@@ -927,6 +927,8 @@
     :dataSource="table.dataList"
     :columns="tableColumns"
     :customCommands="table.customCommands"
+    :addCommand="table.addCommand"
+    @handleAdd="handleAdd"
     @handleStar="handleStar"
     @handleUnstar="handleUnstar"
   />
@@ -972,6 +974,13 @@
               },
             },
           ],
+          addCommand: {
+            text: '新增任务',
+            command: 'handleAdd',
+            visibleValidator: () => true,
+            disableValidator: () => {},
+            elementProps: {},
+          },
         },
       };
     },
@@ -1114,7 +1123,7 @@
 
 | 参数         | 说明                                                                                                        | 类型   | 可选值                                                                       | 默认值  |
 | ------------ | ----------------------------------------------------------------------------------------------------------- | ------ | ---------------------------------------------------------------------------- | ------- |
-| type         | 类型(为expand时，父层表格列禁用fixed属性)                                                                                                       | string | default / selection / index / link / keyToValue / status / expand / commands | default |
+| type         | 类型(为 expand 时，父层表格列禁用 fixed 属性)                                                               | string | default / selection / index / link / keyToValue / status / expand / commands | default |
 | label        | 标题                                                                                                        | string | —                                                                            | 10      |
 | dataField    | 绑定字段                                                                                                    | string | —                                                                            | 0       |
 | elementProps | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object | -                                                                            | {}      |
