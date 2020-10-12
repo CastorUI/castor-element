@@ -1,11 +1,10 @@
 <template>
   <div class="tree-table-container">
-    <div class="table-commands">
+    <div class="table-add-command">
       <el-button
         v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
-        class="table-add-command"
         :disabled="editing || (addCommand.disableValidator && addCommand.disableValidator.call(this))"
-        v-bind="{type: 'text', icon: 'el-icon-circle-plus-outline', ...addCommand.elementProps}"
+        v-bind="{type: 'primary', icon: 'el-icon-plus', ...addCommand.elementProps}"
         @click="handleAdd"
       >
         {{ addCommand.text }}
@@ -285,9 +284,12 @@ export default {
 <style lang="scss" >
 .tree-table-container {
   margin-bottom: 10px;
-  .table-commands {
-    .table-add-command {
+  .table-add-command {
+    float: right;
+    margin: 6px;
+    button {
       font-size: 14px;
+      padding: 8px 10px;
     }
   }
   .el-table__append-wrapper {
