@@ -1017,6 +1017,9 @@
       },
     },
     methods: {
+      handleAdd() {
+        console.log('add new record');
+      },
       handleStar(multipleSelection) {
         console.log('star multipleSelection', multipleSelection);
       },
