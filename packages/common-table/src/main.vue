@@ -181,9 +181,7 @@ export default {
 
 <style lang="scss">
 .common-table-container {
-  padding: 0 24px;
   overflow: hidden;
-  margin-bottom: 10px;
   .table-commands {
     margin-top: 10px;
     overflow: hidden;

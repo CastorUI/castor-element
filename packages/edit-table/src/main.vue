@@ -277,7 +277,6 @@ export default {
 
 <style lang="scss" >
 .common-edit-table-container {
-  margin-bottom: 10px;
   // 暂时解决不同缩放比例下表头行内线消失的问题
   .el-table th.is-leaf {
     border-bottom: 1.2px solid #ebeef5;

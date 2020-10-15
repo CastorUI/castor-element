@@ -122,65 +122,65 @@ import CommonColumn from '../../common-table/src/common-column';
 export default {
   name: 'CaReportTable',
   components: {
-    'common-column': CommonColumn
+    'common-column': CommonColumn,
   },
   props: {
     loading: {
       type: Boolean,
-      default: false
+      default: false,
     },
     dataSource: {
       type: Array,
-      default: function() {
+      default: function () {
         return [];
-      }
+      },
     },
     columns: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     pagination: {
       type: Object,
-      default: function() {
+      default: function () {
         return {
           pageIndex: 1,
           pageSize: 10,
-          total: 0
+          total: 0,
         };
-      }
+      },
     },
     addCommand: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     customCommands: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     getList: {
       type: Function,
-      default: () => {}
+      default: () => {},
     },
     dynamicFields: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     elementProps: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
-      }
-    }
+      },
+    },
   },
   data() {
     return {
       hackReset: true,
       multipleSelection: [],
-      dynamicCloumns: []
+      dynamicCloumns: [],
     };
   },
   computed: {
-    pageSizes: function() {
+    pageSizes: function () {
       const pageSizeArray = [10, 15, 20, 30, 50];
       return pageSizeArray.indexOf(this.pagination.pageSize) > -1
         ? pageSizeArray
@@ -189,13 +189,13 @@ export default {
     defaultSort() {
       return {
         prop: this.pagination.sortField,
-        order: this.pagination.order
+        order: this.pagination.order,
       };
-    }
+    },
   },
   watch: {
     dynamicFields: {
-      handler: function() {
+      handler: function () {
         this.hackReset = false;
         this.dynamicCloumns = this.deepCopy(this.columns);
         this.dynamicCloumns = this.filterColumnsByDynamicFields(
@@ -205,18 +205,18 @@ export default {
           this.hackReset = true;
         });
       },
-      immediate: true
-    }
+      immediate: true,
+    },
   },
   methods: {
     filterColumnsByDynamicFields(dynamicCloumns) {
       dynamicCloumns = dynamicCloumns.filter(
-        r =>
+        (r) =>
           r.showType !== 'dynamic' ||
           (r.showType === 'dynamic' &&
-            this.dynamicFields.some(f => f === r.label))
+            this.dynamicFields.some((f) => f === r.label))
       );
-      dynamicCloumns.forEach(r => {
+      dynamicCloumns.forEach((r) => {
         if (r.children) {
           r.children = this.filterColumnsByDynamicFields(r.children);
         }
@@ -257,17 +257,14 @@ export default {
         }
       }
       return result;
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .report-table-container {
   background: #fff;
-  padding: 0 24px;
-  margin-top: 16px;
-  margin-bottom: 10px;
   overflow: hidden;
   .table-commands {
     margin-top: 10px;

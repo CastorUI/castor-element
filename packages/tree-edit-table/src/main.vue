@@ -283,7 +283,6 @@ export default {
 
 <style lang="scss" >
 .tree-table-container {
-  margin-bottom: 10px;
   .table-add-command {
     float: right;
     margin: 6px;
