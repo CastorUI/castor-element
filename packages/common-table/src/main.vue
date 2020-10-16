@@ -64,6 +64,7 @@
         :page-size="pagination.pageSize"
         :page-sizes="pageSizes"
         :total="pagination.total"
+        style="margin: 10px 0;"
         v-bind="{layout: 'total,sizes, prev, pager, next',hideOnSinglePage: true, ...pagination.elementProps}"
         @size-change="pageSize => handlePageSizeChange(pageSize)"
         @current-change="pageIndex => handlePageIndexChange(pageIndex)"
@@ -233,7 +234,6 @@ export default {
     }
   }
   .common-pagination-container {
-    margin: 10px 0;
     text-align: right;
   }
 }
