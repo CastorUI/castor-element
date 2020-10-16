@@ -1,6 +1,12 @@
 <template>
   <div class="common-table-container">
-    <div class="table-commands">
+    <div
+      v-if="title || (addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))) ||(customCommands && customCommands.length)"
+      class="table-append-header"
+    >
+      <div class="table-title">
+        {{ title }}
+      </div>
       <el-button-group
         v-show="customCommands && customCommands.length"
         class="table-custom-commands"
@@ -84,6 +90,10 @@ export default {
     loading: {
       type: Boolean,
       default: false,
+    },
+    title: {
+      type: String,
+      default: '',
     },
     dataSource: {
       type: Array,
@@ -183,16 +193,18 @@ export default {
 <style lang="scss">
 .common-table-container {
   overflow: hidden;
-  .table-commands {
-    margin-top: 10px;
+  .table-append-header {
+    height: 44px;
+    line-height: 44px;
+    padding: 10px 0;
     overflow: hidden;
+    .table-title {
+      float: left;
+      font-size: 18px;
+      font-weight: bold;
+    }
     .table-add-command {
       float: right;
-      margin: 6px;
-      button {
-        font-size: 14px;
-        padding: 8px 10px;
-      }
       &.add-divider {
         padding-right: 20px;
         border-right: 1px solid rgba(0, 0, 0, 0.06);
@@ -200,9 +212,12 @@ export default {
     }
     .table-custom-commands {
       float: right;
+      height: 100%;
       button {
+        height: 100%;
+        line-height: 100%;
         font-size: 14px;
-        padding: 14px 10px;
+        padding: 0 10px;
       }
       .left-border:after {
         content: '';
@@ -223,6 +238,7 @@ export default {
       }
     }
   }
+
   .table-content {
     overflow: auto;
     width: 100%;

@@ -924,6 +924,7 @@
 ```html
 <template>
   <ca-common-table
+    :title="table.title"
     :dataSource="table.dataList"
     :columns="tableColumns"
     :customCommands="table.customCommands"
@@ -939,6 +940,7 @@
     data() {
       return {
         table: {
+          title: '示例表格',
           dataList: [
             {
               id: 1001,
@@ -1114,13 +1116,14 @@
 | 参数           | 说明                                                                                                                   | 类型     | 可选值 | 默认值 |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
 | loading        | 是否显示 loading                                                                                                       | boolean  | —      | false  |
+| title          | 表格标题                                                                                                               | string   | —      | —      |
 | dataSource     | 数据源                                                                                                                 | array    | —      | []     |
 | columns        | 列集合 [详情](http://castor.polarwin.cn/#/component/common-table#column-options)                                       | array    | —      | []     |
 | pagination     | 分页对象 [详情](http://castor.polarwin.cn/#/component/sharing-config#pagination-options)                               | object   | —      | {}     |
 | addCommand     | 新增事件对象 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling)                   | object   | —      | {}     |
 | customCommands | 自定义事件，显示在表格上方右侧 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling) | array    | —      | []     |
 | getList        | 查询数据方法                                                                                                           | function | —      | —      |
-| elementProps   | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing)            | object   | -      | -      |
+| elementProps   | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing)            | object   | —      | —      |
 
 ### Column Options
 
