@@ -653,6 +653,7 @@
   <ca-edit-table
     editTriggerMode="auto"
     :addInside="table.addInside"
+    :title="table.title"
     :dataSource="table.dataList"
     :columns="tableColumns"
     :validateStatus.sync="table.validateStatus"
@@ -686,6 +687,7 @@
         },
         table: {
           validateStatus: true,
+          title: '示例表格',
           dataList: [
             {
               id: 1001,

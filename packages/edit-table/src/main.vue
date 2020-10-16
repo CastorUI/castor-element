@@ -1,14 +1,19 @@
 <template>
   <div class="common-edit-table-container">
-    <div class="table-add-command">
-      <el-button
-        v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
-        :disabled="editing || (addCommand.disableValidator && addCommand.disableValidator.call(this))"
-        v-bind="{type: 'primary', icon: 'el-icon-plus', ...addCommand.elementProps}"
-        @click="handleAdd"
-      >
-        {{ addCommand.text }}
-      </el-button>
+    <div class="table-append-header">
+      <div class="table-title">
+        {{ title }}
+      </div>
+      <div class="table-add-command">
+        <el-button
+          v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
+          :disabled="editing || (addCommand.disableValidator && addCommand.disableValidator.call(this))"
+          v-bind="{type: 'primary', icon: 'el-icon-plus', ...addCommand.elementProps}"
+          @click="handleAdd"
+        >
+          {{ addCommand.text }}
+        </el-button>
+      </div>
     </div>
     <div class="table-content">
       <el-table
@@ -80,6 +85,10 @@ export default {
     loading: {
       type: Boolean,
       default: false,
+    },
+    title: {
+      type: String,
+      default: '',
     },
     dataSource: {
       type: Array,
@@ -296,12 +305,17 @@ export default {
     padding-left: 5px;
   }
 
-  .table-add-command {
-    float: right;
-    margin: 6px;
-    button {
-      font-size: 14px;
-      padding: 8px 10px;
+  .table-append-header {
+    height: 64px;
+    line-height: 64px;
+    overflow: hidden;
+    .table-title {
+      float: left;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .table-add-command {
+      float: right;
     }
   }
 
