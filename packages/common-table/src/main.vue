@@ -196,7 +196,7 @@ export default {
   .table-append-header {
     height: 44px;
     line-height: 44px;
-    padding: 10px 0;
+    margin: 10px 0;
     overflow: hidden;
     .table-title {
       float: left;
