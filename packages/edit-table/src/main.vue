@@ -1,6 +1,9 @@
 <template>
   <div class="common-edit-table-container">
-    <div class="table-append-header">
+    <div
+      v-if="title || (addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this)))"
+      class="table-append-header"
+    >
       <div class="table-title">
         {{ title }}
       </div>
@@ -20,7 +23,7 @@
         v-loading="loading"
         row-key="id"
         :data="dataSource"
-        style="min-width:600px;height:auto;padding:1px;"
+        style="height:auto;padding:1px;"
         v-bind="{border: true, ...elementProps}"
         @row-click="handleRowClick"
         @current-change="handleCurrentChange"
@@ -306,8 +309,9 @@ export default {
   }
 
   .table-append-header {
-    height: 64px;
-    line-height: 64px;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 12px;
     overflow: hidden;
     .table-title {
       float: left;

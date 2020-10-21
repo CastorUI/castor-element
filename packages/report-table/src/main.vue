@@ -33,7 +33,7 @@
         v-loading="loading"
         :data="dataSource"
         :default-sort="defaultSort"
-        style="width:100%;min-width:700px;height:auto;"
+        style="width:100%;height:auto;"
         v-bind="{border: true, ...elementProps}"
         @row-click="row => $emit('row-click', row)"
         @selection-change="multipleSelection => handleSelectionChange(multipleSelection)"

@@ -15,7 +15,7 @@
       ref="elTreeTable"
       v-loading="loading"
       :data="decoratedDataSource"
-      style="min-width:600px;height:auto;padding:1px;"
+      style="height:auto;padding:1px;"
       v-bind="{border: true,rowKey:'id', ...elementProps}"
       @row-click="handleRowClick"
       @current-change="handleCurrentChange"
