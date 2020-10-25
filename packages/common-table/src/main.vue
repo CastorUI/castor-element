@@ -39,6 +39,7 @@
     </div>
     <div class="table-content">
       <el-table
+        ref="table"
         v-loading="loading"
         row-key="id"
         :data="dataSource"
