@@ -888,6 +888,7 @@
 | rules            | 字段校验规则                                                                                                | array    | -      | []        |
 | visibleValidator | 可见性校验,返回 `true` 时可见                                                                               | function | —      | —         |
 | disableValidator | 可用性校验,返回 `true` 时禁用                                                                               | function | —      | —         |
+| onChange         | 值变动时回调事件                                                                                            | function | —      | —         |
 | elementProps     | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | string   | -      | ascending |
 | extendProps      | 扩展属性，参考 `Field ExtendProps Options`                                                                  | object   | -      | {}        |
 
