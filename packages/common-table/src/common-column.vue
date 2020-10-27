@@ -31,9 +31,8 @@
         v-for="(item,index) of extendProps.commands"
         v-show="!item.visibleValidator || item.visibleValidator.call(this, scope.row)"
         :key="index"
-        type="primary"
         :disabled="item.disableValidator && item.disableValidator.call(this,scope.row)"
-        v-bind="item.elementProps"
+        v-bind="{type:'primary',...item.elementProps}"
         @click.stop="$emit(item.command,scope.$index,scope.row)"
       >
         {{ item.text }}
