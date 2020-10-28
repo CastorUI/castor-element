@@ -885,22 +885,22 @@
 | label            | 标签                                                                                                        | string   | —      | 10        |
 | dataField        | 绑定字段                                                                                                    | string   | —      | 0         |
 | columnSpan       | 字段所占列数                                                                                                | number   | —      | 1         |
-| rules            | 字段校验规则                                                                                                | array    | -      | []        |
+| rules            | 字段校验规则                                                                                                | array    | —      | []        |
 | visibleValidator | 可见性校验,返回 `true` 时可见                                                                               | function | —      | —         |
 | disableValidator | 可用性校验,返回 `true` 时禁用                                                                               | function | —      | —         |
-| onChange         | 值变动时回调事件                                                                                            | function | —      | —         |
-| elementProps     | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | string   | -      | ascending |
-| extendProps      | 扩展属性，参考 `Field ExtendProps Options`                                                                  | object   | -      | {}        |
+| elementProps     | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | string   | —      | ascending |
+| extendProps      | 扩展属性，参考 `Field ExtendProps Options`                                                                  | object   | —      | {}        |
 
 ### Field ExtendProps Options
 
-| 参数         | 说明                                                                                              | 类型   | 可选值 | 默认值 |
-| ------------ | ------------------------------------------------------------------------------------------------- | ------ | ------ | ------ |
-| groupTitle   | 分组标题名称，只限于 `type` 为 `groupTitle`                                                       | string | -      | —      |
-| componentKey | 自定义组件名称，只限于 `type` 为 `custom`                                                         | string | -      | —      |
-| options      | 选项数据源,用于`type` 为 `select multiSelect groupedSelect radioGroup checkboxGroup text cascade` | array  | -      | []     |
-| currentField | 当前字段，只限于 `type` 为 `complexInput`                                                         | object | -      | —      |
-| appendField  | 附加字段，只限于 `type` 为 `complexInput`                                                         | object | -      | —      |
+| 参数         | 说明                                                                                              | 类型     | 可选值 | 默认值 |
+| ------------ | ------------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
+| groupTitle   | 分组标题名称，只限于 `type` 为 `groupTitle`                                                       | string   | —      | —      |
+| componentKey | 自定义组件名称，只限于 `type` 为 `custom`                                                         | string   | —      | —      |
+| options      | 选项数据源,用于`type` 为 `select multiSelect groupedSelect radioGroup checkboxGroup text cascade` | array    | —      | []     |
+| currentField | 当前字段，只限于 `type` 为 `complexInput`                                                         | object   | —      | —      |
+| appendField  | 附加字段，只限于 `type` 为 `complexInput`                                                         | object   | —      | —      |
+| onChange     | 值变动时回调事件                                                                                  | function | —      | —      |
 
 ### Field Type Options
 

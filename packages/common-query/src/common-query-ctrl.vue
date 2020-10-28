@@ -16,6 +16,7 @@
         filterable: true,
         ...elementProps
       }"
+      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
     >
       <el-option
         v-for="option in extendProps.options"
@@ -38,17 +39,20 @@
         style: 'width:100%;',
         ...elementProps
       }"
+      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
     />
     <el-switch
       v-else-if="type==='switch'"
       v-model="model[dataField]"
       v-bind="{style: 'width:40px;', ...elementProps}"
+      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
     />
     <el-checkbox-group
       v-else-if="type==='checkboxGroup'"
       v-model="model[dataField]"
       class="query-item"
       v-bind="{style: 'width:100%;', ...elementProps}"
+      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
     >
       <el-checkbox
         v-for="option in extendProps.options"
@@ -65,6 +69,7 @@
       :from-field="extendProps.fromField"
       :to-field="extendProps.toField"
       :element-props="elementProps"
+      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
     />
     <el-input
       v-else
@@ -76,6 +81,7 @@
         clearable: true,
         ...elementProps
       }"
+      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
     />
   </el-form-item>
 </template>
@@ -86,46 +92,46 @@ export default {
   props: {
     type: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     label: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     model: {
       type: Object,
-      default: undefined
+      default: undefined,
     },
     dataField: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     width: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     height: {
       type: String,
-      default: '36px'
+      default: '36px',
     },
     elementProps: {
       type: Object,
-      default: function() {
+      default: function () {
         return {
-          valueFormat: 'yyyy-MM-dd'
+          valueFormat: 'yyyy-MM-dd',
         };
-      }
+      },
     },
     extendProps: {
       type: Object,
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
   computed: {
     heightStyle() {
       return `height:${this.height};`;
     },
-    pickerOptions: function() {
+    pickerOptions: function () {
       if (this.type === 'dateTimeRange' || this.type === 'dateRange') {
         return (
           this.elementProps.pickerOptions || {
@@ -137,7 +143,7 @@ export default {
                   const start = new Date();
                   start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
                   picker.$emit('pick', [start, end]);
-                }
+                },
               },
               {
                 text: '最近一个月',
@@ -146,7 +152,7 @@ export default {
                   const start = new Date();
                   start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
                   picker.$emit('pick', [start, end]);
-                }
+                },
               },
               {
                 text: '最近三个月',
@@ -155,9 +161,9 @@ export default {
                   const start = new Date();
                   start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
                   picker.$emit('pick', [start, end]);
-                }
-              }
-            ]
+                },
+              },
+            ],
           }
         );
       } else if (this.type === 'monthRange') {
@@ -168,7 +174,7 @@ export default {
                 text: '本月',
                 onClick(picker) {
                   picker.$emit('pick', [new Date(), new Date()]);
-                }
+                },
               },
               {
                 text: '今年至今',
@@ -176,7 +182,7 @@ export default {
                   const end = new Date();
                   const start = new Date(new Date().getFullYear(), 0);
                   picker.$emit('pick', [start, end]);
-                }
+                },
               },
               {
                 text: '最近六个月',
@@ -185,16 +191,16 @@ export default {
                   const start = new Date();
                   start.setMonth(start.getMonth() - 6);
                   picker.$emit('pick', [start, end]);
-                }
-              }
-            ]
+                },
+              },
+            ],
           }
         );
       } else {
         return {};
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style rel="stylesheet/scss" lang="scss">

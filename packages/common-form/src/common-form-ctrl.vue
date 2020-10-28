@@ -11,7 +11,7 @@
       :disabled="disableValidator && disableValidator.call(this,model)"
       :multiple="type==='multiSelect'"
       v-bind="{clearable: true, filterable: true,style: 'width:100%;',allowCreate: false, placeholder: `选择${label}`, ...elementProps}"
-      @change="onChange && onChange.call(this,model)"
+      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
       @clear="handleClear"
     >
       <el-option
@@ -26,7 +26,7 @@
       v-model="model[dataField]"
       :disabled="disableValidator && disableValidator.call(this,model)"
       v-bind="{clearable: true, filterable: true,style: 'width:100%;',allowCreate: false, placeholder: `选择${label}`, ...elementProps}"
-      @change="onChange && onChange.call(this,model)"
+      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
       @clear="handleClear"
     >
       <el-option-group
@@ -46,7 +46,7 @@
       v-else-if="type==='radioGroup'"
       v-model="model[dataField]"
       v-bind="elementProps"
-      @change="onChange && onChange.call(this,model)"
+      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
     >
       <el-radio
         v-for="option in extendProps.options"
@@ -61,7 +61,7 @@
       v-model="model[dataField]"
       :disabled="disableValidator && disableValidator.call(this,model)"
       v-bind="{style: 'width:100%; height: 36px;', ...elementProps}"
-      @change="onChange && onChange.call(this,model)"
+      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
     >
       <el-checkbox
         v-for="option in extendProps.options"
@@ -96,7 +96,7 @@
       v-else-if="type==='switch'"
       v-model="model[dataField]"
       :disabled="disableValidator && disableValidator.call(this,model)"
-      @change="onChange && onChange.call(this,model)"
+      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
     />
     <el-date-picker
       v-else-if="type==='dateTimeRange' || type==='dateRange' || type==='monthRange'|| type==='date' || type==='month'"
@@ -112,7 +112,7 @@
         style: 'width:100%;',
         ...elementProps
       }"
-      @change="onChange && onChange.call(this,model)"
+      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
     />
     <el-input-number
       v-else-if="type==='inputNumber'"
@@ -125,7 +125,7 @@
         style: 'width:100%;',
         ...elementProps
       }"
-      @change="onChange && onChange.call(this,model)"
+      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
     />
     <el-cascader
       v-else-if="type==='cascader'"
@@ -138,7 +138,7 @@
         style: 'width:100%;',
         ...elementProps
       }"
-      @change="onChange && onChange.call(this,model)"
+      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
     />
     <el-input
       v-else-if="type==='complexInput' && extendProps.currentField.options.filter(r=>r.value === model[extendProps.currentField.dataField]).length > 0"
@@ -149,7 +149,7 @@
         style: 'width:100%;',
         ...elementProps
       }"
-      @change="onChange && onChange.call(this,model)"
+      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
     >
       <template slot="append">
         <span
@@ -181,7 +181,7 @@
         style: 'width:100%;',
         ...elementProps
       }"
-      @change="onChange && onChange.call(this,model)"
+      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
     />
     <el-autocomplete
       v-else-if="type==='autocomplete'"
@@ -224,7 +224,7 @@
         style: 'width:100%;',
         ...elementProps
       }"
-      @change="onChange && onChange.call(this,model)"
+      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
     >
       <template
         v-if="elementProps.appendText"

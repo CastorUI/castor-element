@@ -11,6 +11,7 @@
         style: 'float:left;width:calc(50% - 10px);',
         ...elementProps
       }"
+      @change="$emit('change')"
     />
     <el-input-number
       v-model="model[toField]"
@@ -22,6 +23,7 @@
         style: 'float:right;width:calc(50% - 10px);',
         ...elementProps
       }"
+      @change="$emit('change')"
     />
     <div style="width:20px;margin: 0 calc(50% - 10px);text-align:center;">
       ~
@@ -34,22 +36,22 @@ export default {
   props: {
     model: {
       type: Object,
-      default: undefined
+      default: undefined,
     },
     fromField: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     toField: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     elementProps: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>

@@ -409,11 +409,12 @@
 
 ### Field ExtendProps Options
 
-| 参数      | 说明                                                        | 类型   | 可选值 | 默认值 |
-| --------- | ----------------------------------------------------------- | ------ | ------ | ------ |
-| fromField | 最小值绑定字段，只限于 `type` 为`inputNumberRange`          | string | —      | 0      |
-| toField   | 最大值绑定字段，只限于 `type` 为`inputNumberRange`          | string | —      | 0      |
-| options   | 选项数据源,限于`type` 为 `select multiSelect checkboxGroup` | array  | -      | []     |
+| 参数      | 说明                                                        | 类型     | 可选值 | 默认值 |
+| --------- | ----------------------------------------------------------- | -------- | ------ | ------ |
+| fromField | 最小值绑定字段，只限于 `type` 为`inputNumberRange`          | string   | —      | 0      |
+| toField   | 最大值绑定字段，只限于 `type` 为`inputNumberRange`          | string   | —      | 0      |
+| options   | 选项数据源,限于`type` 为 `select multiSelect checkboxGroup` | array    | -      | []     |
+| onChange  | 值变动时回调事件                                            | function | —      | —      |
 
 ### Field Type Options
 
