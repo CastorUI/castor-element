@@ -134,7 +134,7 @@
     v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...elementProps}"
   >
     <template slot-scope="scope">
-      {{ scope.row[dataField] || '/' }}
+      {{ scope.row[dataField] || '' }}
     </template>
   </el-table-column>
 </template>
