@@ -190,7 +190,7 @@ export default {
       }
     },
     handleAdd: function () {
-      let newId = -1;
+      let newId = -10001;
       if (
         this.dataSource &&
         this.dataSource.length > 0 &&

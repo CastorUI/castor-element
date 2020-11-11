@@ -110,7 +110,7 @@ export default {
       decoratedDataSource: [],
       editingRow: null,
       formValidateResult: {},
-      newId: -1,
+      newId: -10001,
     };
   },
   computed: {
