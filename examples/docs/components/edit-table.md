@@ -136,6 +136,7 @@
             type: 'select',
             label: '角色',
             dataField: 'role',
+            editable: true,
             columnSpan: 1,
             elementProps: {
               multiple: true,
@@ -285,6 +286,7 @@
             type: 'select',
             label: '角色',
             dataField: 'role',
+            editable: true,
             columnSpan: 1,
             rules: [{ required: true, message: '不能为空' }],
             elementProps: {
@@ -731,6 +733,7 @@
             type: 'default',
             label: '编号',
             dataField: 'code',
+            editable: true,
             extendProps: {
               autoFocus: true,
             },
@@ -739,6 +742,7 @@
             type: 'default',
             label: '名称',
             dataField: 'name',
+            editable: true,
             elementProps: {
               minWidth: 2,
             },
@@ -747,6 +751,7 @@
             type: 'select',
             label: '角色',
             dataField: 'role',
+            editable: true,
             columnSpan: 1,
             rules: [{ required: true, message: '不能为空' }],
             elementProps: {

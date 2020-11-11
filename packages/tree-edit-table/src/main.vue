@@ -118,15 +118,23 @@ export default {
       return this.editingRow != null;
     },
   },
+  watch: {
+    dataSource: {
+      handler() {
+        this.decoratedDataSource = this.decorateTreeListData(
+          this.dataSource,
+          1,
+          null
+        );
+      },
+      deep: true,
+      immediate: true,
+    },
+  },
   created() {
     if (this.editTriggerMode === 'auto') {
       window.addEventListener('click', this.handleOuterRowChange, false);
     }
-    this.decoratedDataSource = this.decorateTreeListData(
-      this.dataSource,
-      1,
-      null
-    );
   },
   destroyed() {
     if (this.editTriggerMode === 'auto') {

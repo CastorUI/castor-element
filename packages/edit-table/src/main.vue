@@ -181,14 +181,12 @@ export default {
   },
   methods: {
     handleEmitEvent: function (commandType, command, index, row) {
+      console.log('handleEmitEvent', commandType, command, index, row);
       this.$emit(command, index, row);
-      // console.log('this.dataSource - handleEmitEvent',this.dataSource,row);
-      if (this.editTriggerMode === 'manual') {
-        if (row.operateType === 'edit') {
-          this.editingRow = row;
-        } else {
-          this.editingRow = null;
-        }
+      if (row.operateType === 'edit') {
+        this.editingRow = row;
+      } else {
+        this.editingRow = null;
       }
     },
     handleAdd: function () {
