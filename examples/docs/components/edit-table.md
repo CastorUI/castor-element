@@ -662,6 +662,7 @@
     :addCommand="table.addCommand"
     :editCommand="rowEditCommand"
     :saveCommand="rowSaveCommand"
+    @handleCancel="handleCancel"
     @handleEdit="handleEdit"
     @handleSave="handleSave"
   />
@@ -752,13 +753,31 @@
             label: '角色',
             dataField: 'role',
             editable: true,
-            columnSpan: 1,
             rules: [{ required: true, message: '不能为空' }],
             elementProps: {
               multiple: true,
             },
             extendProps: {
               options: this.optionsMap['role'],
+            },
+          },
+          {
+            type: 'commands',
+            label: '操作',
+            dataField: '',
+            elementProps: {
+              width: '120px',
+            },
+            extendProps: {
+              editableCommands: [
+                {
+                  text: '取消',
+                  command: 'handleCancel',
+                  elementProps: {
+                    type: 'primary',
+                  },
+                },
+              ],
             },
           },
         ];
@@ -777,6 +796,31 @@
       },
     },
     methods: {
+      handleCancel(index, row) {
+        console.log('handleCancel,', index, row);
+        row.operateType = 'view';
+        this.table.validateStatus = true;
+        this.table.dataList = [
+          {
+            id: 1001,
+            code: 'A1',
+            name: '上海燃气一期工程',
+            role: [1, 3],
+          },
+          {
+            id: 1002,
+            code: 'A2',
+            name: '上海燃气二期工程',
+            role: [1, 3],
+          },
+          {
+            id: 1003,
+            code: 'A3',
+            name: '上海燃气三期工程',
+            role: [1, 3],
+          },
+        ];
+      },
       handleEdit(index, row) {
         console.log('handleEdit,', index, row);
         row.operateType = 'edit';

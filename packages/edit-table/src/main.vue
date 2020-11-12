@@ -215,7 +215,7 @@ export default {
       }
     },
     handleRowClick: function (row) {
-      // console.log('handleRowClick',row);
+      console.log('handleRowClick', row);
       event.stopPropagation();
       if (
         this.editTriggerMode === 'auto' &&
@@ -243,7 +243,7 @@ export default {
         this.editingRow
       );
       // 新增行-双击事件-不做处理
-      if (this.oldCurrentRow === undefined) {
+      if (this.editingRow && !this.oldCurrentRow) {
         return;
       }
 
