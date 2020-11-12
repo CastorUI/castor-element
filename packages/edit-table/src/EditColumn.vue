@@ -107,6 +107,7 @@
             <el-select
               v-if="type === 'select'"
               v-model="editingRow[dataField]"
+              v-selectFocus="extendProps.autoFocus"
               v-bind="{clearable: true, filterable: true,style: 'width:100%;',allowCreate: false, placeholder: `选择${label}`, ...elementProps}"
               @clear="editingRow[dataField]=undefined"
             >
@@ -153,6 +154,14 @@ export default {
       inserted: function (el, binding) {
         if (binding.value) {
           el.children[0].focus();
+        }
+      },
+    },
+    selectFocus: {
+      inserted: function (el, binding) {
+        console.log('selectFocus', el, binding);
+        if (binding.value) {
+          el.children[1].children[0].focus();
         }
       },
     },
