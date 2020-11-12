@@ -236,7 +236,17 @@ export default {
       }
     },
     handleCurrentChange: function (currentRow, oldCurrentRow) {
-      console.log('handleCurrentChange: ', this.editingRow);
+      console.log(
+        'handleCurrentChange: ',
+        oldCurrentRow,
+        currentRow,
+        this.editingRow
+      );
+      // 新增行-双击事件-不做处理
+      if (this.oldCurrentRow === undefined) {
+        return;
+      }
+
       this.saveEditingRow();
     },
     handleOuterRowChange(event) {
