@@ -87,6 +87,7 @@
             type: 'default',
             label: '日期',
             dataField: 'date',
+            editable: true,
             elementProps: {
               width: '200px',
               align: 'left',
@@ -100,6 +101,7 @@
             type: 'default',
             label: '姓名',
             dataField: 'name',
+            editable: true,
             elementProps: {
               minWidth: '2',
             },
@@ -108,6 +110,7 @@
             type: 'default',
             label: '地址',
             dataField: 'address',
+            editable: true,
             elementProps: {
               minWidth: '2',
             },
@@ -291,6 +294,7 @@
             type: 'default',
             label: '日期',
             dataField: 'date',
+            editable: true,
             rules: [{ required: true, message: '不能为空', trigger: 'blur' }],
             elementProps: {
               width: '200px',
@@ -305,6 +309,7 @@
             type: 'default',
             label: '姓名',
             dataField: 'name',
+            editable: true,
             rules: [{ required: true, message: '不能为空', trigger: 'blur' }],
             elementProps: {
               minWidth: '2',
@@ -314,6 +319,7 @@
             type: 'default',
             label: '地址',
             dataField: 'address',
+            editable: true,
             rules: [{ required: true, message: '不能为空', trigger: 'blur' }],
             elementProps: {
               minWidth: '2',
