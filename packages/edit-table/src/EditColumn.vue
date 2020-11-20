@@ -81,7 +81,7 @@
           size="medium"
           :style="{
             display:'inline-block' , 
-            width: 'calc(100% - ' + (extendProps.isExpandColumn? editingRow.dataLevel:1) * 16 + 'px)'
+            width: 'calc(100% - ' + (extendProps.isExpandColumn? editingRow.dataLevel:0) * 16 + 'px)'
           }"
           @validate="handleValidateForm"
         >

@@ -102,6 +102,7 @@
             label: '姓名',
             dataField: 'name',
             editable: true,
+            rules: [{ required: true, message: '不能为空' }],
             elementProps: {
               minWidth: '2',
             },
