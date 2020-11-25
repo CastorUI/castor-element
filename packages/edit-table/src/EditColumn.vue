@@ -118,6 +118,21 @@
                 :value="option.value"
               />
             </el-select>
+            <el-date-picker
+              v-else-if="type==='dateTimeRange' || type==='dateRange' || type==='monthRange'|| type==='date' || type==='month' || type==='datetime'"
+              v-model="editingRow[dataField]"
+              :type="type.toLocaleLowerCase()"
+              v-bind="{
+                startPlaceholder: '开始日期', 
+                rangeSeparator: '至', 
+                endPlaceholder: '结束日期', 
+                valueFormat: 'yyyy-MM-dd',
+                pickerOptions: pickerOptions,
+                style: 'width:100%;',
+                ...elementProps
+              }"
+              @change="extendProps.onChange && extendProps.onChange.call(this,editingRow)"
+            />
           </el-form-item>
         </el-form>
       </template>
@@ -224,6 +239,104 @@ export default {
       default: function () {
         return {};
       },
+    },
+  },
+  computed: {
+    pickerOptions() {
+      if (this.type === 'dateTimeRange' || this.type === 'dateRange') {
+        return (
+          this.elementProps.pickerOptions || {
+            shortcuts: [
+              {
+                text: '最近一周',
+                onClick(picker) {
+                  const end = new Date();
+                  const start = new Date();
+                  start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                  picker.$emit('pick', [start, end]);
+                },
+              },
+              {
+                text: '最近一个月',
+                onClick(picker) {
+                  const end = new Date();
+                  const start = new Date();
+                  start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                  picker.$emit('pick', [start, end]);
+                },
+              },
+              {
+                text: '最近三个月',
+                onClick(picker) {
+                  const end = new Date();
+                  const start = new Date();
+                  start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                  picker.$emit('pick', [start, end]);
+                },
+              },
+            ],
+          }
+        );
+      } else if (this.type === 'monthRange') {
+        return (
+          this.elementProps.pickerOptions || {
+            shortcuts: [
+              {
+                text: '本月',
+                onClick(picker) {
+                  picker.$emit('pick', [new Date(), new Date()]);
+                },
+              },
+              {
+                text: '今年至今',
+                onClick(picker) {
+                  const end = new Date();
+                  const start = new Date(new Date().getFullYear(), 0);
+                  picker.$emit('pick', [start, end]);
+                },
+              },
+              {
+                text: '最近六个月',
+                onClick(picker) {
+                  const end = new Date();
+                  const start = new Date();
+                  start.setMonth(start.getMonth() - 6);
+                  picker.$emit('pick', [start, end]);
+                },
+              },
+            ],
+          }
+        );
+      } else {
+        return (
+          this.elementProps.pickerOptions || {
+            shortcuts: [
+              {
+                text: '今天',
+                onClick(picker) {
+                  picker.$emit('pick', new Date());
+                },
+              },
+              {
+                text: '昨天',
+                onClick(picker) {
+                  const date = new Date();
+                  date.setTime(date.getTime() - 3600 * 1000 * 24);
+                  picker.$emit('pick', date);
+                },
+              },
+              {
+                text: '一周前',
+                onClick(picker) {
+                  const date = new Date();
+                  date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+                  picker.$emit('pick', date);
+                },
+              },
+            ],
+          }
+        );
+      }
     },
   },
   methods: {

@@ -61,6 +61,7 @@
               age: 30,
               role: [1, 3],
               sex: 1,
+              createTime: '2020-11-24 00:00:01',
             },
             {
               id: 1002,
@@ -70,6 +71,7 @@
               age: 30,
               role: [1, 3],
               sex: 0,
+              createTime: '2020-11-24 00:00:01',
             },
             {
               id: 1003,
@@ -79,6 +81,7 @@
               age: 30,
               role: [1, 2, 3],
               sex: 0,
+              createTime: '2020-11-24 00:00:01',
             },
           ],
         },
@@ -92,6 +95,9 @@
             label: 'ID',
             dataField: 'id',
             editable: false,
+            elementProps: {
+              width: '60px',
+            },
           },
           {
             type: 'default',
@@ -124,9 +130,8 @@
             type: 'select',
             label: '角色',
             dataField: 'sex',
-            columnSpan: 1,
             elementProps: {
-              width: '140px',
+              width: '60px',
             },
             extendProps: {
               options: this.optionsMap['sex'],
@@ -137,13 +142,23 @@
             label: '角色',
             dataField: 'role',
             editable: true,
-            columnSpan: 1,
             elementProps: {
               multiple: true,
-              width: '240px',
+              width: '120px',
             },
             extendProps: {
               options: this.optionsMap['role'],
+            },
+          },
+          {
+            type: 'datetime',
+            label: '创建时间',
+            dataField: 'createTime',
+            editable: true,
+            elementProps: {
+              width: '220px',
+              valueFormat: 'yyyy-MM-dd HH:mm:ss',
+              placeholder: '创建时间',
             },
           },
         ];
@@ -287,7 +302,6 @@
             label: '角色',
             dataField: 'role',
             editable: true,
-            columnSpan: 1,
             rules: [{ required: true, message: '不能为空' }],
             elementProps: {
               multiple: true,
