@@ -182,12 +182,13 @@ export default {
   methods: {
     handleEmitEvent: function (commandType, command, index, row) {
       console.log('handleEmitEvent', commandType, command, index, row);
-      this.$emit(command, index, row);
-      if (row.operateType === 'edit') {
-        this.editingRow = row;
-      } else {
-        this.editingRow = null;
-      }
+      this.$emit(command, index, row, () => {
+        if (row.operateType === 'edit') {
+          this.editingRow = row;
+        } else {
+          this.editingRow = null;
+        }
+      });
     },
     handleAdd: function () {
       let newId = -10001;
@@ -251,10 +252,7 @@ export default {
     },
     handleOuterRowChange(event) {
       console.log('handleOuterRowChange', this.editingRow);
-      var saveFlag = this.saveEditingRow();
-      if (saveFlag) {
-        this.editingRow = null;
-      }
+      this.saveEditingRow();
     },
     saveEditingRow() {
       if (
@@ -267,11 +265,10 @@ export default {
           this.saveCommand.disableValidator &&
           this.saveCommand.disableValidator.call(this, this.editingRow)
         ) {
-          return false;
+          return;
         }
 
         this.handleEmitEvent('', this.saveCommand.command, 0, this.editingRow);
-        return true;
       }
     },
     handleValidateForm(validateField, validateStatus) {

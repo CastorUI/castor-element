@@ -175,12 +175,15 @@
       },
     },
     methods: {
-      handleEdit(index, row) {
+      handleEdit(index, row, callback) {
         console.log('handleEdit,', index, row);
         row.operateType = 'edit';
+        callback();
       },
-      handleSave(index, row) {
+      handleSave(index, row, callback) {
         console.log('handleSave,', index, row);
+        row.operateType = 'view';
+        callback();
       },
     },
   };
@@ -326,12 +329,15 @@
       },
     },
     methods: {
-      handleEdit(index, row) {
+      handleEdit(index, row, callback) {
         console.log('handleEdit,', index, row);
         row.operateType = 'edit';
+        callback();
       },
-      handleSave(index, row) {
+      handleSave(index, row, callback) {
         console.log('handleSave,', index, row);
+        row.operateType = 'view';
+        callback();
       },
     },
   };
@@ -473,20 +479,24 @@
       },
     },
     methods: {
-      handleEdit(index, row) {
+      handleEdit(index, row, callback) {
         console.log('handleEdit,', index, row);
         row.operateType = 'edit';
+        callback();
       },
-      handleSave(index, row) {
+      handleSave(index, row, callback) {
         console.log('handleSave,', index, row);
         row.operateType = 'view';
+        callback();
       },
-      handleCancel(index, row) {
-        row.operateType = 'view';
+      handleCancel(index, row, callback) {
         console.log('handleCancel,', index, row);
+        row.operateType = 'view';
+        callback();
       },
-      handleDelete(index, row) {
+      handleDelete(index, row, callback) {
         console.log('handleDelete,', index, row);
+        callback();
       },
     },
   };
@@ -636,20 +646,24 @@
       },
     },
     methods: {
-      handleEdit(index, row) {
+      handleEdit(index, row, callback) {
         console.log('handleEdit,', index, row);
         row.operateType = 'edit';
+        callback();
       },
-      handleSave(index, row) {
+      handleSave(index, row, callback) {
         console.log('handleSave,', index, row);
         row.operateType = 'view';
+        callback();
       },
-      handleCancel(index, row) {
-        row.operateType = 'view';
+      handleCancel(index, row, callback) {
         console.log('handleCancel,', index, row);
+        row.operateType = 'view';
+        callback();
       },
-      handleDelete(index, row) {
+      handleDelete(index, row, callback) {
         console.log('handleDelete,', index, row);
+        callback();
       },
     },
   };
@@ -810,9 +824,10 @@
       },
     },
     methods: {
-      handleCancel(index, row) {
+      handleCancel(index, row, callback) {
         console.log('handleCancel,', index, row);
         row.operateType = 'view';
+        callback();
         this.table.validateStatus = true;
         this.table.dataList = [
           {
@@ -835,13 +850,14 @@
           },
         ];
       },
-      handleEdit(index, row) {
+      handleEdit(index, row, callback) {
         console.log('handleEdit,', index, row);
         row.operateType = 'edit';
+        callback();
       },
-      handleSave(index, row) {
+      handleSave(index, row, callback) {
         console.log('handleSave,', index, row);
-        row.operateType = 'view';
+        callback();
       },
     },
   };
@@ -948,16 +964,18 @@
       },
     },
     methods: {
-      handleEdit(index, row) {
+      handleEdit(index, row, callback) {
         console.log('handleEdit,', index, row);
         row.operateType = 'edit';
+        callback();
       },
-      handleSave(index, row) {
+      handleSave(index, row, callback) {
         console.log('handleSave,', index, row);
-        row.operateType = 'view';
+        callback();
       },
-      handleDelete(index, row) {
+      handleDelete(index, row, callback) {
         console.log('handleDelete,', index, row);
+        callback();
       },
     },
   };
