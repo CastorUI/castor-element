@@ -198,14 +198,15 @@ export default {
         console.log('add new sub row');
         this.addSubRow(row, index);
       } else {
-        this.$emit(command, index, row);
-        if (this.editTriggerMode === 'manual') {
-          if (['add', 'edit'].indexOf(row.operateType) > -1) {
-            this.editingRow = row;
-          } else {
-            this.editingRow = null;
+        this.$emit(command, index, row, () => {
+          if (this.editTriggerMode === 'manual') {
+            if (['add', 'edit'].indexOf(row.operateType) > -1) {
+              this.editingRow = row;
+            } else {
+              this.editingRow = null;
+            }
           }
-        }
+        });
       }
     },
     handleAdd: function () {

@@ -163,7 +163,6 @@
                 {
                   text: '取消',
                   command: 'handleCancel',
-                  disableValidator: () => !this.table.validateStatus,
                   elementProps: {
                     type: 'primary',
                   },
@@ -188,20 +187,24 @@
       handleAdd() {
         console.log('add new record');
       },
-      handleEdit(index, row) {
-        row.operateType = 'edit';
+      handleEdit(index, row, callback) {
         console.log('handleEdit', index, row);
+        row.operateType = 'edit';
+        callback();
       },
-      handleDelete(index, row) {
+      handleDelete(index, row, callback) {
         console.log('handleDelete', index, row);
+        callback();
       },
-      handleSave(index, row) {
-        row.operateType = 'view';
+      handleSave(index, row, callback) {
         console.log('handleSave', index, row);
-      },
-      handleCancel(index, row) {
         row.operateType = 'view';
+        callback();
+      },
+      handleCancel(index, row, callback) {
         console.log('handleCancel', index, row);
+        row.operateType = 'view';
+        callback();
       },
     },
   };
@@ -373,7 +376,6 @@
                 {
                   text: '取消',
                   command: 'handleCancel',
-                  disableValidator: () => !this.table.validateStatus,
                   elementProps: {
                     type: 'primary',
                   },
@@ -398,20 +400,24 @@
       handleAdd() {
         console.log('add new record');
       },
-      handleEdit(index, row) {
-        row.operateType = 'edit';
+      handleEdit(index, row, callback) {
         console.log('handleEdit', index, row);
+        row.operateType = 'edit';
+        callback();
       },
-      handleDelete(index, row) {
+      handleDelete(index, row, callback) {
         console.log('handleDelete', index, row);
+        callback();
       },
-      handleSave(index, row) {
-        row.operateType = 'view';
+      handleSave(index, row, callback) {
         console.log('handleSave', index, row);
-      },
-      handleCancel(index, row) {
         row.operateType = 'view';
+        callback();
+      },
+      handleCancel(index, row, callback) {
         console.log('handleCancel', index, row);
+        row.operateType = 'view';
+        callback();
       },
     },
   };
