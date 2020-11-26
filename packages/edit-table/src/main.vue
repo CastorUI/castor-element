@@ -183,7 +183,7 @@ export default {
     handleEmitEvent: function (commandType, command, index, row) {
       console.log('handleEmitEvent', commandType, command, index, row);
       this.$emit(command, index, row, () => {
-        if (row.operateType === 'edit') {
+        if (['add', 'edit'].indexOf(row.operateType) > -1) {
           this.editingRow = row;
         } else {
           this.editingRow = null;
@@ -203,6 +203,7 @@ export default {
       if (this.addInside) {
         const newRow = {
           id: newId,
+          operateType: 'add',
         };
         if (this.addInsidePosition === 'beforeFirst') {
           this.dataSource.unshift(newRow);
