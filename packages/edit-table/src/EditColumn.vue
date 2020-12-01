@@ -70,7 +70,7 @@
     v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...elementProps}"
   >
     <template slot-scope="scope">
-      <template v-if="editingRow!=null && scope.row.id === editingRow.id &&(scope.row.id < 0 || editable) ">
+      <template v-if="editingRow!=null && scope.row.id === editingRow.id &&((scope.row.id < 0 && addable) ||(scope.row.id > 0 && editable)) ">
         <el-form
           :id="dataField+'Form'"
           :ref="dataField+'Form'"
@@ -213,6 +213,10 @@ export default {
     editable: {
       type: Boolean,
       default: false,
+    },
+    addable: {
+      type: Boolean,
+      default: true,
     },
     editing: {
       type: Boolean,

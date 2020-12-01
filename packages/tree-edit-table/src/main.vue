@@ -29,6 +29,7 @@
         :type="item.type"
         :data-template="item.dataTemplate"
         :editable="item.editable"
+        :addable="item.addable"
         :editing="editing"
         :editing-row="editingRow"
         :handle-emit-event="handleEmitEvent"
