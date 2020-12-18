@@ -103,10 +103,20 @@
 
 ```html
 <template>
+  <el-select v-model="dynamicFields" multiple placeholder="请选择">
+    <el-option
+      v-for="item in optionsMap['field']"
+      :key="item"
+      :label="item"
+      :value="item"
+    >
+    </el-option>
+  </el-select>
+
   <ca-report-table
     :dataSource="table.dataList"
     :columns="tableColumns"
-    :dynamicFields="table.dynamicFields"
+    :dynamicFields="dynamicFields"
   />
 </template>
 
@@ -114,8 +124,10 @@
   export default {
     data() {
       return {
+        optionsMap: {
+          field: ['英文名', '汉语名'],
+        },
         table: {
-          dynamicFields: ['英文名'],
           dataList: [
             {
               id: 1001,
@@ -137,6 +149,7 @@
             },
           ],
         },
+        dynamicFields: ['英文名'],
       };
     },
     computed: {
