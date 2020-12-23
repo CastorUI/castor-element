@@ -633,125 +633,6 @@
 
 :::
 
-### 动态列
-
-展示动态列的用法。
-
-:::demo 在`tableColumns`中指定`showType`为`dynamic`。
-
-```html
-<template>
-  <el-select v-model="dynamicFields" multiple placeholder="请选择">
-    <el-option
-      v-for="(item,index) in tableColumns.filter(r => r.showType === 'dynamic')"
-      :key="index"
-      :label="item.label"
-      :value="item.label"
-    >
-    </el-option>
-  </el-select>
-  <ca-common-table
-    :dataSource="table.dataList"
-    :columns="tableColumns"
-    :dynamicFields="dynamicFields"
-    @handleEdit="handleEdit"
-    @handleDelete="handleDelete"
-  />
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        table: {
-          dataList: [
-            {
-              id: 1001,
-              code: 'A1',
-              name: '上海燃气一期工程',
-            },
-            {
-              id: 1002,
-              code: 'A2',
-              name: '上海燃气二期工程',
-            },
-            {
-              id: 1003,
-              code: 'A3',
-              name: '上海燃气三期工程',
-            },
-          ],
-        },
-        dynamicFields: ['编号'],
-      };
-    },
-    computed: {
-      tableColumns() {
-        return [
-          {
-            type: 'default',
-            label: 'ID',
-            dataField: 'id',
-          },
-          {
-            type: 'default',
-            label: '编号',
-            dataField: 'code',
-            showType: 'dynamic',
-          },
-          {
-            type: 'default',
-            label: '名称',
-            dataField: 'name',
-            showType: 'dynamic',
-            elementProps: {
-              minWidth: 2,
-            },
-          },
-          {
-            type: 'commands',
-            label: '操作',
-            dataField: '',
-            elementProps: {
-              width: '180px',
-              fixed: 'right',
-            },
-            extendProps: {
-              commands: [
-                {
-                  text: '编辑',
-                  command: 'handleEdit',
-                  elementProps: {
-                    type: 'primary',
-                  },
-                },
-                {
-                  text: '删除',
-                  command: 'handleDelete',
-                  elementProps: {
-                    type: 'danger',
-                  },
-                },
-              ],
-            },
-          },
-        ];
-      },
-    },
-    methods: {
-      handleEdit(index, row) {
-        console.log('handleEdit,', index, row);
-      },
-      handleDelete(index, row) {
-        console.log('handleDelete,', index, row);
-      },
-    },
-  };
-</script>
-```
-
-:::
-
 ### 分页
 
 展示表格分页的用法。
@@ -1251,7 +1132,6 @@
 | type         | 类型(为 expand 时，父层表格列禁用 fixed 属性)                                                               | string | default / selection / index / link / keyToValue / status / expand / commands | default |
 | label        | 标题                                                                                                        | string | —                                                                            | 10      |
 | dataField    | 绑定字段                                                                                                    | string | —                                                                            | 0       |
-| showType     | 展示方式                                                                                                    | string | static/dynamic                                                               | static  |
 | elementProps | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object | -                                                                            | {}      |
 | extendProps  | 扩展属性，参考 `Column ExtendProps Options`                                                                 | object | -                                                                            | {}      |
 

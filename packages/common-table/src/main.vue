@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="hackReset"
-    class="common-table-container"
-  >
+  <div class="common-table-container">
     <div
       v-if="title || (addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))) ||(customCommands && customCommands.length)"
       class="table-append-header"
@@ -54,7 +51,7 @@
         @sort-change="args=> handleSortChange(args)"
       >
         <common-column
-          v-for="(item,index) of finalCloumns"
+          v-for="(item,index) of columns"
           :key="index"
           :type="item.type"
           :label="item.label"
@@ -145,15 +142,9 @@ export default {
         return {};
       },
     },
-    dynamicFields: {
-      type: Array,
-      default: () => [],
-    },
   },
   data() {
     return {
-      hackReset: true,
-      finalCloumns: this.columns,
       multipleSelection: [],
     };
   },
@@ -169,33 +160,6 @@ export default {
         prop: this.pagination.sortField,
         order: this.pagination.order,
       };
-    },
-  },
-  watch: {
-    dynamicFields: {
-      handler: function () {
-        this.hackReset = false;
-        const staticColumns = this.columns.filter(
-          (r) => r.showType !== 'dynamic'
-        );
-        const dynamicColumns = this.columns.filter(
-          (r) => r.showType === 'dynamic'
-        );
-        let finalDynamicColumns = [];
-        this.dynamicFields &&
-          this.dynamicFields.forEach((label) => {
-            const column = dynamicColumns.filter((c) => c.label === label)[0];
-            if (column) {
-              finalDynamicColumns.push(column);
-            }
-          });
-        this.finalCloumns = staticColumns.concat(finalDynamicColumns);
-        this.$nextTick(() => {
-          this.hackReset = true;
-        });
-      },
-      deep: true,
-      immediate: true,
     },
   },
   methods: {
