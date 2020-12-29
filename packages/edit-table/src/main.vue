@@ -288,7 +288,7 @@ export default {
     handlePageSizeChange(pageSize) {
       this.pagination.pageIndex = 1;
       this.pagination.pageSize = pageSize;
-      this.$store.dispatch('SetPagesize', pageSize);
+      this.$emit('page-size-change', pageSize);
       this.getList();
     },
   },
