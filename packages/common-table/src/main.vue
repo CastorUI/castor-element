@@ -30,7 +30,7 @@
         <el-button
           v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
           :disabled="addCommand.disableValidator && addCommand.disableValidator.call(this)"
-          v-bind="{type: 'primary', icon: 'el-icon-plus', ...addCommand.elementProps}"
+          v-bind="{icon: 'el-icon-plus', ...addCommand.elementProps}"
           @click="$emit(addCommand.command)"
         >
           {{ addCommand.text }}

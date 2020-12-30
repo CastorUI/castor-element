@@ -51,7 +51,7 @@
         class="command"
         :loading="item.loading && loading"
         :disabled="item.disableValidator && item.disableValidator.call(this,model)"
-        v-bind="{type: 'primary', ...item.elementProps}"
+        v-bind="item.elementProps"
         @click="$emit(item.command)"
       >
         {{ item.text }}

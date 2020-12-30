@@ -94,7 +94,7 @@
           :loading="item.loading && loading"
           :disabled="item.disableValidator && item.disableValidator.call(this)"
           class="filter-item"
-          v-bind="{type: 'primary', size: 'medium', ...item.elementProps}"
+          v-bind="{size: 'medium', ...item.elementProps}"
           @click="$emit(item.command)"
         >
           {{ item.text }}
@@ -137,59 +137,59 @@ import CommonQueryCtrl from './common-query-ctrl';
 export default {
   name: 'CaCommonQuery',
   components: {
-    CommonQueryCtrl
+    CommonQueryCtrl,
   },
   directives: { resize },
   props: {
     loading: {
       type: Boolean,
-      default: false
+      default: false,
     },
     model: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
-      }
+      },
     },
     fields: {
       type: Array,
-      default: function() {
+      default: function () {
         return [];
-      }
+      },
     },
     commands: {
       type: Array,
-      default: function() {
+      default: function () {
         return [];
-      }
+      },
     },
     downloadOpt: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
-      }
+      },
     },
     elementProps: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
-      }
+      },
     },
     dynamicFieldsPosition: {
       type: String,
-      default: 'end'
+      default: 'end',
     },
     rowHeight: {
       type: Number,
-      default: 36
-    }
+      default: 36,
+    },
   },
   data() {
     return {
       checkedKeys: [],
       checkedFields: [],
       maxFieldWidth: 350,
-      rowFieldsCount: 3
+      rowFieldsCount: 3,
     };
   },
   watch: {
@@ -198,28 +198,28 @@ export default {
       handler() {
         this.checkedFields = [];
         this.fields
-          .filter(r => r.showType === 'dynamic')
-          .forEach(r => {
+          .filter((r) => r.showType === 'dynamic')
+          .forEach((r) => {
             if (this.checkedKeys.indexOf(r.dataField) > -1) {
               this.checkedFields.push(r);
             } else {
               this.model[r.dataField] = undefined;
             }
           });
-      }
-    }
+      },
+    },
   },
   mounted() {
     this.handleResize();
   },
   methods: {
-    handleResize: function() {
+    handleResize: function () {
       const form = document.getElementById('queryForm');
       this.rowFieldsCount = Math.floor(
         form.getBoundingClientRect().width / this.maxFieldWidth
       );
-    }
-  }
+    },
+  },
 };
 </script>
 <style rel="stylesheet/scss" lang="scss">
