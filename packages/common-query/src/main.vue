@@ -33,7 +33,7 @@
       </el-select>
     </div>
     <el-form
-      id="queryForm"
+      :id="formId"
       ref="form"
       :model="model"
       :style="fields.some(r=>r.showType==='dynamic')? 'marginLeft:100px;' : ''"
@@ -141,6 +141,10 @@ export default {
   },
   directives: { resize },
   props: {
+    formId: {
+      type: String,
+      default: 'queryForm',
+    },
     loading: {
       type: Boolean,
       default: false,
@@ -214,7 +218,7 @@ export default {
   },
   methods: {
     handleResize: function () {
-      const form = document.getElementById('queryForm');
+      const form = document.getElementById(this.formId);
       this.rowFieldsCount = Math.floor(
         form.getBoundingClientRect().width / this.maxFieldWidth
       );
