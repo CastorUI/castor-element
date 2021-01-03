@@ -10,7 +10,7 @@
       <div class="table-add-command">
         <el-button
           v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
-          :disabled="editing || (addCommand.disableValidator && addCommand.disableValidator.call(this))"
+          :disabled="loading || editing || (addCommand.disableValidator && addCommand.disableValidator.call(this))"
           v-bind="{type: 'primary', icon: 'el-icon-plus', ...addCommand.elementProps}"
           @click="handleAdd"
         >
