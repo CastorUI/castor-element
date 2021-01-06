@@ -23,7 +23,7 @@ npm profile set password --registry http://verdaccio.polarwin.cn
 然后打包到根目录 lib 文件夹
 
 ```
-npm run build-packages
+npm run build:packages
 ```
 
 最后发布到 npm 私库
@@ -49,7 +49,7 @@ npm run dev
 打包示例站点到根目录 dist 文件夹
 
 ```
-npm run build-examples
+npm run build:examples
 ```
 
 ## 三. 版本说明

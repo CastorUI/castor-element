@@ -15,7 +15,7 @@
           v-for="(item,index) of customCommands"
           :key="index"
           :disabled="item.disableValidator && item.disableValidator.call(this,multipleSelection)"
-          v-bind="{type: 'text', ...item.elementProps}"
+          v-bind="{type: 'text',size:'small', ...item.elementProps}"
           @click="$emit(item.command,multipleSelection)"
         >
           {{ item.text }}
@@ -30,7 +30,7 @@
         <el-button
           v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
           :disabled="addCommand.disableValidator && addCommand.disableValidator.call(this)"
-          v-bind="{icon: 'el-icon-plus', ...addCommand.elementProps}"
+          v-bind="{icon: 'el-icon-plus',size:'small', ...addCommand.elementProps}"
           @click="$emit(addCommand.command)"
         >
           {{ addCommand.text }}
@@ -195,8 +195,8 @@ export default {
 .common-table-container {
   overflow: hidden;
   .table-append-header {
-    height: 40px;
-    line-height: 40px;
+    height: 35px;
+    line-height: 35px;
     margin-bottom: 12px;
     overflow: hidden;
     .table-title {
@@ -218,7 +218,7 @@ export default {
         height: 100%;
         line-height: 100%;
         font-size: 14px;
-        padding: 0 10px;
+        padding: 0 4px;
       }
       .left-border:after {
         content: '';

@@ -1,7 +1,7 @@
 <template>
   <div
     v-resize:debounce="handleResize"
-    style="overflow:hidden;minWidth:700px;background:#fff;padding:20px 10px 0 10px;"
+    style="overflow:hidden;minWidth:700px;background:#fff;padding:10px 10px 0 10px;"
     class="clearfix common-query"
   >
     <div
@@ -9,7 +9,7 @@
       style="display:inline-block;float:left"
     >
       <el-button
-        type="medium"
+        type="small"
         @click="$refs.filterSelect.$el.click()"
       >
         筛选
@@ -36,7 +36,7 @@
       :id="formId"
       ref="form"
       :model="model"
-      :style="fields.some(r=>r.showType==='dynamic')? 'marginLeft:100px;' : ''"
+      :style="fields.some(r=>r.showType==='dynamic')? 'marginLeft:72px;' : ''"
       v-bind="{
         labelWidth:'110px',
         size:'small',
@@ -94,7 +94,7 @@
           :loading="item.loading && loading"
           :disabled="item.disableValidator && item.disableValidator.call(this)"
           class="filter-item"
-          v-bind="{size: 'medium', ...item.elementProps}"
+          v-bind="{size: 'small', ...item.elementProps}"
           @click="$emit(item.command)"
         >
           {{ item.text }}
@@ -187,12 +187,15 @@ export default {
       type: Number,
       default: 36,
     },
+    maxFieldWidth: {
+      type: Number,
+      default: 230,
+    },
   },
   data() {
     return {
       checkedKeys: [],
       checkedFields: [],
-      maxFieldWidth: 350,
       rowFieldsCount: 3,
     };
   },

@@ -105,7 +105,7 @@
       :type="type.toLocaleLowerCase()"
       v-bind="{
         startPlaceholder: '开始日期', 
-        rangeSeparator: '至', 
+        rangeSeparator: '~', 
         endPlaceholder: '结束日期', 
         valueFormat: 'yyyy-MM-dd',
         pickerOptions: pickerOptions,

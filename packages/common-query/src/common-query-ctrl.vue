@@ -2,14 +2,14 @@
   <el-form-item
     :label="label+' :'"
     :prop="dataField"
-    :style="'float:left;minWidth:300px;width:'+width+';height:'+height+';'"
+    :style="'float:left;width:'+width+';height:'+height+';'"
   >
     <el-select
       v-if="type === 'select' || type === 'multiSelect'"
       v-model="model[dataField]"
       :multiple="type==='multiSelect'"
       v-bind="{
-        placeholder:`查询${label}`,
+        placeholder:`${label}`,
         size:'small',
         style:'width:100%;',
         clearable:true,
@@ -32,7 +32,7 @@
       v-bind="{
         size:'small',
         startPlaceholder: '开始日期', 
-        rangeSeparator: '至', 
+        rangeSeparator: '~', 
         endPlaceholder: '结束日期', 
         valueFormat: 'yyyy-MM-dd',
         pickerOptions: pickerOptions,
@@ -77,7 +77,7 @@
       class="filter-item filter-list query-item"
       v-bind="{
         size: 'small',
-        placeholder: `查询${label}`,
+        placeholder: `${label}`,
         clearable: true,
         ...elementProps
       }"
