@@ -1,34 +1,50 @@
 <template>
   <div class="common-table-container">
     <div
-      v-if="title || (addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))) ||(customCommands && customCommands.length)"
+      v-if="title || (addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))) ||(customCommands && customCommands.length)||(settingCommands && settingCommands.length)"
       class="table-append-header"
     >
       <div class="table-title">
         {{ title }}
       </div>
+      <div
+        v-if="settingCommands && settingCommands.length"
+        class="table-setting-commands"
+      >
+        <el-button
+          v-for="(item,index) of settingCommands"
+          :key="index"
+          v-bind="{type: 'text',size:'small', ...item.elementProps}"
+          @click="$emit(item.command)"
+        >
+          {{ item.text }}
+        </el-button>
+      </div>
       <el-button-group
-        v-show="customCommands && customCommands.length"
+        v-if="customCommands && customCommands.length"
         class="table-custom-commands"
+        :class="{
+          'divider': settingCommands && settingCommands.length
+        }"
       >
         <el-button
           v-for="(item,index) of customCommands"
           :key="index"
           :disabled="item.disableValidator && item.disableValidator.call(this,multipleSelection)"
-          v-bind="{type: 'text',size:'small', ...item.elementProps}"
+          v-bind="{size:'small', ...item.elementProps}"
           @click="$emit(item.command,multipleSelection)"
         >
           {{ item.text }}
         </el-button>
       </el-button-group>
       <div
+        v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
         class="table-add-command"
         :class="{
-          'add-divider':addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this)) && customCommands && customCommands.length
+          'divider': (customCommands && customCommands.length)||(settingCommands && settingCommands.length)
         }"
       >
         <el-button
-          v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
           :disabled="addCommand.disableValidator && addCommand.disableValidator.call(this)"
           v-bind="{icon: 'el-icon-plus',size:'small', ...addCommand.elementProps}"
           @click="$emit(addCommand.command)"
@@ -126,6 +142,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    settingCommands: {
+      type: Array,
+      default: () => [],
+    },
     getList: {
       type: Function,
       default: () => {},
@@ -195,8 +215,6 @@ export default {
 .common-table-container {
   overflow: hidden;
   .table-append-header {
-    height: 35px;
-    line-height: 35px;
     margin-bottom: 12px;
     overflow: hidden;
     .table-title {
@@ -206,37 +224,32 @@ export default {
     }
     .table-add-command {
       float: right;
-      &.add-divider {
-        padding-right: 20px;
-        border-right: 1px solid rgba(0, 0, 0, 0.06);
+      button {
+        font-size: 13px;
       }
     }
-    .table-custom-commands {
+    .table-custom-commands,
+    .table-setting-commands {
       float: right;
-      height: 100%;
+      margin-left: 16px;
       button {
-        height: 100%;
-        line-height: 100%;
-        font-size: 14px;
-        padding: 0 4px;
+        font-size: 13px;
       }
-      .left-border:after {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 28%;
-        bottom: auto;
-        right: auto;
-        height: 44%;
-        width: 1px;
-        background-color: #dcdfe6;
-      }
-      .no-border {
-        border: none;
-      }
-      .el-button span {
-        margin-left: 0;
-      }
+    }
+
+    .divider {
+      padding-right: 16px;
+      border-right: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    .el-button [class*='el-icon-'] + span {
+      margin-left: 0;
+    }
+    .el-button.is-disabled,
+    .el-button.is-disabled:hover,
+    .el-button.is-disabled:focus {
+      color: rgb(197, 197, 197);
+      background-color: rgb(241, 241, 241);
+      border-color: #e4e3e6;
     }
   }
 

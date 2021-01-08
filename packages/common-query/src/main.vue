@@ -86,7 +86,7 @@
       </template>
       <el-form-item
         label-width="10px"
-        style="float:right;"
+        :style="`float:${commandsFloat};`"
       >
         <el-button
           v-for="(item,index) of commands"
@@ -190,6 +190,10 @@ export default {
     maxFieldWidth: {
       type: Number,
       default: 230,
+    },
+    commandsFloat: {
+      type: String,
+      default: 'right',
     },
   },
   data() {

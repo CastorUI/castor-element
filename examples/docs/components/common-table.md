@@ -928,6 +928,7 @@
     :dataSource="table.dataList"
     :columns="tableColumns"
     :customCommands="table.customCommands"
+    :settingCommands="table.settingCommands"
     :addCommand="table.addCommand"
     @handleAdd="handleAdd"
     @handleStar="handleStar"
@@ -964,6 +965,20 @@
               command: 'handleStar',
               disableValidator: (multipleSelection) =>
                 !(multipleSelection && multipleSelection.length),
+            },
+            {
+              text: '取消关注',
+              command: 'handleUnstar',
+              disableValidator: (multipleSelection) =>
+                !(multipleSelection && multipleSelection.length),
+            },
+          ],
+          settingCommands: [
+            {
+              text: '关注',
+              command: 'handleStar',
+              disableValidator: (multipleSelection) =>
+                !(multipleSelection && multipleSelection.length),
               elementProps: {
                 icon: 'el-icon-star-on',
               },
@@ -971,6 +986,8 @@
             {
               text: '取消关注',
               command: 'handleUnstar',
+              disableValidator: (multipleSelection) =>
+                !(multipleSelection && multipleSelection.length),
               elementProps: {
                 icon: 'el-icon-star-off',
               },
