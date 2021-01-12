@@ -35,7 +35,20 @@
         v-bind="item.elementProps"
         @click.stop="$emit(item.command,scope.$index,scope.row)"
       >
-        {{ item.text }}
+        <el-tooltip
+          v-if="item.extendProps && item.extendProps.imageUrl"
+          class="item"
+          effect="dark"
+          :content="item.text"
+          placement="top-start"
+        >
+          <el-image
+            :style="item.extendProps.imageStyle||'width: 23px; height: 23px;line-height:23px;'"
+            :src="item.extendProps.imageUrl"
+            fit="fill"
+          />
+        </el-tooltip>
+        <span v-else>{{ item.text }} </span>
       </el-link>
     </template>
   </el-table-column>

@@ -16,6 +16,14 @@ command 代表一个可交互的命令或事件，包含两种情况：
 | visibleValidator | 可见性校验,返回 `true` 时可见                                                                               | function | —      | —      |
 | disableValidator | 可用性校验,返回 `true` 时禁用                                                                               | function | —      | —      |
 | elementProps     | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object   | —      | —      |
+| extendProps      | 扩展属性                                                                                                    | object   | —      | —      |
+
+#### Command Extend Options
+
+| 参数       | 说明     | 类型   | 可选值 | 默认值 |
+| ---------- | -------- | ------ | ------ | ------ |
+| imageUrl   | 图片地址 | string | —      | —      |
+| imageStyle | 图片样式 | string | —      | —      |
 
 ### elementProps ElementUI 属性
 

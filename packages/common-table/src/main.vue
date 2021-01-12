@@ -87,7 +87,7 @@
         :page-size="pagination.pageSize"
         :page-sizes="pageSizes"
         :total="pagination.total"
-        style="margin: 10px 0;"
+        style="margin-top: 10px;"
         v-bind="{layout: 'total,sizes, prev, pager, next',hideOnSinglePage: true, ...pagination.elementProps}"
         @size-change="pageSize => handlePageSizeChange(pageSize)"
         @current-change="pageIndex => handlePageIndexChange(pageIndex)"
