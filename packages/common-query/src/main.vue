@@ -5,7 +5,7 @@
     class="clearfix common-query"
   >
     <div
-      v-show="fields.some(r=>r.showType==='dynamic')"
+      v-if="fields.some(r=>r.showType==='dynamic')"
       style="display:inline-block;float:left"
     >
       <el-button
@@ -199,23 +199,29 @@ export default {
   data() {
     return {
       checkedKeys: [],
-      checkedFields: [],
       rowFieldsCount: 3,
     };
+  },
+  computed: {
+    checkedFields() {
+      return this.fields.filter(
+        (r) =>
+          r.showType === 'dynamic' && this.checkedKeys.indexOf(r.dataField) > -1
+      );
+    },
   },
   watch: {
     checkedKeys: {
       immediate: true,
       handler() {
-        this.checkedFields = [];
         this.fields
-          .filter((r) => r.showType === 'dynamic')
+          .filter(
+            (r) =>
+              r.showType === 'dynamic' &&
+              this.checkedKeys.indexOf(r.dataField) === -1
+          )
           .forEach((r) => {
-            if (this.checkedKeys.indexOf(r.dataField) > -1) {
-              this.checkedFields.push(r);
-            } else {
-              this.model[r.dataField] = undefined;
-            }
+            this.model[r.dataField] = undefined;
           });
       },
     },

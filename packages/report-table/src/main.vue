@@ -14,7 +14,7 @@
         {{ addCommand.text }}
       </el-button>
       <el-button-group
-        v-show="customCommands"
+        v-if="customCommands"
         class="table-custom-commands"
       >
         <el-button
