@@ -1097,6 +1097,7 @@
             border: false,
             stripe: true,
             style: 'width:100%;min-width:720px;height:auto;color:red;',
+            height: '160px',
           },
         },
       };

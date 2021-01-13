@@ -43,7 +43,7 @@
           placement="top-start"
         >
           <el-image
-            :style="item.extendProps.imageStyle||'width: 23px; height: 23px;line-height:23px;'"
+            :style="item.extendProps.imageStyle||'width: 24px; height: 24px;line-height:24px;'"
             :src="item.extendProps.imageUrl"
             fit="fill"
           />
