@@ -3,33 +3,31 @@
   <el-popover
     placement="top-start"
     title="列设置"
-    width="200"
     trigger="click"
   >
-    <div class="config-columns">
-      <div class="config-column-title">
-        左侧固定
+    <div class="column-config">
+      <div class="column-config-title">
+        固定在左侧
       </div>
       <draggable
-        tag="ul"
         :list="leftFixedColumns"
-        class="list-group"
+        class="draggable-items"
         @change="refreshTypedColumns"
       >
         <div
           v-for="leftFixedItem in leftFixedColumns"
           :key="leftFixedItem.dataField"
-          class="config-column"
+          class="item"
         >
           <svg
             t="1610688913051"
-            class="icon"
+            class="icon drag-icon"
             viewBox="0 0 1024 1024"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             p-id="3576"
-            width="16"
-            height="16"
+            width="14"
+            height="14"
           >
             <path
               d="M64.2 271H928v96H64.2zM64.2 463.1H928v96H64.2zM64.2 655.3H928v96H64.2z"
@@ -37,10 +35,10 @@
             />
           </svg>
           <el-checkbox v-model="leftFixedItem.show" />
-          <span>{{ leftFixedItem.label }}</span>
+          <span class="column-label">{{ leftFixedItem.label }}</span>
           <svg
             t="1610689304174"
-            class="icon"
+            class="icon fix-icon"
             viewBox="0 0 1024 1024"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +54,7 @@
           </svg>
           <svg
             t="1610689352063"
-            class="icon"
+            class="icon fix-icon"
             viewBox="0 0 1024 1024"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
@@ -72,29 +70,28 @@
           </svg>
         </div>
       </draggable>
-      <div class="config-column-title">
+      <div class="column-config-title">
         不固定
       </div>
       <draggable
-        tag="ul"
         :list="unFixedColumns"
-        class="list-group"
+        class="draggable-items"
         @change="refreshTypedColumns"
       >
         <div
           v-for="configColumnItem in unFixedColumns"
           :key="configColumnItem.dataField"
-          class="config-column"
+          class="item"
         >
           <svg
             t="1610688913051"
-            class="icon"
+            class="icon drag-icon"
             viewBox="0 0 1024 1024"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             p-id="3576"
-            width="16"
-            height="16"
+            width="14"
+            height="14"
           >
             <path
               d="M64.2 271H928v96H64.2zM64.2 463.1H928v96H64.2zM64.2 655.3H928v96H64.2z"
@@ -102,10 +99,10 @@
             />
           </svg>
           <el-checkbox v-model="configColumnItem.show" />
-          <span>{{ configColumnItem.label }}</span>
+          <span class="column-label">{{ configColumnItem.label }}</span>
           <svg
             t="1610689212107"
-            class="icon"
+            class="icon fix-icon"
             viewBox="0 0 1024 1024"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +118,7 @@
           </svg>
           <svg
             t="1610689352063"
-            class="icon"
+            class="icon fix-icon"
             viewBox="0 0 1024 1024"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
@@ -137,28 +134,27 @@
           </svg>
         </div>
       </draggable>
-      <div class="config-column-title">
-        右侧固定
+      <div class="column-config-title">
+        固定在右侧
       </div>
       <draggable
-        tag="ul"
         :list="rightFixedColumns"
-        class="list-group"
+        class="draggable-items"
       >
         <div
           v-for="rightFixedItem in rightFixedColumns"
           :key="rightFixedItem.dataField"
-          class="config-column"
+          class="item"
         >
           <svg
             t="1610688913051"
-            class="icon"
+            class="icon drag-icon"
             viewBox="0 0 1024 1024"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             p-id="3576"
-            width="16"
-            height="16"
+            width="14"
+            height="14"
           >
             <path
               d="M64.2 271H928v96H64.2zM64.2 463.1H928v96H64.2zM64.2 655.3H928v96H64.2z"
@@ -166,10 +162,10 @@
             />
           </svg>
           <el-checkbox v-model="rightFixedItem.show" />
-          <span>{{ rightFixedItem.label }}</span>
+          <span class="column-label">{{ rightFixedItem.label }}</span>
           <svg
             t="1610689212107"
-            class="icon"
+            class="icon fix-icon"
             viewBox="0 0 1024 1024"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
@@ -185,7 +181,7 @@
           </svg>
           <svg
             t="1610689304174"
-            class="icon"
+            class="icon fix-icon"
             viewBox="0 0 1024 1024"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
@@ -240,11 +236,14 @@ export default {
       this.rightFixedColumns = columns.filter((r) => r.fixed === 'right');
     },
     refreshTypedColumns() {
-      this.getTypedColumns(this.defaultConfigColumns);
-      const allColumns = this.leftFixedColumns
+      const tempAllColumns = this.leftFixedColumns
         .concat(...this.unFixedColumns)
         .concat(this.rightFixedColumns);
-      this.$emit('update:setConfigColumns', allColumns);
+      this.getTypedColumns(tempAllColumns);
+      const finalAllColumns = this.leftFixedColumns
+        .concat(...this.unFixedColumns)
+        .concat(this.rightFixedColumns);
+      this.$emit('update:setConfigColumns', finalAllColumns);
     },
     handleLeftFixed(item) {
       console.log('handleLeftFixed', item);
@@ -265,5 +264,32 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+.column-config {
+  .column-config-title {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    padding-left: 24px;
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 12px;
+  }
+  .draggable-items {
+    .item {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 4px 16px 4px 0;
+      .drag-icon {
+        padding-right: 6px;
+      }
+      .column-label {
+        flex: 1;
+        padding: 0 4px;
+      }
+      .fix-icon {
+        padding: 0 4px;
+      }
+    }
+  }
+}
 </style>
