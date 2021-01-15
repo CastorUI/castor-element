@@ -19,6 +19,29 @@
         >
           {{ item.text }}
         </el-button>
+        <el-popover
+          placement="top-start"
+          title="列设置"
+          width="200"
+          trigger="click"
+        >
+          <div class="config-columns">
+            <div
+              v-for="(configColumnItem,configColumnIndex) in configColumns"
+              :key="configColumnIndex"
+              class="config-column"
+            >
+              <el-checkbox v-model="configColumnItem.show" />
+              {{ configColumnItem.label }}
+            </div>
+          </div>
+          <el-button
+            slot="reference"
+            v-bind="{type: 'text',size:'small',icon: 'el-icon-setting'}"
+          >
+            列设置
+          </el-button>
+        </el-popover>
       </div>
       <el-button-group
         v-if="customCommands && customCommands.length"
@@ -55,6 +78,7 @@
     </div>
     <div class="table-content">
       <el-table
+        v-if="hackReset"
         ref="table"
         v-loading="loading"
         row-key="id"
@@ -66,7 +90,7 @@
         @sort-change="args=> handleSortChange(args)"
       >
         <common-column
-          v-for="(item,index) of columns"
+          v-for="(item,index) of dynamicColums"
           :key="index"
           :type="item.type"
           :label="item.label"
@@ -164,7 +188,16 @@ export default {
   },
   data() {
     return {
+      hackReset: true,
       multipleSelection: [],
+      dynamicColums: this.columns,
+      configColumns: this.columns.map((r) => {
+        return {
+          show: true,
+          dataField: r.dataField,
+          label: r.type === 'selection' ? '选择列' : r.label,
+        };
+      }),
     };
   },
   computed: {
@@ -179,6 +212,23 @@ export default {
         prop: this.pagination.sortField,
         order: this.pagination.order,
       };
+    },
+  },
+  watch: {
+    configColumns: {
+      handler() {
+        this.hackReset = false;
+        this.dynamicColums = this.columns.filter((r) =>
+          this.configColumns.some(
+            (c) => c.dataField === r.dataField && c.show === true
+          )
+        );
+        this.$nextTick(() => {
+          this.hackReset = true;
+        });
+      },
+      deep: true,
+      immediate: false,
     },
   },
   methods: {

@@ -1015,7 +1015,7 @@
             label: '',
             dataField: '',
             elementProps: {
-              width: '40px',
+              width: '100px',
             },
           },
           {
