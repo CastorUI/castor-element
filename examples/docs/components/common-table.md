@@ -1016,6 +1016,7 @@
             dataField: '',
             elementProps: {
               width: '100px',
+              fixed: 'left',
             },
           },
           {
@@ -1034,6 +1035,7 @@
             dataField: 'name',
             elementProps: {
               minWidth: 2,
+              fixed: 'right',
             },
           },
         ];
