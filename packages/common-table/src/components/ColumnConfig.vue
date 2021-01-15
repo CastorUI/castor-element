@@ -6,10 +6,14 @@
     trigger="click"
   >
     <div class="column-config">
-      <div class="column-config-title">
+      <div
+        v-if="leftFixedColumns&&leftFixedColumns.length"
+        class="column-config-title"
+      >
         固定在左侧
       </div>
       <draggable
+        v-if="leftFixedColumns&&leftFixedColumns.length"
         :list="leftFixedColumns"
         class="draggable-items"
         @change="refreshTypedColumns"
@@ -70,7 +74,10 @@
           </svg>
         </div>
       </draggable>
-      <div class="column-config-title">
+      <div
+        v-if="(leftFixedColumns && leftFixedColumns.length)||(rightFixedColumns && rightFixedColumns.length)"
+        class="column-config-title"
+      >
         不固定
       </div>
       <draggable
@@ -134,10 +141,14 @@
           </svg>
         </div>
       </draggable>
-      <div class="column-config-title">
+      <div
+        v-if="rightFixedColumns && rightFixedColumns.length"
+        class="column-config-title"
+      >
         固定在右侧
       </div>
       <draggable
+        v-if="rightFixedColumns && rightFixedColumns.length"
         :list="rightFixedColumns"
         class="draggable-items"
       >
