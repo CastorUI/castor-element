@@ -212,6 +212,7 @@
     <el-button
       slot="reference"
       v-bind="{type: 'text',size:'small',icon: 'el-icon-setting'}"
+      style="margin-left:10px;"
     >
       列设置
     </el-button>
