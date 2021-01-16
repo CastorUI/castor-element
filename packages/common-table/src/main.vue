@@ -1,16 +1,10 @@
 <template>
   <div class="common-table-container">
-    <div
-      v-if="title || (addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))) ||(customCommands && customCommands.length)||(settingCommands && settingCommands.length)"
-      class="table-append-header"
-    >
+    <div class="table-append-header">
       <div class="table-title">
         {{ title }}
       </div>
-      <div
-        v-if="settingCommands && settingCommands.length"
-        class="table-setting-commands"
-      >
+      <div class="table-setting-commands">
         <el-button
           v-for="(item,index) of settingCommands"
           :key="index"
@@ -26,10 +20,7 @@
       </div>
       <el-button-group
         v-if="customCommands && customCommands.length"
-        class="table-custom-commands"
-        :class="{
-          'divider': settingCommands && settingCommands.length
-        }"
+        class="table-custom-commands divider"
       >
         <el-button
           v-for="(item,index) of customCommands"
@@ -43,10 +34,7 @@
       </el-button-group>
       <div
         v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
-        class="table-add-command"
-        :class="{
-          'divider': (customCommands && customCommands.length)||(settingCommands && settingCommands.length)
-        }"
+        class="table-add-command divider"
       >
         <el-button
           :disabled="addCommand.disableValidator && addCommand.disableValidator.call(this)"

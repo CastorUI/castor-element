@@ -322,14 +322,14 @@ export default {
       width: 100%;
       padding: 4px 16px 4px 0;
       .drag-icon {
-        padding-right: 6px;
+        margin-right: 6px;
       }
       .column-label {
         flex: 1;
         padding: 0 4px;
       }
       .fix-icon {
-        padding: 0 4px;
+        margin: 0 4px;
       }
     }
   }
