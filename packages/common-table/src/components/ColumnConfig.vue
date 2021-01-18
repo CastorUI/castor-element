@@ -26,6 +26,11 @@
             v-for="colItem in groupItem.columns"
             :key="colItem.dataField"
             class="item"
+            :class="{
+              active: activeDataField === colItem.dataField
+            }"
+            @mouseover="activeDataField=colItem.dataField"
+            @mouseleave="activeDataField=''"
           >
             <svg
               t="1610953087816"
@@ -49,7 +54,7 @@
               placement="top"
             >
               <svg
-                v-if="groupItem.showLeftFixIcon"
+                v-if="activeDataField===colItem.dataField && groupItem.showLeftFixIcon"
                 t="1610689212107"
                 class="icon fix-icon"
                 viewBox="0 0 1024 1024"
@@ -71,7 +76,7 @@
               placement="top"
             >
               <svg
-                v-if="groupItem.showUnFixIcon"
+                v-if="activeDataField===colItem.dataField && groupItem.showUnFixIcon"
                 t="1610689304174"
                 class="icon fix-icon"
                 viewBox="0 0 1024 1024"
@@ -93,7 +98,7 @@
               placement="top"
             >
               <svg
-                v-if="groupItem.showRightFixIcon"
+                v-if="activeDataField===colItem.dataField && groupItem.showRightFixIcon"
                 t="1610689352063"
                 class="icon fix-icon"
                 viewBox="0 0 1024 1024"
@@ -141,6 +146,7 @@ export default {
       leftFixedColumns: [],
       unFixedColumns: [],
       rightFixedColumns: [],
+      activeDataField: '',
     };
   },
   computed: {
@@ -229,6 +235,7 @@ export default {
 
 <style lang="scss">
 .column-config {
+  margin: 0 -12px;
   .column-config-title {
     margin-top: 6px;
     margin-bottom: 6px;
@@ -240,10 +247,12 @@ export default {
     .item {
       display: flex;
       align-items: center;
-      width: 100%;
       padding: 4px 16px 4px 0;
+      &.active {
+        background: #e6f7ff;
+      }
       .drag-icon {
-        margin-right: 6px;
+        margin: 0 5px;
         color: rgba(0, 0, 0, 0.85);
       }
       .column-label {
