@@ -71,7 +71,7 @@
                 placement="top"
               >
                 <svg
-                  v-if="activeDataField===colItem.dataField && groupItem.showLeftFixIcon"
+                  v-show="activeDataField===colItem.dataField && groupItem.showLeftFixIcon"
                   t="1610689212107"
                   class="icon fix-icon"
                   viewBox="0 0 1024 1024"
@@ -93,7 +93,7 @@
                 placement="top"
               >
                 <svg
-                  v-if="activeDataField===colItem.dataField && groupItem.showUnFixIcon"
+                  v-show="activeDataField===colItem.dataField && groupItem.showUnFixIcon"
                   t="1610689304174"
                   class="icon fix-icon"
                   viewBox="0 0 1024 1024"
@@ -115,7 +115,7 @@
                 placement="top"
               >
                 <svg
-                  v-if="activeDataField===colItem.dataField && groupItem.showRightFixIcon"
+                  v-show="activeDataField===colItem.dataField && groupItem.showRightFixIcon"
                   t="1610689352063"
                   class="icon fix-icon"
                   viewBox="0 0 1024 1024"
@@ -318,14 +318,16 @@ export default {
           .drag-icon {
             margin: 0 5px;
             color: rgba(0, 0, 0, 0.85);
+            cursor: move;
           }
           .column-label {
             flex: 1;
             padding: 0 4px;
-            // min-width: 80px;
+            user-select: none;
           }
           .fix-icon {
             margin: 0 4px;
+            cursor: pointer;
           }
         }
       }
