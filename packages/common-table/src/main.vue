@@ -13,6 +13,13 @@
         >
           {{ item.text }}
         </el-button>
+        <el-button
+          icon="el-icon-refresh-right"
+          v-bind="{type: 'text',size:'small'}"
+          @click="getList"
+        >
+          刷新
+        </el-button>
         <column-config
           :default-config-columns="configColumns"
           :set-config-columns.sync="configColumns"
