@@ -2,13 +2,27 @@
 <template>
   <el-popover
     placement="top-start"
-    title="列设置"
     trigger="click"
   >
     <div class="column-config">
+      <div class="batch-config">
+        <el-checkbox
+          v-model="checkAll"
+          :indeterminate="checkHalf"
+        >
+          列展示
+        </el-checkbox>
+        <el-button
+          v-bind="{type: 'text',size:'small'}"
+          @click="handleResetAll"
+        >
+          重置
+        </el-button>
+      </div>
       <div
         v-for="(groupItem,groupIndex) in groups"
         :key="groupIndex"
+        class="group-config"
       >
         <div
           v-if="groupItem.titleVisibleValidator.call(this)"
@@ -147,6 +161,7 @@ export default {
       unFixedColumns: [],
       rightFixedColumns: [],
       activeDataField: '',
+      originColumns: [],
     };
   },
   computed: {
@@ -194,8 +209,25 @@ export default {
         },
       ];
     },
+    checkAll: {
+      get() {
+        return this.defaultConfigColumns.every((r) => r.show);
+      },
+      set(val) {
+        this.defaultConfigColumns.forEach((r) => {
+          r.show = val;
+        });
+      },
+    },
+    checkHalf() {
+      return (
+        this.defaultConfigColumns.some((r) => r.show) &&
+        this.defaultConfigColumns.some((r) => !r.show)
+      );
+    },
   },
   created() {
+    this.originColumns = JSON.parse(JSON.stringify(this.defaultConfigColumns));
     this.getTypedColumns(this.defaultConfigColumns);
   },
   methods: {
@@ -229,6 +261,12 @@ export default {
       item.fixed = 'right';
       this.refreshTypedColumns();
     },
+    handleResetAll() {
+      console.log('handleResetAll', this.originColumns);
+      const cloneOriginColumns = JSON.parse(JSON.stringify(this.originColumns));
+      this.getTypedColumns(cloneOriginColumns);
+      this.$emit('update:setConfigColumns', cloneOriginColumns);
+    },
   },
 };
 </script>
@@ -236,31 +274,33 @@ export default {
 <style lang="scss">
 .column-config {
   margin: 0 -12px;
-  .column-config-title {
-    margin-top: 6px;
-    margin-bottom: 6px;
-    padding-left: 24px;
-    color: rgba(0, 0, 0, 0.45);
-    font-size: 12px;
-  }
-  .draggable-items {
-    .item {
-      display: flex;
-      align-items: center;
-      padding: 4px 16px 4px 0;
-      &.active {
-        background: #e6f7ff;
-      }
-      .drag-icon {
-        margin: 0 5px;
-        color: rgba(0, 0, 0, 0.85);
-      }
-      .column-label {
-        flex: 1;
-        padding: 0 4px;
-      }
-      .fix-icon {
-        margin: 0 4px;
+  .group-config {
+    .column-config-title {
+      margin-top: 6px;
+      margin-bottom: 6px;
+      padding-left: 24px;
+      color: rgba(0, 0, 0, 0.45);
+      font-size: 12px;
+    }
+    .draggable-items {
+      .item {
+        display: flex;
+        align-items: center;
+        padding: 4px 16px 4px 0;
+        &.active {
+          background: #e6f7ff;
+        }
+        .drag-icon {
+          margin: 0 5px;
+          color: rgba(0, 0, 0, 0.85);
+        }
+        .column-label {
+          flex: 1;
+          padding: 0 4px;
+        }
+        .fix-icon {
+          margin: 0 4px;
+        }
       }
     }
   }
