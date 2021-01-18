@@ -1,7 +1,7 @@
 
 <template>
   <el-popover
-    placement="top-start"
+    placement="top-end"
     trigger="click"
   >
     <div class="column-config">
@@ -282,7 +282,7 @@ export default {
     height: 32px;
     line-height: 32px;
     overflow: hidden;
-    padding: 5px 16px 4px;
+    margin: 5px 16px 4px;
     color: rgba(0, 0, 0, 0.85);
     font-weight: 500;
     border-bottom: 1px solid #f0f0f0;
@@ -322,6 +322,7 @@ export default {
           .column-label {
             flex: 1;
             padding: 0 4px;
+            // min-width: 80px;
           }
           .fix-icon {
             margin: 0 4px;
