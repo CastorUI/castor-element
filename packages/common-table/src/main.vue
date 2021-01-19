@@ -54,7 +54,7 @@
     </div>
     <div class="table-content">
       <el-table
-        v-if="hackReset"
+        v-show="hackReset"
         ref="table"
         v-loading="loading"
         row-key="id"
@@ -168,7 +168,7 @@ export default {
     return {
       hackReset: true,
       multipleSelection: [],
-      dynamicColums: this.columns,
+      dynamicColums: JSON.parse(JSON.stringify(this.columns)),
       configColumns: this.columns.map((r) => {
         return {
           show: true,
@@ -211,6 +211,22 @@ export default {
               },
             };
           });
+        this.$nextTick(() => {
+          this.hackReset = true;
+        });
+      },
+      deep: true,
+      immediate: false,
+    },
+    columns: {
+      handler() {
+        this.hackReset = false;
+        this.dynamicColums.forEach((r) => {
+          const originColumn = this.columns.filter(
+            (c) => c.dataField === r.dataField
+          )[0];
+          r.extendProps = originColumn.extendProps;
+        });
         this.$nextTick(() => {
           this.hackReset = true;
         });

@@ -241,42 +241,10 @@
     data() {
       return {
         optionsMap: {
-          type: [
-            {
-              value: 1,
-              label: '住宅配套项目',
-            },
-            {
-              value: 2,
-              label: '工营事业项目',
-            },
-            {
-              value: 3,
-              label: '道路工程项目',
-            },
-          ],
+          type: [],
         },
         table: {
-          dataList: [
-            {
-              id: 1001,
-              code: 'A1',
-              name: '上海燃气一期工程',
-              type: 1,
-            },
-            {
-              id: 1002,
-              code: 'A2',
-              name: '上海燃气二期工程',
-              type: 2,
-            },
-            {
-              id: 1003,
-              code: 'A3',
-              name: '上海燃气三期工程',
-              type: 3,
-            },
-          ],
+          dataList: [],
         },
       };
     },
@@ -315,7 +283,55 @@
         ];
       },
     },
-    methods: {},
+    async created() {
+      await this.getBasic();
+      await this.getList();
+    },
+    methods: {
+      async getBasic() {
+        const typePromise = new Promise((resolve) => {
+          setTimeout(() => {
+            resolve([
+              {
+                value: 1,
+                label: '住宅配套项目',
+              },
+              {
+                value: 2,
+                label: '工营事业项目',
+              },
+              {
+                value: 3,
+                label: '道路工程项目',
+              },
+            ]);
+          }, 3000);
+        });
+        this.optionsMap['type'] = await typePromise;
+      },
+      async getList() {
+        this.table.dataList = await Promise.resolve([
+          {
+            id: 1001,
+            code: 'A1',
+            name: '上海燃气一期工程',
+            type: 1,
+          },
+          {
+            id: 1002,
+            code: 'A2',
+            name: '上海燃气二期工程',
+            type: 2,
+          },
+          {
+            id: 1003,
+            code: 'A3',
+            name: '上海燃气三期工程',
+            type: 3,
+          },
+        ]);
+      },
+    },
   };
 </script>
 ```
