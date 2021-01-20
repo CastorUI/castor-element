@@ -54,7 +54,7 @@
     </div>
     <div class="table-content">
       <el-table
-        v-show="hackReset"
+        v-if="hackReset"
         ref="table"
         v-loading="loading"
         row-key="id"
