@@ -268,6 +268,9 @@ export default {
     handleResetAll() {
       console.log('handleResetAll', this.originColumns);
       const cloneOriginColumns = JSON.parse(JSON.stringify(this.originColumns));
+      (cloneOriginColumns || []).forEach((r) => {
+        r.show = true;
+      });
       this.getTypedColumns(cloneOriginColumns);
       this.$emit('update:setConfigColumns', cloneOriginColumns);
     },

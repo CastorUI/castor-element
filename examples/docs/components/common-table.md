@@ -10,7 +10,11 @@
 
 ```html
 <template>
-  <ca-common-table :dataSource="table.dataList" :columns="tableColumns" />
+  <ca-common-table
+    :dataSource="table.dataList"
+    :columns="tableColumns"
+    table-tag="demo-basic"
+  />
 </template>
 
 <script>
@@ -77,7 +81,11 @@
 
 ```html
 <template>
-  <ca-common-table :dataSource="table.dataList" :columns="tableColumns" />
+  <ca-common-table
+    :dataSource="table.dataList"
+    :columns="tableColumns"
+    table-tag="demo-index"
+  />
 </template>
 
 <script>

@@ -157,10 +157,22 @@ export default {
         return {};
       },
     },
+    tableTag: {
+      type: String,
+      default: '',
+    },
     elementProps: {
       type: Object,
       default: function () {
         return {};
+      },
+    },
+    extendProps: {
+      type: Object,
+      default: function () {
+        return {
+          cacheConfigColumns: true,
+        };
       },
     },
   },
@@ -169,14 +181,7 @@ export default {
       hackReset: true,
       multipleSelection: [],
       dynamicColums: JSON.parse(JSON.stringify(this.columns)),
-      configColumns: this.columns.map((r) => {
-        return {
-          show: true,
-          dataField: r.dataField,
-          label: r.type === 'selection' ? '选择列' : r.label,
-          fixed: (r.elementProps || {}).fixed,
-        };
-      }),
+      configColumns: [],
     };
   },
   computed: {
@@ -195,7 +200,7 @@ export default {
   },
   watch: {
     configColumns: {
-      handler() {
+      handler(val) {
         this.hackReset = false;
         this.dynamicColums = this.configColumns
           .filter((r) => r.show)
@@ -211,6 +216,16 @@ export default {
               },
             };
           });
+        if (
+          val &&
+          this.tableTag &&
+          (this.extendProps || {}).cacheConfigColumns
+        ) {
+          localStorage.setItem(
+            `${this.tableTag}-CONFIG-COLUMNS`,
+            JSON.stringify(val)
+          );
+        }
         this.$nextTick(() => {
           this.hackReset = true;
         });
@@ -234,6 +249,28 @@ export default {
       deep: true,
       immediate: false,
     },
+  },
+  created() {
+    console.log('this.tableTag', this.tableTag);
+    if (this.tableTag && (this.extendProps || {}).cacheConfigColumns) {
+      const cacheConfigColumnsJson = localStorage.getItem(
+        `${this.tableTag}-CONFIG-COLUMNS`
+      );
+      if (cacheConfigColumnsJson) {
+        this.configColumns = JSON.parse(cacheConfigColumnsJson);
+      }
+    }
+
+    if (!(this.configColumns && this.configColumns.length)) {
+      this.configColumns = this.columns.map((r) => {
+        return {
+          show: true,
+          dataField: r.dataField,
+          label: r.type === 'selection' ? '选择列' : r.label,
+          fixed: (r.elementProps || {}).fixed,
+        };
+      });
+    }
   },
   methods: {
     indexMethod(index) {
