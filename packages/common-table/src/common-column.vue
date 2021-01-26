@@ -2,18 +2,21 @@
   <el-table-column
     v-if="type==='selection'"
     :type="type"
+    :prop="dataField"
     v-bind="{align: 'center', ...elementProps}"
   />
   <el-table-column
     v-else-if="type==='index'"
     :type="type"
     :label="label"
+    :prop="dataField"
     :index="indexMethod"
     v-bind="{align: 'center', ...elementProps}"
   />
   <el-table-column
     v-else-if="type==='custom'"
     :label="label"
+    :prop="dataField"
     v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...elementProps}"
   >
     <!-- <template slot-scope="scope">
@@ -24,6 +27,7 @@
   <el-table-column
     v-else-if="type==='commands'"
     :label="label"
+    :prop="dataField"
     v-bind="{minWidth: 1, align: 'center', ...elementProps}"
   >
     <template slot-scope="scope">
@@ -55,6 +59,7 @@
   <el-table-column
     v-else-if="type==='link'"
     :label="label"
+    :prop="dataField"
     v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...elementProps}"
   >
     <template slot-scope="scope">
@@ -69,6 +74,7 @@
   <el-table-column
     v-else-if="type==='status'"
     :label="label"
+    :prop="dataField"
     v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...elementProps}"
   >
     <template slot-scope="scope">
@@ -93,6 +99,7 @@
   <el-table-column
     v-else-if="type==='dot-status'"
     :label="label"
+    :prop="dataField"
     v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...elementProps}"
   >
     <template slot-scope="scope">
@@ -108,6 +115,7 @@
   <el-table-column
     v-else-if="type==='keyToValue'"
     :label="label"
+    :prop="dataField"
     v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...elementProps}"
   >
     <template slot-scope="scope">
@@ -117,6 +125,7 @@
   <el-table-column
     v-else-if="type==='multiKeyToValue'"
     :label="label"
+    :prop="dataField"
     v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...elementProps}"
   >
     <template slot-scope="scope">
@@ -129,6 +138,7 @@
   <el-table-column
     v-else-if="type==='expand'"
     type="expand"
+    :prop="dataField"
     v-bind="elementProps"
   >
     <template slot-scope="scope">
