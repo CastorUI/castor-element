@@ -57,7 +57,7 @@
           },
           {
             type: 'default',
-            label: '名称',
+            label: '测试表格名称超长',
             dataField: 'name',
             elementProps: {
               minWidth: 2,

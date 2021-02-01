@@ -3,6 +3,7 @@
   <el-popover
     placement="top-end"
     trigger="click"
+    width="164"
   >
     <div class="column-config">
       <div class="all-config">
@@ -65,7 +66,17 @@
                 />
               </svg>
               <el-checkbox v-model="colItem.show" />
-              <span class="column-label">{{ colItem.label }}</span>
+              <el-tooltip
+                v-if="colItem.label && colItem.label.length > 6"
+                :content="colItem.label"
+                placement="top"
+              >
+                <span class="column-label">{{ `${colItem.label.substr(0,6)}...` }}</span>
+              </el-tooltip>
+              <span
+                v-else
+                class="column-label"
+              >{{ colItem.label }}</span>
               <el-tooltip
                 content="固定在左侧"
                 placement="top"
@@ -78,8 +89,8 @@
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
                   p-id="11011"
-                  width="16"
-                  height="16"
+                  width="14"
+                  height="14"
                   @click="handleLeftFixed(colItem)"
                 >
                   <path
@@ -100,8 +111,8 @@
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
                   p-id="17484"
-                  width="16"
-                  height="16"
+                  width="14"
+                  height="14"
                   @click="handleUnFixed(colItem)"
                 >
                   <path
@@ -122,8 +133,8 @@
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
                   p-id="18220"
-                  width="16"
-                  height="16"
+                  width="14"
+                  height="14"
                   @click="handleRightFixed(colItem)"
                 >
                   <path
@@ -306,7 +317,7 @@ export default {
       .column-config-title {
         margin-top: 6px;
         margin-bottom: 6px;
-        padding-left: 24px;
+        padding-left: 20px;
         color: rgba(0, 0, 0, 0.45);
         font-size: 12px;
       }
@@ -314,12 +325,12 @@ export default {
         .item {
           display: flex;
           align-items: center;
-          padding: 4px 16px 4px 0;
+          padding: 4px 4px 4px 0;
           &.active {
             background: #e6f7ff;
           }
           .drag-icon {
-            margin: 0 5px;
+            margin: 0 2px 0 4px;
             color: rgba(0, 0, 0, 0.85);
             cursor: move;
           }
