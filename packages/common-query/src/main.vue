@@ -195,6 +195,10 @@ export default {
       type: String,
       default: 'right',
     },
+    defaultCheckedKeys: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
@@ -211,6 +215,13 @@ export default {
     },
   },
   watch: {
+    defaultCheckedKeys: {
+      handler() {
+        this.checkedKeys = this.defaultCheckedKeys;
+      },
+      immediate: true,
+      deep: false,
+    },
     checkedKeys: {
       immediate: true,
       handler() {

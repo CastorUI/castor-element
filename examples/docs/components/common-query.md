@@ -223,6 +223,7 @@
     :model="search.model"
     :commands="search.commands"
     :fields="searchFields"
+    :default-checked-keys="['code']"
     label-width="120px"
     dynamicFieldsPosition="start"
     @handleFilter="handleFilter"
@@ -390,6 +391,7 @@
 | fields                | 查询字段集合,见 `Field Options`                                                                             | array   | —         | []     |
 | rowHeight             | 行高                                                                                                        | number  | —         | 36     |
 | commands              | 命令集合 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling)            | array   | —         | []     |
+| defaultCheckedKeys    | 动态查询默认选中字段                                                                                        | array   | —         | []     |
 | dynamicFieldsPosition | 动态查询字段插入位置                                                                                        | string  | start\end | end    |
 | downloadOpt           | 下拉命令项                                                                                                  | object  | —         | {}     |
 | elementProps          | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object  | —         | {}     |
