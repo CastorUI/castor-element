@@ -189,6 +189,7 @@
             type: 'checkboxGroup',
             label: '主打产品',
             dataField: 'equipment',
+            columnSpan: 2,
             extendProps: {
               options: this.optionsMap['equipment'],
             },
