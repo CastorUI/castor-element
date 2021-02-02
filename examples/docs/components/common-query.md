@@ -105,6 +105,9 @@
             label: '编号',
             dataField: 'code',
             columnSpan: 1,
+            extendProps: {
+              helpText: '请输入',
+            },
           },
           {
             type: 'input',
