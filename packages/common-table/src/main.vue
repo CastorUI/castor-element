@@ -221,9 +221,16 @@ export default {
           this.tableTag &&
           (this.extendProps || {}).cacheConfigColumns
         ) {
+          const cachedColumns = val.map((r) => {
+            return {
+              dataField: r.dataField,
+              show: r.show,
+              fixed: r.fixed,
+            };
+          });
           localStorage.setItem(
             `${this.tableTag}-CONFIG-COLUMNS`,
-            JSON.stringify(val)
+            JSON.stringify(cachedColumns)
           );
         }
         this.$nextTick(() => {
@@ -257,7 +264,27 @@ export default {
         `${this.tableTag}-CONFIG-COLUMNS`
       );
       if (cacheConfigColumnsJson) {
-        this.configColumns = JSON.parse(cacheConfigColumnsJson);
+        const cachedColumns = JSON.parse(cacheConfigColumnsJson);
+        // 过滤删除列&&获取列标题
+        const validCachedColumns = cachedColumns
+          // 过滤删除列
+          .filter((r) => this.columns.some((c) => c.dataField === r.dataField))
+          // 获取列标题
+          .map((r) => {
+            const originColumn = this.columns.find(
+              (c) => c.dataField === r.dataField
+            );
+            return {
+              ...r,
+              label: originColumn.type === 'selection' ? '选择列' : originColumn.label,
+            };
+          });
+        // 获取新增列
+        const addedColumns = this.columns.filter(
+          (r) => !validCachedColumns.some((c) => c.dataField === r.dataField)
+        );
+        // 组装所有可设置列
+        this.configColumns = validCachedColumns.concat(addedColumns);
       }
     }
 

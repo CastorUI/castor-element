@@ -57,8 +57,16 @@
           },
           {
             type: 'default',
-            label: '测试表格名称超长',
+            label: '测试表格列',
             dataField: 'name',
+            elementProps: {
+              minWidth: 2,
+            },
+          },
+          {
+            type: 'default',
+            label: '测试表格列3',
+            dataField: 'name2',
             elementProps: {
               minWidth: 2,
             },
@@ -119,7 +127,7 @@
           {
             type: 'index',
             label: '序号',
-            dataField: '',
+            dataField: 'index',
             elementProps: {
               width: '80px',
             },
@@ -163,6 +171,7 @@
   <ca-common-table
     :dataSource="table.dataList"
     :columns="tableColumns"
+    table-tag="demo-link"
     @handleLink="handleLink"
   />
 </template>
@@ -241,7 +250,11 @@
 
 ```html
 <template>
-  <ca-common-table :dataSource="table.dataList" :columns="tableColumns" />
+  <ca-common-table
+    :dataSource="table.dataList"
+    :columns="tableColumns"
+    table-tag="demo-keyToValue"
+  />
 </template>
 
 <script>
@@ -354,7 +367,11 @@
 
 ```html
 <template>
-  <ca-common-table :dataSource="table.dataList" :columns="tableColumns" />
+  <ca-common-table
+    :dataSource="table.dataList"
+    :columns="tableColumns"
+    table-tag="demo-multiKeyToValue"
+  />
 </template>
 
 <script>
@@ -451,7 +468,11 @@
 
 ```html
 <template>
-  <ca-common-table :dataSource="table.dataList" :columns="tableColumns" />
+  <ca-common-table
+    :dataSource="table.dataList"
+    :columns="tableColumns"
+    table-tag="demo-status"
+  />
 </template>
 
 <script>
@@ -563,6 +584,7 @@
   <ca-common-table
     :dataSource="table.dataList"
     :columns="tableColumns"
+    table-tag="demo-commands"
     @handleEdit="handleEdit"
     @handleDelete="handleDelete"
   />
@@ -674,6 +696,7 @@
     :columns="tableColumns"
     :pagination="table.pagination"
     :getList="getList"
+    table-tag="demo-pagination"
   />
 </template>
 
@@ -790,6 +813,7 @@
     :columns="tableColumns"
     :pagination="table.pagination"
     :getList="getList"
+    table-tag="demo-paginationLessOne"
   />
 </template>
 
@@ -870,6 +894,7 @@
     :dataSource="table.dataList"
     :columns="tableColumns"
     :addCommand="table.addCommand"
+    table-tag="demo-add"
     @handleAdd="handleAdd"
   />
 </template>
@@ -958,6 +983,7 @@
     :customCommands="table.customCommands"
     :settingCommands="table.settingCommands"
     :addCommand="table.addCommand"
+    table-tag="demo-custom"
     @handleAdd="handleAdd"
     @handleStar="handleStar"
     @handleUnstar="handleUnstar"
@@ -1093,6 +1119,7 @@
   <ca-common-table
     :dataSource="table.dataList"
     :columns="tableColumns"
+    table-tag="demo-elementPros"
     :elementProps="table.elementProps"
   />
 </template>
