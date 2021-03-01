@@ -276,7 +276,10 @@ export default {
             );
             return {
               ...r,
-              label: originColumn.type === 'selection' ? '选择列' : originColumn.label,
+              label:
+                originColumn.type === 'selection'
+                  ? '选择列'
+                  : originColumn.label,
             };
           });
         // 获取新增列
@@ -332,11 +335,13 @@ export default {
 .common-table-container {
   overflow: hidden;
   .table-append-header {
+    height: 40px;
+    line-height: 40px;
     margin-bottom: 12px;
     overflow: hidden;
     .table-title {
       float: left;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: bold;
     }
     .table-add-command {

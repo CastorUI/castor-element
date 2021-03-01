@@ -322,7 +322,7 @@ export default {
     overflow: hidden;
     .table-title {
       float: left;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: bold;
     }
     .table-add-command {
