@@ -25,7 +25,7 @@ deploy_prod:
     - nvm use $NODE_VERSION
     - npm install -g mirror-config-china --registry=http://registry.npm.taobao.org
     - npm install  --silent
-    - npm run build-examples
+    - npm run build:examples
 
   script:
     - tar -czf dist.tar.gz dist
