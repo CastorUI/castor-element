@@ -3,7 +3,6 @@
   <el-popover
     placement="top-end"
     trigger="click"
-    width="164"
   >
     <div class="column-config">
       <div class="all-config">
@@ -292,7 +291,6 @@ export default {
 <style lang="scss">
 .column-config {
   margin: -12px;
-  box-sizing: content-box;
   width: 188px;
   .all-config {
     height: 32px;
