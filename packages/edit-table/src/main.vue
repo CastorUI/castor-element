@@ -299,16 +299,12 @@ export default {
 .common-edit-table-container {
   // 暂时解决不同缩放比例下表头行内线消失的问题
   .el-table th.is-leaf {
-    border-bottom: 1.2px solid #ebeef5;
+    border-bottom-width: 1.2px;
+    border-bottom-style: solid;
   }
   .el-table__header-wrapper tr th,
   .el-table__fixed-header-wrapper tr th {
-    color: rgba(0, 0, 0, 0.85);
     font-weight: 500;
-    background: #fafafa;
-  }
-  .el-table__append-wrapper {
-    background: #fafafa;
   }
 
   .el-table__append-wrapper {
@@ -322,7 +318,7 @@ export default {
     overflow: hidden;
     .table-title {
       float: left;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: bold;
     }
     .table-add-command {
@@ -333,7 +329,6 @@ export default {
   .table-content {
     .append-content {
       font-weight: 500;
-      background: #fafafa;
     }
   }
   .common-pagination-container {
