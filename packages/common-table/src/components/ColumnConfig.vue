@@ -292,6 +292,7 @@ export default {
 <style lang="scss">
 .column-config {
   margin: -12px;
+  box-sizing: content-box;
   .all-config {
     height: 32px;
     line-height: 32px;
@@ -318,7 +319,7 @@ export default {
         margin-top: 6px;
         margin-bottom: 6px;
         padding-left: 20px;
-        color: rgba(0, 0, 0, 0.45);
+        opacity: 0.85;
         font-size: 12px;
       }
       .draggable-items {
@@ -331,7 +332,7 @@ export default {
           }
           .drag-icon {
             margin: 0 2px 0 4px;
-            color: rgba(0, 0, 0, 0.85);
+            opacity: 0.85;
             cursor: move;
           }
           .column-label {
