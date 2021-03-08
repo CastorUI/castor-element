@@ -293,6 +293,7 @@ export default {
 .column-config {
   margin: -12px;
   box-sizing: content-box;
+  width: 188px;
   .all-config {
     height: 32px;
     line-height: 32px;
