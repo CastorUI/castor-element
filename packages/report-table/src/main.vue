@@ -264,7 +264,6 @@ export default {
 
 <style lang="scss" scoped>
 .report-table-container {
-  background: #fff;
   overflow: hidden;
   .table-commands {
     margin-top: 10px;

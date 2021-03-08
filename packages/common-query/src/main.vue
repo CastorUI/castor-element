@@ -1,7 +1,7 @@
 <template>
   <div
     v-resize:debounce="handleResize"
-    style="overflow:hidden;minWidth:700px;background:#fff;padding:10px 10px 0 10px;"
+    style="overflow:hidden;minWidth:700px;padding:10px 10px 0 10px;"
     class="clearfix common-query"
   >
     <div

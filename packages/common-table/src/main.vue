@@ -378,12 +378,6 @@ export default {
   .table-content {
     overflow: auto;
     width: 100%;
-    .el-table__header-wrapper tr th,
-    .el-table__fixed-header-wrapper tr th {
-      color: rgba(0, 0, 0, 0.85);
-      font-weight: 500;
-      background: #fafafa;
-    }
   }
   .common-pagination-container {
     text-align: right;
