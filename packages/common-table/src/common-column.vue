@@ -17,12 +17,16 @@
     v-else-if="type==='custom'"
     :label="label"
     :prop="dataField"
-    v-bind="{minWidth: 1, align: 'center', showOverflowTooltip: true, ...elementProps}"
+    v-bind="{minWidth: 1, align: 'center', ...elementProps}"
   >
-    <!-- <template slot-scope="scope">
-      // eslint-disable-next-line vue/no-v-html
-      <div v-html="dataTemplate(scope.row)" />
-    </template> -->
+    <template slot-scope="scope">
+      <component
+        :is="customComponents[extendProps.componentKey]"
+        :component-data.sync="scope.row[dataField]"
+        :model="scope.row"
+        v-bind="elementProps"
+      />
+    </template>
   </el-table-column>
   <el-table-column
     v-else-if="type==='commands'"
