@@ -115,7 +115,7 @@
   </el-form-item>
 </template>
 <script>
-import InputNumberRange from './input-number-range';
+import InputNumberRange from './InputNumberRange';
 export default {
   components: { InputNumberRange },
   props: {

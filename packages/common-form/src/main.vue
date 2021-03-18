@@ -60,7 +60,7 @@
   </el-form>
 </template>
 <script>
-import CommonFormCtrl from './common-form-ctrl';
+import CommonFormCtrl from './components/CommonFormCtrl';
 export default {
   name: 'CaCommonForm',
   components: {

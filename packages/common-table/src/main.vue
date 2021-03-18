@@ -96,7 +96,7 @@
 </template>
 
 <script>
-import CommonColumn from './common-column';
+import CommonColumn from './../../components/CommonColumn';
 import ColumnConfig from './components/ColumnConfig';
 export default {
   name: 'CaCommonTable',

@@ -133,7 +133,7 @@
 </template>
 <script>
 import resize from 'vue-resize-directive';
-import CommonQueryCtrl from './common-query-ctrl';
+import CommonQueryCtrl from './components/CommonQueryCtrl';
 export default {
   name: 'CaCommonQuery',
   components: {

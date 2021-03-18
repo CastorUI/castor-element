@@ -118,7 +118,7 @@
 </template>
 
 <script>
-import CommonColumn from '../../common-table/src/common-column';
+import CommonColumn from '../../components/CommonColumn';
 export default {
   name: 'CaReportTable',
   components: {

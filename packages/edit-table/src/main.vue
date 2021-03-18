@@ -65,7 +65,7 @@
         :page-sizes="pageSizes"
         :total="pagination.total"
         style="margin: 10px 0;"
-        v-bind="{layout: 'total,sizes, prev, pager, next',hideOnSinglePage: true, ...pagination.elementProps}"
+        v-bind="{layout: 'total,sizes, prev, pager, next',background: true, ...pagination.elementProps}"
         @size-change="pageSize => handlePageSizeChange(pageSize)"
         @current-change="pageIndex => handlePageIndexChange(pageIndex)"
       />
@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import EditColumn from './EditColumn';
+import EditColumn from './../../components/EditColumn';
 export default {
   name: 'CaEditTable',
   components: {

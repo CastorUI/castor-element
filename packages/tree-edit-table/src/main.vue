@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import EditColumn from './../../edit-table/src/EditColumn';
+import EditColumn from './../../components/EditColumn';
 export default {
   name: 'CaTreeEditTable',
   components: {
