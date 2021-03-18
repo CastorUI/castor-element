@@ -10,6 +10,7 @@
 <template>
   <ca-common-query
     :ref="search.formId"
+    :form-id="search.formId"
     :model="search.model"
     :commands="search.commands"
     :fields="searchFields"
@@ -64,7 +65,7 @@
           ],
         },
         search: {
-          formId: 'searchForm',
+          formId: 'basicSearchForm',
           operateType: 'add',
           model: {
             code: '1001',
@@ -224,6 +225,7 @@
 <template>
   <ca-common-query
     :ref="search.formId"
+    :form-id="search.formId"
     :model="search.model"
     :commands="search.commands"
     :fields="searchFields"
@@ -280,7 +282,7 @@
           ],
         },
         search: {
-          formId: 'searchForm',
+          formId: 'dynamicSearchForm',
           operateType: 'add',
           model: {
             code: '1001',

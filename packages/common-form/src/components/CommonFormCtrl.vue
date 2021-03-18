@@ -104,9 +104,9 @@
       :disabled="disableValidator && disableValidator.call(this,model)"
       :type="type.toLocaleLowerCase()"
       v-bind="{
-        startPlaceholder: '开始日期', 
-        rangeSeparator: '~', 
-        endPlaceholder: '结束日期', 
+        startPlaceholder: '开始日期',
+        rangeSeparator: '~',
+        endPlaceholder: '结束日期',
         valueFormat: 'yyyy-MM-dd',
         pickerOptions: pickerOptions,
         style: 'width:100%;',

@@ -12,7 +12,7 @@ const components = [
   EditTable,
   CommonForm,
   CommonQuery,
-  TreeEditTable
+  TreeEditTable,
 ];
 
 /**

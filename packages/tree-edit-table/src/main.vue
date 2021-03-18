@@ -184,7 +184,7 @@ export default {
       });
     },
     expandRows: function () {
-      let expandRows = [this.editingRow];
+      const expandRows = [this.editingRow];
       let tempParentRow = this.editingRow.parentRow;
       while (tempParentRow) {
         expandRows.unshift(tempParentRow);
@@ -282,7 +282,7 @@ export default {
     handleValidateForm(validateField, validateStatus) {
       console.log('handleValidateForm', validateField, validateStatus);
       this.formValidateResult[validateField] = validateStatus;
-      let formValidateStatus = Object.values(this.formValidateResult).every(
+      const formValidateStatus = Object.values(this.formValidateResult).every(
         (r) => r
       );
       this.$emit('update:validateStatus', formValidateStatus);

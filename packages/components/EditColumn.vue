@@ -80,7 +80,7 @@
           label-width="0px"
           size="medium"
           :style="{
-            display:'inline-block' , 
+            display:'inline-block' ,
             width: 'calc(100% - ' + (extendProps.isExpandColumn? editingRow.dataLevel:0) * 16 + 'px)'
           }"
           @validate="handleValidateForm"
@@ -123,9 +123,9 @@
               v-model="editingRow[dataField]"
               :type="type.toLocaleLowerCase()"
               v-bind="{
-                startPlaceholder: '开始日期', 
-                rangeSeparator: '~', 
-                endPlaceholder: '结束日期', 
+                startPlaceholder: '开始日期',
+                rangeSeparator: '~',
+                endPlaceholder: '结束日期',
                 valueFormat: 'yyyy-MM-dd',
                 pickerOptions: pickerOptions,
                 style: 'width:100%;',
