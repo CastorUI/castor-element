@@ -294,7 +294,7 @@ export default {
 
   mounted() {
     this.$nextTick(() => {
-      let highlight = this.$el.getElementsByClassName('highlight')[0];
+      const highlight = this.$el.getElementsByClassName('highlight')[0];
       if (this.$el.getElementsByClassName('description').length === 0) {
         highlight.style.width = '100%';
         highlight.borderRight = 'none';
@@ -318,8 +318,8 @@ export default {
         `ipt src="//unpkg.com/element-ui@${version}/lib/index.js"></scr` +
         'ipt>';
       let jsTpl = (script || '').replace(/export default/, 'var Main =').trim();
-      let htmlTpl = `${resourcesTpl}\n<div id="app">\n${html.trim()}\n</div>`;
-      let cssTpl = `@import url("//unpkg.com/element-ui@${version}/lib/theme-chalk/index.css");\n${(
+      const htmlTpl = `${resourcesTpl}\n<div id="app">\n${html.trim()}\n</div>`;
+      const cssTpl = `@import url("//unpkg.com/element-ui@${version}/lib/theme-chalk/index.css");\n${(
         style || ''
       ).trim()}\n`;
       jsTpl = jsTpl

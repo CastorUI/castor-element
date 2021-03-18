@@ -30,7 +30,7 @@ router.afterEach((route) => {
     guide: '指南 | Castor',
     component: '组件 | Castor',
   };
-  for (let val in data) {
+  for (const val in data) {
     if (new RegExp('^' + val, 'g').test(route.name)) {
       document.title = data[val];
       return;
