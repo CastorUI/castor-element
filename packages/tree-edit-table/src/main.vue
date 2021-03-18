@@ -165,6 +165,8 @@ export default {
       });
     },
     addSubRow: function (row, index) {
+      console.log('addSubRow', row, index);
+      const oldScrollTop = this.$parent.$el.scrollTop;
       const newRow = {
         id: this.newId,
         operateType: 'add',
@@ -173,13 +175,22 @@ export default {
         parentRow: row,
       };
       this.newId = this.newId - 1;
-      row.children.push(newRow);
+      row.children.unshift(newRow);
       this.tableHackVisible = false;
       this.$nextTick(() => {
         this.tableHackVisible = true;
         this.$nextTick(() => {
           this.editingRow = newRow;
           this.expandRows();
+          this.$nextTick(() => {
+            if (oldScrollTop) {
+              this.$parent.$el.scrollTop = oldScrollTop;
+              console.log(
+                'parent component dom newScrollTop',
+                this.$parent.$el.scrollTop
+              );
+            }
+          });
         });
       });
     },
