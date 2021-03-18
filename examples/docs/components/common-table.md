@@ -683,11 +683,11 @@
 
 :::
 
-### 分页
+### 分页（常规）
 
 展示表格分页的用法。
 
-:::demo 在`pagination`中配置分页相关属性，包含`pageIndex`和`pageSize`和`total`。这里的分页用于后台分页，所以需要配置`getList`方法用于调用后台接口，每次切换分页时都会调用此方法。当后台返回`total`值大于设置的`pageSize`属性值时，会自动显示分页组件。
+:::demo 在`pagination`中配置分页相关属性，包含`pageIndex`和`pageSize`和`total`。这里的分页用于后台分页，所以需要配置`getList`方法用于调用后台接口，每次切换分页时都会调用此方法。
 
 ```html
 <template>
@@ -800,11 +800,11 @@
 
 :::
 
-### 分页-数据不足一页
+### 分页（大数据）
 
-展示表格分页的用法。
+展示大数据表格分页的用法。由于数据量巨大，无法支持总页码计算和跳页查询。
 
-:::demo 在`pagination`中配置分页相关属性，包含`pageIndex`和`pageSize`和`total`。这里的分页用于后台分页，所以需要配置`getList`方法用于调用后台接口，每次切换分页时都会调用此方法。当后台返回`total`值大于设置的`pageSize`属性值时，会自动显示分页组件。
+:::demo 在`pagination`中配置分页属性`pageSize`，并指定`type`为`bigData`。这里的分页用于后台分页，所以需要配置`getList`方法用于调用后台接口，每次切换分页时都会调用此方法。
 
 ```html
 <template>
@@ -813,7 +813,8 @@
     :columns="tableColumns"
     :pagination="table.pagination"
     :getList="getList"
-    table-tag="demo-paginationLessOne"
+    table-tag="demo-pagination"
+    @big-data-page-index-change="handlePageIndexChange"
   />
 </template>
 
@@ -838,11 +839,45 @@
               code: 'A3',
               name: '上海燃气三期工程',
             },
+            {
+              id: 1004,
+              code: 'A4',
+              name: '上海燃气四期工程',
+            },
+            {
+              id: 1005,
+              code: 'A5',
+              name: '上海燃气三期工程',
+            },
+            {
+              id: 1006,
+              code: 'A6',
+              name: '上海燃气三期工程',
+            },
+            {
+              id: 1007,
+              code: 'A7',
+              name: '上海燃气三期工程',
+            },
+            {
+              id: 1008,
+              code: 'A8',
+              name: '上海燃气三期工程',
+            },
+            {
+              id: 1009,
+              code: 'A9',
+              name: '上海燃气三期工程',
+            },
+            {
+              id: 1010,
+              code: 'A10',
+              name: '上海燃气三期工程',
+            },
           ],
           pagination: {
-            pageIndex: 1,
+            type: 'bigData',
             pageSize: 10,
-            total: 3,
           },
         },
       };
@@ -874,6 +909,21 @@
     methods: {
       getList() {
         console.log('this.table.pagination', this.table.pagination);
+      },
+      handlePageIndexChange(type) {
+        console.log('handlePageIndexChange', type);
+        let params = {
+          pageSize: this.table.pagination.pageSize,
+        };
+        if (type === 'previous') {
+          params = { ...params, minId: this.table.dataList[0].id };
+        } else {
+          params = {
+            ...params,
+            maxId: this.table.dataList[this.table.dataList.length - 1].id,
+          };
+        }
+        console.log('params', params);
       },
     },
   };

@@ -82,6 +82,21 @@
     </div>
     <div class="common-pagination-container">
       <el-pagination
+        v-if="pagination.type==='bigData'"
+        :current-page="999999"
+        :page-size="pagination.pageSize"
+        :page-sizes="pageSizes"
+        style="margin-top: 10px;"
+        prev-text="上一页"
+        next-text="下一页"
+        class="big-data-pagination"
+        v-bind="{layout: 'sizes, prev, next',background:true, ...pagination.elementProps}"
+        @size-change="pageSize => handleBigDataPageSizeChange(pageSize)"
+        @prev-click="$emit('big-data-page-index-change','previous')"
+        @next-click="$emit('big-data-page-index-change','next')"
+      />
+      <el-pagination
+        v-else
         :current-page="pagination.pageIndex"
         :page-size="pagination.pageSize"
         :page-sizes="pageSizes"
@@ -327,6 +342,11 @@ export default {
       this.pagination.order = order;
       this.getList();
     },
+    handleBigDataPageSizeChange(pageSize) {
+      this.pagination.pageSize = pageSize;
+      this.$emit('page-size-change', pageSize);
+      this.getList();
+    },
   },
 };
 </script>
@@ -381,6 +401,12 @@ export default {
   }
   .common-pagination-container {
     text-align: right;
+    .big-data-pagination {
+      .btn-prev,
+      .btn-next {
+        padding: 0 12px;
+      }
+    }
   }
 }
 </style>

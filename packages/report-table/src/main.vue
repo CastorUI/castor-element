@@ -248,7 +248,7 @@ export default {
     deepCopy(obj) {
       const result = Array.isArray(obj) ? [] : {};
       for (const key in obj) {
-        if (obj.hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
           if (typeof obj[key] === 'object') {
             result[key] = this.deepCopy(obj[key]); // 递归复制
           } else {
