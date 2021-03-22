@@ -92,8 +92,8 @@
         class="big-data-pagination"
         v-bind="{layout: 'sizes, prev, next',background:true, ...pagination.elementProps}"
         @size-change="pageSize => handleBigDataPageSizeChange(pageSize)"
-        @prev-click="$emit('big-data-page-index-change','previous')"
-        @next-click="$emit('big-data-page-index-change','next')"
+        @prev-click="()=>handleBigDataPageIndexChange('previous')"
+        @next-click="()=>handleBigDataPageIndexChange('next')"
       />
       <el-pagination
         v-else
@@ -345,6 +345,10 @@ export default {
     handleBigDataPageSizeChange(pageSize) {
       this.pagination.pageSize = pageSize;
       this.$emit('page-size-change', pageSize);
+      this.getList();
+    },
+    handleBigDataPageIndexChange(direction) {
+      this.pagination.direction = direction;
       this.getList();
     },
   },
