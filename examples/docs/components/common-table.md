@@ -85,7 +85,7 @@
 
 展示序号列的用法。
 
-:::demo 在`tableColumns`中添加`type`为`index`的对象即可。
+:::demo 在`tableColumns`中添加`type`为`index`的对象即可。序号列的内部计算依赖分页对象`pagination`.
 
 ```html
 <template>
@@ -93,6 +93,7 @@
     :dataSource="table.dataList"
     :columns="tableColumns"
     table-tag="demo-index"
+    :pagination="table.pagination"
   />
 </template>
 
@@ -118,6 +119,11 @@
               name: '上海燃气三期工程',
             },
           ],
+          pagination: {
+            pageIndex: 1,
+            pageSize: 10,
+            total: 3,
+          },
         },
       };
     },

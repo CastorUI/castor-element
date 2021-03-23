@@ -80,7 +80,10 @@
         />
       </el-table>
     </div>
-    <div class="common-pagination-container">
+    <div
+      v-if="pagination.pageSize"
+      class="common-pagination-container"
+    >
       <el-pagination
         v-if="pagination.type==='bigData'"
         :current-page="999999"
@@ -143,11 +146,7 @@ export default {
     pagination: {
       type: Object,
       default: function () {
-        return {
-          pageIndex: 1,
-          pageSize: 10,
-          total: 0,
-        };
+        return {};
       },
     },
     addCommand: {

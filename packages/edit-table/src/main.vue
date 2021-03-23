@@ -58,7 +58,10 @@
         </template>
       </el-table>
     </div>
-    <div class="common-pagination-container">
+    <div
+      v-if="pagination.pageSize"
+      class="common-pagination-container"
+    >
       <el-pagination
         :current-page="pagination.pageIndex"
         :page-size="pagination.pageSize"
@@ -105,11 +108,7 @@ export default {
     pagination: {
       type: Object,
       default: function () {
-        return {
-          pageIndex: 1,
-          pageSize: 10,
-          total: 0,
-        };
+        return {};
       },
     },
     addCommand: {
