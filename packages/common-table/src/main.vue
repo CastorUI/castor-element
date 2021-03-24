@@ -358,8 +358,6 @@ export default {
 .common-table-container {
   overflow: hidden;
   .table-append-header {
-    height: 40px;
-    line-height: 40px;
     margin-bottom: 12px;
     overflow: hidden;
     .table-title {
@@ -388,13 +386,6 @@ export default {
     }
     .el-button [class*='el-icon-'] + span {
       margin-left: 0;
-    }
-    .el-button.is-disabled,
-    .el-button.is-disabled:hover,
-    .el-button.is-disabled:focus {
-      color: rgb(197, 197, 197);
-      background-color: rgb(241, 241, 241);
-      border-color: #e4e3e6;
     }
   }
 
