@@ -14,6 +14,7 @@
           {{ item.text }}
         </el-button>
         <el-button
+          v-if="extendProps.showRefresh !== false"
           icon="el-icon-refresh-right"
           v-bind="{type: 'text',size:'small'}"
           @click="getList"
@@ -21,6 +22,7 @@
           刷新
         </el-button>
         <column-config
+          v-if="extendProps.showColumnConfig !== false"
           :default-config-columns="configColumns"
           :set-config-columns.sync="configColumns"
         />
