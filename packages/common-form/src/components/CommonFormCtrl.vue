@@ -99,7 +99,7 @@
       @change="extendProps.onChange && extendProps.onChange.call(this,model)"
     />
     <el-date-picker
-      v-else-if="type==='dateTimeRange' || type==='dateRange' || type==='monthRange'|| type==='date' || type==='month'"
+      v-else-if="['dateTimeRange','dateRange','monthRange','date','month','datetime'].indexOf(type)>-1"
       v-model="model[dataField]"
       :disabled="disableValidator && disableValidator.call(this,model)"
       :type="type.toLocaleLowerCase()"

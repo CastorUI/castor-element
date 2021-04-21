@@ -111,6 +111,7 @@
             en_name: undefined,
             cn_name: undefined,
             valid_end_date: undefined,
+            create_time: undefined,
             user: 1,
             user_type: 2,
             enabled: false,
@@ -175,6 +176,15 @@
             label: '有效期',
             dataField: 'valid_end_date',
             columnSpan: 1,
+          },
+          {
+            type: 'datetime',
+            label: '创建时间',
+            dataField: 'create_time',
+            columnSpan: 1,
+            elementProps: {
+              valueFormat: 'yyyy-MM-dd HH:mm:ss',
+            },
           },
           {
             type: 'multiSelect',
@@ -920,6 +930,7 @@
 | checkboxGroup  | 复选框组       |
 | date           | 日期选择器     |
 | dateRange      | 日期区间选择器 |
+| datetime       | 日期时间选择器 |
 | dateTimeRange  | 时间区间选择器 |
 | hr             | 分行           |
 | groupTitle     | 组标题         |
