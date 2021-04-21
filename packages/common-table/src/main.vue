@@ -188,6 +188,8 @@ export default {
       default: function () {
         return {
           cacheConfigColumns: true,
+          showRefresh: true,
+          showColumnConfig: true,
         };
       },
     },
@@ -218,7 +220,7 @@ export default {
     configColumns: {
       handler(val) {
         this.hackReset = false;
-        this.dynamicColums = this.configColumns
+        this.dynamicColums = val
           .filter((r) => r.show)
           .map((r) => {
             const originColumn = this.columns.filter(
@@ -235,7 +237,7 @@ export default {
         if (
           val &&
           this.tableTag &&
-          (this.extendProps || {}).cacheConfigColumns
+          (this.extendProps || {}).cacheConfigColumns !== false
         ) {
           const cachedColumns = val.map((r) => {
             return {
@@ -275,7 +277,10 @@ export default {
   },
   created() {
     console.log('this.tableTag', this.tableTag);
-    if (this.tableTag && (this.extendProps || {}).cacheConfigColumns) {
+    if (
+      this.tableTag &&
+      (this.extendProps || {}).cacheConfigColumns !== false
+    ) {
       const cacheConfigColumnsJson = localStorage.getItem(
         `${this.tableTag}-CONFIG-COLUMNS`
       );

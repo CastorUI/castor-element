@@ -1255,6 +1255,7 @@
 | customCommands | 自定义事件，显示在表格上方右侧 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling) | array    | —      | []     |
 | getList        | 查询数据方法                                                                                                           | function | —      | —      |
 | elementProps   | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing)            | object   | —      | —      |
+| extendProps    | 扩展属性，参考 `Table ExtendProps Options`                                                                             | object   | -      | {}     |
 
 ### Column Options
 
@@ -1268,13 +1269,19 @@
 
 ### Column ExtendProps Options
 
-| 参数             | 说明                                                                                                                               | 类型     | 可选值 | 默认值 |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
-| commands         | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling) | array    | -      | []     |
-| options          | 数据转换数据源 ，当 `type` 为 `keyToValue` 或 `status` 时使用                                                                      | array    | -      | []     |
-| linkCommand      | 超链接事件，当 `type` 为 `link` 时使用                                                                                             | function | -      | -      |
-| showRefresh      | 是否启用刷新功能                                                                                                                   | boolean  | -      | true   |
-| showColumnConfig | 是否启用列设置功能                                                                                                                 | boolean  | -      | true   |
+| 参数        | 说明                                                                                                                               | 类型     | 可选值 | 默认值 |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
+| commands    | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling) | array    | -      | []     |
+| options     | 数据转换数据源 ，当 `type` 为 `keyToValue` 或 `status` 时使用                                                                      | array    | -      | []     |
+| linkCommand | 超链接事件，当 `type` 为 `link` 时使用                                                                                             | function | -      | -      |
+
+### Table ExtendProps Options
+
+| 参数               | 说明               | 类型    | 可选值 | 默认值 |
+| ------------------ | ------------------ | ------- | ------ | ------ |
+| showRefresh        | 是否启用刷新功能   | boolean | -      | true   |
+| showColumnConfig   | 是否启用列设置功能 | boolean | -      | true   |
+| cacheConfigColumns | 列设置是否使用缓存 | boolean | -      | true   |
 
 ### Table Events
 
