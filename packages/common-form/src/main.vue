@@ -40,7 +40,7 @@
       :on-change="item.onChange"
     />
     <el-form-item
-      v-if="operateType !== 'view'"
+      v-if="operateType !== 'view' && commands && commands.length"
       label-width="10px"
       style="width:100%;padding-right:10px;float:right;text-align:right;"
     >
