@@ -689,6 +689,122 @@
 
 :::
 
+### 操作列-状态控制
+
+展示操作列的用法。
+
+:::demo 在`tableColumns`中添加`type`为`commands`的对象。
+
+```html
+<template>
+  <ca-common-table
+    :dataSource="table.dataList"
+    :columns="tableColumns"
+    table-tag="demo-commands"
+    @handleEdit="handleEdit"
+    @handleDelete="handleDelete"
+    @row-click="handleRowClick"
+  />
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        table: {
+          dataList: [
+            {
+              id: 1001,
+              code: 'A1',
+              name: '上海燃气一期工程',
+            },
+            {
+              id: 1002,
+              code: 'A2',
+              name: '上海燃气二期工程',
+            },
+            {
+              id: 1003,
+              code: 'A3',
+              name: '上海燃气三期工程',
+            },
+          ],
+        },
+      };
+    },
+    computed: {
+      tableColumns() {
+        return [
+          {
+            type: 'default',
+            label: 'ID',
+            dataField: 'id',
+          },
+          {
+            type: 'default',
+            label: '编号',
+            dataField: 'code',
+          },
+          {
+            type: 'default',
+            label: '名称',
+            dataField: 'name',
+            elementProps: {
+              minWidth: 2,
+            },
+          },
+          {
+            type: 'commands',
+            label: '操作',
+            dataField: '',
+            extendProps: {
+              commands: [
+                {
+                  text: '编辑',
+                  command: 'handleEdit',
+                  disableValidator: (row) => true,
+                  elementProps: {
+                    type: 'primary',
+                  },
+                  extendProps: {
+                    imageUrl:
+                      'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+                  },
+                },
+                {
+                  text: '删除',
+                  command: 'handleDelete',
+                  disableValidator: (row) => true,
+                  elementProps: {
+                    type: 'danger',
+                  },
+                },
+              ],
+            },
+            elementProps: {
+              width: '180px',
+            },
+          },
+        ];
+      },
+    },
+    methods: {
+      handleEdit(index, row) {
+        console.log('handleEdit,', index, row);
+      },
+      handleDelete(index, row) {
+        console.log('handleDelete,', index, row);
+      },
+      handleRowClick(row) {
+        console.log('handleRowClick,', row);
+      },
+    },
+  };
+</script>
+```
+
+:::
+
 ### 分页（常规）
 
 展示表格分页的用法。

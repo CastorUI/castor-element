@@ -63,7 +63,7 @@
         :data="dataSource"
         :default-sort="defaultSort"
         v-bind="{border: true, ...elementProps}"
-        @row-click="row => $emit('row-click', row)"
+        @row-click="handleRowClick"
         @selection-change="multipleSelection => handleSelectionChange(multipleSelection)"
         @sort-change="args=> handleSortChange(args)"
       >
@@ -356,6 +356,14 @@ export default {
     handleBigDataPageIndexChange(direction) {
       this.pagination.direction = direction;
       this.getList();
+    },
+    handleRowClick(row, column, event) {
+      // 列类型为commands时,包装层为SPAN或IMG
+      if (['SPAN', 'IMG'].indexOf(event.target.nodeName) > -1) {
+        return;
+      }
+
+      this.$emit('row-click', row);
     },
   },
 };
