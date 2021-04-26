@@ -295,11 +295,16 @@ export default {
   },
   computed: {
     heightStyle() {
-      return ['custom', 'groupTitle', 'textArea', 'avatarUploader'].indexOf(
-        this.type
-      ) > -1
-        ? ''
-        : `height:${this.height};`;
+      if (
+        ['custom', 'groupTitle', 'textArea', 'avatarUploader'].indexOf(
+          this.type
+        ) > -1 ||
+        (this.type === 'text' && this.extendProps.multiline)
+      ) {
+        return '';
+      } else {
+        return `height:${this.height};`;
+      }
     },
     pickerOptions() {
       if (this.type === 'dateTimeRange' || this.type === 'dateRange') {
