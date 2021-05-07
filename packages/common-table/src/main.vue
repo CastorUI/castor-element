@@ -62,6 +62,7 @@
         row-key="id"
         :data="dataSource"
         :default-sort="defaultSort"
+        :row-class-name="tableRowClassName"
         v-bind="{border: true, ...elementProps}"
         @row-click="handleRowClick"
         @selection-change="multipleSelection => handleSelectionChange(multipleSelection)"
@@ -324,6 +325,13 @@ export default {
     }
   },
   methods: {
+    tableRowClassName({ rowIndex }) {
+      if (rowIndex % 2 === 0) {
+        return 'odd-row';
+      } else {
+        return 'even-row';
+      }
+    },
     indexMethod(index) {
       return (
         this.pagination.pageSize * (this.pagination.pageIndex - 1) + index + 1
