@@ -38,6 +38,7 @@
       :element-props="item.elementProps || {}"
       :extend-props="item.extendProps || {}"
       :on-change="item.onChange"
+      v-on="$listeners"
     />
     <el-form-item
       v-if="operateType !== 'view' && commands && commands.length"

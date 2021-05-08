@@ -70,13 +70,29 @@
         :disabled="option.disabled"
       />
     </el-checkbox-group>
-    <el-button
+    <div
       v-else-if="type==='groupTitle'"
-      type="text"
-      v-bind="{style: 'font-size:16px;font-weight:bold;', ...elementProps}"
+      v-bind="{style: 'overflow:hidden;width:100%;font-size:16px;font-weight:bold;', ...elementProps}"
     >
-      {{ extendProps.groupTitle }}
-    </el-button>
+      <div style="float:left;"> {{ extendProps.groupTitle }} </div>
+      <div
+        v-if="extendProps.groupCommands"
+        style="float:right;"
+      >
+        <el-link
+          v-for="(item,index) of extendProps.groupCommands"
+          v-show="!item.visibleValidator || item.visibleValidator.call(this, model)"
+          :key="index"
+          type="primary"
+          :disabled="item.disableValidator && item.disableValidator.call(this,model)"
+          v-bind="{size:'small',type: 'primary',underline: true, ...item.elementProps}"
+          @click.stop="handleGroupCommand.call(this,item,model)"
+          v-on="$listeners"
+        >
+          {{ item.text }}
+        </el-link>
+      </div>
+    </div>
     <span
       v-else-if="type==='text'"
       v-bind="{style: 'display:inline-block;font-size:14px;height: 36px;line-height: 36px;', ...elementProps}"
@@ -402,6 +418,11 @@ export default {
     },
     trim(str) {
       return str.replace(/^(\s|\u00A0)+/, '').replace(/(\s|\u00A0)+$/, '');
+    },
+    handleGroupCommand(item, model) {
+      console.log('handleGroupCommand', item, model);
+      console.log('$listeners', this.$listeners);
+      this.$emit(item.command, model);
     },
   },
 };

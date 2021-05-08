@@ -17,6 +17,8 @@
     :elementProps="form.elementProps"
     @handleCancel="handleCancel"
     @handleSave="handleSave"
+    @handleUnStar="handleUnStar"
+    @handleStar="handleStar"
   />
 </template>
 
@@ -151,6 +153,19 @@
             columnSpan: 2,
             extendProps: {
               groupTitle: '1、基本信息',
+              groupCommands: [
+                {
+                  text: '取消关注',
+                  command: 'handleUnStar',
+                  elementProps: {
+                    icon: 'el-icon-edit',
+                  },
+                },
+                {
+                  text: '关注',
+                  command: 'handleStar',
+                },
+              ],
             },
           },
           {
@@ -208,6 +223,20 @@
             columnSpan: 2,
             extendProps: {
               groupTitle: '2、业务信息',
+              groupCommands: [
+                {
+                  text: '取消关注',
+                  command: 'handleUnStar',
+                  elementProps: {
+                    icon: 'el-icon-edit',
+                  },
+                },
+                {
+                  text: '关注',
+                  command: 'handleStar',
+                  visibleValidator: (model) => false,
+                },
+              ],
             },
           },
           {
@@ -311,6 +340,12 @@
       },
       handleSave() {
         console.log('handleSave,model:', this.form.model);
+      },
+      handleStar(model) {
+        console.log('handleStar,model:', model);
+      },
+      handleUnStar(model) {
+        console.log('handleUnStar,model:', model);
       },
       handleCityLazyLoad(node, resolve) {
         console.log('handleCityLazyLoad,node:', node);
@@ -903,14 +938,15 @@
 
 ### Field ExtendProps Options
 
-| 参数         | 说明                                                                                              | 类型     | 可选值 | 默认值 |
-| ------------ | ------------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
-| groupTitle   | 分组标题名称，只限于 `type` 为 `groupTitle`                                                       | string   | —      | —      |
-| componentKey | 自定义组件名称，只限于 `type` 为 `custom`                                                         | string   | —      | —      |
-| options      | 选项数据源,用于`type` 为 `select multiSelect groupedSelect radioGroup checkboxGroup text cascade` | array    | —      | []     |
-| currentField | 当前字段，只限于 `type` 为 `complexInput`                                                         | object   | —      | —      |
-| appendField  | 附加字段，只限于 `type` 为 `complexInput`                                                         | object   | —      | —      |
-| onChange     | 值变动时回调事件                                                                                  | function | —      | —      |
+| 参数          | 说明                                                                                              | 类型     | 可选值 | 默认值 |
+| ------------- | ------------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
+| groupTitle    | 分组标题名称，只限于 `type` 为 `groupTitle`                                                       | string   | —      | —      |
+| groupCommands | 分组命令集合，只限于 `type` 为 `groupTitle`                                                       | array    | —      | —      |
+| componentKey  | 自定义组件名称，只限于 `type` 为 `custom`                                                         | string   | —      | —      |
+| options       | 选项数据源,用于`type` 为 `select multiSelect groupedSelect radioGroup checkboxGroup text cascade` | array    | —      | []     |
+| currentField  | 当前字段，只限于 `type` 为 `complexInput`                                                         | object   | —      | —      |
+| appendField   | 附加字段，只限于 `type` 为 `complexInput`                                                         | object   | —      | —      |
+| onChange      | 值变动时回调事件                                                                                  | function | —      | —      |
 
 ### Field Type Options
 
