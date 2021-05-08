@@ -2,7 +2,7 @@
   <el-form-item
     v-if="!visibleValidator || visibleValidator.call(this,model)"
     :prop="dataField"
-    :style="'float:left;padding-right:10px;minWidth:300px;width:'+width+';'+ heightStyle"
+    :style="'float:left;minWidth:300px;width:'+width+';marginBottom:'+ (extendProps.marginBottom || '22px') +';'+ heightStyle+''"
     v-bind="{ ...(label ? {label: `${label} :`} : {labelWidth: '0'})}"
   >
     <el-select
