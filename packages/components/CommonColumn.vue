@@ -213,4 +213,7 @@ export default {
 .el-link {
   margin: 0 10px;
 }
+.el-tooltip__popper {
+  margin: 0 12px 0 32px;
+}
 </style>
