@@ -2,7 +2,7 @@
   <el-form-item
     :label="label+' :'"
     :prop="dataField"
-    :style="'float:left;width:'+width+';height:'+height+';'"
+    :style="'float:left;width:'+width+';'+heightStyle"
   >
     <div :style="{display:'inline-block',width: (extendProps && extendProps.helpText)?'calc(100% - 16px)':'100%'}">
       <el-select
@@ -158,7 +158,11 @@ export default {
   },
   computed: {
     heightStyle() {
-      return `height:${this.height};`;
+      if (['multiSelect'].indexOf(this.type) > -1) {
+        return `min-height:${this.height};`;
+      } else {
+        return `height:${this.height};`;
+      }
     },
     pickerOptions: function () {
       if (this.type === 'dateTimeRange' || this.type === 'dateRange') {
@@ -232,9 +236,3 @@ export default {
   },
 };
 </script>
-<style rel="stylesheet/scss" lang="scss">
-.el-select--small,
-.el-input--small {
-  line-height: 13px;
-}
-</style>

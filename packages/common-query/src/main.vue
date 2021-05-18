@@ -263,12 +263,5 @@ export default {
   .dynamic-select-options {
     min-width: 150px;
   }
-  .el-select,
-  .el-input {
-    height: 32px;
-  }
-  .el-select > .el-input {
-    height: 32px;
-  }
 }
 </style>
