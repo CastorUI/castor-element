@@ -11,7 +11,6 @@
         :multiple="type==='multiSelect'"
         v-bind="{
           placeholder:`${label}`,
-          size:'small',
           style:'width:100%;',
           clearable:true,
           filterable: true,
@@ -31,7 +30,6 @@
         v-model="model[dataField]"
         :type="type.toLocaleLowerCase()"
         v-bind="{
-          size:'small',
           startPlaceholder: '开始日期',
           rangeSeparator: '~',
           endPlaceholder: '结束日期',
@@ -77,7 +75,6 @@
         v-model="model[dataField]"
         class="filter-item filter-list query-item"
         v-bind="{
-          size: 'small',
           placeholder: `${label}`,
           clearable: true,
           ...elementProps

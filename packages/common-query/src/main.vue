@@ -39,7 +39,6 @@
       :style="fields.some(r=>r.showType==='dynamic')? 'marginLeft:72px;' : ''"
       v-bind="{
         labelWidth:'110px',
-        size:'small',
         ...elementProps
       }"
       @submit.native.prevent
@@ -94,20 +93,16 @@
           :loading="item.loading && loading"
           :disabled="item.disableValidator && item.disableValidator.call(this)"
           class="filter-item"
-          v-bind="{size: 'small', ...item.elementProps}"
+          v-bind="item.elementProps"
           @click="$emit(item.command)"
         >
           {{ item.text }}
         </el-button>
 
-        <el-dropdown
-          v-if="downloadOpt && downloadOpt.options && downloadOpt.options.length > 0"
-          size="medium"
-        >
+        <el-dropdown v-if="downloadOpt && downloadOpt.options && downloadOpt.options.length > 0">
           <el-button
             type="primary"
             icon="el-icon-document"
-            size="medium"
             :loading="downloadOpt.loading && loading"
             :plain="downloadOpt.elementProps && downloadOpt.elementProps.plain"
           >
