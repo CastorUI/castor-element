@@ -8,7 +8,7 @@
         <el-button
           v-for="(item,index) of settingCommands"
           :key="index"
-          v-bind="{type: 'text',size:'small', ...item.elementProps}"
+          v-bind="{type: 'text', ...item.elementProps}"
           @click="$emit(item.command)"
         >
           {{ item.text }}
@@ -16,7 +16,7 @@
         <el-button
           v-if="extendProps.showRefresh !== false"
           icon="el-icon-refresh-right"
-          v-bind="{type: 'text',size:'small'}"
+          v-bind="{type: 'text'}"
           @click="getList"
         >
           刷新
@@ -35,7 +35,7 @@
           v-for="(item,index) of customCommands"
           :key="index"
           :disabled="item.disableValidator && item.disableValidator.call(this,multipleSelection)"
-          v-bind="{size:'small', ...item.elementProps}"
+          v-bind="item.elementProps"
           @click="$emit(item.command,multipleSelection)"
         >
           {{ item.text }}
@@ -47,7 +47,7 @@
       >
         <el-button
           :disabled="addCommand.disableValidator && addCommand.disableValidator.call(this)"
-          v-bind="{icon: 'el-icon-plus',size:'small', ...addCommand.elementProps}"
+          v-bind="{icon: 'el-icon-plus', ...addCommand.elementProps}"
           @click="$emit(addCommand.command)"
         >
           {{ addCommand.text }}
