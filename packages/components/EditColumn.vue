@@ -78,7 +78,6 @@
           :model="editingRow"
           :rules="getFormRules(dataField, rules)"
           label-width="0px"
-          size="medium"
           :style="{
             display:'inline-block' ,
             width: 'calc(100% - ' + (extendProps.isExpandColumn? editingRow.dataLevel:0) * 16 + 'px)'
