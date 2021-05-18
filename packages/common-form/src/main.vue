@@ -5,7 +5,7 @@
     :model="model"
     :rules="rules"
     :disabled="operateType==='view'"
-    v-bind="{size: 'medium',labelWidth: '120px', labelPosition: 'right', ...elementProps}"
+    v-bind="{labelWidth: '120px', labelPosition: 'right', ...elementProps}"
   >
     <div
       v-if="customCommands"
@@ -16,7 +16,7 @@
         :key="index"
         type="primary"
         :disabled="item.disableValidator && item.disableValidator.call(this,model)"
-        v-bind="{size:'small',type: 'primary',underline: true, ...item.elementProps}"
+        v-bind="{type: 'primary',underline: true, ...item.elementProps}"
         @click.stop="$emit(item.command,model)"
       >
         {{ item.text }}

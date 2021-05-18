@@ -4,7 +4,6 @@
     <el-input-number
       v-model="model[fromField]"
       v-bind="{
-        size: 'small',
         placeholder: '起始值',
         precision:0,
         clearable: true,
@@ -16,7 +15,6 @@
     <el-input-number
       v-model="model[toField]"
       v-bind="{
-        size: 'small',
         placeholder: '终止值',
         precision:0,
         clearable: true,

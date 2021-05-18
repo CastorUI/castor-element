@@ -14,7 +14,7 @@ import SideNav from './components/side-nav';
 import demoBlock from './components/demo-block';
 
 // 注册组件库
-Vue.use(ElementUI, { locale, size: 'medium' });
+Vue.use(ElementUI, { locale, size: 'small' });
 Vue.use(CastorUI);
 Vue.config.productionTip = false;
 

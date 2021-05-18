@@ -85,7 +85,7 @@
           :key="index"
           type="primary"
           :disabled="item.disableValidator && item.disableValidator.call(this,model)"
-          v-bind="{size:'small',type: 'primary',underline: true, ...item.elementProps}"
+          v-bind="{type: 'primary',underline: true, ...item.elementProps}"
           @click.stop="handleGroupCommand.call(this,item,model)"
           v-on="$listeners"
         >
