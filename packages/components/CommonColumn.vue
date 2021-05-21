@@ -45,7 +45,7 @@
       >
         <el-tooltip
           v-if="item.extendProps && item.extendProps.imageUrl"
-          class="item"
+          popper-class="command"
           effect="dark"
           :content="item.text"
           placement="top-start"
@@ -209,11 +209,14 @@ export default {
   },
 };
 </script>
-<style>
+<style lang="scss">
 .el-link {
   margin: 0 10px;
 }
 .el-tooltip__popper {
   margin: 0 12px 0 32px;
+  &.command {
+    margin: 12px 4px;
+  }
 }
 </style>
