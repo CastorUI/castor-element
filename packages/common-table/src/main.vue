@@ -305,9 +305,16 @@ export default {
             };
           });
         // 获取新增列
-        const addedColumns = this.columns.filter(
-          (r) => !validCachedColumns.some((c) => c.dataField === r.dataField)
-        );
+        const addedColumns = this.columns
+          .filter(
+            (r) => !validCachedColumns.some((c) => c.dataField === r.dataField)
+          )
+          .map((r) => {
+            return {
+              ...r,
+              show: true,
+            };
+          });
         // 组装所有可设置列
         this.configColumns = validCachedColumns.concat(addedColumns);
       }
