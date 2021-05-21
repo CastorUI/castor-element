@@ -84,6 +84,7 @@
     </div>
     <el-tooltip
       v-if="extendProps && extendProps.helpText"
+      popper-class="normal"
       effect="dark"
       placement="top"
     >

@@ -77,6 +77,7 @@
                 class="column-label"
               >{{ colItem.label }}</span>
               <el-tooltip
+                popper-class="normal"
                 content="固定在左侧"
                 placement="top"
               >
@@ -99,6 +100,7 @@
                 </svg>
               </el-tooltip>
               <el-tooltip
+                popper-class="normal"
                 content="不固定"
                 placement="top"
               >
@@ -121,6 +123,7 @@
                 </svg>
               </el-tooltip>
               <el-tooltip
+                popper-class="normal"
                 content="固定在右侧"
                 placement="top"
               >

@@ -45,7 +45,7 @@
       >
         <el-tooltip
           v-if="item.extendProps && item.extendProps.imageUrl"
-          popper-class="command"
+          popper-class="normal"
           effect="dark"
           :content="item.text"
           placement="top-start"
@@ -90,7 +90,7 @@
         {{ extendProps.options.filter(r=>r.value === scope.row[dataField])[0].label }}
         <el-tooltip
           v-if="elementProps.showTips === scope.row[dataField] && scope.row[elementProps.tipsContent]"
-          class="item"
+          popper-class="normal"
           effect="dark"
           placement="bottom"
         >
@@ -215,8 +215,8 @@ export default {
 }
 .el-tooltip__popper {
   margin: 0 12px 0 32px;
-  &.command {
-    margin: 12px 4px;
+  &.normal {
+    margin: 12px 0;
   }
 }
 </style>
