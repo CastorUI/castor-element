@@ -50,6 +50,8 @@
           :data-field="item.dataField"
           :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
           :height="`${rowHeight}px`"
+          :disable-validator="item.disableValidator"
+          :visible-validator="item.visibleValidator"
           :element-props="item.elementProps || {}"
           :extend-props="item.extendProps || {}"
         />
@@ -63,6 +65,8 @@
         :data-field="item.dataField"
         :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
         :height="`${rowHeight}px`"
+        :disable-validator="item.disableValidator"
+        :visible-validator="item.visibleValidator"
         :element-props="item.elementProps || {}"
         :extend-props="item.extendProps || {}"
       />
@@ -76,6 +80,8 @@
           :data-field="item.dataField"
           :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
           :height="`${rowHeight}px`"
+          :disable-validator="item.disableValidator"
+          :visible-validator="item.visibleValidator"
           :element-props="item.elementProps || {}"
           :extend-props="item.extendProps || {}"
         />

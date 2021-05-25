@@ -1,5 +1,6 @@
 <template>
   <el-form-item
+    v-if="!visibleValidator || visibleValidator.call(this,model)"
     :label="label+' :'"
     :prop="dataField"
     :style="'float:left;width:'+width+';'+heightStyle"
@@ -8,6 +9,7 @@
       <el-select
         v-if="type === 'select' || type === 'multiSelect'"
         v-model="model[dataField]"
+        :disabled="disableValidator && disableValidator.call(this,model)"
         :multiple="type==='multiSelect'"
         v-bind="{
           placeholder:`${label}`,
@@ -28,6 +30,7 @@
       <el-date-picker
         v-else-if="type==='dateTimeRange' || type==='dateRange' || type==='monthRange'|| type==='date' || type==='month'"
         v-model="model[dataField]"
+        :disabled="disableValidator && disableValidator.call(this,model)"
         :type="type.toLocaleLowerCase()"
         v-bind="{
           startPlaceholder: '开始日期',
@@ -43,12 +46,14 @@
       <el-switch
         v-else-if="type==='switch'"
         v-model="model[dataField]"
+        :disabled="disableValidator && disableValidator.call(this,model)"
         v-bind="{style: 'width:40px;', ...elementProps}"
         @change="extendProps.onChange && extendProps.onChange.call(this,model)"
       />
       <el-checkbox-group
         v-else-if="type==='checkboxGroup'"
         v-model="model[dataField]"
+        :disabled="disableValidator && disableValidator.call(this,model)"
         class="query-item"
         v-bind="{style: 'width:100%;', ...elementProps}"
         @change="extendProps.onChange && extendProps.onChange.call(this,model)"
@@ -67,12 +72,13 @@
         :model="model"
         :from-field="extendProps.fromField"
         :to-field="extendProps.toField"
-        :element-props="elementProps"
+        :element-props="{...elementProps,disabled:disableValidator && disableValidator.call(this,model)}"
         @change="extendProps.onChange && extendProps.onChange.call(this,model)"
       />
       <el-input
         v-else
         v-model="model[dataField]"
+        :disabled="disableValidator && disableValidator.call(this,model)"
         class="filter-item filter-list query-item"
         v-bind="{
           placeholder: `${label}`,
@@ -140,6 +146,14 @@ export default {
     height: {
       type: String,
       default: '36px',
+    },
+    disableValidator: {
+      type: Function,
+      default: undefined,
+    },
+    visibleValidator: {
+      type: Function,
+      default: () => true,
     },
     elementProps: {
       type: Object,
