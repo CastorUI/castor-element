@@ -115,7 +115,7 @@
             label: '英文名',
             dataField: 'en_name',
             columnSpan: 1,
-            disableValidator: () => false,
+            disableValidator: () => true,
             visibleValidator: () => true,
           },
           {
@@ -154,7 +154,7 @@
             label: '工程编号',
             columnSpan: 2,
             showType: 'static',
-            disableValidator: () => false,
+            disableValidator: () => true,
             visibleValidator: () => true,
             elementProps: {
               precision: 2,
