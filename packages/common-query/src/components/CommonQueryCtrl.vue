@@ -86,6 +86,7 @@
           ...elementProps
         }"
         @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+        @focus="extendProps.onFocus && extendProps.onFocus.call(this,model)"
       />
     </div>
     <el-tooltip

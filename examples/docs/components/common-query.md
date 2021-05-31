@@ -108,6 +108,7 @@
             columnSpan: 1,
             extendProps: {
               helpText: '请输入',
+              onFocus: this.handleCodeFocus,
             },
           },
           {
@@ -206,6 +207,9 @@
       },
     },
     methods: {
+      handleCodeFocus(model) {
+        console.log('handleCodeFocus', model);
+      },
       handleFilter() {
         console.log('handleFilter', this.search.model);
       },
