@@ -1,9 +1,5 @@
-
 <template>
-  <el-popover
-    placement="top-end"
-    trigger="click"
-  >
+  <el-popover placement="top-end" trigger="click">
     <div class="column-config">
       <div class="all-config">
         <el-checkbox
@@ -14,7 +10,7 @@
           列展示
         </el-checkbox>
         <el-button
-          v-bind="{type: 'text',size:'small'}"
+          v-bind="{ type: 'text', size: 'small' }"
           class="reset-all"
           @click="handleResetAll"
         >
@@ -23,7 +19,7 @@
       </div>
       <div class="column-groups">
         <div
-          v-for="(groupItem,groupIndex) in groups"
+          v-for="(groupItem, groupIndex) in groups"
           :key="groupIndex"
           class="column-group"
         >
@@ -44,10 +40,10 @@
               :key="colItem.dataField"
               class="item"
               :class="{
-                active: activeDataField === colItem.dataField
+                active: activeDataField === colItem.dataField,
               }"
-              @mouseover="activeDataField=colItem.dataField"
-              @mouseleave="activeDataField=''"
+              @mouseover="activeDataField = colItem.dataField"
+              @mouseleave="activeDataField = ''"
             >
               <svg
                 t="1610953087816"
@@ -70,19 +66,21 @@
                 :content="colItem.label"
                 placement="top"
               >
-                <span class="column-label">{{ `${colItem.label.substr(0,6)}...` }}</span>
+                <span class="column-label">{{
+                  `${colItem.label.substr(0, 6)}...`
+                }}</span>
               </el-tooltip>
-              <span
-                v-else
-                class="column-label"
-              >{{ colItem.label }}</span>
+              <span v-else class="column-label">{{ colItem.label }}</span>
               <el-tooltip
                 popper-class="normal"
                 content="固定在左侧"
                 placement="top"
               >
                 <svg
-                  v-show="activeDataField===colItem.dataField && groupItem.showLeftFixIcon"
+                  v-show="
+                    activeDataField === colItem.dataField &&
+                      groupItem.showLeftFixIcon
+                  "
                   t="1610689212107"
                   class="icon fix-icon"
                   viewBox="0 0 1024 1024"
@@ -105,7 +103,10 @@
                 placement="top"
               >
                 <svg
-                  v-show="activeDataField===colItem.dataField && groupItem.showUnFixIcon"
+                  v-show="
+                    activeDataField === colItem.dataField &&
+                      groupItem.showUnFixIcon
+                  "
                   t="1610689304174"
                   class="icon fix-icon"
                   viewBox="0 0 1024 1024"
@@ -128,7 +129,10 @@
                 placement="top"
               >
                 <svg
-                  v-show="activeDataField===colItem.dataField && groupItem.showRightFixIcon"
+                  v-show="
+                    activeDataField === colItem.dataField &&
+                      groupItem.showRightFixIcon
+                  "
                   t="1610689352063"
                   class="icon fix-icon"
                   viewBox="0 0 1024 1024"
@@ -152,7 +156,7 @@
     </div>
     <el-button
       slot="reference"
-      v-bind="{type: 'text',size:'small',icon: 'el-icon-setting'}"
+      v-bind="{ type: 'text', size: 'small', icon: 'el-icon-setting' }"
       style="margin-left:10px;"
     >
       列设置
@@ -167,6 +171,10 @@ export default {
     draggable,
   },
   props: {
+    originColumns: {
+      type: Array,
+      default: () => [],
+    },
     defaultConfigColumns: {
       type: Array,
       default: () => [],
@@ -178,7 +186,6 @@ export default {
       unFixedColumns: [],
       rightFixedColumns: [],
       activeDataField: '',
-      originColumns: [],
     };
   },
   computed: {
@@ -244,7 +251,6 @@ export default {
     },
   },
   created() {
-    this.originColumns = JSON.parse(JSON.stringify(this.defaultConfigColumns));
     this.getTypedColumns(this.defaultConfigColumns);
   },
   methods: {

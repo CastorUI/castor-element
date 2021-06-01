@@ -23,6 +23,7 @@
         </el-button>
         <column-config
           v-if="extendProps.showColumnConfig !== false"
+          :origin-columns="originColumns"
           :default-config-columns="configColumns"
           :set-config-columns.sync="configColumns"
         />
@@ -198,6 +199,7 @@ export default {
   data() {
     return {
       hackReset: true,
+      originColumns: [],
       multipleSelection: [],
       dynamicColums: JSON.parse(JSON.stringify(this.columns)),
       configColumns: [],
@@ -262,6 +264,14 @@ export default {
     columns: {
       handler() {
         this.hackReset = false;
+        this.originColumns = this.columns.map((r) => {
+          return {
+            show: true,
+            dataField: r.dataField,
+            label: r.type === 'selection' ? '选择列' : r.label,
+            fixed: (r.elementProps || {}).fixed,
+          };
+        });
         this.dynamicColums.forEach((r) => {
           const originColumn = this.columns.filter(
             (c) => c.dataField === r.dataField
@@ -273,7 +283,7 @@ export default {
         });
       },
       deep: true,
-      immediate: false,
+      immediate: true,
     },
   },
   created() {
