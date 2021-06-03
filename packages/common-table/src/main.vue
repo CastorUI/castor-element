@@ -323,6 +323,7 @@ export default {
             return {
               ...r,
               show: true,
+              fixed: (r.elementProps || {}).fixed,
             };
           });
         // 组装所有可设置列

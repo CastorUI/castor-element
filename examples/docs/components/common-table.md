@@ -31,7 +31,8 @@
             {
               id: 1002,
               code: 'A2',
-              name: '上海燃气二期工程 it will work no matter where your popper and reference elements live, even in the most complex scenarios like nested scrolling containers or alternative offsetParent contexts. it will work no matter where your popper and reference elements live, even in the most complex scenarios like nested scrolling containers or alternative offsetParent contexts.',
+              name:
+                '上海燃气二期工程 it will work no matter where your popper and reference elements live, even in the most complex scenarios like nested scrolling containers or alternative offsetParent contexts. it will work no matter where your popper and reference elements live, even in the most complex scenarios like nested scrolling containers or alternative offsetParent contexts.',
             },
             {
               id: 1003,
@@ -45,6 +46,15 @@
     computed: {
       tableColumns() {
         return [
+          {
+            type: 'selection',
+            label: '',
+            dataField: 'selection',
+            elementProps: {
+              width: '40px',
+              fixed: 'left',
+            },
+          },
           {
             type: 'default',
             label: 'ID',
