@@ -8,7 +8,10 @@
       v-if="fields.some(r=>r.showType==='dynamic')"
       style="display:inline-block;float:left"
     >
-      <el-button @click="$refs.filterSelect.$el.click()">
+      <el-button
+        size="mini"
+        @click="$refs.filterSelect.$el.click()"
+      >
         筛选
         <i class="el-icon-arrow-down" />
       </el-button>
