@@ -95,7 +95,7 @@
     </div>
     <span
       v-else-if="type==='text'"
-      v-bind="{style: 'display:inline-block;font-size:14px;height: 36px;line-height: 36px;', ...elementProps}"
+      v-bind="{style: 'display:inline-block;height: 36px;line-height: 36px;', ...elementProps}"
     >{{ extendProps.options ? extendProps.options.filter(r => r.value === model[dataField])[0].label : model[dataField] }}</span>
     <hr
       v-else-if="type==='hr'"
@@ -232,7 +232,7 @@
     </el-upload>
     <el-input
       v-else
-      v-model="model[dataField]"
+      v-model.trim="model[dataField]"
       :disabled="disableValidator && disableValidator.call(this,model)"
       v-bind="{
         placeholder: `输入${label}`,
