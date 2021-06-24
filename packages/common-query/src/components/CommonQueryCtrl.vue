@@ -3,7 +3,7 @@
     v-if="!visibleValidator || visibleValidator.call(this,model)"
     :label="label+' :'"
     :prop="dataField"
-    :style="'float:left;width:'+width+';'+heightStyle"
+    :style="`float:left;width:${width};`"
   >
     <div :style="{display:'inline-block',width: (extendProps && extendProps.helpText)?'calc(100% - 16px)':'100%'}">
       <el-select
@@ -13,7 +13,6 @@
         :multiple="type==='multiSelect'"
         v-bind="{
           placeholder:`${label}`,
-          size:'medium',
           style:'width:100%;',
           clearable:true,
           filterable: true,
@@ -34,7 +33,6 @@
         :disabled="disableValidator && disableValidator.call(this,model)"
         :type="type.toLocaleLowerCase()"
         v-bind="{
-          size:'medium',
           startPlaceholder: '开始日期',
           rangeSeparator: '~',
           endPlaceholder: '结束日期',
@@ -83,7 +81,6 @@
         :disabled="disableValidator && disableValidator.call(this,model)"
         class="filter-item filter-list query-item"
         v-bind="{
-          size:'medium',
           placeholder: `${label}`,
           clearable: true,
           ...elementProps
@@ -147,10 +144,6 @@ export default {
       type: String,
       default: undefined,
     },
-    height: {
-      type: String,
-      default: '36px',
-    },
     disableValidator: {
       type: Function,
       default: undefined,
@@ -173,13 +166,6 @@ export default {
     },
   },
   computed: {
-    heightStyle() {
-      if (['multiSelect'].indexOf(this.type) > -1) {
-        return `min-height:${this.height};`;
-      } else {
-        return `height:${this.height};`;
-      }
-    },
     pickerOptions: function () {
       if (this.type === 'dateTimeRange' || this.type === 'dateRange') {
         return (

@@ -1,7 +1,7 @@
 <template>
   <div
     v-resize:debounce="handleResize"
-    style="overflow:hidden;minWidth:700px;padding:10px 10px 0 10px;"
+    style="overflow:hidden;minWidth:700px;padding:14px 10px 0 10px;"
     class="clearfix common-query"
   >
     <div
@@ -9,8 +9,7 @@
       style="display:inline-block;float:left"
     >
       <el-button
-        size="mini"
-        style="height:36px;"
+        style="paddingLeft:10px;paddingRight:10px;"
         @click="$refs.filterSelect.$el.click()"
       >
         筛选
@@ -37,7 +36,8 @@
       :id="formId"
       ref="form"
       :model="model"
-      :style="fields.some(r=>r.showType==='dynamic')? 'marginLeft:72px;' : ''"
+      style="overflow:hidden;"
+      :style="fields.some(r=>r.showType==='dynamic')? 'marginLeft:68px;' : ''"
       v-bind="{
         labelWidth:'110px',
         ...elementProps
@@ -53,7 +53,6 @@
           :model="model"
           :data-field="item.dataField"
           :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
-          :height="`${rowHeight}px`"
           :disable-validator="item.disableValidator"
           :visible-validator="item.visibleValidator"
           :element-props="item.elementProps || {}"
@@ -68,7 +67,6 @@
         :model="model"
         :data-field="item.dataField"
         :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
-        :height="`${rowHeight}px`"
         :disable-validator="item.disableValidator"
         :visible-validator="item.visibleValidator"
         :element-props="item.elementProps || {}"
@@ -83,7 +81,6 @@
           :model="model"
           :data-field="item.dataField"
           :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
-          :height="`${rowHeight}px`"
           :disable-validator="item.disableValidator"
           :visible-validator="item.visibleValidator"
           :element-props="item.elementProps || {}"
@@ -97,7 +94,6 @@
         <el-button
           v-for="(item,index) of commands"
           :key="index"
-          size="medium"
           :loading="item.loading && loading"
           :disabled="item.disableValidator && item.disableValidator.call(this)"
           class="filter-item"
@@ -109,7 +105,6 @@
 
         <el-dropdown v-if="downloadOpt && downloadOpt.options && downloadOpt.options.length > 0">
           <el-button
-            size="medium"
             type="primary"
             icon="el-icon-document"
             :loading="downloadOpt.loading && loading"
@@ -187,10 +182,6 @@ export default {
       type: String,
       default: 'end',
     },
-    rowHeight: {
-      type: Number,
-      default: 36,
-    },
     maxFieldWidth: {
       type: Number,
       default: 230,
@@ -254,7 +245,7 @@ export default {
   },
 };
 </script>
-<style rel="stylesheet/scss" lang="scss">
+<style lang="scss">
 .common-query {
   .dynamic-filter-select {
     position: absolute;
@@ -266,6 +257,27 @@ export default {
   }
   .dynamic-select-options {
     min-width: 150px;
+  }
+  .el-form-item--mini {
+    margin-bottom: 10px !important;
+    .el-form-item__content {
+      height: 28px;
+    }
+  }
+  .el-form-item--small {
+    margin-bottom: 14px !important ;
+    .el-form-item__content {
+      height: 32px;
+    }
+  }
+  .el-form-item--medium {
+    margin-bottom: 18px !important;
+    .el-form-item__content {
+      height: 36px;
+    }
+  }
+  .el-button--small {
+    padding: 8px 15px;
   }
 }
 </style>
