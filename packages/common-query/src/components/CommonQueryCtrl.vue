@@ -13,6 +13,7 @@
         :multiple="type==='multiSelect'"
         v-bind="{
           placeholder:`${label}`,
+          size:'medium',
           style:'width:100%;',
           clearable:true,
           filterable: true,
@@ -33,6 +34,7 @@
         :disabled="disableValidator && disableValidator.call(this,model)"
         :type="type.toLocaleLowerCase()"
         v-bind="{
+          size:'medium',
           startPlaceholder: '开始日期',
           rangeSeparator: '~',
           endPlaceholder: '结束日期',
@@ -81,6 +83,7 @@
         :disabled="disableValidator && disableValidator.call(this,model)"
         class="filter-item filter-list query-item"
         v-bind="{
+          size:'medium',
           placeholder: `${label}`,
           clearable: true,
           ...elementProps

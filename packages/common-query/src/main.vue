@@ -10,6 +10,7 @@
     >
       <el-button
         size="mini"
+        style="height:36px;"
         @click="$refs.filterSelect.$el.click()"
       >
         筛选
@@ -96,6 +97,7 @@
         <el-button
           v-for="(item,index) of commands"
           :key="index"
+          size="medium"
           :loading="item.loading && loading"
           :disabled="item.disableValidator && item.disableValidator.call(this)"
           class="filter-item"
@@ -107,6 +109,7 @@
 
         <el-dropdown v-if="downloadOpt && downloadOpt.options && downloadOpt.options.length > 0">
           <el-button
+            size="medium"
             type="primary"
             icon="el-icon-document"
             :loading="downloadOpt.loading && loading"
