@@ -201,10 +201,14 @@ export default {
           this.dataSource.map((r) => r.id).reduce((a, b) => Math.min(a, b)) - 1;
       }
       if (this.addInside) {
-        const newRow = {
-          id: newId,
-          operateType: 'add',
-        };
+        const newRow = {};
+        (this.columns || []).forEach((col) => {
+          if (col.dataField) {
+            newRow[col.dataField] = undefined;
+          }
+        });
+        newRow.id = newId;
+        newRow.operateType = 'add';
         if (this.addInsidePosition === 'beforeFirst') {
           this.dataSource.unshift(newRow);
         } else {
