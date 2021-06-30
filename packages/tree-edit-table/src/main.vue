@@ -241,8 +241,8 @@ export default {
         this.$emit('handleAdd');
       }
     },
-    handleRowClick: function (row) {
-      console.log('handleRowClick', row);
+    handleRowClick: function (row, column, event) {
+      console.log('handleRowClick', row, column, event);
       event.stopPropagation();
       if (
         this.editTriggerMode === 'auto' &&
@@ -258,7 +258,7 @@ export default {
         this.editingRow = row;
         this.handleEmitEvent('', this.editCommand.command, 0, row);
       } else {
-        this.$emit('row-click', row);
+        this.$emit('row-click', row, column, event);
       }
     },
     handleCurrentChange: function (currentRow, oldCurrentRow) {

@@ -384,12 +384,13 @@ export default {
       this.getList();
     },
     handleRowClick(row, column, event) {
+      console.log('handleRowClick', row, column, event);
       // 列类型为commands时,包装层为SPAN或IMG
       if (['SPAN', 'IMG'].indexOf(event.target.nodeName) > -1) {
         return;
       }
 
-      this.$emit('row-click', row);
+      this.$emit('row-click', row, column, event);
     },
   },
 };

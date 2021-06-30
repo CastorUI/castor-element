@@ -35,7 +35,7 @@
         :default-sort="defaultSort"
         style="width:100%;height:auto;"
         v-bind="{border: true, ...elementProps}"
-        @row-click="row => $emit('row-click', row)"
+        @row-click="handleRowClick"
         @selection-change="multipleSelection => handleSelectionChange(multipleSelection)"
         @sort-change="args=> handleSortChange(args)"
       >
@@ -244,6 +244,10 @@ export default {
       return (
         this.pagination.pageSize * (this.pagination.pageIndex - 1) + index + 1
       );
+    },
+    handleRowClick(row, column, event) {
+      console.log('handleRowClick', row, column, event);
+      this.$emit('row-click', row, column, event);
     },
     deepCopy(obj) {
       const result = Array.isArray(obj) ? [] : {};
