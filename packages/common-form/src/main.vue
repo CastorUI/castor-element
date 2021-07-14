@@ -31,7 +31,7 @@
       :model="model"
       :data-field="item.dataField"
       :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
-      :height="`${rowHeight * (elementProps.labelPosition==='top'? 2 : 1)}px`"
+      :label-position="elementProps.labelPosition || 'right'"
       :custom-components="customComponents"
       :disable-validator="item.disableValidator"
       :visible-validator="item.visibleValidator"

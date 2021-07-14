@@ -2,7 +2,13 @@
   <el-form-item
     v-if="!visibleValidator || visibleValidator.call(this,model)"
     :prop="dataField"
-    :style="'float:left;minWidth:300px;width:'+width+';marginBottom:'+ (extendProps.marginBottom || '22px') +';'+ heightStyle+''"
+    :style="{
+      float: 'left',
+      minWidth: '300px',
+      width: `calc(${width} - ${extendProps.marginLeft || (labelPosition==='top'?'16px':'0px')})`,
+      marginBottom: extendProps.marginBottom || '22px',
+      marginLeft: extendProps.marginLeft || (labelPosition==='top'?'16px':'0px')
+    }"
     v-bind="{ ...(label ? {label: `${label} :`} : {labelWidth: '0'})}"
   >
     <el-select
@@ -60,7 +66,7 @@
       v-else-if="type==='checkboxGroup'"
       v-model="model[dataField]"
       :disabled="disableValidator && disableValidator.call(this,model)"
-      v-bind="{style: 'width:100%; height: 36px;', ...elementProps}"
+      v-bind="{style: 'width:100%;', ...elementProps}"
       @change="extendProps.onChange && extendProps.onChange.call(this,model)"
     >
       <el-checkbox
@@ -95,7 +101,7 @@
     </div>
     <span
       v-else-if="type==='text'"
-      v-bind="{style: 'display:inline-block;height: 36px;line-height: 36px;', ...elementProps}"
+      v-bind="{style: 'display:inline-block;', ...elementProps}"
     >{{ extendProps.options ? extendProps.options.filter(r => r.value === model[dataField])[0].label : model[dataField] }}</span>
     <hr
       v-else-if="type==='hr'"
@@ -262,6 +268,10 @@ export default {
       type: String,
       default: undefined,
     },
+    labelPosition: {
+      type: String,
+      default: 'right',
+    },
     operateType: {
       type: String,
       default: 'add',
@@ -277,10 +287,6 @@ export default {
     width: {
       type: String,
       default: undefined,
-    },
-    height: {
-      type: String,
-      default: '36px',
     },
     disableValidator: {
       type: Function,
@@ -310,18 +316,6 @@ export default {
     },
   },
   computed: {
-    heightStyle() {
-      if (
-        ['custom', 'groupTitle', 'textArea', 'avatarUploader'].indexOf(
-          this.type
-        ) > -1 ||
-        (this.type === 'text' && this.extendProps.multiline)
-      ) {
-        return '';
-      } else {
-        return `height:${this.height};`;
-      }
-    },
     pickerOptions() {
       if (this.type === 'dateTimeRange' || this.type === 'dateRange') {
         return (
