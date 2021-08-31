@@ -92,7 +92,7 @@
           >
             <el-input
               v-if="type==='default' || type==='input'"
-              v-model="editingRow[dataField]"
+              v-model.trim="editingRow[dataField]"
               v-inputFocus="extendProps.autoFocus"
               v-bind="{style: 'width:100%;', ...elementProps}"
             />

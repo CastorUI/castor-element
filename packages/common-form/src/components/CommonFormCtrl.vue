@@ -193,7 +193,7 @@
     />
     <el-input
       v-else-if="type==='textArea'"
-      v-model="model[dataField]"
+      v-model.trim="model[dataField]"
       type="textarea"
       :disabled="disableValidator && disableValidator.call(this,model)"
       v-bind="{
@@ -249,10 +249,10 @@
       @change="extendProps.onChange && extendProps.onChange.call(this,model)"
     >
       <template
-        v-if="elementProps.appendText"
+        v-if="extendProps.appendText"
         slot="append"
       >
-        {{ elementProps.appendText }}
+        {{ extendProps.appendText }}
       </template>
     </el-input>
   </el-form-item>

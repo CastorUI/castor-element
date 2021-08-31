@@ -947,6 +947,7 @@
 | currentField  | 当前字段，只限于 `type` 为 `complexInput`                                                         | object   | —      | —      |
 | appendField   | 附加字段，只限于 `type` 为 `complexInput`                                                         | object   | —      | —      |
 | onChange      | 值变动时回调事件                                                                                  | function | —      | —      |
+| appendText    | 后缀文本，只限于 `type` 为 `input`                                                                | string   | —      | —      |
 
 ### Field Type Options
 
