@@ -260,20 +260,26 @@ export default {
   }
   .el-form-item--mini {
     margin-bottom: 10px !important;
-    .el-form-item__content {
-      height: 28px;
+    &.fixed-height-field {
+      .el-form-item__content {
+        height: 28px;
+      }
     }
   }
   .el-form-item--small {
     margin-bottom: 14px !important ;
-    .el-form-item__content {
-      height: 32px;
+    &.fixed-height-field {
+      .el-form-item__content {
+        height: 32px;
+      }
     }
   }
   .el-form-item--medium {
     margin-bottom: 18px !important;
-    .el-form-item__content {
-      height: 36px;
+    &.fixed-height-field {
+      .el-form-item__content {
+        height: 36px;
+      }
     }
   }
   .el-button--small {

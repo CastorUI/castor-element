@@ -4,6 +4,9 @@
     :label="label+' :'"
     :prop="dataField"
     :style="`float:left;width:${width};`"
+    :class="{
+      'fixed-height-field': ['multiSelect'].indexOf(type) <= -1
+    }"
   >
     <div :style="{display:'inline-block',width: (extendProps && extendProps.helpText)?'calc(100% - 16px)':'100%'}">
       <el-select
