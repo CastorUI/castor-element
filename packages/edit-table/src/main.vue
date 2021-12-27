@@ -200,6 +200,7 @@ export default {
         newId =
           this.dataSource.map((r) => r.id).reduce((a, b) => Math.min(a, b)) - 1;
       }
+
       if (this.addInside) {
         const newRow = {};
         (this.columns || []).forEach((col) => {
@@ -216,9 +217,9 @@ export default {
         }
         this.editingRow = newRow;
         event.stopPropagation();
-      } else {
-        this.$emit(this.addCommand.command);
       }
+
+      this.$emit(this.addCommand.command);
     },
     handleRowClick: function (row, column, event) {
       console.log('handleRowClick', row, column, event);

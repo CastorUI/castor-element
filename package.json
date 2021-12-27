@@ -1,6 +1,6 @@
 {
   "name": "@polarwin/castor-ui",
-  "version": "2.6.10",
+  "version": "2.7.2",
   "private": false,
   "author": "heke",
   "main": "lib/castor-ui.umd.min.js",
@@ -8,7 +8,8 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.demo.dev.js",
     "build:packages": "vue-cli-service build --target lib --name castor-ui --dest lib packages/index.js",
     "build:examples": "cross-env NODE_ENV=production webpack --config build/webpack.demo.prod.js",
-    "lint": "eslint examples/ packages/ --ext .vue,.js --fix"
+    "lint": "eslint examples/ packages/ --ext .vue,.js --fix",
+    "verdaccio": "npm publish --registry=http://verdaccio.polarwin.cn/"
   },
   "dependencies": {
     "core-js": "^3.6.4",
