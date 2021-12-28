@@ -359,9 +359,15 @@ export default {
       this.multipleSelection = multipleSelection;
       this.$emit('selection-change', multipleSelection);
     },
-    handlePageIndexChange(pageIndex) {
+    async handlePageIndexChange(pageIndex) {
       this.pagination.pageIndex = pageIndex;
-      this.getList();
+      const results = await this.getList();
+      // 修复bug: 修改查询条件后，直接切换页码（切换前未点击查询按钮）
+      if (pageIndex > 1 && (results || []).length === 0) {
+        this.pagination.pageIndex = 1;
+        this.getList();
+      }
+      this.$emit('page-index-change', this.pagination.pageIndex);
     },
     handlePageSizeChange(pageSize) {
       this.pagination.pageIndex = 1;
