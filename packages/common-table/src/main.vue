@@ -90,7 +90,7 @@
     >
       <el-pagination
         v-if="pagination.type==='bigData'"
-        :current-page="999999"
+        :current-page="pagination.pageIndex"
         :page-size="pagination.pageSize"
         :page-sizes="pageSizes"
         style="margin-top: 10px;"
