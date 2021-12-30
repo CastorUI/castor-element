@@ -205,7 +205,7 @@ export default {
         const newRow = {};
         (this.columns || []).forEach((col) => {
           if (col.dataField) {
-            newRow[col.dataField] = undefined;
+            newRow[col.dataField] = (col.extendProps || {}).defaultValue;
           }
         });
         newRow.id = newId;

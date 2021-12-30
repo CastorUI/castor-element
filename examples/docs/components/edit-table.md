@@ -1132,10 +1132,11 @@
 
 ### Column ExtendProps Options
 
-| 参数      | 说明                                                                                                                               | 类型    | 可选值 | 默认值 |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------- | ------ | ------ |
-| autoFocus | 当行处于编辑状态时，是否默认选中当前列（只设置一列）                                                                               | boolean | -      | false  |
-| commands  | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling) | array   | -      | []     |
+| 参数         | 说明                                                                                                                               | 类型    | 可选值 | 默认值 |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------- | ------- | ------ | ------ |
+| defaultValue | 当前列字段的默认值（类型与列类型一致）                                                                                             | any     | -      |        |
+| autoFocus    | 当行处于编辑状态时，是否默认选中当前列（只设置一列）                                                                               | boolean | -      | false  |
+| commands     | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling) | array   | -      | []     |
 
 ### Table Events
 
@@ -1143,9 +1144,10 @@
 | --------- | ---------------------------- | ---- |
 | row-click | 当某一行被点击时会触发该事件 | row  |
 
-
 ### 注意事项
-校验方式采用Element Form组件内置的validate事件，使用方式推荐：
-1. 配置rules的trigger指定为blur
-2. 配置列的autoFocus为true(指定一个有校验规则的列)
-3. 配置saveCommand的disableValidator（校验table.validateStatus）
+
+校验方式采用 Element Form 组件内置的 validate 事件，使用方式推荐：
+
+1. 配置 rules 的 trigger 指定为 blur
+2. 配置列的 autoFocus 为 true(指定一个有校验规则的列)
+3. 配置 saveCommand 的 disableValidator（校验 table.validateStatus）
