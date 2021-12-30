@@ -1142,3 +1142,10 @@
 | 事件名    | 说明                         | 参数 |
 | --------- | ---------------------------- | ---- |
 | row-click | 当某一行被点击时会触发该事件 | row  |
+
+
+### 注意事项
+校验方式采用Element Form组件内置的validate事件，使用方式推荐：
+1. 配置rules的trigger指定为blur
+2. 配置列的autoFocus为true(指定一个有校验规则的列)
+3. 配置saveCommand的disableValidator（校验table.validateStatus）
