@@ -1132,11 +1132,13 @@
 
 ### Column ExtendProps Options
 
-| 参数         | 说明                                                                                                                               | 类型    | 可选值 | 默认值 |
-| ------------ | ---------------------------------------------------------------------------------------------------------------------------------- | ------- | ------ | ------ |
-| defaultValue | 当前列字段的默认值（类型与列类型一致）                                                                                             | any     | -      |        |
-| autoFocus    | 当行处于编辑状态时，是否默认选中当前列（只设置一列）                                                                               | boolean | -      | false  |
-| commands     | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling) | array   | -      | []     |
+| 参数         | 说明                                                                                                                               | 类型     | 可选值 | 默认值 |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
+| defaultValue | 当前列字段的默认值（类型与列类型一致）                                                                                             | any      | -      |        |
+| autoFocus    | 当行处于编辑状态时，是否默认选中当前列（只设置一列）                                                                               | boolean  | -      | false  |
+| commands     | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling) | array    | -      | []     |
+| onChange     | 当前行处于编辑状态时，当前单元格的值发生变化时触发                                                                                 | Function | -      |        |
+| onEnter      | 当前行处于编辑状态时，回车键触发                                                                                                   | Function | -      |        |
 
 ### Table Events
 

@@ -95,6 +95,8 @@
               v-model.trim="editingRow[dataField]"
               v-inputFocus="extendProps.autoFocus"
               v-bind="{style: 'width:100%;', ...elementProps}"
+              @change="extendProps.onChange && extendProps.onChange.call(this,editingRow)"
+              @keyup.enter.native="handleEnter(scope.$index,scope.row,dataField)"
             />
             <el-input-number
               v-else-if="type==='inputNumber'"
@@ -102,6 +104,8 @@
               v-inputNumberFocus="extendProps.autoFocus"
               v-bind="{precision: 0, style: 'width:100%;', ...elementProps}"
               @focus="$event.target.select()"
+              @change="extendProps.onChange && extendProps.onChange.call(this,editingRow)"
+              @keyup.enter.native="handleEnter(scope.$index,scope.row,dataField)"
             />
             <el-select
               v-if="type === 'select'"
@@ -109,6 +113,8 @@
               v-selectFocus="extendProps.autoFocus"
               v-bind="{clearable: true, filterable: true,style: 'width:100%;',allowCreate: false, placeholder: `选择${label}`, ...elementProps}"
               @clear="editingRow[dataField]=undefined"
+              @change="extendProps.onChange && extendProps.onChange.call(this,editingRow)"
+              @keyup.enter.native="handleEnter(scope.$index,scope.row,dataField)"
             >
               <el-option
                 v-for="option in extendProps.options"
@@ -131,6 +137,7 @@
                 ...elementProps
               }"
               @change="extendProps.onChange && extendProps.onChange.call(this,editingRow)"
+              @keyup.enter.native="handleEnter(scope.$index,scope.row,dataField)"
             />
           </el-form-item>
         </el-form>
@@ -198,6 +205,10 @@ export default {
       default: () => [],
     },
     dataTemplate: {
+      type: Function,
+      default: () => {},
+    },
+    callback: {
       type: Function,
       default: () => {},
     },
@@ -347,6 +358,19 @@ export default {
       const formRules = {};
       formRules[dataField] = rules;
       return formRules;
+    },
+    // 回车提交
+    handleEnter(index, row, dataField) {
+      console.log('handleEnter', index, dataField, this.editingRow[dataField]);
+      if (this.$refs[`${dataField}Form`]) {
+        this.$refs[`${dataField}Form`].validate((valid) => {
+          if (valid && this.extendProps.onEnter) {
+            this.extendProps.onEnter(index, this.editingRow, () => {
+              this.callback(row);
+            });
+          }
+        });
+      }
     },
   },
 };

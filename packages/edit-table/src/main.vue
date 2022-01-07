@@ -40,6 +40,7 @@
           :addable="item.addable"
           :editing="editing"
           :editing-row="editingRow"
+          :callback="callback"
           :handle-emit-event="handleEmitEvent"
           :handle-validate-form="handleValidateForm"
           :custom-components="customComponents"
@@ -180,14 +181,17 @@ export default {
     }
   },
   methods: {
+    callback(row) {
+      if (['add', 'edit'].indexOf(row.operateType) > -1) {
+        this.editingRow = row;
+      } else {
+        this.editingRow = null;
+      }
+    },
     handleEmitEvent: function (commandType, command, index, row) {
       console.log('handleEmitEvent', commandType, command, index, row);
       this.$emit(command, index, row, () => {
-        if (['add', 'edit'].indexOf(row.operateType) > -1) {
-          this.editingRow = row;
-        } else {
-          this.editingRow = null;
-        }
+        this.callback(row);
       });
     },
     handleAdd: function () {
