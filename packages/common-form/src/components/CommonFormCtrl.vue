@@ -133,6 +133,27 @@
           : model[dataField]
       }${extendProps.appendText || ''}`
     }}</span>
+    <span
+      v-else-if="
+        type === 'status' &&
+          extendProps.options.some((r) => r.value === model[dataField])
+      "
+      :style="{
+        color: extendProps.options.filter(
+          (r) => r.value === model[dataField]
+        )[0].color,
+      }"
+    >
+      <i
+        :class="
+          extendProps.options.filter((r) => r.value === model[dataField])[0]
+            .icon
+        "
+      />
+      {{
+        extendProps.options.filter((r) => r.value === model[dataField])[0].label
+      }}
+    </span>
     <hr v-else-if="type === 'hr'" v-bind="elementProps">
     <!-- <div
       v-else-if="type==='diy'"

@@ -59,10 +59,14 @@
             {
               value: 1,
               label: '供应商',
+              color: 'rgb(224,110,29)',
+              icon: 'el-icon-s-opportunity',
             },
             {
               value: 2,
               label: '经销商',
+              color: 'rgb(24,121,255)',
+              icon: 'el-icon-s-opportunity',
             },
           ],
           equipment: [
@@ -243,6 +247,15 @@
                   visibleValidator: (model) => false,
                 },
               ],
+            },
+          },
+          {
+            type: 'status',
+            label: '用户类型',
+            dataField: 'user_type',
+            columnSpan: 1,
+            extendProps: {
+              options: this.optionsMap['user_type'],
             },
           },
           {
@@ -444,10 +457,14 @@
             {
               value: 1,
               label: '供应商',
+              color: 'rgb(224,110,29)',
+              icon: 'el-icon-s-opportunity',
             },
             {
               value: 2,
               label: '经销商',
+              color: 'rgb(24,121,255)',
+              icon: 'el-icon-s-opportunity',
             },
           ],
           equipment: [
@@ -671,10 +688,14 @@
             {
               value: 1,
               label: '供应商',
+              color: 'rgb(224,110,29)',
+              icon: 'el-icon-s-opportunity',
             },
             {
               value: 2,
               label: '经销商',
+              color: 'rgb(24,121,255)',
+              icon: 'el-icon-s-opportunity',
             },
           ],
           equipment: [
@@ -944,39 +965,40 @@
 
 ### Field ExtendProps Options
 
-| 参数          | 说明                                                                                              | 类型     | 可选值 | 默认值 |
-| ------------- | ------------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
-| groupTitle    | 分组标题名称，只限于 `type` 为 `groupTitle`                                                       | string   | —      | —      |
-| groupCommands | 分组命令集合，只限于 `type` 为 `groupTitle`                                                       | array    | —      | —      |
-| componentKey  | 自定义组件名称，只限于 `type` 为 `custom`                                                         | string   | —      | —      |
-| options       | 选项数据源,用于`type` 为 `select multiSelect groupedSelect radioGroup checkboxGroup text cascade` | array    | —      | []     |
-| currentField  | 当前字段，只限于 `type` 为 `complexInput`                                                         | object   | —      | —      |
-| appendField   | 附加字段，只限于 `type` 为 `complexInput`                                                         | object   | —      | —      |
-| onChange      | 值变动时回调事件                                                                                  | function | —      | —      |
-| appendText    | 后缀文本，用于 `type` 为 `input、text`                                                            | string   | —      | —      |
+| 参数          | 说明                                                                                                     | 类型     | 可选值 | 默认值 |
+| ------------- | -------------------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
+| groupTitle    | 分组标题名称，只限于 `type` 为 `groupTitle`                                                              | string   | —      | —      |
+| groupCommands | 分组命令集合，只限于 `type` 为 `groupTitle`                                                              | array    | —      | —      |
+| componentKey  | 自定义组件名称，只限于 `type` 为 `custom`                                                                | string   | —      | —      |
+| options       | 选项数据源,用于`type` 为 `select multiSelect groupedSelect radioGroup checkboxGroup text status cascade` | array    | —      | []     |
+| currentField  | 当前字段，只限于 `type` 为 `complexInput`                                                                | object   | —      | —      |
+| appendField   | 附加字段，只限于 `type` 为 `complexInput`                                                                | object   | —      | —      |
+| onChange      | 值变动时回调事件                                                                                         | function | —      | —      |
+| appendText    | 后缀文本，用于 `type` 为 `input、text`                                                                   | string   | —      | —      |
 
 ### Field Type Options
 
-| 类型           | 说明           |
-| -------------- | -------------- |
-| text           | 只读文本       |
-| input          | 输入框         |
-| autocomplete   | 自动填充输入框 |
-| inputNumber    | 数字输入框     |
-| textArea       | 多行文本       |
-| select         | 下拉框         |
-| multiSelect    | 多选下拉框     |
-| groupedSelect  | 分组选择下拉框 |
-| cascader       | 级联选择器     |
-| switch         | 开关           |
-| radioGroup     | 单选框组       |
-| checkboxGroup  | 复选框组       |
-| date           | 日期选择器     |
-| dateRange      | 日期区间选择器 |
-| datetime       | 日期时间选择器 |
-| dateTimeRange  | 时间区间选择器 |
-| hr             | 分行           |
-| groupTitle     | 组标题         |
-| complexInput   | 组合输入框     |
-| custom         | 定制组件       |
-| avatarUploader | 用户头像上传   |
+| 类型           | 说明                         |
+| -------------- | ---------------------------- |
+| text           | 只读文本                     |
+| status         | 只读状态文本（含颜色、图标） |
+| input          | 输入框                       |
+| autocomplete   | 自动填充输入框               |
+| inputNumber    | 数字输入框                   |
+| textArea       | 多行文本                     |
+| select         | 下拉框                       |
+| multiSelect    | 多选下拉框                   |
+| groupedSelect  | 分组选择下拉框               |
+| cascader       | 级联选择器                   |
+| switch         | 开关                         |
+| radioGroup     | 单选框组                     |
+| checkboxGroup  | 复选框组                     |
+| date           | 日期选择器                   |
+| dateRange      | 日期区间选择器               |
+| datetime       | 日期时间选择器               |
+| dateTimeRange  | 时间区间选择器               |
+| hr             | 分行                         |
+| groupTitle     | 组标题                       |
+| complexInput   | 组合输入框                   |
+| custom         | 定制组件                     |
+| avatarUploader | 用户头像上传                 |
