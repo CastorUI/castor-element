@@ -9,6 +9,5 @@
       "singleQuote": true
     }
   },
-  "vetur.format.defaultFormatter.html": "js-beautify-html",
   "volar.takeOverMode.enabled": false,
 }

@@ -1,23 +1,33 @@
 <template>
   <el-form-item
-    v-if="!visibleValidator || visibleValidator.call(this,model)"
+    v-if="!visibleValidator || visibleValidator.call(this, model)"
     :prop="dataField"
     :style="{
       float: 'left',
       minWidth: '300px',
-      width: `calc(${width} - ${extendProps.marginLeft || (labelPosition==='top'?'16px':'0px')})`,
+      width: `calc(${width} - ${
+        extendProps.marginLeft || (labelPosition === 'top' ? '16px' : '0px')
+      })`,
       marginBottom: extendProps.marginBottom || '22px',
-      marginLeft: extendProps.marginLeft || (labelPosition==='top'?'16px':'0px')
+      marginLeft:
+        extendProps.marginLeft || (labelPosition === 'top' ? '16px' : '0px'),
     }"
-    v-bind="{ ...(label ? {label: `${label} :`} : {labelWidth: '0'})}"
+    v-bind="{ ...(label ? { label: `${label} :` } : { labelWidth: '0' }) }"
   >
     <el-select
       v-if="type === 'select' || type === 'multiSelect'"
       v-model="model[dataField]"
-      :disabled="disableValidator && disableValidator.call(this,model)"
-      :multiple="type==='multiSelect'"
-      v-bind="{clearable: true, filterable: true,style: 'width:100%;',allowCreate: false, placeholder: `选择${label}`, ...elementProps}"
-      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+      :disabled="disableValidator && disableValidator.call(this, model)"
+      :multiple="type === 'multiSelect'"
+      v-bind="{
+        clearable: true,
+        filterable: true,
+        style: 'width:100%;',
+        allowCreate: false,
+        placeholder: `选择${label}`,
+        ...elementProps,
+      }"
+      @change="extendProps.onChange && extendProps.onChange.call(this, model)"
       @clear="handleClear"
     >
       <el-option
@@ -28,11 +38,18 @@
       />
     </el-select>
     <el-select
-      v-else-if="type === 'groupedSelect' "
+      v-else-if="type === 'groupedSelect'"
       v-model="model[dataField]"
-      :disabled="disableValidator && disableValidator.call(this,model)"
-      v-bind="{clearable: true, filterable: true,style: 'width:100%;',allowCreate: false, placeholder: `选择${label}`, ...elementProps}"
-      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+      :disabled="disableValidator && disableValidator.call(this, model)"
+      v-bind="{
+        clearable: true,
+        filterable: true,
+        style: 'width:100%;',
+        allowCreate: false,
+        placeholder: `选择${label}`,
+        ...elementProps,
+      }"
+      @change="extendProps.onChange && extendProps.onChange.call(this, model)"
       @clear="handleClear"
     >
       <el-option-group
@@ -49,10 +66,10 @@
       </el-option-group>
     </el-select>
     <el-radio-group
-      v-else-if="type==='radioGroup'"
+      v-else-if="type === 'radioGroup'"
       v-model="model[dataField]"
       v-bind="elementProps"
-      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+      @change="extendProps.onChange && extendProps.onChange.call(this, model)"
     >
       <el-radio
         v-for="option in extendProps.options"
@@ -63,11 +80,11 @@
       </el-radio>
     </el-radio-group>
     <el-checkbox-group
-      v-else-if="type==='checkboxGroup'"
+      v-else-if="type === 'checkboxGroup'"
       v-model="model[dataField]"
-      :disabled="disableValidator && disableValidator.call(this,model)"
-      v-bind="{style: 'width:100%;', ...elementProps}"
-      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+      :disabled="disableValidator && disableValidator.call(this, model)"
+      v-bind="{ style: 'width:100%;', ...elementProps }"
+      @change="extendProps.onChange && extendProps.onChange.call(this, model)"
     >
       <el-checkbox
         v-for="option in extendProps.options"
@@ -77,22 +94,28 @@
       />
     </el-checkbox-group>
     <div
-      v-else-if="type==='groupTitle'"
-      v-bind="{style: 'overflow:hidden;width:100%;font-size:16px;font-weight:bold;', ...elementProps}"
+      v-else-if="type === 'groupTitle'"
+      v-bind="{
+        ...elementProps,
+        style:
+          'overflow:hidden;width:100%;font-size:16px;font-weight:bold;' +
+          (elementProps.style || ''),
+      }"
     >
-      <div style="float:left;"> {{ extendProps.groupTitle }} </div>
-      <div
-        v-if="extendProps.groupCommands"
-        style="float:right;"
-      >
+      <div style="float: left">{{ extendProps.groupTitle }}</div>
+      <div v-if="extendProps.groupCommands" style="float: right">
         <el-link
-          v-for="(item,index) of extendProps.groupCommands"
-          v-show="!item.visibleValidator || item.visibleValidator.call(this, model)"
+          v-for="(item, index) of extendProps.groupCommands"
+          v-show="
+            !item.visibleValidator || item.visibleValidator.call(this, model)
+          "
           :key="index"
           type="primary"
-          :disabled="item.disableValidator && item.disableValidator.call(this,model)"
-          v-bind="{type: 'primary',underline: true, ...item.elementProps}"
-          @click.stop="handleGroupCommand.call(this,item,model)"
+          :disabled="
+            item.disableValidator && item.disableValidator.call(this, model)
+          "
+          v-bind="{ type: 'primary', underline: true, ...item.elementProps }"
+          @click.stop="handleGroupCommand.call(this, item, model)"
           v-on="$listeners"
         >
           {{ item.text }}
@@ -100,13 +123,15 @@
       </div>
     </div>
     <span
-      v-else-if="type==='text'"
-      v-bind="{style: 'display:inline-block;', ...elementProps}"
-    >{{ extendProps.options ? extendProps.options.filter(r => r.value === model[dataField])[0].label : model[dataField] }}</span>
-    <hr
-      v-else-if="type==='hr'"
-      v-bind="elementProps"
-    >
+      v-else-if="type === 'text'"
+      v-bind="{ style: 'display:inline-block;', ...elementProps }"
+    >{{
+      extendProps.options
+        ? extendProps.options.filter((r) => r.value === model[dataField])[0]
+          .label
+        : model[dataField]
+    }}</span>
+    <hr v-else-if="type === 'hr'" v-bind="elementProps">
     <!-- <div
       v-else-if="type==='diy'"
       v-bind="elementProps"
@@ -115,15 +140,24 @@
       <div v-html="elementProps.vHtml" />
     </div> -->
     <el-switch
-      v-else-if="type==='switch'"
+      v-else-if="type === 'switch'"
       v-model="model[dataField]"
-      :disabled="disableValidator && disableValidator.call(this,model)"
-      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+      :disabled="disableValidator && disableValidator.call(this, model)"
+      @change="extendProps.onChange && extendProps.onChange.call(this, model)"
     />
     <el-date-picker
-      v-else-if="['dateTimeRange','dateRange','monthRange','date','month','datetime'].indexOf(type)>-1"
+      v-else-if="
+        [
+          'dateTimeRange',
+          'dateRange',
+          'monthRange',
+          'date',
+          'month',
+          'datetime',
+        ].indexOf(type) > -1
+      "
       v-model="model[dataField]"
-      :disabled="disableValidator && disableValidator.call(this,model)"
+      :disabled="disableValidator && disableValidator.call(this, model)"
       :type="type.toLocaleLowerCase()"
       v-bind="{
         startPlaceholder: '开始日期',
@@ -132,94 +166,124 @@
         valueFormat: 'yyyy-MM-dd',
         pickerOptions: pickerOptions,
         style: 'width:100%;',
-        ...elementProps
+        ...elementProps,
       }"
-      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+      @change="extendProps.onChange && extendProps.onChange.call(this, model)"
     />
     <el-input-number
-      v-else-if="type==='inputNumber'"
+      v-else-if="type === 'inputNumber'"
       v-model="model[dataField]"
-      :disabled="disableValidator && disableValidator.call(this,model)"
+      :disabled="disableValidator && disableValidator.call(this, model)"
       v-bind="{
         placeholder: `输入${label}`,
-        precision:0,
+        precision: 0,
         clearable: true,
         style: 'width:100%;',
-        ...elementProps
+        ...elementProps,
       }"
-      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+      @change="extendProps.onChange && extendProps.onChange.call(this, model)"
     />
     <el-cascader
-      v-else-if="type==='cascader'"
+      v-else-if="type === 'cascader'"
       v-model="model[dataField]"
-      :disabled="disableValidator && disableValidator.call(this,model)"
+      :disabled="disableValidator && disableValidator.call(this, model)"
       :options="extendProps.options"
       v-bind="{
         placeholder: `输入${label}`,
         clearable: true,
         style: 'width:100%;',
-        ...elementProps
+        ...elementProps,
       }"
-      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+      @change="extendProps.onChange && extendProps.onChange.call(this, model)"
     />
     <el-input
-      v-else-if="type==='complexInput' && extendProps.currentField.options.filter(r=>r.value === model[extendProps.currentField.dataField]).length > 0"
-      v-model="extendProps.currentField.options.filter(r=>r.value === model[extendProps.currentField.dataField])[0].label"
+      v-else-if="
+        type === 'complexInput' &&
+          extendProps.currentField.options.filter(
+            (r) => r.value === model[extendProps.currentField.dataField]
+          ).length > 0
+      "
+      v-model="
+        extendProps.currentField.options.filter(
+          (r) => r.value === model[extendProps.currentField.dataField]
+        )[0].label
+      "
       :class="['complexInput']"
       v-bind="{
         disabled: true,
         style: 'width:100%;',
-        ...elementProps
+        ...elementProps,
       }"
-      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+      @change="extendProps.onChange && extendProps.onChange.call(this, model)"
     >
       <template slot="append">
         <span
-          v-if="extendProps.appendField.options && model[extendProps.appendField.dataField]"
-          :style="'color:'+extendProps.appendField.options.filter(r=>r.value === model[extendProps.appendField.dataField])[0].color+';'"
+          v-if="
+            extendProps.appendField.options &&
+              model[extendProps.appendField.dataField]
+          "
+          :style="
+            'color:' +
+              extendProps.appendField.options.filter(
+                (r) => r.value === model[extendProps.appendField.dataField]
+              )[0].color +
+              ';'
+          "
         >
-          <i :class="extendProps.appendField.options.filter(r=>r.value === model[extendProps.appendField.dataField])[0].icon" />
-          {{ extendProps.appendField.options.filter(r=>r.value === model[extendProps.appendField.dataField])[0].label.slice(0,5) }}
+          <i
+            :class="
+              extendProps.appendField.options.filter(
+                (r) => r.value === model[extendProps.appendField.dataField]
+              )[0].icon
+            "
+          />
+          {{
+            extendProps.appendField.options
+              .filter(
+                (r) => r.value === model[extendProps.appendField.dataField]
+              )[0]
+              .label.slice(0, 5)
+          }}
         </span>
       </template>
     </el-input>
     <component
       :is="customComponents[extendProps.componentKey]"
-      v-else-if="type==='custom'"
+      v-else-if="type === 'custom'"
       :component-data.sync="model[dataField]"
       :model="model"
       :operate-type="operateType"
       v-bind="elementProps"
     />
     <el-input
-      v-else-if="type==='textArea'"
+      v-else-if="type === 'textArea'"
       v-model.trim="model[dataField]"
       type="textarea"
-      :disabled="disableValidator && disableValidator.call(this,model)"
+      :disabled="disableValidator && disableValidator.call(this, model)"
       v-bind="{
         placeholder: `输入${label}`,
         clearable: true,
         rows: 2,
         style: 'width:100%;',
-        ...elementProps
+        ...elementProps,
       }"
-      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+      @change="extendProps.onChange && extendProps.onChange.call(this, model)"
     />
     <el-autocomplete
-      v-else-if="type==='autocomplete'"
+      v-else-if="type === 'autocomplete'"
       v-model="model[dataField]"
-      :disabled="disableValidator && disableValidator.call(this,model)"
+      :disabled="disableValidator && disableValidator.call(this, model)"
       :fetch-suggestions="querySearch"
       v-bind="{
         placeholder: `输入${label}`,
         clearable: true,
         style: 'width:100%;',
-        ...elementProps
+        ...elementProps,
       }"
-      @select="onChange && onChange.call(this,model)"
+      @select="onChange && onChange.call(this, model)"
     />
     <el-upload
-      v-else-if="type==='avatarUploader'"
+      v-else-if="type === 'avatarUploader'"
       class="avatar-uploader"
       v-bind="elementProps"
     >
@@ -231,27 +295,21 @@
           width: extendProps.width || '178px',
         }"
       >
-      <i
-        v-else
-        class="el-icon-plus avatar-uploader-icon"
-      />
+      <i v-else class="el-icon-plus avatar-uploader-icon" />
     </el-upload>
     <el-input
       v-else
       v-model.trim="model[dataField]"
-      :disabled="disableValidator && disableValidator.call(this,model)"
+      :disabled="disableValidator && disableValidator.call(this, model)"
       v-bind="{
         placeholder: `输入${label}`,
         clearable: true,
         style: 'width:100%;',
-        ...elementProps
+        ...elementProps,
       }"
-      @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+      @change="extendProps.onChange && extendProps.onChange.call(this, model)"
     >
-      <template
-        v-if="extendProps.appendText"
-        slot="append"
-      >
+      <template v-if="extendProps.appendText" slot="append">
         {{ extendProps.appendText }}
       </template>
     </el-input>
@@ -262,58 +320,58 @@ export default {
   props: {
     type: {
       type: String,
-      default: undefined,
+      default: undefined
     },
     label: {
       type: String,
-      default: undefined,
+      default: undefined
     },
     labelPosition: {
       type: String,
-      default: 'right',
+      default: 'right'
     },
     operateType: {
       type: String,
-      default: 'add',
+      default: 'add'
     },
     model: {
       type: Object,
-      default: undefined,
+      default: undefined
     },
     dataField: {
       type: String,
-      default: undefined,
+      default: undefined
     },
     width: {
       type: String,
-      default: undefined,
+      default: undefined
     },
     disableValidator: {
       type: Function,
-      default: undefined,
+      default: undefined
     },
     visibleValidator: {
       type: Function,
-      default: () => true,
+      default: () => true
     },
     customComponents: {
       type: Object,
-      default: function () {
+      default: function() {
         return {};
-      },
+      }
     },
     elementProps: {
       type: Object,
-      default: () => {},
+      default: () => {}
     },
     extendProps: {
       type: Object,
-      default: () => {},
+      default: () => {}
     },
     onChange: {
       type: Function,
-      default: undefined,
-    },
+      default: undefined
+    }
   },
   computed: {
     pickerOptions() {
@@ -328,7 +386,7 @@ export default {
                   const start = new Date();
                   start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
                   picker.$emit('pick', [start, end]);
-                },
+                }
               },
               {
                 text: '最近一个月',
@@ -337,7 +395,7 @@ export default {
                   const start = new Date();
                   start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
                   picker.$emit('pick', [start, end]);
-                },
+                }
               },
               {
                 text: '最近三个月',
@@ -346,9 +404,9 @@ export default {
                   const start = new Date();
                   start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
                   picker.$emit('pick', [start, end]);
-                },
-              },
-            ],
+                }
+              }
+            ]
           }
         );
       } else if (this.type === 'monthRange') {
@@ -359,7 +417,7 @@ export default {
                 text: '本月',
                 onClick(picker) {
                   picker.$emit('pick', [new Date(), new Date()]);
-                },
+                }
               },
               {
                 text: '今年至今',
@@ -367,7 +425,7 @@ export default {
                   const end = new Date();
                   const start = new Date(new Date().getFullYear(), 0);
                   picker.$emit('pick', [start, end]);
-                },
+                }
               },
               {
                 text: '最近六个月',
@@ -376,15 +434,15 @@ export default {
                   const start = new Date();
                   start.setMonth(start.getMonth() - 6);
                   picker.$emit('pick', [start, end]);
-                },
-              },
-            ],
+                }
+              }
+            ]
           }
         );
       } else {
         return {};
       }
-    },
+    }
   },
   methods: {
     handleClear() {
@@ -404,7 +462,7 @@ export default {
       cb(results);
     },
     createFilter(queryString) {
-      return (option) => {
+      return option => {
         return (
           option.value.toLowerCase().indexOf(queryString.toLowerCase()) >= 0
         );
@@ -417,8 +475,8 @@ export default {
       console.log('handleGroupCommand', item, model);
       console.log('$listeners', this.$listeners);
       this.$emit(item.command, model);
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

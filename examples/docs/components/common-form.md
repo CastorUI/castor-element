@@ -151,6 +151,9 @@
             label: '',
             dataField: '',
             columnSpan: 2,
+            elementProps: {
+              style: 'font-size:15px;',
+            },
             extendProps: {
               groupTitle: '1、基本信息',
               groupCommands: [
