@@ -177,7 +177,7 @@
             dataField: 'code',
             columnSpan: 1,
             extendProps: {
-              unit: '小时',
+              appendText: '小时',
             },
           },
           {
@@ -953,7 +953,7 @@
 | currentField  | 当前字段，只限于 `type` 为 `complexInput`                                                         | object   | —      | —      |
 | appendField   | 附加字段，只限于 `type` 为 `complexInput`                                                         | object   | —      | —      |
 | onChange      | 值变动时回调事件                                                                                  | function | —      | —      |
-| appendText    | 后缀文本，只限于 `type` 为 `input`                                                                | string   | —      | —      |
+| appendText    | 后缀文本，用于 `type` 为 `input、text`                                                            | string   | —      | —      |
 
 ### Field Type Options
 

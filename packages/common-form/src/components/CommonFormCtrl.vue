@@ -131,7 +131,7 @@
           ? extendProps.options.filter((r) => r.value === model[dataField])[0]
             .label
           : model[dataField]
-      }${extendProps.unit || ''}`
+      }${extendProps.appendText || ''}`
     }}</span>
     <hr v-else-if="type === 'hr'" v-bind="elementProps">
     <!-- <div
