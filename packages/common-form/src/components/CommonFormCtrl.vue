@@ -126,10 +126,12 @@
       v-else-if="type === 'text'"
       v-bind="{ style: 'display:inline-block;', ...elementProps }"
     >{{
-      extendProps.options
-        ? extendProps.options.filter((r) => r.value === model[dataField])[0]
-          .label
-        : model[dataField]
+      `${
+        extendProps.options
+          ? extendProps.options.filter((r) => r.value === model[dataField])[0]
+            .label
+          : model[dataField]
+      }${extendProps.unit || ''}`
     }}</span>
     <hr v-else-if="type === 'hr'" v-bind="elementProps">
     <!-- <div

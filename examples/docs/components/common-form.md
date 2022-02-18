@@ -176,6 +176,9 @@
             label: '编号',
             dataField: 'code',
             columnSpan: 1,
+            extendProps: {
+              unit: '小时',
+            },
           },
           {
             type: 'input',
