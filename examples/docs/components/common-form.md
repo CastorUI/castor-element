@@ -185,6 +185,12 @@
             },
           },
           {
+            type: 'text',
+            label: '空字段',
+            dataField: 'code2',
+            columnSpan: 1,
+          },
+          {
             type: 'input',
             label: '英文名',
             dataField: 'en_name',

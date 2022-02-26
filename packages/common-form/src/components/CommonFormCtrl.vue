@@ -127,10 +127,10 @@
       v-bind="{ style: 'display:inline-block;', ...elementProps }"
     >{{
       `${
-        extendProps.options
+        (extendProps.options
           ? extendProps.options.filter((r) => r.value === model[dataField])[0]
             .label
-          : model[dataField]
+          : model[dataField]) || '暂无'
       }${extendProps.appendText || ''}`
     }}</span>
     <span
@@ -183,6 +183,7 @@
       :disabled="disableValidator && disableValidator.call(this, model)"
       :type="type.toLocaleLowerCase()"
       v-bind="{
+        placeholder: '请选择',
         startPlaceholder: '开始日期',
         rangeSeparator: '~',
         endPlaceholder: '结束日期',

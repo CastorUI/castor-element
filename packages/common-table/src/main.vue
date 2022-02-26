@@ -6,9 +6,9 @@
       </div>
       <div class="table-setting-commands">
         <el-button
-          v-for="(item,index) of settingCommands"
+          v-for="(item, index) of settingCommands"
           :key="index"
-          v-bind="{type: 'text', ...item.elementProps}"
+          v-bind="{ type: 'text', ...item.elementProps }"
           @click="$emit(item.command)"
         >
           {{ item.text }}
@@ -16,7 +16,7 @@
         <el-button
           v-if="extendProps.showRefresh !== false"
           icon="el-icon-refresh-right"
-          v-bind="{type: 'text'}"
+          v-bind="{ type: 'text' }"
           @click="getList"
         >
           刷新
@@ -33,22 +33,33 @@
         class="table-custom-commands divider"
       >
         <el-button
-          v-for="(item,index) of customCommands"
+          v-for="(item, index) of customCommands"
           :key="index"
-          :disabled="item.disableValidator && item.disableValidator.call(this,multipleSelection)"
+          :disabled="
+            item.disableValidator &&
+              item.disableValidator.call(this, multipleSelection)
+          "
           v-bind="item.elementProps"
-          @click="$emit(item.command,multipleSelection)"
+          @click="$emit(item.command, multipleSelection)"
         >
           {{ item.text }}
         </el-button>
       </el-button-group>
       <div
-        v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
+        v-if="
+          addCommand &&
+            addCommand.text &&
+            (!addCommand.visibleValidator ||
+              addCommand.visibleValidator.call(this))
+        "
         class="table-add-command divider"
       >
         <el-button
-          :disabled="addCommand.disableValidator && addCommand.disableValidator.call(this)"
-          v-bind="{icon: 'el-icon-plus', ...addCommand.elementProps}"
+          :disabled="
+            addCommand.disableValidator &&
+              addCommand.disableValidator.call(this)
+          "
+          v-bind="{ icon: 'el-icon-plus', ...addCommand.elementProps }"
           @click="$emit(addCommand.command)"
         >
           {{ addCommand.text }}
@@ -64,13 +75,15 @@
         :data="dataSource"
         :default-sort="defaultSort"
         :row-class-name="tableRowClassName"
-        v-bind="{border: true, ...elementProps}"
+        v-bind="{ border: true, ...elementProps }"
         @row-click="handleRowClick"
-        @selection-change="multipleSelection => handleSelectionChange(multipleSelection)"
-        @sort-change="args=> handleSortChange(args)"
+        @selection-change="
+          (multipleSelection) => handleSelectionChange(multipleSelection)
+        "
+        @sort-change="(args) => handleSortChange(args)"
       >
         <common-column
-          v-for="(item,index) of dynamicColums"
+          v-for="(item, index) of dynamicColums"
           :key="index"
           :type="item.type"
           :label="item.label"
@@ -85,22 +98,30 @@
       </el-table>
     </div>
     <div
-      v-if="pagination.pageSize"
+      v-if="
+        pagination.pageSize &&
+          (pagination.type === 'bigData' ||
+            (pagination.type !== 'bigData' && pagination.total > pageSizes[0]))
+      "
       class="common-pagination-container"
     >
       <el-pagination
-        v-if="pagination.type==='bigData'"
+        v-if="pagination.type === 'bigData'"
         :current-page="pagination.pageIndex"
         :page-size="pagination.pageSize"
         :page-sizes="pageSizes"
-        style="margin-top: 10px;"
+        style="margin-top: 10px"
         prev-text="上一页"
         next-text="下一页"
         class="big-data-pagination"
-        v-bind="{layout: 'sizes, prev, next',background:true, ...pagination.elementProps}"
-        @size-change="pageSize => handleBigDataPageSizeChange(pageSize)"
-        @prev-click="()=>handleBigDataPageIndexChange('previous')"
-        @next-click="()=>handleBigDataPageIndexChange('next')"
+        v-bind="{
+          layout: 'sizes, prev, next',
+          background: true,
+          ...pagination.elementProps,
+        }"
+        @size-change="(pageSize) => handleBigDataPageSizeChange(pageSize)"
+        @prev-click="() => handleBigDataPageIndexChange('previous')"
+        @next-click="() => handleBigDataPageIndexChange('next')"
       />
       <el-pagination
         v-else
@@ -108,10 +129,14 @@
         :page-size="pagination.pageSize"
         :page-sizes="pageSizes"
         :total="pagination.total"
-        style="margin-top: 10px;"
-        v-bind="{layout: 'total,sizes, prev, pager, next',background:true, ...pagination.elementProps}"
-        @size-change="pageSize => handlePageSizeChange(pageSize)"
-        @current-change="pageIndex => handlePageIndexChange(pageIndex)"
+        style="margin-top: 10px"
+        v-bind="{
+          layout: 'total,sizes, prev, pager, next',
+          background: true,
+          ...pagination.elementProps,
+        }"
+        @size-change="(pageSize) => handlePageSizeChange(pageSize)"
+        @current-change="(pageIndex) => handlePageIndexChange(pageIndex)"
       />
     </div>
   </div>
@@ -124,77 +149,77 @@ export default {
   name: 'CaCommonTable',
   components: {
     CommonColumn,
-    ColumnConfig,
+    ColumnConfig
   },
   props: {
     loading: {
       type: Boolean,
-      default: false,
+      default: false
     },
     title: {
       type: String,
-      default: '',
+      default: ''
     },
     dataSource: {
       type: Array,
-      default: function () {
+      default: function() {
         return [];
-      },
+      }
     },
     columns: {
       type: Array,
-      default: function () {
+      default: function() {
         return [];
-      },
+      }
     },
     pagination: {
       type: Object,
-      default: function () {
+      default: function() {
         return {};
-      },
+      }
     },
     addCommand: {
       type: Object,
-      default: () => {},
+      default: () => {}
     },
     customCommands: {
       type: Array,
-      default: () => [],
+      default: () => []
     },
     settingCommands: {
       type: Array,
-      default: () => [],
+      default: () => []
     },
     getList: {
       type: Function,
-      default: () => {},
+      default: () => {}
     },
     customComponents: {
       type: Object,
-      default: function () {
+      default: function() {
         return {};
-      },
+      }
     },
     tableTag: {
       type: String,
-      default: '',
+      default: ''
     },
     elementProps: {
       type: Object,
-      default: function () {
+      default: function() {
         return {};
-      },
+      }
     },
     extendProps: {
       type: Object,
-      default: function () {
+      default: function() {
         return {
           cacheConfigColumns: true,
           showRefresh: true,
-          showColumnConfig: true,
+          showColumnConfig: true
         };
-      },
-    },
+      }
+    }
   },
   data() {
     return {
@@ -202,39 +227,41 @@ export default {
       originColumns: [],
       multipleSelection: [],
       dynamicColums: JSON.parse(JSON.stringify(this.columns)),
-      configColumns: [],
+      configColumns: []
     };
   },
   computed: {
     pageSizes() {
-      const pageSizeArray = [10, 15, 20, 30, 50];
-      return pageSizeArray.indexOf(this.pagination.pageSize) > -1
-        ? pageSizeArray
-        : pageSizeArray.concat(this.pagination.pageSize);
+      const pageSizeList = [10, 15, 20, 30, 50];
+      if (pageSizeList.indexOf(this.pagination.pageSize) <= -1) {
+        pageSizeList.push(this.pagination.pageSize);
+        pageSizeList.sort((a, b) => a - b);
+      }
+      return pageSizeList;
     },
     defaultSort() {
       return {
         prop: this.pagination.sortField,
-        order: this.pagination.order,
+        order: this.pagination.order
       };
-    },
+    }
   },
   watch: {
     configColumns: {
       handler(val) {
         this.hackReset = false;
         this.dynamicColums = val
-          .filter((r) => r.show)
-          .map((r) => {
+          .filter(r => r.show)
+          .map(r => {
             const originColumn = this.columns.filter(
-              (c) => c.dataField === r.dataField
+              c => c.dataField === r.dataField
             )[0];
             return {
               ...originColumn,
               elementProps: {
                 ...originColumn.elementProps,
-                fixed: r.fixed,
-              },
+                fixed: r.fixed
+              }
             };
           });
         if (
@@ -242,11 +269,11 @@ export default {
           this.tableTag &&
           (this.extendProps || {}).cacheConfigColumns !== false
         ) {
-          const cachedColumns = val.map((r) => {
+          const cachedColumns = val.map(r => {
             return {
               dataField: r.dataField,
               show: r.show,
-              fixed: r.fixed,
+              fixed: r.fixed
             };
           });
           localStorage.setItem(
@@ -259,22 +286,22 @@ export default {
         });
       },
       deep: true,
-      immediate: false,
+      immediate: false
     },
     columns: {
       handler() {
         this.hackReset = false;
-        this.originColumns = this.columns.map((r) => {
+        this.originColumns = this.columns.map(r => {
           return {
             show: true,
             dataField: r.dataField,
             label: r.type === 'selection' ? '选择列' : r.label,
-            fixed: (r.elementProps || {}).fixed,
+            fixed: (r.elementProps || {}).fixed
           };
         });
-        this.dynamicColums.forEach((r) => {
+        this.dynamicColums.forEach(r => {
           const originColumn = this.columns.filter(
-            (c) => c.dataField === r.dataField
+            c => c.dataField === r.dataField
           )[0];
           r.extendProps = originColumn.extendProps;
         });
@@ -283,8 +310,8 @@ export default {
         });
       },
       deep: true,
-      immediate: true,
-    },
+      immediate: true
+    }
   },
   created() {
     console.log('this.tableTag', this.tableTag);
@@ -300,30 +327,30 @@ export default {
         // 过滤删除列&&获取列标题
         const validCachedColumns = cachedColumns
           // 过滤删除列
-          .filter((r) => this.columns.some((c) => c.dataField === r.dataField))
+          .filter(r => this.columns.some(c => c.dataField === r.dataField))
           // 获取列标题
-          .map((r) => {
+          .map(r => {
             const originColumn = this.columns.find(
-              (c) => c.dataField === r.dataField
+              c => c.dataField === r.dataField
             );
             return {
               ...r,
               label:
                 originColumn.type === 'selection'
                   ? '选择列'
-                  : originColumn.label,
+                  : originColumn.label
             };
           });
         // 获取新增列
         const addedColumns = this.columns
           .filter(
-            (r) => !validCachedColumns.some((c) => c.dataField === r.dataField)
+            r => !validCachedColumns.some(c => c.dataField === r.dataField)
           )
-          .map((r) => {
+          .map(r => {
             return {
               ...r,
               show: true,
-              fixed: (r.elementProps || {}).fixed,
+              fixed: (r.elementProps || {}).fixed
             };
           });
         // 组装所有可设置列
@@ -332,12 +359,12 @@ export default {
     }
 
     if (!(this.configColumns && this.configColumns.length)) {
-      this.configColumns = this.columns.map((r) => {
+      this.configColumns = this.columns.map(r => {
         return {
           show: true,
           dataField: r.dataField,
           label: r.type === 'selection' ? '选择列' : r.label,
-          fixed: (r.elementProps || {}).fixed,
+          fixed: (r.elementProps || {}).fixed
         };
       });
     }
@@ -397,8 +424,8 @@ export default {
       }
 
       this.$emit('row-click', row, column, event);
-    },
-  },
+    }
+  }
 };
 </script>
 
