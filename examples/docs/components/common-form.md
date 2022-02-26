@@ -327,6 +327,19 @@
             columnSpan: 2,
           },
           {
+            type: 'avatarUploader',
+            label: '用户头像',
+            dataField: 'user_avatar',
+            columnSpan: 1,
+            elementProps: {
+              action: 'https://jsonplaceholder.typicode.com/posts/',
+            },
+            extendProps: {
+              width: '300px',
+              height: '300px',
+            },
+          },
+          {
             type: 'complexInput',
             label: '审核人',
             dataField: '',
@@ -341,19 +354,6 @@
                 dataField: 'user_type',
                 options: this.optionsMap['user_type'],
               },
-            },
-          },
-          {
-            type: 'avatarUploader',
-            label: '用户头像',
-            dataField: 'user_avatar',
-            columnSpan: 2,
-            elementProps: {
-              action: 'https://jsonplaceholder.typicode.com/posts/',
-            },
-            extendProps: {
-              width: '300px',
-              height: '300px',
             },
           },
         ];
