@@ -131,6 +131,7 @@
             user: 1,
             user_type: 2,
             user_type_text: undefined,
+            user_type_text_async: undefined,
             enabled: false,
             equipment: [],
             city: undefined,
@@ -277,7 +278,7 @@
           },
           {
             type: 'autoComplete',
-            label: '业务类型',
+            label: '业务类型-静态',
             dataField: 'user_type_text',
             columnSpan: 1,
             elementProps: {
@@ -286,6 +287,20 @@
             },
             extendProps: {
               options: this.optionsMap['user_type_text'],
+              onSelect: this.handleUserTypeTextChange,
+            },
+          },
+          {
+            type: 'autoComplete',
+            label: '业务类型-动态',
+            dataField: 'user_type_text_async',
+            columnSpan: 1,
+            elementProps: {
+              triggerOnFocus: false,
+              valueKey: 'value',
+            },
+            extendProps: {
+              getSuggestOptions: this.getUserTypeSuggestOptions,
               onSelect: this.handleUserTypeTextChange,
             },
           },
@@ -391,6 +406,15 @@
       handleUserTypeTextChange(model, item) {
         console.log('handleUserTypeTextChange:', model, item);
         model.user_type = item.id;
+      },
+      async getUserTypeSuggestOptions(queryString) {
+        console.log('getUserTypeSuggestOptions', queryString);
+        const res = await Promise.resolve(this.optionsMap['user_type_text']);
+        return res.filter((option) => {
+          return (
+            option.value.toLowerCase().indexOf(queryString.toLowerCase()) > -1
+          );
+        });
       },
       handleCityLazyLoad(node, resolve) {
         console.log('handleCityLazyLoad,node:', node);
@@ -991,17 +1015,18 @@
 
 ### Field ExtendProps Options
 
-| 参数          | 说明                                                                                                     | 类型     | 可选值 | 默认值 |
-| ------------- | -------------------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
-| groupTitle    | 分组标题名称，只限于 `type` 为 `groupTitle`                                                              | string   | —      | —      |
-| groupCommands | 分组命令集合，只限于 `type` 为 `groupTitle`                                                              | array    | —      | —      |
-| componentKey  | 自定义组件名称，只限于 `type` 为 `custom`                                                                | string   | —      | —      |
-| options       | 选项数据源,用于`type` 为 `select multiSelect groupedSelect radioGroup checkboxGroup text status cascade` | array    | —      | []     |
-| currentField  | 当前字段，只限于 `type` 为 `complexInput`                                                                | object   | —      | —      |
-| appendField   | 附加字段，只限于 `type` 为 `complexInput`                                                                | object   | —      | —      |
-| onChange      | 值变动时回调事件                                                                                         | function | —      | —      |
-| onSelect      | 值变动时回调事件，只限于 `type` 为 `autoComplete`                                                        | function | —      | —      |
-| appendText    | 后缀文本，用于 `type` 为 `input、text`                                                                   | string   | —      | —      |
+| 参数              | 说明                                                                                                     | 类型                   | 可选值 | 默认值 |
+| ----------------- | -------------------------------------------------------------------------------------------------------- | ---------------------- | ------ | ------ |
+| groupTitle        | 分组标题名称，只限于 `type` 为 `groupTitle`                                                              | string                 | —      | —      |
+| groupCommands     | 分组命令集合，只限于 `type` 为 `groupTitle`                                                              | array                  | —      | —      |
+| componentKey      | 自定义组件名称，只限于 `type` 为 `custom`                                                                | string                 | —      | —      |
+| options           | 选项数据源,用于`type` 为 `select multiSelect groupedSelect radioGroup checkboxGroup text status cascade` | array                  | —      | []     |
+| currentField      | 当前字段，只限于 `type` 为 `complexInput`                                                                | object                 | —      | —      |
+| appendField       | 附加字段，只限于 `type` 为 `complexInput`                                                                | object                 | —      | —      |
+| onChange          | 值变动时回调事件                                                                                         | function(model)        | —      | —      |
+| onSelect          | 值变动时回调事件，只限于 `type` 为 `autoComplete`                                                        | function(model,item)   | —      | —      |
+| getSuggestOptions | 输入时查询匹配结果，只限于 `type` 为 `autoComplete`                                                      | function(queryString)) | —      | —      |
+| appendText        | 后缀文本，用于 `type` 为 `input、text`                                                                   | string                 | —      | —      |
 
 ### Field Type Options
 

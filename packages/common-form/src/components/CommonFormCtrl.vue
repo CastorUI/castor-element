@@ -487,7 +487,7 @@ export default {
           ? options.filter(this.createFilter(queryString))
           : options;
       } else if (this.extendProps.getSuggestOptions) {
-        results = await this.extendProps.getSuggestOptions(this.dataField);
+        results = await this.extendProps.getSuggestOptions(queryString);
       }
 
       // 调用 callback 返回建议列表的数据
