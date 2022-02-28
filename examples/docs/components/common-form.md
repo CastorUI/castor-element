@@ -282,13 +282,13 @@
             columnSpan: 1,
             elementProps: {
               triggerOnFocus: true,
+              valueKey: 'value',
             },
             extendProps: {
               options: this.optionsMap['user_type_text'],
               onSelect: this.handleUserTypeTextChange,
             },
           },
-
           {
             type: 'checkboxGroup',
             label: '主打产品',
