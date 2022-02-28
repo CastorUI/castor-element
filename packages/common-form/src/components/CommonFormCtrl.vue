@@ -293,7 +293,7 @@
       @change="extendProps.onChange && extendProps.onChange.call(this, model)"
     />
     <el-autocomplete
-      v-else-if="type === 'autocomplete'"
+      v-else-if="type === 'autoComplete'"
       v-model="model[dataField]"
       :disabled="disableValidator && disableValidator.call(this, model)"
       :fetch-suggestions="querySearch"
@@ -303,7 +303,10 @@
         style: 'width:100%;',
         ...elementProps,
       }"
-      @select="onChange && onChange.call(this, model)"
+      @select="
+        (item) =>
+          extendProps.onSelect && extendProps.onSelect.call(this, model, item)
+      "
     />
     <el-upload
       v-else-if="type === 'avatarUploader'"
@@ -474,13 +477,19 @@ export default {
     handleFilter(query, method, options) {
       method.call(this, query, options, this.model);
     },
-    querySearch(queryString, cb) {
-      var options = this.extendProps.options;
-      queryString = this.trim(queryString);
+    async querySearch(queryString, cb) {
+      queryString = this.trim(queryString || '');
       console.log('query', queryString);
-      var results = queryString
-        ? options.filter(this.createFilter(queryString))
-        : options;
+      var options = this.extendProps.options;
+      let results = [];
+      if (options) {
+        results = queryString
+          ? options.filter(this.createFilter(queryString))
+          : options;
+      } else if (this.extendProps.getSuggestOptions) {
+        results = await this.extendProps.getSuggestOptions(this.dataField);
+      }
+
       // 调用 callback 返回建议列表的数据
       cb(results);
     },

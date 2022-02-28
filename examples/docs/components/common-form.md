@@ -69,6 +69,16 @@
               icon: 'el-icon-s-opportunity',
             },
           ],
+          user_type_text: [
+            {
+              id: 1,
+              value: '供应商',
+            },
+            {
+              id: 2,
+              value: '经销商',
+            },
+          ],
           equipment: [
             {
               label: '双压记录仪',
@@ -120,6 +130,7 @@
             create_time: undefined,
             user: 1,
             user_type: 2,
+            user_type_text: undefined,
             enabled: false,
             equipment: [],
             city: undefined,
@@ -258,21 +269,26 @@
           {
             type: 'status',
             label: '用户类型',
-            dataField: 'user_type',
+            dataField: 'user',
             columnSpan: 1,
             extendProps: {
               options: this.optionsMap['user_type'],
             },
           },
           {
-            type: 'select',
+            type: 'autoComplete',
             label: '业务类型',
-            dataField: 'user_type',
+            dataField: 'user_type_text',
             columnSpan: 1,
+            elementProps: {
+              triggerOnFocus: true,
+            },
             extendProps: {
-              options: this.optionsMap['user_type'],
+              options: this.optionsMap['user_type_text'],
+              onSelect: this.handleUserTypeTextChange,
             },
           },
+
           {
             type: 'checkboxGroup',
             label: '主打产品',
@@ -371,6 +387,10 @@
       },
       handleUnStar(model) {
         console.log('handleUnStar,model:', model);
+      },
+      handleUserTypeTextChange(model, item) {
+        console.log('handleUserTypeTextChange:', model, item);
+        model.user_type = item.id;
       },
       handleCityLazyLoad(node, resolve) {
         console.log('handleCityLazyLoad,node:', node);
@@ -980,6 +1000,7 @@
 | currentField  | 当前字段，只限于 `type` 为 `complexInput`                                                                | object   | —      | —      |
 | appendField   | 附加字段，只限于 `type` 为 `complexInput`                                                                | object   | —      | —      |
 | onChange      | 值变动时回调事件                                                                                         | function | —      | —      |
+| onSelect      | 值变动时回调事件，只限于 `type` 为 `autoComplete`                                                        | function | —      | —      |
 | appendText    | 后缀文本，用于 `type` 为 `input、text`                                                                   | string   | —      | —      |
 
 ### Field Type Options
@@ -989,7 +1010,7 @@
 | text           | 只读文本                     |
 | status         | 只读状态文本（含颜色、图标） |
 | input          | 输入框                       |
-| autocomplete   | 自动填充输入框               |
+| autoComplete   | 自动填充输入框               |
 | inputNumber    | 数字输入框                   |
 | textArea       | 多行文本                     |
 | select         | 下拉框                       |
