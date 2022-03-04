@@ -3,7 +3,6 @@
     v-if="!visibleValidator || visibleValidator.call(this, model)"
     :prop="dataField"
     :style="{
-      minWidth: '300px',
       width: `calc(${width} - ${
         extendProps.marginLeft || (labelPosition === 'top' ? '16px' : '0px')
       })`,
