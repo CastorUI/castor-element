@@ -1,27 +1,33 @@
 <template>
   <el-form-item
-    v-if="!visibleValidator || visibleValidator.call(this,model)"
-    :label="label+' :'"
+    v-if="!visibleValidator || visibleValidator.call(this, model)"
+    :label="label + ' :'"
     :prop="dataField"
     :style="`float:left;width:${width};`"
     :class="{
-      'fixed-height-field': ['multiSelect'].indexOf(type) <= -1
+      'fixed-height-field': ['multiSelect'].indexOf(type) <= -1,
     }"
   >
-    <div :style="{display:'inline-block',width: (extendProps && extendProps.helpText)?'calc(100% - 16px)':'100%'}">
+    <div
+      :style="{
+        display: 'inline-block',
+        width:
+          extendProps && extendProps.helpText ? 'calc(100% - 16px)' : '100%',
+      }"
+    >
       <el-select
         v-if="type === 'select' || type === 'multiSelect'"
         v-model="model[dataField]"
-        :disabled="disableValidator && disableValidator.call(this,model)"
-        :multiple="type==='multiSelect'"
+        :disabled="disableValidator && disableValidator.call(this, model)"
+        :multiple="type === 'multiSelect'"
         v-bind="{
-          placeholder:`${label}`,
-          style:'width:100%;',
-          clearable:true,
+          placeholder: `${label}`,
+          style: 'width:100%;',
+          clearable: true,
           filterable: true,
-          ...elementProps
+          ...elementProps,
         }"
-        @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+        @change="extendProps.onChange && extendProps.onChange.call(this, model)"
       >
         <el-option
           v-for="option in extendProps.options"
@@ -30,10 +36,48 @@
           :value="option.value"
         />
       </el-select>
-      <el-date-picker
-        v-else-if="type==='dateTimeRange' || type==='dateRange' || type==='monthRange'|| type==='date' || type==='month'"
+      <el-radio-group
+        v-else-if="type === 'radioGroup'"
         v-model="model[dataField]"
-        :disabled="disableValidator && disableValidator.call(this,model)"
+        :disabled="disableValidator && disableValidator.call(this, model)"
+        v-bind="{
+          style: 'width:100%;',
+          ...elementProps,
+        }"
+        @change="extendProps.onChange && extendProps.onChange.call(this, model)"
+      >
+        <el-radio
+          v-for="option in extendProps.options"
+          :key="option.value"
+          :label="option.value"
+        >{{ option.label }}</el-radio>
+      </el-radio-group>
+      <el-radio-group
+        v-else-if="type === 'radioButtonGroup'"
+        v-model="model[dataField]"
+        :disabled="disableValidator && disableValidator.call(this, model)"
+        v-bind="{
+          style: 'width:100%;',
+          ...elementProps,
+        }"
+        @change="extendProps.onChange && extendProps.onChange.call(this, model)"
+      >
+        <el-radio-button
+          v-for="option in extendProps.options"
+          :key="option.value"
+          :label="option.value"
+        >{{ option.label }}</el-radio-button>
+      </el-radio-group>
+      <el-date-picker
+        v-else-if="
+          type === 'dateTimeRange' ||
+            type === 'dateRange' ||
+            type === 'monthRange' ||
+            type === 'date' ||
+            type === 'month'
+        "
+        v-model="model[dataField]"
+        :disabled="disableValidator && disableValidator.call(this, model)"
         :type="type.toLocaleLowerCase()"
         v-bind="{
           startPlaceholder: '开始日期',
@@ -42,24 +86,24 @@
           valueFormat: 'yyyy-MM-dd',
           pickerOptions: pickerOptions,
           style: 'width:100%;',
-          ...elementProps
+          ...elementProps,
         }"
-        @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+        @change="extendProps.onChange && extendProps.onChange.call(this, model)"
       />
       <el-switch
-        v-else-if="type==='switch'"
+        v-else-if="type === 'switch'"
         v-model="model[dataField]"
-        :disabled="disableValidator && disableValidator.call(this,model)"
-        v-bind="{style: 'width:40px;', ...elementProps}"
-        @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+        :disabled="disableValidator && disableValidator.call(this, model)"
+        v-bind="{ style: 'width:40px;', ...elementProps }"
+        @change="extendProps.onChange && extendProps.onChange.call(this, model)"
       />
       <el-checkbox-group
-        v-else-if="type==='checkboxGroup'"
+        v-else-if="type === 'checkboxGroup'"
         v-model="model[dataField]"
-        :disabled="disableValidator && disableValidator.call(this,model)"
+        :disabled="disableValidator && disableValidator.call(this, model)"
         class="query-item"
-        v-bind="{style: 'width:100%;', ...elementProps}"
-        @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+        v-bind="{ style: 'width:100%;', ...elementProps }"
+        @change="extendProps.onChange && extendProps.onChange.call(this, model)"
       >
         <el-checkbox
           v-for="option in extendProps.options"
@@ -69,27 +113,30 @@
         />
       </el-checkbox-group>
       <input-number-range
-        v-else-if="type==='inputNumberRange'"
+        v-else-if="type === 'inputNumberRange'"
         class="query-item"
-        style="width:100%;"
+        style="width: 100%"
         :model="model"
         :from-field="extendProps.fromField"
         :to-field="extendProps.toField"
-        :element-props="{...elementProps,disabled:disableValidator && disableValidator.call(this,model)}"
-        @change="extendProps.onChange && extendProps.onChange.call(this,model)"
+        :element-props="{
+          ...elementProps,
+          disabled: disableValidator && disableValidator.call(this, model),
+        }"
+        @change="extendProps.onChange && extendProps.onChange.call(this, model)"
       />
       <el-input
         v-else
         v-model="model[dataField]"
-        :disabled="disableValidator && disableValidator.call(this,model)"
+        :disabled="disableValidator && disableValidator.call(this, model)"
         class="filter-item filter-list query-item"
         v-bind="{
           placeholder: `${label}`,
           clearable: true,
-          ...elementProps
+          ...elementProps,
         }"
-        @change="extendProps.onChange && extendProps.onChange.call(this,model)"
-        @focus="extendProps.onFocus && extendProps.onFocus.call(this,model)"
+        @change="extendProps.onChange && extendProps.onChange.call(this, model)"
+        @focus="extendProps.onFocus && extendProps.onFocus.call(this, model)"
       />
     </div>
     <el-tooltip
@@ -103,7 +150,7 @@
       </div>
       <svg
         v-if="extendProps && extendProps.helpText"
-        style="display:inline-block;margin-left:2px;"
+        style="display: inline-block; margin-left: 2px"
         t="1609742301560"
         class="icon"
         viewBox="0 0 1024 1024"
@@ -129,47 +176,47 @@ export default {
   props: {
     type: {
       type: String,
-      default: undefined,
+      default: undefined
     },
     label: {
       type: String,
-      default: undefined,
+      default: undefined
     },
     model: {
       type: Object,
-      default: undefined,
+      default: undefined
     },
     dataField: {
       type: String,
-      default: undefined,
+      default: undefined
     },
     width: {
       type: String,
-      default: undefined,
+      default: undefined
     },
     disableValidator: {
       type: Function,
-      default: undefined,
+      default: undefined
     },
     visibleValidator: {
       type: Function,
-      default: () => true,
+      default: () => true
     },
     elementProps: {
       type: Object,
-      default: function () {
+      default: function() {
         return {
-          valueFormat: 'yyyy-MM-dd',
+          valueFormat: 'yyyy-MM-dd'
         };
-      },
+      }
     },
     extendProps: {
       type: Object,
-      default: () => {},
-    },
+      default: () => {}
+    }
   },
   computed: {
-    pickerOptions: function () {
+    pickerOptions: function() {
       if (this.type === 'dateTimeRange' || this.type === 'dateRange') {
         return (
           this.elementProps.pickerOptions || {
@@ -181,7 +228,7 @@ export default {
                   const start = new Date();
                   start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
                   picker.$emit('pick', [start, end]);
-                },
+                }
               },
               {
                 text: '最近一个月',
@@ -190,7 +237,7 @@ export default {
                   const start = new Date();
                   start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
                   picker.$emit('pick', [start, end]);
-                },
+                }
               },
               {
                 text: '最近三个月',
@@ -199,9 +246,9 @@ export default {
                   const start = new Date();
                   start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
                   picker.$emit('pick', [start, end]);
-                },
-              },
-            ],
+                }
+              }
+            ]
           }
         );
       } else if (this.type === 'monthRange') {
@@ -212,7 +259,7 @@ export default {
                 text: '本月',
                 onClick(picker) {
                   picker.$emit('pick', [new Date(), new Date()]);
-                },
+                }
               },
               {
                 text: '今年至今',
@@ -220,7 +267,7 @@ export default {
                   const end = new Date();
                   const start = new Date(new Date().getFullYear(), 0);
                   picker.$emit('pick', [start, end]);
-                },
+                }
               },
               {
                 text: '最近六个月',
@@ -229,15 +276,15 @@ export default {
                   const start = new Date();
                   start.setMonth(start.getMonth() - 6);
                   picker.$emit('pick', [start, end]);
-                },
-              },
-            ],
+                }
+              }
+            ]
           }
         );
       } else {
         return {};
       }
-    },
-  },
+    }
+  }
 };
 </script>

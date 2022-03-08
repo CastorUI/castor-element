@@ -63,6 +63,16 @@
               disabled: false,
             },
           ],
+          sex: [
+            {
+              value: 1,
+              label: '男',
+            },
+            {
+              value: 2,
+              label: '女',
+            },
+          ],
         },
         search: {
           formId: 'basicSearchForm',
@@ -70,6 +80,8 @@
           model: {
             code: '1001',
             en_name: undefined,
+            user_sex: 1,
+            author_sex: 2,
             valid_end_date: undefined,
             user_type: undefined,
             enabled: false,
@@ -120,6 +132,32 @@
             visibleValidator: () => true,
           },
           {
+            type: 'switch',
+            label: '是否启用',
+            dataField: 'enabled',
+            columnSpan: 1,
+          },
+          {
+            type: 'radioGroup',
+            label: '用户性别',
+            dataField: 'user_sex',
+            columnSpan: 1,
+            extendProps: {
+              options: this.optionsMap['sex'],
+              onChange: this.handleUserSexChange,
+            },
+          },
+          {
+            type: 'radioButtonGroup',
+            label: '作者性别',
+            dataField: 'author_sex',
+            columnSpan: 1,
+            extendProps: {
+              options: this.optionsMap['sex'],
+              onChange: this.handleAuthorSexChange,
+            },
+          },
+          {
             type: 'date',
             label: '有效期',
             dataField: 'valid_end_date',
@@ -132,21 +170,6 @@
             columnSpan: 1,
             extendProps: {
               options: this.optionsMap['user_role'],
-            },
-          },
-          {
-            type: 'switch',
-            label: '是否启用',
-            dataField: 'enabled',
-            columnSpan: 1,
-          },
-          {
-            type: 'select',
-            label: '业务类型',
-            dataField: 'user_type',
-            columnSpan: 1,
-            extendProps: {
-              options: this.optionsMap['user_type'],
             },
           },
           {
@@ -166,6 +189,15 @@
             extendProps: {
               fromField: 'from_num',
               toField: 'to_num',
+            },
+          },
+          {
+            type: 'select',
+            label: '业务类型',
+            dataField: 'user_type',
+            columnSpan: 1,
+            extendProps: {
+              options: this.optionsMap['user_type'],
             },
           },
           {
@@ -209,6 +241,12 @@
     methods: {
       handleCodeFocus(model) {
         console.log('handleCodeFocus', model);
+      },
+      handleUserSexChange(model) {
+        console.log('handleUserSexChange', model);
+      },
+      handleAuthorSexChange(model) {
+        console.log('handleAuthorSexChange', model);
       },
       handleFilter() {
         console.log('handleFilter', this.search.model);
@@ -425,25 +463,27 @@
 
 ### Field ExtendProps Options
 
-| 参数      | 说明                                                        | 类型     | 可选值 | 默认值 |
-| --------- | ----------------------------------------------------------- | -------- | ------ | ------ |
-| fromField | 最小值绑定字段，只限于 `type` 为`inputNumberRange`          | string   | —      | 0      |
-| toField   | 最大值绑定字段，只限于 `type` 为`inputNumberRange`          | string   | —      | 0      |
-| options   | 选项数据源,限于`type` 为 `select multiSelect checkboxGroup` | array    | -      | []     |
-| onChange  | 值变动时回调事件                                            | function | —      | —      |
+| 参数      | 说明                                                                                    | 类型     | 可选值 | 默认值 |
+| --------- | --------------------------------------------------------------------------------------- | -------- | ------ | ------ |
+| fromField | 最小值绑定字段，只限于 `type` 为`inputNumberRange`                                      | string   | —      | 0      |
+| toField   | 最大值绑定字段，只限于 `type` 为`inputNumberRange`                                      | string   | —      | 0      |
+| options   | 选项数据源,限于`type` 为 `select multiSelect checkboxGroup radioGroup radioButtonGroup` | array    | -      | []     |
+| onChange  | 值变动时回调事件                                                                        | function | —      | —      |
 
 ### Field Type Options
 
-| 类型             | 说明           |
-| ---------------- | -------------- |
-| input            | 输入框         |
-| select           | 下拉框         |
-| multiSelect      | 多选下拉框     |
-| date             | 日期选择器     |
-| month            | 月份选择器     |
-| dateRange        | 日期区间选择器 |
-| dateTimeRange    | 时间区间选择器 |
-| monthRange       | 月份区间选择器 |
-| switch           | 开关           |
-| checkboxGroup    | 复选框组       |
-| inputNumberRange | 数字区间选择器 |
+| 类型             | 说明                 |
+| ---------------- | -------------------- |
+| input            | 输入框               |
+| radioGroup       | 单选框组（默认样式） |
+| radioButtonGroup | 单选框组（按钮样式） |
+| select           | 下拉框               |
+| multiSelect      | 多选下拉框           |
+| date             | 日期选择器           |
+| month            | 月份选择器           |
+| dateRange        | 日期区间选择器       |
+| dateTimeRange    | 时间区间选择器       |
+| monthRange       | 月份区间选择器       |
+| switch           | 开关                 |
+| checkboxGroup    | 复选框组             |
+| inputNumberRange | 数字区间选择器       |
