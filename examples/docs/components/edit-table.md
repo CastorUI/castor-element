@@ -50,6 +50,20 @@
               label: '女',
             },
           ],
+          enabled: [
+            {
+              value: false,
+              label: '已禁用',
+              color: '#d0021b',
+              icon: 'el-icon-remove',
+            },
+            {
+              value: true,
+              label: '已启用',
+              color: '#4a90e2',
+              icon: 'el-icon-top',
+            },
+          ],
         },
         table: {
           dataList: [
@@ -62,6 +76,7 @@
               role: [1, 3],
               sex: 1,
               createTime: '2020-11-24 00:00:01',
+              enabled: false,
             },
             {
               id: 1002,
@@ -72,6 +87,7 @@
               role: [1, 3],
               sex: 0,
               createTime: '2020-11-24 00:00:01',
+              enabled: true,
             },
             {
               id: 1003,
@@ -82,6 +98,7 @@
               role: [1, 2, 3],
               sex: 0,
               createTime: '2020-11-24 00:00:01',
+              enabled: false,
             },
           ],
         },
@@ -101,21 +118,12 @@
           },
           {
             type: 'default',
-            label: '编号',
-            dataField: 'code',
-            editable: true,
-          },
-          {
-            type: 'default',
-            label: '英文名',
-            dataField: 'en_name',
-            editable: true,
-          },
-          {
-            type: 'default',
             label: '汉语名',
             dataField: 'cn_name',
             editable: true,
+            elementProps: {
+              minWidth: '100px',
+            },
           },
           {
             type: 'inputNumber',
@@ -123,15 +131,15 @@
             dataField: 'age',
             editable: true,
             elementProps: {
-              width: '140px',
+              minWidth: '130px',
             },
           },
           {
             type: 'select',
-            label: '角色',
+            label: '性别',
             dataField: 'sex',
             elementProps: {
-              width: '60px',
+              minWidth: '80px',
             },
             extendProps: {
               options: this.optionsMap['sex'],
@@ -144,7 +152,7 @@
             editable: true,
             elementProps: {
               multiple: true,
-              width: '120px',
+              minWidth: '160px',
             },
             extendProps: {
               options: this.optionsMap['role'],
@@ -156,9 +164,22 @@
             dataField: 'createTime',
             editable: true,
             elementProps: {
-              width: '220px',
+              minWidth: '210px',
               valueFormat: 'yyyy-MM-dd HH:mm:ss',
               placeholder: '创建时间',
+            },
+          },
+          {
+            type: 'switch',
+            label: '启用状态',
+            dataField: 'enabled',
+            editable: true,
+            elementProps: {
+              minWidth: '90px',
+              align:'center'
+            },
+            extendProps: {
+              options: this.optionsMap['enabled'],
             },
           },
         ];
