@@ -293,8 +293,8 @@ export default {
     switchFocus: {
       inserted: function(el, binding) {
         console.log('switchFocus', el, binding);
-        if (binding.value) {
-          el.children[1].children[0].focus();
+        if (binding.value !== null && binding.value !== undefined) {
+          el.children[0].focus();
         }
       }
     }

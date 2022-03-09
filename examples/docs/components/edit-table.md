@@ -98,7 +98,6 @@
               role: [1, 2, 3],
               sex: 0,
               createTime: '2020-11-24 00:00:01',
-              enabled: false,
             },
           ],
         },
@@ -123,6 +122,9 @@
             editable: true,
             elementProps: {
               minWidth: '100px',
+            },
+            extendProps: {
+              autoFocus: true,
             },
           },
           {
@@ -176,7 +178,7 @@
             editable: true,
             elementProps: {
               minWidth: '90px',
-              align:'center'
+              align: 'center',
             },
             extendProps: {
               options: this.optionsMap['enabled'],
