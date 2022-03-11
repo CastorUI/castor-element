@@ -306,6 +306,10 @@
         (item) =>
           extendProps.onSelect && extendProps.onSelect.call(this, model, item)
       "
+      @clear="
+        (item) =>
+          extendProps.onClear && extendProps.onClear.call(this, model, item)
+      "
     />
     <el-upload
       v-else-if="type === 'avatarUploader'"
