@@ -307,9 +307,9 @@
           extendProps.onSelect && extendProps.onSelect.call(this, model, item)
       "
       @clear="
-        (item) =>
-          extendProps.onClear && extendProps.onClear.call(this, model, item)
+        () => extendProps.onClear && extendProps.onClear.call(this, model)
       "
+      @blur="handleAutoCompleteBlur"
     />
     <el-upload
       v-else-if="type === 'avatarUploader'"
@@ -342,6 +342,51 @@
         {{ extendProps.appendText }}
       </template>
     </el-input>
+    <template
+      v-if="type === 'autoComplete' && model[dataField] && autoCompleteNoData"
+    >
+      <div
+        role="region"
+        class="el-autocomplete-suggestion el-popper"
+        style="
+          transform-origin: center top;
+          z-index: 2084;
+          width: 100%;
+          position: absolute;
+        "
+        x-placement="bottom-start"
+      >
+        <div class="el-scrollbar">
+          <div
+            class="el-autocomplete-suggestion__wrap el-scrollbar__wrap"
+            style="margin-bottom: -17px; margin-right: -17px"
+          >
+            <ul
+              id="el-autocomplete-5354"
+              class="el-scrollbar__view el-autocomplete-suggestion__list"
+              role="listbox"
+            >
+              <li id="el-autocomplete-5354-item-0" role="option" class="">
+                没有匹配的数据
+              </li>
+            </ul>
+          </div>
+          <div class="el-scrollbar__bar is-horizontal">
+            <div
+              class="el-scrollbar__thumb"
+              style="transform: translateX(0%)"
+            />
+          </div>
+          <div class="el-scrollbar__bar is-vertical">
+            <div
+              class="el-scrollbar__thumb"
+              style="transform: translateY(0%)"
+            />
+          </div>
+        </div>
+        <div x-arrow="" class="popper__arrow" style="left: 35px" />
+      </div>
+    </template>
   </el-form-item>
 </template>
 <script>
@@ -401,6 +446,11 @@ export default {
       type: Function,
       default: undefined
     }
+  },
+  data() {
+    return {
+      autoCompleteNoData: false
+    };
   },
   computed: {
     pickerOptions() {
@@ -492,6 +542,7 @@ export default {
       } else if (this.extendProps.getSuggestOptions) {
         results = await this.extendProps.getSuggestOptions(queryString);
       }
+      this.autoCompleteNoData = (results || []).length === 0;
 
       // 调用 callback 返回建议列表的数据
       cb(results);
@@ -505,6 +556,13 @@ export default {
     },
     trim(str) {
       return str.replace(/^(\s|\u00A0)+/, '').replace(/(\s|\u00A0)+$/, '');
+    },
+    handleAutoCompleteBlur(event) {
+      console.log('handleAutoCompleteBlur', event);
+      if (this.extendProps.onBlur) {
+        this.extendProps.onBlur.call(this, this.model, this.autoCompleteNoData);
+      }
+      this.autoCompleteNoData = false;
     },
     handleGroupCommand(item, model) {
       console.log('handleGroupCommand', item, model);
