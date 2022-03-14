@@ -357,32 +357,7 @@
         x-placement="bottom-start"
       >
         <div class="el-scrollbar">
-          <div
-            class="el-autocomplete-suggestion__wrap el-scrollbar__wrap"
-            style="margin-bottom: -17px; margin-right: -17px"
-          >
-            <ul
-              id="el-autocomplete-5354"
-              class="el-scrollbar__view el-autocomplete-suggestion__list"
-              role="listbox"
-            >
-              <li id="el-autocomplete-5354-item-0" role="option" class="">
-                没有匹配的数据
-              </li>
-            </ul>
-          </div>
-          <div class="el-scrollbar__bar is-horizontal">
-            <div
-              class="el-scrollbar__thumb"
-              style="transform: translateX(0%)"
-            />
-          </div>
-          <div class="el-scrollbar__bar is-vertical">
-            <div
-              class="el-scrollbar__thumb"
-              style="transform: translateY(0%)"
-            />
-          </div>
+          <div style="margin-left: 16px; opacity: 0.65">没有匹配的数据</div>
         </div>
         <div x-arrow="" class="popper__arrow" style="left: 35px" />
       </div>
