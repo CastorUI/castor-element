@@ -4,66 +4,68 @@
       <div class="table-title">
         {{ title }}
       </div>
-      <div class="table-setting-commands">
-        <el-button
-          v-for="(item, index) of settingCommands"
-          :key="index"
-          v-bind="{ type: 'text', ...item.elementProps }"
-          @click="$emit(item.command)"
-        >
-          {{ item.text }}
-        </el-button>
-        <el-button
-          v-if="extendProps.showRefresh !== false"
-          icon="el-icon-refresh-right"
-          v-bind="{ type: 'text' }"
-          @click="getList"
-        >
-          刷新
-        </el-button>
-        <column-config
-          v-if="extendProps.showColumnConfig !== false"
-          :origin-columns="originColumns"
-          :default-config-columns="configColumns"
-          :set-config-columns.sync="configColumns"
-        />
-      </div>
-      <el-button-group
-        v-if="customCommands && customCommands.length"
-        class="table-custom-commands divider"
-      >
-        <el-button
-          v-for="(item, index) of customCommands"
-          :key="index"
-          :disabled="
-            item.disableValidator &&
-              item.disableValidator.call(this, multipleSelection)
+      <div class="table-commands">
+        <div
+          v-if="
+            addCommand &&
+              addCommand.text &&
+              (!addCommand.visibleValidator ||
+                addCommand.visibleValidator.call(this))
           "
-          v-bind="item.elementProps"
-          @click="$emit(item.command, multipleSelection)"
+          class="table-add-command divider"
         >
-          {{ item.text }}
-        </el-button>
-      </el-button-group>
-      <div
-        v-if="
-          addCommand &&
-            addCommand.text &&
-            (!addCommand.visibleValidator ||
-              addCommand.visibleValidator.call(this))
-        "
-        class="table-add-command divider"
-      >
-        <el-button
-          :disabled="
-            addCommand.disableValidator &&
-              addCommand.disableValidator.call(this)
-          "
-          v-bind="{ icon: 'el-icon-plus', ...addCommand.elementProps }"
-          @click="$emit(addCommand.command)"
+          <el-button
+            :disabled="
+              addCommand.disableValidator &&
+                addCommand.disableValidator.call(this)
+            "
+            v-bind="{ icon: 'el-icon-plus', ...addCommand.elementProps }"
+            @click="$emit(addCommand.command)"
+          >
+            {{ addCommand.text }}
+          </el-button>
+        </div>
+        <el-button-group
+          v-if="customCommands && customCommands.length"
+          class="table-custom-commands divider"
         >
-          {{ addCommand.text }}
-        </el-button>
+          <el-button
+            v-for="(item, index) of customCommands"
+            :key="index"
+            :disabled="
+              item.disableValidator &&
+                item.disableValidator.call(this, multipleSelection)
+            "
+            v-bind="item.elementProps"
+            @click="$emit(item.command, multipleSelection)"
+          >
+            {{ item.text }}
+          </el-button>
+        </el-button-group>
+        <div class="table-setting-commands">
+          <el-button
+            v-for="(item, index) of settingCommands"
+            :key="index"
+            v-bind="{ type: 'text', ...item.elementProps }"
+            @click="$emit(item.command)"
+          >
+            {{ item.text }}
+          </el-button>
+          <el-button
+            v-if="extendProps.showRefresh !== false"
+            icon="el-icon-refresh-right"
+            v-bind="{ type: 'text' }"
+            @click="getList"
+          >
+            刷新
+          </el-button>
+          <column-config
+            v-if="extendProps.showColumnConfig !== false"
+            :origin-columns="originColumns"
+            :default-config-columns="configColumns"
+            :set-config-columns.sync="configColumns"
+          />
+        </div>
       </div>
     </div>
     <div class="table-content">
@@ -425,34 +427,35 @@ export default {
 .common-table-container {
   overflow: hidden;
   .table-append-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 12px;
-    overflow: hidden;
     .table-title {
-      float: left;
       font-size: 16px;
       font-weight: bold;
     }
-    .table-add-command {
-      float: right;
-      button {
-        font-size: 13px;
+    .table-commands {
+      display: flex;
+      .table-add-command {
+        button {
+          font-size: 13px;
+        }
       }
-    }
-    .table-custom-commands,
-    .table-setting-commands {
-      float: right;
-      margin-left: 16px;
-      button {
-        font-size: 13px;
+      .table-custom-commands,
+      .table-setting-commands {
+        margin-left: 16px;
+        button {
+          font-size: 13px;
+        }
       }
-    }
-
-    .divider {
-      padding-right: 16px;
-      border-right: 1px solid rgba(0, 0, 0, 0.06);
-    }
-    .el-button [class*='el-icon-'] + span {
-      margin-left: 0;
+      .divider {
+        padding-right: 16px;
+        border-right: 1px solid rgba(0, 0, 0, 0.06);
+      }
+      .el-button [class*='el-icon-'] + span {
+        margin-left: 0;
+      }
     }
   }
 
