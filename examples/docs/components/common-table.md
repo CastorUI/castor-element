@@ -11,9 +11,10 @@
 ```html
 <template>
   <ca-common-table
+    table-tag="demo-basic"
     :dataSource="table.dataList"
     :columns="tableColumns"
-    table-tag="demo-basic"
+    :pagination="table.pagination"
   />
 </template>
 
@@ -40,6 +41,11 @@
               name: '上海燃气三期工程',
             },
           ],
+          pagination: {
+            pageIndex: 1,
+            pageSize: 10,
+            total: 3,
+          },
         },
       };
     },
@@ -100,9 +106,9 @@
 ```html
 <template>
   <ca-common-table
+    table-tag="demo-index"
     :dataSource="table.dataList"
     :columns="tableColumns"
-    table-tag="demo-index"
     :pagination="table.pagination"
   />
 </template>
@@ -185,9 +191,10 @@
 ```html
 <template>
   <ca-common-table
+    table-tag="demo-link"
     :dataSource="table.dataList"
     :columns="tableColumns"
-    table-tag="demo-link"
+    :pagination="table.pagination"
     @handleLink="handleLink"
   />
 </template>
@@ -214,6 +221,11 @@
               name: '上海燃气三期工程',
             },
           ],
+          pagination: {
+            pageIndex: 1,
+            pageSize: 10,
+            total: 3,
+          },
         },
       };
     },
@@ -267,9 +279,10 @@
 ```html
 <template>
   <ca-common-table
+    table-tag="demo-keyToValue"
     :dataSource="table.dataList"
     :columns="tableColumns"
-    table-tag="demo-keyToValue"
+    :pagination="table.pagination"
   />
 </template>
 
@@ -282,6 +295,11 @@
         },
         table: {
           dataList: [],
+          pagination: {
+            pageIndex: 1,
+            pageSize: 10,
+            total: 0,
+          },
         },
       };
     },
@@ -384,9 +402,10 @@
 ```html
 <template>
   <ca-common-table
+    table-tag="demo-multiKeyToValue"
     :dataSource="table.dataList"
     :columns="tableColumns"
-    table-tag="demo-multiKeyToValue"
+    :pagination="table.pagination"
   />
 </template>
 
@@ -431,6 +450,11 @@
               type: [1, 2, 3],
             },
           ],
+          pagination: {
+            pageIndex: 1,
+            pageSize: 10,
+            total: 3,
+          },
         },
       };
     },
@@ -485,9 +509,10 @@
 ```html
 <template>
   <ca-common-table
+    table-tag="demo-status"
     :dataSource="table.dataList"
     :columns="tableColumns"
-    table-tag="demo-status"
+    :pagination="table.pagination"
   />
 </template>
 
@@ -544,6 +569,11 @@
               type: 3,
             },
           ],
+          pagination: {
+            pageIndex: 1,
+            pageSize: 10,
+            total: 3,
+          },
         },
       };
     },
@@ -598,9 +628,10 @@
 ```html
 <template>
   <ca-common-table
+    table-tag="demo-commands"
     :dataSource="table.dataList"
     :columns="tableColumns"
-    table-tag="demo-commands"
+    :pagination="table.pagination"
     @handleEdit="handleEdit"
     @handleDelete="handleDelete"
   />
@@ -628,6 +659,11 @@
               name: '上海燃气三期工程',
             },
           ],
+          pagination: {
+            pageIndex: 1,
+            pageSize: 10,
+            total: 3,
+          },
         },
       };
     },
@@ -703,14 +739,15 @@
 
 展示操作列的用法。
 
-:::demo 在`tableColumns`中添加`type`为`commands`的对象。
+:::demo 在`tableColumns`中添加`type`为`commands`的数组,在每个 command 对象中通过`disableValidator`和`visibleValidator`进行状态控制
 
 ```html
 <template>
   <ca-common-table
+    table-tag="demo-command-staus-validator"
     :dataSource="table.dataList"
     :columns="tableColumns"
-    table-tag="demo-commands"
+    :pagination="table.pagination"
     @handleEdit="handleEdit"
     @handleDelete="handleDelete"
     @row-click="handleRowClick"
@@ -739,6 +776,11 @@
               name: '上海燃气三期工程',
             },
           ],
+          pagination: {
+            pageIndex: 1,
+            pageSize: 10,
+            total: 3,
+          },
         },
       };
     },
@@ -1073,10 +1115,11 @@
 ```html
 <template>
   <ca-common-table
+    table-tag="demo-add"
     :dataSource="table.dataList"
     :columns="tableColumns"
     :addCommand="table.addCommand"
-    table-tag="demo-add"
+    :pagination="table.pagination"
     @handleAdd="handleAdd"
   />
 </template>
@@ -1103,6 +1146,11 @@
               name: '上海燃气三期工程',
             },
           ],
+          pagination: {
+            pageIndex: 1,
+            pageSize: 10,
+            total: 3,
+          },
           addCommand: {
             text: '新增任务',
             command: 'handleAdd',
@@ -1159,13 +1207,14 @@
 ```html
 <template>
   <ca-common-table
+    table-tag="demo-custom"
     :title="table.title"
     :dataSource="table.dataList"
     :columns="tableColumns"
+    :pagination="table.pagination"
     :customCommands="table.customCommands"
     :settingCommands="table.settingCommands"
     :addCommand="table.addCommand"
-    table-tag="demo-custom"
     @handleAdd="handleAdd"
     @handleStar="handleStar"
     @handleUnstar="handleUnstar"
@@ -1195,6 +1244,11 @@
               name: '上海燃气三期工程',
             },
           ],
+          pagination: {
+            pageIndex: 1,
+            pageSize: 10,
+            total: 3,
+          },
           customCommands: [
             {
               text: '关注',
@@ -1290,6 +1344,110 @@
 
 :::
 
+### 提示信息
+
+展示表格的提示信息。
+
+:::demo `ca-common-table` 使用 `Tips` 对象来表示提示信息。
+
+```html
+<template>
+  <ca-common-table
+    table-tag="demo-tips"
+    :tips="table.tips"
+    :dataSource="table.dataList"
+    :columns="tableColumns"
+    :pagination="table.pagination"
+  />
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        table: {
+          tips: {
+            title: '这是表格的提示信息',
+            elementProps: {
+              type: 'success',
+              center: false,
+              showIcon: true,
+            },
+          },
+          dataList: [
+            {
+              id: 1001,
+              code: 'A1',
+              name: '上海燃气一期工程',
+            },
+            {
+              id: 1002,
+              code: 'A2',
+              name:
+                '上海燃气二期工程 it will work no matter where your popper and reference elements live, even in the most complex scenarios like nested scrolling containers or alternative offsetParent contexts. it will work no matter where your popper and reference elements live, even in the most complex scenarios like nested scrolling containers or alternative offsetParent contexts.',
+            },
+            {
+              id: 1003,
+              code: 'A3',
+              name: '上海燃气三期工程',
+            },
+          ],
+          pagination: {
+            pageIndex: 1,
+            pageSize: 10,
+            total: 3,
+          },
+        },
+      };
+    },
+    computed: {
+      tableColumns() {
+        return [
+          {
+            type: 'selection',
+            label: '',
+            dataField: 'selection',
+            elementProps: {
+              width: '40px',
+              fixed: 'left',
+            },
+          },
+          {
+            type: 'default',
+            label: 'ID',
+            dataField: 'id',
+          },
+          {
+            type: 'default',
+            label: '编号',
+            dataField: 'code',
+          },
+          {
+            type: 'default',
+            label: '测试表格列',
+            dataField: 'name',
+            elementProps: {
+              minWidth: 2,
+            },
+          },
+          {
+            type: 'default',
+            label: '测试表格列3',
+            dataField: 'name2',
+            elementProps: {
+              minWidth: 2,
+            },
+          },
+        ];
+      },
+    },
+    methods: {},
+  };
+</script>
+```
+
+:::
+
 ### ElementUI 属性
 
 展示 ElementUI 属性的用法。
@@ -1299,9 +1457,10 @@
 ```html
 <template>
   <ca-common-table
+    table-tag="demo-elementPros"
     :dataSource="table.dataList"
     :columns="tableColumns"
-    table-tag="demo-elementPros"
+    :pagination="table.pagination"
     :elementProps="table.elementProps"
   />
 </template>
@@ -1328,6 +1487,11 @@
               name: '上海燃气三期工程',
             },
           ],
+          pagination: {
+            pageIndex: 1,
+            pageSize: 10,
+            total: 3,
+          },
           elementProps: {
             border: false,
             stripe: true,

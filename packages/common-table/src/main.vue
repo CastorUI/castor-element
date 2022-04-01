@@ -78,6 +78,12 @@
         </div>
       </div>
     </div>
+    <el-alert
+      v-if="tips"
+      class="table-tips"
+      :title="tips.title"
+      v-bind="tips.elementProps"
+    />
     <div class="table-content">
       <el-table
         v-if="hackReset"
@@ -171,23 +177,21 @@ export default {
       type: String,
       default: ''
     },
+    tips: {
+      type: Object,
+      default: () => {}
+    },
     dataSource: {
       type: Array,
-      default: function() {
-        return [];
-      }
+      default: () => []
     },
     columns: {
       type: Array,
-      default: function() {
-        return [];
-      }
+      default: () => []
     },
     pagination: {
       type: Object,
-      default: function() {
-        return {};
-      }
+      default: () => {}
     },
     addCommand: {
       type: Object,
@@ -207,9 +211,7 @@ export default {
     },
     customComponents: {
       type: Object,
-      default: function() {
-        return {};
-      }
+      default: () => {}
     },
     tableTag: {
       type: String,
@@ -217,9 +219,7 @@ export default {
     },
     elementProps: {
       type: Object,
-      default: function() {
-        return {};
-      }
+      default: () => {}
     },
     extendProps: {
       type: Object,
@@ -470,7 +470,9 @@ export default {
       }
     }
   }
-
+  .table-tips {
+    margin-bottom: 6px;
+  }
   .table-content {
     overflow: auto;
     width: 100%;
