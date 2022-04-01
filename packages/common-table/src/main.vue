@@ -1,6 +1,16 @@
 <template>
   <div class="common-table-container">
-    <div class="table-append-header">
+    <div
+      class="table-append-header"
+      :class="{
+        'custom-commands':
+          (addCommand &&
+            addCommand.text &&
+            (!addCommand.visibleValidator ||
+              addCommand.visibleValidator.call(this))) ||
+          (customCommands && customCommands.length),
+      }"
+    >
       <div class="table-title">
         {{ title }}
       </div>
@@ -430,7 +440,9 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 12px;
+    &.custom-commands {
+      margin-bottom: 12px;
+    }
     .table-title {
       font-size: 16px;
       font-weight: bold;
