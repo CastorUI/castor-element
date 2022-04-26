@@ -166,6 +166,36 @@
       :disabled="disableValidator && disableValidator.call(this, model)"
       @change="extendProps.onChange && extendProps.onChange.call(this, model)"
     />
+    <el-time-select
+      v-else-if="['time'].indexOf(type) > -1"
+      v-model="model[dataField]"
+      :disabled="disableValidator && disableValidator.call(this, model)"
+      :type="type.toLocaleLowerCase()"
+      v-bind="{
+        placeholder: '请选择',
+        valueFormat: 'HH:mm:ss',
+        style: 'width:100%;',
+        ...elementProps,
+      }"
+      @change="extendProps.onChange && extendProps.onChange.call(this, model)"
+    />
+    <el-time-picker
+      v-else-if="['timeRange'].indexOf(type) > -1"
+      v-model="model[dataField]"
+      :is-range="true"
+      :disabled="disableValidator && disableValidator.call(this, model)"
+      :type="type.toLocaleLowerCase()"
+      v-bind="{
+        placeholder: '请选择',
+        startPlaceholder: '开始时间',
+        rangeSeparator: '~',
+        endPlaceholder: '结束时间',
+        valueFormat: 'HH:mm:ss',
+        style: 'width:100%;',
+        ...elementProps,
+      }"
+      @change="extendProps.onChange && extendProps.onChange.call(this, model)"
+    />
     <el-date-picker
       v-else-if="
         [

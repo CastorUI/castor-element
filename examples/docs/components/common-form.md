@@ -141,6 +141,8 @@
             remarks: undefined,
             user_avatar:
               'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+            test_time: undefined,
+            test_time_range: undefined,
           },
           commands: [
             {
@@ -386,6 +388,26 @@
                 options: this.optionsMap['user_type'],
               },
             },
+          },
+          {
+            type: 'time',
+            label: '测试时间',
+            dataField: 'test_time',
+            columnSpan: 1,
+            elementProps: {
+              valueFormat: 'HH:mm',
+              pickerOptions: {
+                start: '08:30',
+                step: '00:15',
+                end: '18:30',
+              },
+            },
+          },
+          {
+            type: 'timeRange',
+            label: '测试时间区间',
+            dataField: 'test_time_range',
+            columnSpan: 1,
           },
         ];
       },
@@ -1045,10 +1067,12 @@
 | switch         | 开关                         |
 | radioGroup     | 单选框组                     |
 | checkboxGroup  | 复选框组                     |
+| time           | 时间选择器                   |
+| timeRange      | 时间区间选择器               |
 | date           | 日期选择器                   |
 | dateRange      | 日期区间选择器               |
 | datetime       | 日期时间选择器               |
-| dateTimeRange  | 时间区间选择器               |
+| dateTimeRange  | 日期+时间区间选择器               |
 | hr             | 分行                         |
 | groupTitle     | 组标题                       |
 | complexInput   | 组合输入框                   |
