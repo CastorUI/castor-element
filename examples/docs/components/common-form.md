@@ -395,7 +395,6 @@
             dataField: 'test_time',
             columnSpan: 1,
             elementProps: {
-              valueFormat: 'HH:mm',
               pickerOptions: {
                 start: '08:30',
                 step: '00:15',

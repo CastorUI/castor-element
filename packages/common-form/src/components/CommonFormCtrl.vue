@@ -170,10 +170,8 @@
       v-else-if="['time'].indexOf(type) > -1"
       v-model="model[dataField]"
       :disabled="disableValidator && disableValidator.call(this, model)"
-      :type="type.toLocaleLowerCase()"
       v-bind="{
         placeholder: '请选择',
-        valueFormat: 'HH:mm:ss',
         style: 'width:100%;',
         ...elementProps,
       }"
@@ -184,7 +182,6 @@
       v-model="model[dataField]"
       :is-range="true"
       :disabled="disableValidator && disableValidator.call(this, model)"
-      :type="type.toLocaleLowerCase()"
       v-bind="{
         placeholder: '请选择',
         startPlaceholder: '开始时间',
