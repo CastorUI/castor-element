@@ -166,8 +166,19 @@
       :disabled="disableValidator && disableValidator.call(this, model)"
       @change="extendProps.onChange && extendProps.onChange.call(this, model)"
     />
-    <el-time-select
+    <el-time-picker
       v-else-if="['time'].indexOf(type) > -1"
+      v-model="model[dataField]"
+      :disabled="disableValidator && disableValidator.call(this, model)"
+      v-bind="{
+        placeholder: '请选择',
+        style: 'width:100%;',
+        ...elementProps,
+      }"
+      @change="extendProps.onChange && extendProps.onChange.call(this, model)"
+    />
+    <el-time-select
+      v-else-if="['timeSelect'].indexOf(type) > -1"
       v-model="model[dataField]"
       :disabled="disableValidator && disableValidator.call(this, model)"
       v-bind="{
