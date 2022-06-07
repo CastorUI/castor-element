@@ -17,6 +17,7 @@
     :elementProps="search.elementProps"
     @handleFilter="handleFilter"
     @handleReset="handleReset"
+    @handleUserTypeAutoSelect="handleUserTypeAutoSelect"
   />
 </template>
 
@@ -84,6 +85,7 @@
             author_sex: 2,
             valid_end_date: undefined,
             user_type: undefined,
+            user_type_auto: undefined,
             enabled: false,
             equipment: [],
             from_num: 200,
@@ -201,6 +203,18 @@
             },
           },
           {
+            type: 'autoComplete',
+            label: '业务类型Auto',
+            dataField: 'user_type_auto',
+            columnSpan: 1,
+            elementProps: {
+              fetchSuggestions: this.getUserTypesAuto,
+            },
+            extendProps: {
+              onSelect: this.handleUserTypeAutoSelect,
+            },
+          },
+          {
             type: 'dateRange',
             label: '创建日期区间',
             dataField: 'create_date_range',
@@ -253,6 +267,27 @@
       },
       handleReset() {
         this.$refs['searchForm'].$refs['form'].resetFields();
+      },
+      getUserTypesAuto(queryString, cb) {
+        console.log('getUserTypesAuto', queryString);
+        setTimeout(() => {
+          const res = this.optionsMap['user_type'].map((r) => {
+            return {
+              value: r.label,
+              id: r.value,
+            };
+          });
+          const finalRes = queryString
+            ? res.filter(
+                (r) =>
+                  r.value.toLowerCase().indexOf(queryString.toLowerCase()) > -1
+              )
+            : res;
+          cb(finalRes);
+        }, 500);
+      },
+      handleUserTypeAutoSelect(item, model) {
+        console.log('handleUserTypeAutoSelect', item, model);
       },
     },
   };
@@ -475,6 +510,7 @@
 | 类型             | 说明                 |
 | ---------------- | -------------------- |
 | input            | 输入框               |
+| autoComplete     | 自动完成输入框       |
 | radioGroup       | 单选框组（默认样式） |
 | radioButtonGroup | 单选框组（按钮样式） |
 | select           | 下拉框               |

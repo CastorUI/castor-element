@@ -36,6 +36,21 @@
           :value="option.value"
         />
       </el-select>
+      <el-autocomplete
+        v-else-if="type === 'autoComplete'"
+        v-model="model[dataField]"
+        :disabled="disableValidator && disableValidator.call(this, model)"
+        v-bind="{
+          placeholder: `${label}`,
+          style: 'width:100%;',
+          ...elementProps,
+        }"
+        @change="extendProps.onChange && extendProps.onChange.call(this, model)"
+        @select="
+          (item) =>
+            extendProps.onSelect && extendProps.onSelect.call(this, item, model)
+        "
+      />
       <el-radio-group
         v-else-if="type === 'radioGroup'"
         v-model="model[dataField]"
