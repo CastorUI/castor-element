@@ -55,6 +55,16 @@
               label: '李四',
             },
           ],
+          sex: [
+            {
+              value: 1,
+              label: '男',
+            },
+            {
+              value: 2,
+              label: '女',
+            },
+          ],
           user_type: [
             {
               value: 1,
@@ -126,6 +136,7 @@
             code: '1001',
             en_name: undefined,
             cn_name: undefined,
+            sex: 2,
             valid_end_date: undefined,
             create_time: undefined,
             user: 1,
@@ -216,6 +227,15 @@
             label: '汉语名',
             dataField: 'cn_name',
             columnSpan: 1,
+          },
+          {
+            type: 'radioGroup',
+            label: '性别',
+            dataField: 'sex',
+            columnSpan: 1,
+            extendProps: {
+              options: this.optionsMap['sex'],
+            },
           },
           {
             type: 'date',
@@ -1079,7 +1099,7 @@
 | radioGroup     | 单选框组                     |
 | checkboxGroup  | 复选框组                     |
 | time           | 任意时间选择器               |
-| timeSelect      | 固定区间选择器               |
+| timeSelect     | 固定区间选择器               |
 | timeRange      | 时间区间选择器               |
 | date           | 日期选择器                   |
 | dateRange      | 日期区间选择器               |
