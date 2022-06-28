@@ -10,12 +10,14 @@
 <template>
   <ca-common-query
     :ref="search.formId"
+    :form-id="search.formId"
     :model="search.model"
     :commands="search.commands"
     :fields="searchFields"
-    :extendProps="search.extendProps"
+    :elementProps="search.elementProps"
     @handleFilter="handleFilter"
     @handleReset="handleReset"
+    @handleUserTypeAutoSelect="handleUserTypeAutoSelect"
   />
 </template>
 
@@ -62,15 +64,28 @@
               disabled: false,
             },
           ],
+          sex: [
+            {
+              value: 1,
+              label: '男',
+            },
+            {
+              value: 2,
+              label: '女',
+            },
+          ],
         },
         search: {
-          formId: 'searchForm',
+          formId: 'basicSearchForm',
           operateType: 'add',
           model: {
             code: '1001',
             en_name: undefined,
+            user_sex: 1,
+            author_sex: 2,
             valid_end_date: undefined,
             user_type: undefined,
+            user_type_auto: undefined,
             enabled: false,
             equipment: [],
             from_num: 200,
@@ -91,7 +106,7 @@
               icon: 'el-icon-refresh',
             },
           ],
-          extendProps: {
+          elementProps: {
             labelWidth: '120px',
           },
         },
@@ -105,12 +120,44 @@
             label: '编号',
             dataField: 'code',
             columnSpan: 1,
+            extendProps: {
+              helpText: '请输入',
+              onFocus: this.handleCodeFocus,
+            },
           },
           {
             type: 'input',
             label: '英文名',
             dataField: 'en_name',
             columnSpan: 1,
+            disableValidator: () => true,
+            visibleValidator: () => true,
+          },
+          {
+            type: 'switch',
+            label: '是否启用',
+            dataField: 'enabled',
+            columnSpan: 1,
+          },
+          {
+            type: 'radioGroup',
+            label: '用户性别',
+            dataField: 'user_sex',
+            columnSpan: 1,
+            extendProps: {
+              options: this.optionsMap['sex'],
+              onChange: this.handleUserSexChange,
+            },
+          },
+          {
+            type: 'radioButtonGroup',
+            label: '作者性别',
+            dataField: 'author_sex',
+            columnSpan: 1,
+            extendProps: {
+              options: this.optionsMap['sex'],
+              onChange: this.handleAuthorSexChange,
+            },
           },
           {
             type: 'date',
@@ -123,34 +170,48 @@
             label: '角色',
             dataField: 'user_role',
             columnSpan: 1,
-            options: this.optionsMap['user_role'],
+            extendProps: {
+              options: this.optionsMap['user_role'],
+            },
           },
           {
-            type: 'switch',
-            label: '是否启用',
-            dataField: 'enabled',
-            columnSpan: 1,
+            type: 'inputNumberRange',
+            dataField: '',
+            label: '工程编号',
+            columnSpan: 2,
+            showType: 'static',
+            disableValidator: () => true,
+            visibleValidator: () => true,
+            elementProps: {
+              precision: 2,
+              step: 5,
+              min: 100,
+              max: 1000,
+            },
+            extendProps: {
+              fromField: 'from_num',
+              toField: 'to_num',
+            },
           },
           {
             type: 'select',
             label: '业务类型',
             dataField: 'user_type',
             columnSpan: 1,
-            options: this.optionsMap['user_type'],
+            extendProps: {
+              options: this.optionsMap['user_type'],
+            },
           },
           {
-            dataField: '',
-            label: '工程编号',
-            type: 'inputNumberRange',
-            showType: 'static',
-            columnSpan: 2,
-            fromField: 'from_num',
-            toField: 'to_num',
+            type: 'autoComplete',
+            label: '业务类型Auto',
+            dataField: 'user_type_auto',
+            columnSpan: 1,
+            elementProps: {
+              fetchSuggestions: this.getUserTypesAuto,
+            },
             extendProps: {
-              precision: 2,
-              step: 5,
-              min: 100,
-              max: 1000,
+              onSelect: this.handleUserTypeAutoSelect,
             },
           },
           {
@@ -166,7 +227,7 @@
             dataField: 'create_month_range',
             columnSpan: 2,
             showType: 'static',
-            extendProps: {
+            elementProps: {
               valueFormat: 'yyyy-MM',
             },
           },
@@ -175,7 +236,7 @@
             label: '创建月份',
             dataField: 'create_month',
             showType: 'static',
-            extendProps: {
+            elementProps: {
               valueFormat: 'yyyy-MM',
             },
           },
@@ -183,17 +244,50 @@
             type: 'checkboxGroup',
             label: '主打产品',
             dataField: 'equipment',
-            options: this.optionsMap['equipment'],
+            columnSpan: 2,
+            extendProps: {
+              options: this.optionsMap['equipment'],
+            },
           },
         ];
       },
     },
     methods: {
+      handleCodeFocus(model) {
+        console.log('handleCodeFocus', model);
+      },
+      handleUserSexChange(model) {
+        console.log('handleUserSexChange', model);
+      },
+      handleAuthorSexChange(model) {
+        console.log('handleAuthorSexChange', model);
+      },
       handleFilter() {
         console.log('handleFilter', this.search.model);
       },
       handleReset() {
         this.$refs['searchForm'].$refs['form'].resetFields();
+      },
+      getUserTypesAuto(queryString, cb) {
+        console.log('getUserTypesAuto', queryString);
+        setTimeout(() => {
+          const res = this.optionsMap['user_type'].map((r) => {
+            return {
+              value: r.label,
+              id: r.value,
+            };
+          });
+          const finalRes = queryString
+            ? res.filter(
+                (r) =>
+                  r.value.toLowerCase().indexOf(queryString.toLowerCase()) > -1
+              )
+            : res;
+          cb(finalRes);
+        }, 500);
+      },
+      handleUserTypeAutoSelect(item, model) {
+        console.log('handleUserTypeAutoSelect', item, model);
       },
     },
   };
@@ -212,9 +306,11 @@
 <template>
   <ca-common-query
     :ref="search.formId"
+    :form-id="search.formId"
     :model="search.model"
     :commands="search.commands"
     :fields="searchFields"
+    :default-checked-keys="['code']"
     label-width="120px"
     dynamicFieldsPosition="start"
     @handleFilter="handleFilter"
@@ -267,7 +363,7 @@
           ],
         },
         search: {
-          formId: 'searchForm',
+          formId: 'dynamicSearchForm',
           operateType: 'add',
           model: {
             code: '1001',
@@ -328,7 +424,9 @@
             label: '角色',
             dataField: 'user_role',
             columnSpan: 1,
-            options: this.optionsMap['user_role'],
+            extendProps: {
+              options: this.optionsMap['user_role'],
+            },
           },
           {
             type: 'switch',
@@ -341,14 +439,18 @@
             label: '业务类型',
             dataField: 'user_type',
             columnSpan: 1,
-            options: this.optionsMap['user_type'],
+            extendProps: {
+              options: this.optionsMap['user_type'],
+            },
           },
           {
             type: 'checkboxGroup',
             label: '主打产品',
             dataField: 'equipment',
             columnSpan: 2,
-            options: this.optionsMap['equipment'],
+            extendProps: {
+              options: this.optionsMap['equipment'],
+            },
           },
         ];
       },
@@ -369,51 +471,55 @@
 
 ### Attributes
 
-| 参数                  | 说明                                                                                          | 类型    | 可选值    | 默认值 |
-| --------------------- | --------------------------------------------------------------------------------------------- | ------- | --------- | ------ |
-| loading               | 是否显示 loading                                                                              | boolean | —         | false  |
-| model                 | 表单数据源                                                                                    | object  | —         | {}     |
-| fields                | 查询字段集合,见 `Field Options`                                                               | array   | —         | []     |
-| rowHeight             | 行高                                                                                          | number  | —         | 36     |
-| commands              | 命令集合 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling)    | array   | —         | []     |
-| dynamicFieldsPosition | 动态查询字段插入位置                                                                          | string  | start\end | end    |
-| downloadOpt           | 下拉命令项                                                                                    | object  | —         | {}     |
-| extendProps           | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing) | object  | —         | {}     |
+| 参数                  | 说明                                                                                                        | 类型    | 可选值    | 默认值 |
+| --------------------- | ----------------------------------------------------------------------------------------------------------- | ------- | --------- | ------ |
+| loading               | 命令按钮是否显示 loading                                                                                    | boolean | —         | false  |
+| model                 | 表单数据源                                                                                                  | object  | —         | {}     |
+| fields                | 查询字段集合,见 `Field Options`                                                                             | array   | —         | []     |
+| rowHeight             | 行高                                                                                                        | number  | —         | 36     |
+| commands              | 命令集合 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling)            | array   | —         | []     |
+| defaultCheckedKeys    | 动态查询默认选中字段                                                                                        | array   | —         | []     |
+| dynamicFieldsPosition | 动态查询字段插入位置                                                                                        | string  | start\end | end    |
+| downloadOpt           | 下拉命令项                                                                                                  | object  | —         | {}     |
+| elementProps          | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object  | —         | {}     |
 
 ### Field Options
 
-| 参数        | 说明                                                                                          | 类型   | 可选值 | 默认值    |
-| ----------- | --------------------------------------------------------------------------------------------- | ------ | ------ | --------- |
-| type        | 类型, 见 `Field Type Options`                                                                 | string | —      | input     |
-| label       | 标签                                                                                          | string | —      | 10        |
-| model       | 表单数据源                                                                                    | object | —      | {}        |
-| dataField   | 绑定字段                                                                                      | string | —      | 0         |
-| columnSpan  | 字段所占列数                                                                                  | number | —      | 1         |
-| fromField   | 起始值绑定字段，inputNumberRange 专用                                                         | string | —      | 0         |
-| toField     | 绑定字段                                                                                      | string | —      | 0         |
-| options     | 选项数据源                                                                                    | array  | -      | []        |
-| extendProps | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing) | string | -      | ascending |
+| 参数         | 说明                                                                                                        | 类型   | 可选值         | 默认值    |
+| ------------ | ----------------------------------------------------------------------------------------------------------- | ------ | -------------- | --------- |
+| type         | 类型, 见 `Field Type Options`                                                                               | string | —              | input     |
+| label        | 标签                                                                                                        | string | —              | 10        |
+| model        | 表单数据源                                                                                                  | object | —              | {}        |
+| dataField    | 绑定字段                                                                                                    | string | —              | 0         |
+| columnSpan   | 字段所占列数                                                                                                | number | —              | 1         |
+| showType     | 展示方式                                                                                                    | string | static/dynamic | static    |
+| elementProps | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | string | -              | ascending |
+| extendProps  | 扩展属性，参考 `Field ExtendProps Options`                                                                  | object | -              | {}        |
+
+### Field ExtendProps Options
+
+| 参数      | 说明                                                                                    | 类型     | 可选值 | 默认值 |
+| --------- | --------------------------------------------------------------------------------------- | -------- | ------ | ------ |
+| fromField | 最小值绑定字段，只限于 `type` 为`inputNumberRange`                                      | string   | —      | 0      |
+| toField   | 最大值绑定字段，只限于 `type` 为`inputNumberRange`                                      | string   | —      | 0      |
+| options   | 选项数据源,限于`type` 为 `select multiSelect checkboxGroup radioGroup radioButtonGroup` | array    | -      | []     |
+| onChange  | 值变动时回调事件                                                                        | function | —      | —      |
 
 ### Field Type Options
 
-| 类型          | 说明           |
-| ------------- | -------------- |
-| text          | 只读文本       |
-| input         | 输入框         |
-| autocomplete  | 自动填充输入框 |
-| inputNumber   | 数字输入框     |
-| textArea      | 多行文本       |
-| select        | 下拉框         |
-| multiSelect   | 多选下拉框     |
-| groupedSelect | 分组选择下拉框 |
-| cascader      | 级联选择器     |
-| switch        | 开关           |
-| radioGroup    | 单选框组       |
-| checkboxGroup | 复选框组       |
-| date          | 日期选择器     |
-| dateRange     | 日期区间选择器 |
-| dateTimeRange | 时间区间选择器 |
-| hr            | 分行           |
-| groupTitle    | 组标题         |
-| complexInput  | 组合输入框     |
-| custom        | 定制组件       |
+| 类型             | 说明                 |
+| ---------------- | -------------------- |
+| input            | 输入框               |
+| autoComplete     | 自动完成输入框       |
+| radioGroup       | 单选框组（默认样式） |
+| radioButtonGroup | 单选框组（按钮样式） |
+| select           | 下拉框               |
+| multiSelect      | 多选下拉框           |
+| date             | 日期选择器           |
+| month            | 月份选择器           |
+| dateRange        | 日期区间选择器       |
+| dateTimeRange    | 时间区间选择器       |
+| monthRange       | 月份区间选择器       |
+| switch           | 开关                 |
+| checkboxGroup    | 复选框组             |
+| inputNumberRange | 数字区间选择器       |

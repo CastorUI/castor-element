@@ -8,20 +8,20 @@
         v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
         class="table-add-command"
         :disabled="addCommand.disableValidator && addCommand.disableValidator.call(this)"
-        v-bind="{type: 'text', icon: 'el-icon-circle-plus-outline', ...addCommand.extendProps}"
+        v-bind="{type: 'text', icon: 'el-icon-circle-plus-outline', ...addCommand.elementProps}"
         @click="$emit(addCommand.command)"
       >
         {{ addCommand.text }}
       </el-button>
       <el-button-group
-        v-show="customCommands"
+        v-if="customCommands"
         class="table-custom-commands"
       >
         <el-button
           v-for="(item,index) of customCommands"
           :key="index"
           :disabled="item.disableValidator &&item.disableValidator.call(this,multipleSelection)"
-          v-bind="{type: 'text', ...item.extendProps}"
+          v-bind="{type: 'text', ...item.elementProps}"
           @click="$emit(item.command,multipleSelection)"
         >
           {{ item.text }}
@@ -33,9 +33,9 @@
         v-loading="loading"
         :data="dataSource"
         :default-sort="defaultSort"
-        style="width:100%;min-width:700px;height:auto;"
-        v-bind="{border: true, ...extendProps}"
-        @row-click="row => $emit('row-click', row)"
+        style="width:100%;height:auto;"
+        v-bind="{border: true, ...elementProps}"
+        @row-click="handleRowClick"
         @selection-change="multipleSelection => handleSelectionChange(multipleSelection)"
         @sort-change="args=> handleSortChange(args)"
       >
@@ -44,21 +44,21 @@
             v-if="item.reportType==='title' && item.children && item.children.length > 0"
             :key="index"
             :label="item.label"
-            v-bind="{align: 'center', ...item.extendProps}"
+            v-bind="{align: 'center', ...item.elementProps}"
           >
             <template v-for="(childItem,childIndex) of item.children">
               <el-table-column
                 v-if="childItem.reportType==='title' && childItem.children && childItem.children.length > 0"
                 :key="'childIndex' + childIndex"
                 :label="childItem.label"
-                v-bind="{align: 'center', ...childItem.extendProps}"
+                v-bind="{align: 'center', ...childItem.elementProps}"
               >
                 <template v-for="(grandChildItem,grandChildIndex) of childItem.children">
                   <el-table-column
                     v-if="grandChildItem.reportType==='title'"
                     :key="'grandChild' + grandChildIndex"
                     :label="grandChildItem.label"
-                    v-bind="{align: 'center', ...grandChildItem.extendProps}"
+                    v-bind="{align: 'center', ...grandChildItem.elementProps}"
                   />
                   <common-column
                     v-if="grandChildItem.reportType==='data'"
@@ -66,11 +66,9 @@
                     :type="grandChildItem.type"
                     :label="grandChildItem.label"
                     :data-field="grandChildItem.dataField"
-                    :options="grandChildItem.options"
-                    :commands="grandChildItem.commands"
-                    :link-command="grandChildItem.linkCommand"
                     :index-method="indexMethod"
                     :data-template="grandChildItem.dataTemplate"
+                    :element-props="grandChildItem.elementProps"
                     :extend-props="grandChildItem.extendProps"
                     v-on="$listeners"
                   />
@@ -82,11 +80,9 @@
                 :type="childItem.type"
                 :label="childItem.label"
                 :data-field="childItem.dataField"
-                :options="childItem.options"
-                :commands="childItem.commands"
-                :link-command="childItem.linkCommand"
                 :index-method="indexMethod"
                 :data-template="childItem.dataTemplate"
+                :element-props="childItem.elementProps"
                 :extend-props="childItem.extendProps"
                 v-on="$listeners"
               />
@@ -98,11 +94,9 @@
             :type="item.type"
             :label="item.label"
             :data-field="item.dataField"
-            :options="item.options"
-            :commands="item.commands"
-            :link-command="item.linkCommand"
             :index-method="indexMethod"
             :data-template="item.dataTemplate"
+            :element-props="item.elementProps"
             :extend-props="item.extendProps"
             v-on="$listeners"
           />
@@ -115,7 +109,7 @@
         :page-size="pagination.pageSize"
         :page-sizes="pageSizes"
         :total="pagination.total"
-        v-bind="{layout: 'total,sizes, prev, pager, next', hideOnSinglePage: true, ...pagination.extendProps}"
+        v-bind="{layout: 'total,sizes, prev, pager, next', hideOnSinglePage: true, ...pagination.elementProps}"
         @size-change="pageSize => handlePageSizeChange(pageSize)"
         @current-change="pageIndex => handlePageIndexChange(pageIndex)"
       />
@@ -124,69 +118,69 @@
 </template>
 
 <script>
-import CommonColumn from '../../common-table/src/common-column';
+import CommonColumn from '../../components/CommonColumn';
 export default {
   name: 'CaReportTable',
   components: {
-    'common-column': CommonColumn
+    'common-column': CommonColumn,
   },
   props: {
     loading: {
       type: Boolean,
-      default: false
+      default: false,
     },
     dataSource: {
       type: Array,
-      default: function() {
+      default: function () {
         return [];
-      }
+      },
     },
     columns: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     pagination: {
       type: Object,
-      default: function() {
+      default: function () {
         return {
           pageIndex: 1,
           pageSize: 10,
-          total: 0
+          total: 0,
         };
-      }
+      },
     },
     addCommand: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     customCommands: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     getList: {
       type: Function,
-      default: () => {}
+      default: () => {},
     },
     dynamicFields: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
-    extendProps: {
+    elementProps: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
-      }
-    }
+      },
+    },
   },
   data() {
     return {
       hackReset: true,
       multipleSelection: [],
-      dynamicCloumns: []
+      dynamicCloumns: [],
     };
   },
   computed: {
-    pageSizes: function() {
+    pageSizes: function () {
       const pageSizeArray = [10, 15, 20, 30, 50];
       return pageSizeArray.indexOf(this.pagination.pageSize) > -1
         ? pageSizeArray
@@ -195,13 +189,13 @@ export default {
     defaultSort() {
       return {
         prop: this.pagination.sortField,
-        order: this.pagination.order
+        order: this.pagination.order,
       };
-    }
+    },
   },
   watch: {
     dynamicFields: {
-      handler: function() {
+      handler: function () {
         this.hackReset = false;
         this.dynamicCloumns = this.deepCopy(this.columns);
         this.dynamicCloumns = this.filterColumnsByDynamicFields(
@@ -211,18 +205,18 @@ export default {
           this.hackReset = true;
         });
       },
-      immediate: true
-    }
+      immediate: true,
+    },
   },
   methods: {
     filterColumnsByDynamicFields(dynamicCloumns) {
       dynamicCloumns = dynamicCloumns.filter(
-        r =>
+        (r) =>
           r.showType !== 'dynamic' ||
           (r.showType === 'dynamic' &&
-            this.dynamicFields.some(f => f === r.label))
+            this.dynamicFields.some((f) => f === r.label))
       );
-      dynamicCloumns.forEach(r => {
+      dynamicCloumns.forEach((r) => {
         if (r.children) {
           r.children = this.filterColumnsByDynamicFields(r.children);
         }
@@ -251,10 +245,14 @@ export default {
         this.pagination.pageSize * (this.pagination.pageIndex - 1) + index + 1
       );
     },
+    handleRowClick(row, column, event) {
+      console.log('handleRowClick', row, column, event);
+      this.$emit('row-click', row, column, event);
+    },
     deepCopy(obj) {
       const result = Array.isArray(obj) ? [] : {};
       for (const key in obj) {
-        if (obj.hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
           if (typeof obj[key] === 'object') {
             result[key] = this.deepCopy(obj[key]); // 递归复制
           } else {
@@ -263,17 +261,13 @@ export default {
         }
       }
       return result;
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .report-table-container {
-  background: #fff;
-  padding: 0 24px;
-  margin-top: 16px;
-  margin-bottom: 10px;
   overflow: hidden;
   .table-commands {
     margin-top: 10px;
@@ -288,26 +282,6 @@ export default {
       }
       button:last-child {
         padding-right: 0;
-      }
-      .default-color {
-        color: #909399;
-      }
-      .default-color:hover {
-        background-color: #909399;
-        color: #ffffff;
-      }
-      .default-color:focus,
-      .default-bg:focus {
-        border-color: #dcdfe6;
-      }
-      .default-bg {
-        background: #ffffff;
-        color: #009944;
-        border-left: none;
-      }
-      .default-bg:hover {
-        background: #67c23a;
-        color: #ffffff;
       }
       .left-border:after {
         content: '';

@@ -14,9 +14,11 @@
     :model="form.model"
     :commands="form.commands"
     :fields="formFields"
-    :extendProps="form.extendProps"
+    :elementProps="form.elementProps"
     @handleCancel="handleCancel"
     @handleSave="handleSave"
+    @handleUnStar="handleUnStar"
+    @handleStar="handleStar"
   />
 </template>
 
@@ -43,14 +45,38 @@
               label: '管理员',
             },
           ],
+          user: [
+            {
+              value: 1,
+              label: '张三',
+            },
+            {
+              value: 2,
+              label: '李四',
+            },
+          ],
           user_type: [
             {
               value: 1,
               label: '供应商',
+              color: 'rgb(224,110,29)',
+              icon: 'el-icon-s-opportunity',
             },
             {
               value: 2,
               label: '经销商',
+              color: 'rgb(24,121,255)',
+              icon: 'el-icon-s-opportunity',
+            },
+          ],
+          user_type_text: [
+            {
+              id: 1,
+              value: '供应商',
+            },
+            {
+              id: 2,
+              value: '经销商',
             },
           ],
           equipment: [
@@ -101,7 +127,11 @@
             en_name: undefined,
             cn_name: undefined,
             valid_end_date: undefined,
-            user_type: undefined,
+            create_time: undefined,
+            user: 1,
+            user_type: 2,
+            user_type_text: undefined,
+            user_type_text_async: undefined,
             enabled: false,
             equipment: [],
             city: undefined,
@@ -109,6 +139,11 @@
             design_cost: undefined,
             create_date_range: undefined,
             remarks: undefined,
+            user_avatar:
+              'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+            test_time: undefined,
+            test_time_select: undefined,
+            test_time_range: undefined,
           },
           commands: [
             {
@@ -120,7 +155,7 @@
               command: 'handleSave',
             },
           ],
-          extendProps: {
+          elementProps: {
             labelWidth: '120px',
             labelPosition: 'right',
           },
@@ -135,12 +170,39 @@
             label: '',
             dataField: '',
             columnSpan: 2,
-            groupTitle: '1、基本信息',
+            elementProps: {
+              style: 'font-size:15px;',
+            },
+            extendProps: {
+              groupTitle: '1、基本信息',
+              groupCommands: [
+                {
+                  text: '取消关注',
+                  command: 'handleUnStar',
+                  elementProps: {
+                    icon: 'el-icon-edit',
+                  },
+                },
+                {
+                  text: '关注',
+                  command: 'handleStar',
+                },
+              ],
+            },
           },
           {
             type: 'text',
             label: '编号',
             dataField: 'code',
+            columnSpan: 1,
+            extendProps: {
+              appendText: '小时',
+            },
+          },
+          {
+            type: 'text',
+            label: '空字段',
+            dataField: 'code2',
             columnSpan: 1,
           },
           {
@@ -162,11 +224,22 @@
             columnSpan: 1,
           },
           {
+            type: 'datetime',
+            label: '创建时间',
+            dataField: 'create_time',
+            columnSpan: 1,
+            elementProps: {
+              valueFormat: 'yyyy-MM-dd HH:mm:ss',
+            },
+          },
+          {
             type: 'multiSelect',
             label: '角色',
             dataField: 'user_role',
             columnSpan: 1,
-            options: this.optionsMap['user_role'],
+            extendProps: {
+              options: this.optionsMap['user_role'],
+            },
           },
           {
             type: 'switch',
@@ -179,34 +252,84 @@
             label: '',
             dataField: '',
             columnSpan: 2,
-            groupTitle: '2、业务信息',
+            extendProps: {
+              groupTitle: '2、业务信息',
+              groupCommands: [
+                {
+                  text: '取消关注',
+                  command: 'handleUnStar',
+                  elementProps: {
+                    icon: 'el-icon-edit',
+                  },
+                },
+                {
+                  text: '关注',
+                  command: 'handleStar',
+                  visibleValidator: (model) => false,
+                },
+              ],
+            },
           },
           {
-            type: 'select',
-            label: '业务类型',
-            dataField: 'user_type',
+            type: 'status',
+            label: '用户类型',
+            dataField: 'user',
             columnSpan: 1,
-            options: this.optionsMap['user_type'],
+            extendProps: {
+              options: this.optionsMap['user_type'],
+            },
+          },
+          {
+            type: 'autoComplete',
+            label: '业务类型-静态',
+            dataField: 'user_type_text',
+            columnSpan: 1,
+            elementProps: {
+              triggerOnFocus: true,
+              valueKey: 'value',
+            },
+            extendProps: {
+              options: this.optionsMap['user_type_text'],
+              onSelect: this.handleUserTypeTextChange,
+            },
+          },
+          {
+            type: 'autoComplete',
+            label: '业务类型-动态',
+            dataField: 'user_type_text_async',
+            columnSpan: 1,
+            elementProps: {
+              triggerOnFocus: false,
+              valueKey: 'value',
+            },
+            extendProps: {
+              getSuggestOptions: this.getUserTypeSuggestOptions,
+              onSelect: this.handleUserTypeTextChange,
+            },
           },
           {
             type: 'checkboxGroup',
             label: '主打产品',
             dataField: 'equipment',
-            options: this.optionsMap['equipment'],
+            extendProps: {
+              options: this.optionsMap['equipment'],
+            },
           },
           {
             type: 'cascader',
             label: '所属区域',
             dataField: 'city',
             columnSpan: 2,
-            options: this.optionsMap['city'],
+            extendProps: {
+              options: this.optionsMap['city'],
+            },
           },
           {
             type: 'cascader',
             label: '区域（lazy）',
             dataField: 'lazy_city',
             columnSpan: 2,
-            extendProps: {
+            elementProps: {
               props: {
                 lazy: true,
                 lazyLoad: this.handleCityLazyLoad,
@@ -218,7 +341,7 @@
             label: '设计成本',
             dataField: 'design_cost',
             columnSpan: 1,
-            extendProps: {
+            elementProps: {
               precision: 2,
               step: 5,
               min: 100,
@@ -237,6 +360,66 @@
             dataField: 'remarks',
             columnSpan: 2,
           },
+          {
+            type: 'avatarUploader',
+            label: '用户头像',
+            dataField: 'user_avatar',
+            columnSpan: 1,
+            elementProps: {
+              action: 'https://jsonplaceholder.typicode.com/posts/',
+            },
+            extendProps: {
+              width: '300px',
+              height: '300px',
+            },
+          },
+          {
+            type: 'complexInput',
+            label: '审核人',
+            dataField: '',
+            columnSpan: 1,
+            visibleValidator: (model) => model.user && model.user_type,
+            extendProps: {
+              currentField: {
+                dataField: 'user',
+                options: this.optionsMap['user'],
+              },
+              appendField: {
+                dataField: 'user_type',
+                options: this.optionsMap['user_type'],
+              },
+            },
+          },
+          {
+            type: 'time',
+            label: '测试时间',
+            dataField: 'test_time',
+            columnSpan: 1,
+            elementProps: {
+              pickerOptions: {
+                selectableRange: '18:30:00 - 20:30:00',
+              },
+            },
+          },
+          {
+            type: 'timeSelect',
+            label: '测试时间选择',
+            dataField: 'test_time_select',
+            columnSpan: 1,
+            elementProps: {
+              pickerOptions: {
+                start: '08:30',
+                step: '00:15',
+                end: '18:30',
+              },
+            },
+          },
+          {
+            type: 'timeRange',
+            label: '测试时间区间',
+            dataField: 'test_time_range',
+            columnSpan: 1,
+          },
         ];
       },
     },
@@ -246,6 +429,25 @@
       },
       handleSave() {
         console.log('handleSave,model:', this.form.model);
+      },
+      handleStar(model) {
+        console.log('handleStar,model:', model);
+      },
+      handleUnStar(model) {
+        console.log('handleUnStar,model:', model);
+      },
+      handleUserTypeTextChange(model, item) {
+        console.log('handleUserTypeTextChange:', model, item);
+        model.user_type = item.id;
+      },
+      async getUserTypeSuggestOptions(queryString) {
+        console.log('getUserTypeSuggestOptions', queryString);
+        const res = await Promise.resolve(this.optionsMap['user_type_text']);
+        return res.filter((option) => {
+          return (
+            option.value.toLowerCase().indexOf(queryString.toLowerCase()) > -1
+          );
+        });
       },
       handleCityLazyLoad(node, resolve) {
         console.log('handleCityLazyLoad,node:', node);
@@ -338,10 +540,14 @@
             {
               value: 1,
               label: '供应商',
+              color: 'rgb(224,110,29)',
+              icon: 'el-icon-s-opportunity',
             },
             {
               value: 2,
               label: '经销商',
+              color: 'rgb(24,121,255)',
+              icon: 'el-icon-s-opportunity',
             },
           ],
           equipment: [
@@ -414,7 +620,9 @@
             label: '',
             dataField: '',
             columnSpan: 2,
-            groupTitle: '1、基本信息',
+            extendProps: {
+              groupTitle: '1、基本信息',
+            },
           },
           {
             type: 'text',
@@ -448,8 +656,10 @@
             label: '角色',
             dataField: 'user_role',
             columnSpan: 1,
-            options: this.optionsMap['user_role'],
             rules: [{ required: true, message: '不能为空' }],
+            extendProps: {
+              options: this.optionsMap['user_role'],
+            },
           },
           {
             type: 'switch',
@@ -462,30 +672,38 @@
             label: '',
             dataField: '',
             columnSpan: 2,
-            groupTitle: '2、业务信息',
+            extendProps: {
+              groupTitle: '2、业务信息',
+            },
           },
           {
             type: 'select',
             label: '业务类型',
             dataField: 'user_type',
             columnSpan: 1,
-            options: this.optionsMap['user_type'],
             rules: [{ required: true, message: '不能为空' }],
+            extendProps: {
+              options: this.optionsMap['user_type'],
+            },
           },
           {
             type: 'checkboxGroup',
             label: '主打产品',
             dataField: 'equipment',
-            options: this.optionsMap['equipment'],
             rules: [{ required: true, message: '不能为空' }],
+            extendProps: {
+              options: this.optionsMap['equipment'],
+            },
           },
           {
             type: 'cascader',
             label: '所属区域',
             dataField: 'city',
             columnSpan: 2,
-            options: this.optionsMap['city'],
             rules: [{ required: true, message: '不能为空' }],
+            extendProps: {
+              options: this.optionsMap['city'],
+            },
           },
         ];
       },
@@ -553,10 +771,14 @@
             {
               value: 1,
               label: '供应商',
+              color: 'rgb(224,110,29)',
+              icon: 'el-icon-s-opportunity',
             },
             {
               value: 2,
               label: '经销商',
+              color: 'rgb(24,121,255)',
+              icon: 'el-icon-s-opportunity',
             },
           ],
           equipment: [
@@ -628,7 +850,9 @@
             label: '',
             dataField: '',
             columnSpan: 2,
-            groupTitle: '1、基本信息',
+            extendProps: {
+              groupTitle: '1、基本信息',
+            },
           },
           {
             type: 'text',
@@ -659,7 +883,9 @@
             label: '角色',
             dataField: 'user_role',
             columnSpan: 1,
-            options: this.optionsMap['user_role'],
+            extendProps: {
+              options: this.optionsMap['user_role'],
+            },
           },
           {
             type: 'switch',
@@ -672,27 +898,35 @@
             label: '',
             dataField: '',
             columnSpan: 2,
-            groupTitle: '2、业务信息',
+            extendProps: {
+              groupTitle: '2、业务信息',
+            },
           },
           {
             type: 'select',
             label: '业务类型',
             dataField: 'user_type',
             columnSpan: 1,
-            options: this.optionsMap['user_type'],
+            extendProps: {
+              options: this.optionsMap['user_type'],
+            },
           },
           {
             type: 'checkboxGroup',
             label: '主打产品',
             dataField: 'equipment',
-            options: this.optionsMap['equipment'],
+            extendProps: {
+              options: this.optionsMap['equipment'],
+            },
           },
           {
             type: 'cascader',
             label: '所属区域',
             dataField: 'city',
             columnSpan: 2,
-            options: this.optionsMap['city'],
+            extendProps: {
+              options: this.optionsMap['city'],
+            },
           },
         ];
       },
@@ -761,15 +995,17 @@
             label: '启用审核',
             dataField: 'audit_enabled',
             columnSpan: 1,
-            disableValidator: (model) => model.anditor_id,
+            disableValidator: (model) => model.anditor_id > 0,
           },
           {
             type: 'select',
             label: '审核人',
             dataField: 'anditor_id',
             columnSpan: 1,
-            options: this.optionsMap['anditor_id'],
             visibleValidator: (model) => model.audit_enabled,
+            extendProps: {
+              options: this.optionsMap['anditor_id'],
+            },
           },
         ];
       },
@@ -783,52 +1019,74 @@
 
 ### Attributes
 
-| 参数             | 说明                                                                                                               | 类型    | 可选值        | 默认值 |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------ | ------- | ------------- | ------ |
-| loading          | 是否显示 loading                                                                                                   | boolean | —             | false  |
-| operateType      | 表单操作类型                                                                                                       | string  | add/edit/view | add    |
-| model            | 数据源                                                                                                             | object  | —             | {}     |
-| fields           | 查询字段集合,见 `Field Options`                                                                                    | array   | —             | []     |
-| rowFieldsCount   | 每行显示字段数                                                                                                     | number  | —             | 2      |
-| rowHeight        | 行高                                                                                                               | number  | —             | 36     |
-| commands         | 命令集合，显示在表单底部 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling)         | array   | —             | []     |
-| customCommands   | 定制命令集合，显示在表单顶部右侧 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array   | —             | []     |
-| customComponents | 定制组件集合                                                                                                       | array   | —             | []     |
-| extendProps      | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                      | object  | —             | {}     |
+| 参数             | 说明                                                                                                                     | 类型    | 可选值        | 默认值 |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------ | ------- | ------------- | ------ |
+| loading          | 是否显示 loading                                                                                                         | boolean | —             | false  |
+| operateType      | 表单操作类型                                                                                                             | string  | add/edit/view | add    |
+| model            | 数据源                                                                                                                   | object  | —             | {}     |
+| fields           | 查询字段集合,见 `Field Options`                                                                                          | array   | —             | []     |
+| rowFieldsCount   | 每行显示字段数                                                                                                           | number  | —             | 2      |
+| rowHeight        | 行高                                                                                                                     | number  | —             | 36     |
+| commands         | 命令集合，显示在表单底部 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling)         | array   | —             | []     |
+| customCommands   | 定制命令集合，显示在表单顶部右侧 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling) | array   | —             | []     |
+| customComponents | 定制组件集合                                                                                                             | array   | —             | []     |
+| elementProps     | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing)              | object  | —             | {}     |
 
 ### Field Options
 
-| 参数        | 说明                                                                                                                         | 类型   | 可选值 | 默认值    |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------- | ------ | ------ | --------- |
-| type        | 类型, 见 `Field Type Options`                                                                                                | string | —      | input     |
-| label       | 标签                                                                                                                         | string | —      | 10        |
-| model       | 表单数据源                                                                                                                   | object | —      | {}        |
-| dataField   | 绑定字段                                                                                                                     | string | —      | 0         |
-| columnSpan  | 字段所占列数                                                                                                                 | number | —      | 1         |
-| commands    | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://0.0.0.0:8085/#/component/sharing-config#command-shi-jian-ming-ling) | array  | -      | []        |
-| options     | 选项数据源                                                                                                                   | array  | -      | []        |
-| extendProps | 扩展属性 [详情](http://0.0.0.0:8085/#/component/sharing-config#extendprops-kuo-zhan-shu-xing)                                | string | -      | ascending |
+| 参数             | 说明                                                                                                        | 类型     | 可选值 | 默认值    |
+| ---------------- | ----------------------------------------------------------------------------------------------------------- | -------- | ------ | --------- |
+| type             | 类型, 见 `Field Type Options`                                                                               | string   | —      | input     |
+| label            | 标签                                                                                                        | string   | —      | 10        |
+| dataField        | 绑定字段                                                                                                    | string   | —      | 0         |
+| columnSpan       | 字段所占列数                                                                                                | number   | —      | 1         |
+| rules            | 字段校验规则                                                                                                | array    | —      | []        |
+| visibleValidator | 可见性校验,返回 `true` 时可见                                                                               | function | —      | —         |
+| disableValidator | 可用性校验,返回 `true` 时禁用                                                                               | function | —      | —         |
+| elementProps     | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | string   | —      | ascending |
+| extendProps      | 扩展属性，参考 `Field ExtendProps Options`                                                                  | object   | —      | {}        |
+
+### Field ExtendProps Options
+
+| 参数              | 说明                                                                                                     | 类型                   | 可选值 | 默认值 |
+| ----------------- | -------------------------------------------------------------------------------------------------------- | ---------------------- | ------ | ------ |
+| groupTitle        | 分组标题名称，只限于 `type` 为 `groupTitle`                                                              | string                 | —      | —      |
+| groupCommands     | 分组命令集合，只限于 `type` 为 `groupTitle`                                                              | array                  | —      | —      |
+| componentKey      | 自定义组件名称，只限于 `type` 为 `custom`                                                                | string                 | —      | —      |
+| options           | 选项数据源,用于`type` 为 `select multiSelect groupedSelect radioGroup checkboxGroup text status cascade` | array                  | —      | []     |
+| currentField      | 当前字段，只限于 `type` 为 `complexInput`                                                                | object                 | —      | —      |
+| appendField       | 附加字段，只限于 `type` 为 `complexInput`                                                                | object                 | —      | —      |
+| onChange          | 值变动时回调事件                                                                                         | function(model)        | —      | —      |
+| onSelect          | 值变动时回调事件，只限于 `type` 为 `autoComplete`                                                        | function(model,item)   | —      | —      |
+| getSuggestOptions | 输入时查询匹配结果，只限于 `type` 为 `autoComplete`                                                      | function(queryString)) | —      | —      |
+| appendText        | 后缀文本，用于 `type` 为 `input、text`                                                                   | string                 | —      | —      |
 
 ### Field Type Options
 
-| 类型          | 说明           |
-| ------------- | -------------- |
-| text          | 只读文本       |
-| input         | 输入框         |
-| autocomplete  | 自动填充输入框 |
-| inputNumber   | 数字输入框     |
-| textArea      | 多行文本       |
-| select        | 下拉框         |
-| multiSelect   | 多选下拉框     |
-| groupedSelect | 分组选择下拉框 |
-| cascader      | 级联选择器     |
-| switch        | 开关           |
-| radioGroup    | 单选框组       |
-| checkboxGroup | 复选框组       |
-| date          | 日期选择器     |
-| dateRange     | 日期区间选择器 |
-| dateTimeRange | 时间区间选择器 |
-| hr            | 分行           |
-| groupTitle    | 组标题         |
-| complexInput  | 组合输入框     |
-| custom        | 定制组件       |
+| 类型           | 说明                         |
+| -------------- | ---------------------------- |
+| text           | 只读文本                     |
+| status         | 只读状态文本（含颜色、图标） |
+| input          | 输入框                       |
+| autoComplete   | 自动填充输入框               |
+| inputNumber    | 数字输入框                   |
+| textArea       | 多行文本                     |
+| select         | 下拉框                       |
+| multiSelect    | 多选下拉框                   |
+| groupedSelect  | 分组选择下拉框               |
+| cascader       | 级联选择器                   |
+| switch         | 开关                         |
+| radioGroup     | 单选框组                     |
+| checkboxGroup  | 复选框组                     |
+| time           | 任意时间选择器               |
+| timeSelect      | 固定区间选择器               |
+| timeRange      | 时间区间选择器               |
+| date           | 日期选择器                   |
+| dateRange      | 日期区间选择器               |
+| datetime       | 日期时间选择器               |
+| dateTimeRange  | 日期+时间区间选择器          |
+| hr             | 分行                         |
+| groupTitle     | 组标题                       |
+| complexInput   | 组合输入框                   |
+| custom         | 定制组件                     |
+| avatarUploader | 用户头像上传                 |

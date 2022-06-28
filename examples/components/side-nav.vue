@@ -202,28 +202,28 @@ export default {
   props: {
     data: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     base: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   data() {
     return {
       highlights: [],
       navState: [],
       isSmallScreen: false,
-      isFade: false
+      isFade: false,
     };
   },
   computed: {
     navStyle() {
-      const style={};
-      if(this.isSmallScreen) {
-        style.paddingBottom='60px';
+      const style = {};
+      if (this.isSmallScreen) {
+        style.paddingBottom = '60px';
       }
-      style.opacity=this.isFade? '0.5':'1';
+      style.opacity = this.isFade ? '0.5' : '1';
       return style;
     },
   },
@@ -232,58 +232,61 @@ export default {
       this.handlePathChange();
     },
     isFade(val) {
-      bus.$emit('navFade',val);
-    }
+      bus.$emit('navFade', val);
+    },
   },
   created() {
-    bus.$on('fadeNav',() => {
-      this.isFade=true;
+    bus.$on('fadeNav', () => {
+      this.isFade = true;
     });
   },
   mounted() {
     this.handleResize();
-    window.addEventListener('resize',this.handleResize);
+    window.addEventListener('resize', this.handleResize);
   },
   beforeDestroy() {
-    window.removeEventListener('resize',this.handleResize);
+    window.removeEventListener('resize', this.handleResize);
   },
   methods: {
     handleResize() {
-      this.isSmallScreen=document.documentElement.clientWidth<768;
+      this.isSmallScreen = document.documentElement.clientWidth < 768;
       this.handlePathChange();
     },
     handlePathChange() {
-      if(!this.isSmallScreen) {
+      if (!this.isSmallScreen) {
         this.expandAllMenu();
         return;
       }
       this.$nextTick(() => {
         this.hideAllMenu();
-        let activeAnchor=this.$el.querySelector('a.active');
-        let ul=activeAnchor.parentNode;
-        while(ul.tagName!=='UL') {
-          ul=ul.parentNode;
+        const activeAnchor = this.$el.querySelector('a.active');
+        let ul = activeAnchor.parentNode;
+        while (ul.tagName !== 'UL') {
+          ul = ul.parentNode;
         }
-        ul.style.height='auto';
+        ul.style.height = 'auto';
       });
     },
     hideAllMenu() {
-      [].forEach.call(this.$el.querySelectorAll('.pure-menu-list'),ul => {
-        ul.style.height='0';
+      [].forEach.call(this.$el.querySelectorAll('.pure-menu-list'), (ul) => {
+        ul.style.height = '0';
       });
     },
     expandAllMenu() {
-      [].forEach.call(this.$el.querySelectorAll('.pure-menu-list'),ul => {
-        ul.style.height='auto';
+      [].forEach.call(this.$el.querySelectorAll('.pure-menu-list'), (ul) => {
+        ul.style.height = 'auto';
       });
     },
     expandMenu(event) {
-      if(!this.isSmallScreen) return;
-      let target=event.currentTarget;
-      if(!target.nextElementSibling||target.nextElementSibling.tagName!=='UL') return;
+      if (!this.isSmallScreen) return;
+      const target = event.currentTarget;
+      if (
+        !target.nextElementSibling ||
+        target.nextElementSibling.tagName !== 'UL'
+      ) { return; }
       this.hideAllMenu();
-      event.currentTarget.nextElementSibling.style.height='auto';
-    }
-  }
+      event.currentTarget.nextElementSibling.style.height = 'auto';
+    },
+  },
 };
 </script>

@@ -13,16 +13,16 @@ module.exports = {
     }
   },
   // 为packages目录添加babel-loader处理
-  chainWebpack: config => {
-    config.module
-      .rule('js')
-      .include
-      .add(resolve('packages'))
-      .end()
-      .use('babel')
-      .loader('babel-loader')
-      .tap(options => {
-        return options;
-      });
-  }
+  // chainWebpack: config => {
+  //   config.module
+  //     .rule('js')
+  //     .include
+  //     .add(resolve('packages'))
+  //     .end()
+  //     .use('babel')
+  //     .loader('babel-loader')
+  //     .tap(options => {
+  //       return options;
+  //     });
+  // }
 };

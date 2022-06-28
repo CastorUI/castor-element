@@ -46,10 +46,10 @@
       tableColumns() {
         return [
           {
-            reportType: 'data',
             type: 'default',
             label: 'ID',
             dataField: 'id',
+            reportType: 'data',
           },
           {
             reportType: 'title',
@@ -57,10 +57,10 @@
             align: 'center',
             children: [
               {
-                reportType: 'data',
                 type: 'default',
                 label: '编号',
                 dataField: 'code',
+                reportType: 'data',
               },
               {
                 reportType: 'title',
@@ -70,16 +70,16 @@
                 align: 'center',
                 children: [
                   {
-                    reportType: 'data',
                     type: 'default',
                     label: '英文名',
                     dataField: 'en_name',
+                    reportType: 'data',
                   },
                   {
-                    reportType: 'data',
                     type: 'default',
                     label: '汉语名',
                     dataField: 'cn_name',
+                    reportType: 'data',
                   },
                 ],
               },
@@ -103,10 +103,20 @@
 
 ```html
 <template>
+  <el-select v-model="dynamicFields" multiple placeholder="请选择">
+    <el-option
+      v-for="item in optionsMap['field']"
+      :key="item"
+      :label="item"
+      :value="item"
+    >
+    </el-option>
+  </el-select>
+
   <ca-report-table
     :dataSource="table.dataList"
     :columns="tableColumns"
-    :dynamicFields="table.dynamicFields"
+    :dynamicFields="dynamicFields"
   />
 </template>
 
@@ -114,8 +124,10 @@
   export default {
     data() {
       return {
+        optionsMap: {
+          field: ['英文名', '汉语名'],
+        },
         table: {
-          dynamicFields: ['英文名'],
           dataList: [
             {
               id: 1001,
@@ -137,52 +149,53 @@
             },
           ],
         },
+        dynamicFields: ['英文名'],
       };
     },
     computed: {
       tableColumns() {
         return [
           {
-            reportType: 'data',
-            showType: 'static',
             type: 'default',
             label: 'ID',
             dataField: 'id',
+            reportType: 'data',
+            showType: 'static',
           },
           {
-            reportType: 'title',
-            showType: 'static',
             label: '项目信息',
             align: 'center',
+            reportType: 'title',
+            showType: 'static',
             children: [
               {
-                reportType: 'data',
-                showType: 'static',
                 type: 'default',
                 label: '编号',
                 dataField: 'code',
+                reportType: 'data',
+                showType: 'static',
               },
               {
-                reportType: 'title',
-                showType: 'static',
                 type: 'default',
                 label: '名称',
                 dataField: '',
+                reportType: 'title',
+                showType: 'static',
                 align: 'center',
                 children: [
                   {
-                    reportType: 'data',
-                    showType: 'dynamic',
                     type: 'default',
                     label: '英文名',
                     dataField: 'en_name',
-                  },
-                  {
                     reportType: 'data',
                     showType: 'dynamic',
+                  },
+                  {
                     type: 'default',
                     label: '汉语名',
                     dataField: 'cn_name',
+                    reportType: 'data',
+                    showType: 'dynamic',
                   },
                 ],
               },
@@ -209,7 +222,7 @@
   <ca-report-table
     :dataSource="table.dataList"
     :columns="tableColumns"
-    :extendProps="table.extendProps"
+    :elementProps="table.elementProps"
   />
 </template>
 
@@ -241,7 +254,7 @@
               nationality: '香港',
             },
           ],
-          extendProps: {
+          elementProps: {
             spanMethod: this.spanMethod,
           },
         },
@@ -251,46 +264,46 @@
       tableColumns() {
         return [
           {
-            reportType: 'data',
             type: 'default',
             label: 'ID',
             dataField: 'id',
+            reportType: 'data',
           },
           {
-            reportType: 'title',
             label: '项目信息',
             align: 'center',
+            reportType: 'title',
             children: [
               {
-                reportType: 'data',
                 type: 'default',
                 label: '编号',
                 dataField: 'code',
+                reportType: 'data',
               },
               {
-                reportType: 'title',
                 type: 'default',
                 label: '名称',
                 dataField: '',
+                reportType: 'title',
                 align: 'center',
                 children: [
                   {
-                    reportType: 'data',
                     type: 'default',
                     label: '国籍',
                     dataField: 'nationality',
+                    reportType: 'data',
                   },
                   {
-                    reportType: 'data',
                     type: 'default',
                     label: '英文名',
                     dataField: 'en_name',
+                    reportType: 'data',
                   },
                   {
-                    reportType: 'data',
                     type: 'default',
                     label: '汉语名',
                     dataField: 'cn_name',
+                    reportType: 'data',
                   },
                 ],
               },
@@ -324,11 +337,23 @@
 
 ### Attributes
 
-常规属性可参考 [通用表格](http://0.0.0.0:8085/#/component/common-table) , 独有属性如下：
+常规属性可参考 [通用表格](http://castor.polarwin.cn/#/component/common-table) , 独有属性如下：
 
 | 参数          | 说明             | 类型  | 可选值 | 默认值 |
 | ------------- | ---------------- | ----- | ------ | ------ |
 | dynamicFields | 动态字段名称集合 | array | -      | []     |
+
+### Column Options
+
+| 参数         | 说明                                                                                                        | 类型   | 可选值                                                              | 默认值  |
+| ------------ | ----------------------------------------------------------------------------------------------------------- | ------ | ------------------------------------------------------------------- | ------- |
+| type         | 类型                                                                                                        | string | default / selection / index / link / keyToValue / status / commands | default |
+| label        | 标题                                                                                                        | string | —                                                                   | 10      |
+| dataField    | 绑定字段                                                                                                    | string | —                                                                   | 0       |
+| reportType   | 报表列类型                                                                                                  | string | data/title                                                          | -       |
+| showType     | 展示方式                                                                                                    | string | static/dynamic                                                      | static  |
+| elementProps | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object | -                                                                   | {}      |
+| extendProps  | 扩展属性 [详情](http://castor.polarwin.cn/#/component/common-table#column-extendprops-options)              | object | -                                                                   | {}      |
 
 ### Table Events
 

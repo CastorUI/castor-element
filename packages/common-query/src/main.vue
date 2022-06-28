@@ -1,15 +1,15 @@
 <template>
   <div
     v-resize:debounce="handleResize"
-    style="overflow:hidden;minWidth:700px;background:#fff;padding:20px 10px 0 10px;"
+    style="overflow:hidden;padding:14px 10px 0 10px;"
     class="clearfix common-query"
   >
     <div
-      v-show="fields.some(r=>r.showType==='dynamic')"
+      v-if="fields.some(r=>r.showType==='dynamic')"
       style="display:inline-block;float:left"
     >
       <el-button
-        type="medium"
+        style="paddingLeft:10px;paddingRight:10px;"
         @click="$refs.filterSelect.$el.click()"
       >
         筛选
@@ -33,14 +33,14 @@
       </el-select>
     </div>
     <el-form
-      id="queryForm"
+      :id="formId"
       ref="form"
       :model="model"
-      :style="fields.some(r=>r.showType==='dynamic')? 'marginLeft:100px;' : ''"
+      style="overflow:hidden;"
+      :style="fields.some(r=>r.showType==='dynamic')? 'marginLeft:68px;' : ''"
       v-bind="{
         labelWidth:'110px',
-        size:'small',
-        ...extendProps
+        ...elementProps
       }"
       @submit.native.prevent
     >
@@ -52,9 +52,10 @@
           :label="item.label"
           :model="model"
           :data-field="item.dataField"
-          :options="item.options"
           :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
-          :height="`${rowHeight}px`"
+          :disable-validator="item.disableValidator"
+          :visible-validator="item.visibleValidator"
+          :element-props="item.elementProps || {}"
           :extend-props="item.extendProps || {}"
         />
       </template>
@@ -65,11 +66,10 @@
         :label="item.label"
         :model="model"
         :data-field="item.dataField"
-        :options="item.options"
-        :from-field="item.fromField"
-        :to-field="item.toField"
         :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
-        :height="`${rowHeight}px`"
+        :disable-validator="item.disableValidator"
+        :visible-validator="item.visibleValidator"
+        :element-props="item.elementProps || {}"
         :extend-props="item.extendProps || {}"
       />
       <template v-if="dynamicFieldsPosition==='end'">
@@ -80,15 +80,16 @@
           :label="item.label"
           :model="model"
           :data-field="item.dataField"
-          :options="item.options"
           :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
-          :height="`${rowHeight}px`"
+          :disable-validator="item.disableValidator"
+          :visible-validator="item.visibleValidator"
+          :element-props="item.elementProps || {}"
           :extend-props="item.extendProps || {}"
         />
       </template>
       <el-form-item
         label-width="10px"
-        style="float:right;"
+        :style="`float:${commandsFloat};`"
       >
         <el-button
           v-for="(item,index) of commands"
@@ -96,22 +97,18 @@
           :loading="item.loading && loading"
           :disabled="item.disableValidator && item.disableValidator.call(this)"
           class="filter-item"
-          v-bind="{type: 'primary', size: 'medium', ...item.extendProps}"
+          v-bind="item.elementProps"
           @click="$emit(item.command)"
         >
           {{ item.text }}
         </el-button>
 
-        <el-dropdown
-          v-if="downloadOpt && downloadOpt.options && downloadOpt.options.length > 0"
-          size="medium"
-        >
+        <el-dropdown v-if="downloadOpt && downloadOpt.options && downloadOpt.options.length > 0">
           <el-button
             type="primary"
             icon="el-icon-document"
-            size="medium"
             :loading="downloadOpt.loading && loading"
-            :plain="downloadOpt.extendProps && downloadOpt.extendProps.plain"
+            :plain="downloadOpt.elementProps && downloadOpt.elementProps.plain"
           >
             导出<i class="el-icon-arrow-down el-icon--right" />
           </el-button>
@@ -135,114 +132,158 @@
 </template>
 <script>
 import resize from 'vue-resize-directive';
-import CommonQueryCtrl from './common-query-ctrl';
+import CommonQueryCtrl from './components/CommonQueryCtrl';
 export default {
   name: 'CaCommonQuery',
   components: {
-    CommonQueryCtrl
+    CommonQueryCtrl,
   },
   directives: { resize },
   props: {
+    formId: {
+      type: String,
+      default: 'queryForm',
+    },
     loading: {
       type: Boolean,
-      default: false
+      default: false,
     },
     model: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
-      }
+      },
     },
     fields: {
       type: Array,
-      default: function() {
+      default: function () {
         return [];
-      }
+      },
     },
     commands: {
       type: Array,
-      default: function() {
+      default: function () {
         return [];
-      }
+      },
     },
     downloadOpt: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
-      }
+      },
     },
-    extendProps: {
+    elementProps: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
-      }
+      },
     },
     dynamicFieldsPosition: {
       type: String,
-      default: 'end'
+      default: 'end',
     },
-    rowHeight: {
+    maxFieldWidth: {
       type: Number,
-      default: 36
-    }
+      default: 230,
+    },
+    commandsFloat: {
+      type: String,
+      default: 'right',
+    },
+    defaultCheckedKeys: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
       checkedKeys: [],
-      checkedFields: [],
-      maxFieldWidth: 350,
-      rowFieldsCount: 3
+      rowFieldsCount: 3,
     };
   },
+  computed: {
+    checkedFields() {
+      return this.fields.filter(
+        (r) =>
+          r.showType === 'dynamic' && this.checkedKeys.indexOf(r.dataField) > -1
+      );
+    },
+  },
   watch: {
+    defaultCheckedKeys: {
+      handler() {
+        this.checkedKeys = this.defaultCheckedKeys;
+      },
+      immediate: true,
+      deep: false,
+    },
     checkedKeys: {
       immediate: true,
       handler() {
-        this.checkedFields = [];
         this.fields
-          .filter(r => r.showType === 'dynamic')
-          .forEach(r => {
-            if (this.checkedKeys.indexOf(r.dataField) > -1) {
-              this.checkedFields.push(r);
-            } else {
-              this.model[r.dataField] = undefined;
-            }
+          .filter(
+            (r) =>
+              r.showType === 'dynamic' &&
+              this.checkedKeys.indexOf(r.dataField) === -1
+          )
+          .forEach((r) => {
+            this.model[r.dataField] = undefined;
           });
-      }
-    }
+      },
+    },
   },
   mounted() {
     this.handleResize();
   },
   methods: {
-    handleResize: function() {
-      const form = document.getElementById('queryForm');
+    handleResize: function () {
+      const form = document.getElementById(this.formId);
       this.rowFieldsCount = Math.floor(
         form.getBoundingClientRect().width / this.maxFieldWidth
       );
-    }
-  }
+    },
+  },
 };
 </script>
-<style rel="stylesheet/scss" lang="scss">
+<style lang="scss">
 .common-query {
   .dynamic-filter-select {
     position: absolute;
     top: 10px;
     left: 10px;
     visibility: hidden;
-    width: 88px;
+    width: 148px;
     overflow: hidden;
   }
   .dynamic-select-options {
     min-width: 150px;
   }
-  .el-select,
-  .el-input {
-    height: 32px;
+  .el-form-item--mini {
+    margin-bottom: 10px !important;
+    &.fixed-height-field {
+      .el-form-item__content {
+        height: 28px;
+      }
+    }
   }
-  .el-select > .el-input {
-    height: 32px;
+  .el-form-item--small {
+    margin-bottom: 14px !important ;
+    &.fixed-height-field {
+      .el-form-item__content {
+        height: 32px;
+      }
+    }
+  }
+  .el-form-item--medium {
+    margin-bottom: 18px !important;
+    &.fixed-height-field {
+      .el-form-item__content {
+        height: 36px;
+      }
+    }
+  }
+  .el-button--small {
+    padding: 8px 15px;
   }
 }
 </style>

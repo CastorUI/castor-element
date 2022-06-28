@@ -7,6 +7,7 @@
     <div class="main-cnt">
       <router-view />
     </div>
+    <main-footer v-if="!isComponent" />
   </div>
 </template>
 
@@ -15,8 +16,8 @@ export default {
   name: 'App',
   computed: {
     isComponent() {
-      return /^component-/.test(this.$route.name||'');
+      return /^component-/.test(this.$route.name || '');
     }
-  },
+  }
 };
 </script>

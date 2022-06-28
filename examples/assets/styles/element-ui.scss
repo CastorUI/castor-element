@@ -1,6 +1,6 @@
 //to reset element-ui default css
 .el-upload {
-  input[type="file"] {
+  input[type='file'] {
     display: none !important;
   }
 }
@@ -173,9 +173,6 @@
 .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner::after {
   border-color: #666666;
 }
-.el-link.el-link--primary {
-  color: #009944;
-}
 .el-switch__label {
   color: #c0c4cc;
   &.is-active {
@@ -188,8 +185,8 @@
   min-width: 24px;
 }
 // 解决el-table在缩放时表头和表格错位的问题
-body .el-table th.gutter{
-  display: table-cell!important;
+body .el-table th.gutter {
+  display: table-cell !important;
 }
 // 暂时解决不同缩放比例下表头行内线消失的问题
 // .el-table th.is-leaf {

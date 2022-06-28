@@ -1,29 +1,59 @@
-# castor-ui
+# @polarwin/castor-ui
 
-## Project setup
+## 一. 组件库发布
 
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
+### 注册 npm 私库用户
 
 ```
-npm run serve
+npm adduser --registry http://verdaccio.polarwin.cn
+npm profile set password --registry http://verdaccio.polarwin.cn
 ```
 
-### Compiles and minifies for production
+### 发布到 npm 私库
+
+每次更新后在 `package.json` 文件中手动更新版本号
 
 ```
-npm run build
+{
+  "name": "@polarwin/castor-ui",
+  "version": "1.0.5",
+}
 ```
 
-### Lints and fixes files
+然后打包到根目录 lib 文件夹
 
 ```
-npm run lint
+npm run build:packages
 ```
 
-### Customize configuration
+最后发布到 npm 私库
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```
+npm publish
+```
+
+## 二. 组件库文档
+
+### 文档地址
+
+参考 [Castor 官方网站](http://castor.polarwin.cn/).
+
+### 本地运行
+
+```
+npm run dev
+```
+
+### 打包发布版本
+
+打包示例站点到根目录 dist 文件夹
+
+```
+npm run build:examples
+```
+
+## 三. 版本说明
+
+- node 版本 >= 10.19.0
+- npm 版本 >= 6.13.4
+- element-ui 版本 >=2.10.1

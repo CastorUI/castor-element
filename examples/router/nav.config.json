@@ -22,6 +22,10 @@
       {
         "path": "/sharing-config",
         "name": "共享配置"
+      },
+      {
+        "path": "/interaction",
+        "name": "前后端交互"
       }
     ]
   },
@@ -51,6 +55,10 @@
           {
             "path": "/report-table",
             "title": "报表表格"
+          },
+          {
+            "path": "/tree-edit-table",
+            "title": "树形可编辑表格"
           }
         ]
       }

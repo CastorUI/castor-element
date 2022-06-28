@@ -28,3 +28,7 @@
   ```
 
 - 自定义事件以`handle`前缀来命名，如`handleAdd`
+
+- ElementUI 相关属性放置到 `elementProps` 中
+
+- 自定义属性放置到 `extendProps` 中
