@@ -1,0 +1,67 @@
+[
+  {
+    "name": "更新日志",
+    "path": "/changelog"
+  },
+  {
+    "name": "开发指南",
+    "code": "guide",
+    "children": [
+      {
+        "path": "/installation",
+        "name": "安装"
+      },
+      {
+        "path": "/quickstart",
+        "name": "快速上手"
+      },
+      {
+        "path": "/convention",
+        "name": "约定"
+      },
+      {
+        "path": "/sharing-config",
+        "name": "共享配置"
+      },
+      {
+        "path": "/interaction",
+        "name": "前后端交互"
+      }
+    ]
+  },
+  {
+    "name": "组件",
+    "code": "components",
+    "groups": [
+      {
+        "groupName": "Data",
+        "list": [
+          {
+            "path": "/common-table",
+            "title": "通用表格"
+          },
+          {
+            "path": "/common-form",
+            "title": "通用表单"
+          },
+          {
+            "path": "/common-query",
+            "title": "通用查询"
+          },
+          {
+            "path": "/edit-table",
+            "title": "可编辑表格"
+          },
+          {
+            "path": "/report-table",
+            "title": "报表表格"
+          },
+          {
+            "path": "/tree-edit-table",
+            "title": "树形可编辑表格"
+          }
+        ]
+      }
+    ]
+  }
+]

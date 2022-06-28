@@ -1,0 +1,194 @@
+//to reset element-ui default css
+.el-upload {
+  input[type='file'] {
+    display: none !important;
+  }
+}
+
+.el-upload__input {
+  display: none;
+}
+
+//暂时性解决diolag 问题 https://github.com/ElemeFE/element/issues/2461
+.el-dialog {
+  transform: none;
+  left: 0;
+  position: relative;
+  margin: 0 auto;
+  min-width: 700px;
+}
+
+//element ui upload
+.upload-container {
+  .el-upload {
+    width: 100%;
+    .el-upload-dragger {
+      width: 100%;
+      height: 200px;
+    }
+  }
+}
+
+// 定制手风琴
+/*This will work for firefox*/
+.stage1,
+.stage2,
+.stage3,
+.stage4 {
+  .el-collapse {
+    border: none !important;
+  }
+
+  .el-collapse-item {
+    margin-bottom: 0 !important;
+    &__header {
+      padding-left: 0 !important;
+      background-color: #ffffff !important;
+      height: 44px !important;
+      border-radius: 22px !important;
+      border: 1px solid rgba(0, 153, 68, 0.3) !important;
+      line-height: 44px !important;
+      border-left: 0 !important;
+    }
+    &__header.is-active {
+      border-bottom-color: rgba(0, 153, 68, 0.3) !important;
+    }
+    &__arrow {
+      line-height: 44px !important;
+    }
+    &__content {
+      padding-bottom: 0 !important;
+    }
+    &__wrap {
+      border-bottom: none !important;
+    }
+  }
+  .noActive.el-collapse-item {
+    .el-collapse-item__header {
+      padding-left: 0 !important;
+      background-color: #ffffff !important;
+      height: 44px !important;
+      border-radius: 22px !important;
+      border: 1px solid rgba(89, 87, 87, 0.3) !important;
+      line-height: 44px !important;
+    }
+    .el-collapse-item__wrap {
+      display: none !important;
+    }
+  }
+  .is-active.fx-collapse-item::after {
+    transition: all 0.5s;
+    height: 5px;
+  }
+  .noActive.fx-collapse-item::after {
+    border-left: 4px solid rgba(0, 0, 0, 0.3);
+    height: 48px;
+  }
+  // table 部分样式定制
+  .el-table td,
+  .el-table th {
+    padding: 7.5px 0;
+  }
+  .el-table .invalid-row {
+    color: hsla(203, 10%, 31%, 0.616);
+    text-decoration: line-through;
+  }
+  .el-table .invalid-project-cost,
+  .el-table .invalid-design-cost {
+    // background: #f0f9eb;
+    color: hsla(203, 10%, 31%, 0.616);
+    text-decoration: line-through;
+  }
+}
+// only work for firefox
+@-moz-document url-prefix() {
+  .stage1,
+  .stage2,
+  .stage3,
+  .stage4 {
+    .el-collapse-item__wrap {
+      position: relative;
+      left: -45px;
+    }
+  }
+}
+.dashboard-container {
+  .el-collapse-item {
+    &__wrap {
+      border-bottom: none !important;
+    }
+    &__content {
+      padding-bottom: 5px;
+    }
+  }
+}
+// 处理所有的可点击的表格
+.clickable-table .el-table__row {
+  cursor: pointer;
+}
+// 分页
+.pagination-container {
+  margin-top: 5px;
+  text-align: right;
+  .el-pagination {
+    .el-pagination__sizes {
+      input {
+        height: 28px;
+        line-height: 28px;
+      }
+      .el-input__suffix {
+        i {
+          line-height: 28px;
+        }
+      }
+    }
+  }
+}
+
+// dialog最大和最小宽度设置
+
+.min-dialog {
+  max-width: 600px;
+  min-width: 500px;
+}
+
+// element禁用样式看不见字
+.el-input.is-disabled .el-input__inner {
+  color: #666666;
+}
+.el-textarea.is-disabled .el-textarea__inner {
+  color: #666666;
+}
+.el-radio__input.is-disabled + span.el-radio__label {
+  color: #666666;
+}
+.el-radio__input.is-disabled .el-radio__inner,
+.el-radio__input.is-disabled.is-checked .el-radio__inner,
+.el-checkbox__input.is-disabled + span.el-checkbox__label {
+  color: #666666;
+}
+.el-radio__input.is-disabled.is-checked .el-radio__inner::after {
+  background-color: #666666;
+}
+.el-checkbox__input.is-disabled.is-checked .el-checkbox__inner::after {
+  border-color: #666666;
+}
+.el-switch__label {
+  color: #c0c4cc;
+  &.is-active {
+    font-weight: bold;
+  }
+}
+// 解决element 的 date range 分割字宽度问题
+.el-date-editor .el-range-separator {
+  width: 10%;
+  min-width: 24px;
+}
+// 解决el-table在缩放时表头和表格错位的问题
+body .el-table th.gutter {
+  display: table-cell !important;
+}
+// 暂时解决不同缩放比例下表头行内线消失的问题
+// .el-table th.is-leaf {
+//   border-bottom: 1.2px solid #ebeef5;
+// }

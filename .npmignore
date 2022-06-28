@@ -1,0 +1,14 @@
+examples/
+packages/
+public/
+build/
+dist/
+vue.config.js
+# postcss.config.js
+babel.config.js
+*.map
+.eslintignore
+.eslintrc.json
+jsconfig.json
+.vscode/settings.json
+.gitlab-ci.yml
