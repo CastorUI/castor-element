@@ -471,19 +471,19 @@
 
 ### Attributes
 
-| 参数                  | 说明                                                                                                        | 类型    | 可选值     | 默认值 |
-| --------------------- | ----------------------------------------------------------------------------------------------------------- | ------- | ---------- | ------ |
-| formId                | 表单标识                                                                                                    | string  | —          | -      |
-| loading               | 命令按钮是否显示 loading                                                                                    | boolean | —          | false  |
-| model                 | 表单数据源                                                                                                  | object  | —          | {}     |
-| fields                | 查询字段集合,见 `Field Options`                                                                             | array   | —          | []     |
-| commands              | 命令集合 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling)            | array   | —          | []     |
-| defaultCheckedKeys    | 动态查询默认选中字段                                                                                        | array   | —          | []     |
-| dynamicFieldsPosition | 动态查询字段插入位置                                                                                        | string  | start\end  | end    |
-| downloadOpt           | 下拉命令项                                                                                                  | object  | —          | {}     |
-| commandsFloat         | 命令按钮浮动位置                                                                                            | string  | right\left | right  |
-| maxFieldWidth         | 表单字段最大宽度                                                                                            | number  | —          | 230    |
-| elementProps          | ElementUI属性,作用于ElForm组件 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object  | —          | {}     |
+| 参数                  | 说明                                                                                                                           | 类型    | 可选值     | 默认值 |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------- | ---------- | ------ |
+| formId                | 表单标识                                                                                                                       | string  | —          | -      |
+| loading               | 命令按钮是否显示 loading                                                                                                       | boolean | —          | false  |
+| maxFieldWidth         | 表单字段最大宽度                                                                                                               | number  | —          | 230    |
+| commandsFloat         | 命令按钮浮动位置                                                                                                               | string  | right\left | right  |
+| model                 | 表单数据源                                                                                                                     | object  | —          | {}     |
+| fields                | 查询字段集合,见 `Field Options`                                                                                                | array   | —          | []     |
+| commands              | 命令集合 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling)                               | array   | —          | []     |
+| dynamicFieldsPosition | 动态查询字段插入位置                                                                                                           | string  | start\end  | end    |
+| defaultCheckedKeys    | 动态查询默认选中字段                                                                                                           | array   | —          | []     |
+| downloadOpt           | 下拉命令项                                                                                                                     | object  | —          | {}     |
+| elementProps          | ElementUI 属性,作用于 ElForm 组件 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object  | —          | {}     |
 
 ### Field Options
 

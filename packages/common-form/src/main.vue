@@ -78,6 +78,14 @@ export default {
       type: Boolean,
       default: false
     },
+    operateType: {
+      type: String,
+      default: 'add'
+    },
+    rowFieldsCount: {
+      type: Number,
+      default: 2
+    },
     model: {
       type: Object,
       default: function() {
@@ -101,18 +109,6 @@ export default {
       default: function() {
         return [];
       }
-    },
-    rowFieldsCount: {
-      type: Number,
-      default: 2
-    },
-    rowHeight: {
-      type: Number,
-      default: 36
-    },
-    operateType: {
-      type: String,
-      default: 'add'
     },
     customComponents: {
       type: Object,

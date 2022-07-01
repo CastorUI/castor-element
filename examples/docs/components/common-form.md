@@ -1043,10 +1043,9 @@
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------ | ------- | ------------- | ------ |
 | loading          | 是否显示 loading                                                                                                         | boolean | —             | false  |
 | operateType      | 表单操作类型                                                                                                             | string  | add/edit/view | add    |
+| rowFieldsCount   | 每行显示字段数                                                                                                           | number  | —             | 2      |
 | model            | 数据源                                                                                                                   | object  | —             | {}     |
 | fields           | 查询字段集合,见 `Field Options`                                                                                          | array   | —             | []     |
-| rowFieldsCount   | 每行显示字段数                                                                                                           | number  | —             | 2      |
-| rowHeight        | 行高                                                                                                                     | number  | —             | 36     |
 | commands         | 命令集合，显示在表单底部 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling)         | array   | —             | []     |
 | customCommands   | 定制命令集合，显示在表单顶部右侧 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling) | array   | —             | []     |
 | customComponents | 定制组件集合                                                                                                             | array   | —             | []     |
