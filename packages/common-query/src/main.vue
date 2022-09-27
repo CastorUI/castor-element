@@ -1,15 +1,15 @@
 <template>
   <div
     v-resize:debounce="handleResize"
-    style="overflow:hidden;padding:14px 10px 0 10px;"
+    style="overflow: hidden; padding: 14px 10px 0 10px"
     class="clearfix common-query"
   >
     <div
-      v-if="fields.some(r=>r.showType==='dynamic')"
-      style="display:inline-block;float:left"
+      v-if="fields.some((r) => r.showType === 'dynamic')"
+      style="display: inline-block; float: left"
     >
       <el-button
-        style="paddingLeft:10px;paddingRight:10px;"
+        style="paddingleft: 10px; paddingright: 10px"
         @click="$refs.filterSelect.$el.click()"
       >
         筛选
@@ -24,7 +24,7 @@
         placeholder="请选择"
       >
         <el-option
-          v-for="item in fields.filter(r=>r.showType==='dynamic')"
+          v-for="item in fields.filter((r) => r.showType === 'dynamic')"
           :key="item.dataField"
           class="dynamic-select-options"
           :label="item.label"
@@ -36,15 +36,17 @@
       :id="formId"
       ref="form"
       :model="model"
-      style="overflow:hidden;"
-      :style="fields.some(r=>r.showType==='dynamic')? 'marginLeft:68px;' : ''"
+      style="overflow: hidden"
+      :style="
+        fields.some((r) => r.showType === 'dynamic') ? 'marginLeft:68px;' : ''
+      "
       v-bind="{
-        labelWidth:'110px',
-        ...elementProps
+        labelWidth: '110px',
+        ...elementProps,
       }"
       @submit.native.prevent
     >
-      <template v-if="dynamicFieldsPosition==='start'">
+      <template v-if="dynamicFieldsPosition === 'start'">
         <common-query-ctrl
           v-for="item in checkedFields"
           :key="item.dataField"
@@ -52,7 +54,7 @@
           :label="item.label"
           :model="model"
           :data-field="item.dataField"
-          :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
+          :width="(100 / rowFieldsCount) * (item.columnSpan || 1) + '%'"
           :disable-validator="item.disableValidator"
           :visible-validator="item.visibleValidator"
           :element-props="item.elementProps || {}"
@@ -60,19 +62,19 @@
         />
       </template>
       <common-query-ctrl
-        v-for="item in fields.filter(r=>r.showType!=='dynamic')"
+        v-for="item in fields.filter((r) => r.showType !== 'dynamic')"
         :key="item.dataField"
         :type="item.type"
         :label="item.label"
         :model="model"
         :data-field="item.dataField"
-        :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
+        :width="(100 / rowFieldsCount) * (item.columnSpan || 1) + '%'"
         :disable-validator="item.disableValidator"
         :visible-validator="item.visibleValidator"
         :element-props="item.elementProps || {}"
         :extend-props="item.extendProps || {}"
       />
-      <template v-if="dynamicFieldsPosition==='end'">
+      <template v-if="dynamicFieldsPosition === 'end'">
         <common-query-ctrl
           v-for="item in checkedFields"
           :key="item.dataField"
@@ -80,19 +82,16 @@
           :label="item.label"
           :model="model"
           :data-field="item.dataField"
-          :width="100/rowFieldsCount*(item.columnSpan || 1) + '%'"
+          :width="(100 / rowFieldsCount) * (item.columnSpan || 1) + '%'"
           :disable-validator="item.disableValidator"
           :visible-validator="item.visibleValidator"
           :element-props="item.elementProps || {}"
           :extend-props="item.extendProps || {}"
         />
       </template>
-      <el-form-item
-        label-width="10px"
-        :style="`float:${commandsFloat};`"
-      >
+      <el-form-item label-width="10px" :style="`float:${commandsFloat};`">
         <el-button
-          v-for="(item,index) of commands"
+          v-for="(item, index) of commands"
           :key="index"
           :loading="item.loading && loading"
           :disabled="item.disableValidator && item.disableValidator.call(this)"
@@ -103,7 +102,11 @@
           {{ item.text }}
         </el-button>
 
-        <el-dropdown v-if="downloadOpt && downloadOpt.options && downloadOpt.options.length > 0">
+        <el-dropdown
+          v-if="
+            downloadOpt && downloadOpt.options && downloadOpt.options.length > 0
+          "
+        >
           <el-button
             type="primary"
             icon="el-icon-document"
@@ -114,10 +117,12 @@
           </el-button>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item
-              v-for="(item,index) of downloadOpt.options"
+              v-for="(item, index) of downloadOpt.options"
               :key="index"
               :icon="item.icon"
-              :disabled="item.disableValidator && item.disableValidator.call(this)"
+              :disabled="
+                item.disableValidator && item.disableValidator.call(this)
+              "
               :type="item.styleType || 'primary'"
               class="filter-item"
               @click.native="$emit(item.command)"
@@ -136,78 +141,78 @@ import CommonQueryCtrl from './components/CommonQueryCtrl';
 export default {
   name: 'CaCommonQuery',
   components: {
-    CommonQueryCtrl,
+    CommonQueryCtrl
   },
   directives: { resize },
   props: {
     formId: {
       type: String,
-      default: 'queryForm',
+      default: 'queryForm'
     },
     loading: {
       type: Boolean,
-      default: false,
-    },
-    model: {
-      type: Object,
-      default: function () {
-        return {};
-      },
-    },
-    fields: {
-      type: Array,
-      default: function () {
-        return [];
-      },
-    },
-    commands: {
-      type: Array,
-      default: function () {
-        return [];
-      },
-    },
-    downloadOpt: {
-      type: Object,
-      default: function () {
-        return {};
-      },
-    },
-    elementProps: {
-      type: Object,
-      default: function () {
-        return {};
-      },
-    },
-    dynamicFieldsPosition: {
-      type: String,
-      default: 'end',
+      default: false
     },
     maxFieldWidth: {
       type: Number,
-      default: 230,
+      default: 230
     },
     commandsFloat: {
       type: String,
-      default: 'right',
+      default: 'right'
+    },
+    model: {
+      type: Object,
+      default: function() {
+        return {};
+      }
+    },
+    fields: {
+      type: Array,
+      default: function() {
+        return [];
+      }
+    },
+    commands: {
+      type: Array,
+      default: function() {
+        return [];
+      }
+    },
+    dynamicFieldsPosition: {
+      type: String,
+      default: 'end'
     },
     defaultCheckedKeys: {
       type: Array,
-      default: () => [],
+      default: () => []
     },
+    downloadOpt: {
+      type: Object,
+      default: function() {
+        return {};
+      }
+    },
+    elementProps: {
+      type: Object,
+      default: function() {
+        return {};
+      }
+    }
   },
   data() {
     return {
       checkedKeys: [],
-      rowFieldsCount: 3,
+      rowFieldsCount: 3
     };
   },
   computed: {
     checkedFields() {
       return this.fields.filter(
-        (r) =>
+        r =>
           r.showType === 'dynamic' && this.checkedKeys.indexOf(r.dataField) > -1
       );
-    },
+    }
   },
   watch: {
     defaultCheckedKeys: {
@@ -215,34 +220,34 @@ export default {
         this.checkedKeys = this.defaultCheckedKeys;
       },
       immediate: true,
-      deep: false,
+      deep: false
     },
     checkedKeys: {
       immediate: true,
       handler() {
         this.fields
           .filter(
-            (r) =>
+            r =>
               r.showType === 'dynamic' &&
               this.checkedKeys.indexOf(r.dataField) === -1
           )
-          .forEach((r) => {
+          .forEach(r => {
             this.model[r.dataField] = undefined;
           });
-      },
-    },
+      }
+    }
   },
   mounted() {
     this.handleResize();
   },
   methods: {
-    handleResize: function () {
+    handleResize: function() {
       const form = document.getElementById(this.formId);
       this.rowFieldsCount = Math.floor(
         form.getBoundingClientRect().width / this.maxFieldWidth
       );
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

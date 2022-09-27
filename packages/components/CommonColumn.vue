@@ -240,7 +240,11 @@
     }"
   >
     <template slot-scope="scope">
-      {{ scope.row[dataField] || '' }}
+      {{
+        scope.row[dataField] === null || scope.row[dataField] === undefined
+          ? ''
+          : scope.row[dataField]
+      }}
     </template>
   </el-table-column>
 </template>

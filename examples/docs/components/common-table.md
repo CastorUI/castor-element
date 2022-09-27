@@ -28,16 +28,19 @@
               id: 1001,
               code: 'A1',
               name: '上海燃气一期工程',
+              age: 10,
             },
             {
               id: 1002,
               code: 'A2',
+              age: 0,
               name:
                 '上海燃气二期工程 it will work no matter where your popper and reference elements live, even in the most complex scenarios like nested scrolling containers or alternative offsetParent contexts. it will work no matter where your popper and reference elements live, even in the most complex scenarios like nested scrolling containers or alternative offsetParent contexts.',
             },
             {
               id: 1003,
               code: 'A3',
+              age: 20,
               name: '上海燃气三期工程',
             },
           ],
@@ -70,6 +73,11 @@
             type: 'default',
             label: '编号',
             dataField: 'code',
+          },
+          {
+            type: 'default',
+            label: '年龄',
+            dataField: 'age',
           },
           {
             type: 'default',
