@@ -22,7 +22,7 @@
         filterable: true,
         style: 'width:100%;',
         allowCreate: false,
-        placeholder: `选择${label}`,
+        placeholder: `请选择`,
         ...elementProps,
       }"
       @change="extendProps.onChange && extendProps.onChange.call(this, model)"
@@ -44,7 +44,7 @@
         filterable: true,
         style: 'width:100%;',
         allowCreate: false,
-        placeholder: `选择${label}`,
+        placeholder: `请选择`,
         ...elementProps,
       }"
       @change="extendProps.onChange && extendProps.onChange.call(this, model)"
@@ -235,7 +235,7 @@
       v-model="model[dataField]"
       :disabled="disableValidator && disableValidator.call(this, model)"
       v-bind="{
-        placeholder: `输入${label}`,
+        placeholder: `请输入`,
         precision: 0,
         clearable: true,
         style: 'width:100%;',
@@ -249,7 +249,7 @@
       :disabled="disableValidator && disableValidator.call(this, model)"
       :options="extendProps.options"
       v-bind="{
-        placeholder: `输入${label}`,
+        placeholder: `请输入`,
         clearable: true,
         style: 'width:100%;',
         ...elementProps,
@@ -321,7 +321,7 @@
       type="textarea"
       :disabled="disableValidator && disableValidator.call(this, model)"
       v-bind="{
-        placeholder: `输入${label}`,
+        placeholder: `请输入`,
         clearable: true,
         rows: 2,
         style: 'width:100%;',
@@ -335,7 +335,7 @@
       :disabled="disableValidator && disableValidator.call(this, model)"
       :fetch-suggestions="querySearch"
       v-bind="{
-        placeholder: `输入${label}`,
+        placeholder: `请输入`,
         clearable: true,
         style: 'width:100%;',
         ...elementProps,
@@ -369,7 +369,7 @@
       v-model.trim="model[dataField]"
       :disabled="disableValidator && disableValidator.call(this, model)"
       v-bind="{
-        placeholder: `输入${label}`,
+        placeholder: `请输入`,
         clearable: true,
         style: 'width:100%;',
         ...elementProps,
