@@ -46,6 +46,15 @@
       tableColumns() {
         return [
           {
+            type: 'index',
+            label: '序号',
+            dataField: 'index',
+            reportType: 'data',
+            elementProps: {
+              width: '80px',
+            },
+          },
+          {
             type: 'default',
             label: 'ID',
             dataField: 'id',

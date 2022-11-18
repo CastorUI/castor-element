@@ -21,7 +21,7 @@
         :disabled="disableValidator && disableValidator.call(this, model)"
         :multiple="type === 'multiSelect'"
         v-bind="{
-          placeholder: `${label}`,
+          placeholder: '请选择',
           style: 'width:100%;',
           clearable: true,
           filterable: true,
@@ -41,7 +41,7 @@
         v-model="model[dataField]"
         :disabled="disableValidator && disableValidator.call(this, model)"
         v-bind="{
-          placeholder: `${label}`,
+          placeholder: `请输入`,
           style: 'width:100%;',
           ...elementProps,
         }"
@@ -95,6 +95,7 @@
         :disabled="disableValidator && disableValidator.call(this, model)"
         :type="type.toLocaleLowerCase()"
         v-bind="{
+          placeholder: '请选择',
           startPlaceholder: '开始日期',
           rangeSeparator: '~',
           endPlaceholder: '结束日期',
@@ -146,7 +147,7 @@
         :disabled="disableValidator && disableValidator.call(this, model)"
         class="filter-item filter-list query-item"
         v-bind="{
-          placeholder: `${label}`,
+          placeholder: `请输入`,
           clearable: true,
           ...elementProps,
         }"

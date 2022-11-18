@@ -1,6 +1,7 @@
 <template>
   <el-form
     ref="form"
+    v-loading="loading"
     class="form"
     :model="model"
     :rules="rules"
@@ -54,12 +55,12 @@
         "
         :key="index"
         class="command"
-        :loading="item.loading && loading"
+        :loading="item.loading"
         :disabled="
           item.disableValidator && item.disableValidator.call(this, model)
         "
         v-bind="item.elementProps"
-        @click="$emit(item.command)"
+        @click="$emit(item.command, item)"
       >
         {{ item.text }}
       </el-button>
