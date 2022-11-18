@@ -134,6 +134,7 @@
           operateType: 'add',
           model: {
             code: '1001',
+            code2: 0,
             en_name: undefined,
             cn_name: undefined,
             sex: 2,
