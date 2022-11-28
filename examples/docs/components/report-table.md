@@ -1,9 +1,9 @@
-## ReportTable 报表表格
+# ReportTable 报表表格
 
 用于展示报表数据，可以自定义表头和动态展示列。
 报表表格基于通用表格，基本用法请参考通用表格，这里只展示其独有的用法。
 
-### 多级表头
+## 多级表头
 
 目前只支持最多三级表头。
 
@@ -104,7 +104,7 @@
 
 :::
 
-### 动态列
+## 动态列
 
 通过控制列是否展示来实现动态效果。
 
@@ -220,7 +220,7 @@
 
 :::
 
-### 合并单元格
+## 合并单元格
 
 合并单元法需要设定算法。
 
@@ -344,7 +344,7 @@
 
 :::
 
-### Attributes
+## Attributes
 
 常规属性可参考 [通用表格](http://castor.polarwin.cn/#/component/common-table) , 独有属性如下：
 
@@ -352,7 +352,7 @@
 | ------------- | ---------------- | ----- | ------ | ------ |
 | dynamicFields | 动态字段名称集合 | array | -      | []     |
 
-### Column Options
+## Column Options
 
 | 参数         | 说明                                                                                                        | 类型   | 可选值                                                              | 默认值  |
 | ------------ | ----------------------------------------------------------------------------------------------------------- | ------ | ------------------------------------------------------------------- | ------- |
@@ -364,7 +364,7 @@
 | elementProps | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object | -                                                                   | {}      |
 | extendProps  | 扩展属性 [详情](http://castor.polarwin.cn/#/component/common-table#column-extendprops-options)              | object | -                                                                   | {}      |
 
-### Table Events
+## Table Events
 
 | 事件名    | 说明                         | 参数 |
 | --------- | ---------------------------- | ---- |

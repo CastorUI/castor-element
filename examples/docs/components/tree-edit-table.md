@@ -1,8 +1,8 @@
-## TreeEditTable 树形可编辑表格
+# TreeEditTable 树形可编辑表格
 
 可编辑表格支持两种模式，手动触发和自动触发两种。手动触发模式需要手动点击编辑按钮才能触发，而自动触发则在点击行时即触发。
 
-### 手动触发-基础
+## 手动触发-基础
 
 展示自动触发的基本效果。选中行进入到编辑状态，当前行失去焦点时恢复到原始状态。
 
@@ -213,7 +213,7 @@
 
 :::
 
-### 手动触发-校验
+## 手动触发-校验
 
 展示自动触发的基本效果。选中行进入到编辑状态，当前行失去焦点时恢复到原始状态。
 
@@ -426,7 +426,7 @@
 
 :::
 
-### Table Attributes
+## Table Attributes
 
 常规属性可参考 [通用表格](http://castor.polarwin.cn/#/component/common-table) , 独有属性如下：
 
@@ -441,7 +441,7 @@
 | appendContent     | 插入至表格最后一行之后的内容                                                                                | string  | —                     | —           |
 | elementProps      | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object  | —                     | {}          |
 
-### Column Options
+## Column Options
 
 | 参数         | 说明                                                                                                        | 类型    | 可选值                                                             | 默认值  |
 | ------------ | ----------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------ | ------- |
@@ -453,7 +453,7 @@
 | elementProps | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object  | -                                                                  | {}      |
 | extendProps  | 扩展属性，参考 `Column ExtendProps Options`                                                                 | object  | -                                                                  | {}      |
 
-### Column ExtendProps Options
+## Column ExtendProps Options
 
 | 参数           | 说明                                                                                                                               | 类型    | 可选值 | 默认值 |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------- | ------ | ------ |
@@ -461,7 +461,7 @@
 | isExpandColumn | 是否折叠列                                                                                                                         | boolean | -      | false  |
 | commands       | 行事件集合，当 `type` 为 `commands` 时使用 [详情](http://castor.polarwin.cn/#/component/sharing-config#command-shi-jian-ming-ling) | array   | -      | []     |
 
-### Table Events
+## Table Events
 
 | 事件名    | 说明                         | 参数 |
 | --------- | ---------------------------- | ---- |

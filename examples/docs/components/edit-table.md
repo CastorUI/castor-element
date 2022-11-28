@@ -1,8 +1,8 @@
-## EditTable 可编辑表格
+# EditTable 可编辑表格
 
 可编辑表格支持两种模式，手动触发和自动触发两种。手动触发模式需要手动点击编辑按钮才能触发，而自动触发则在点击行时即触发。
 
-### 自动触发-基础
+## 自动触发-基础
 
 展示自动触发的基本效果。选中行进入到编辑状态，当前行失去焦点时恢复到原始状态。
 
@@ -215,7 +215,7 @@
 
 :::
 
-### 自动触发-校验
+## 自动触发-校验
 
 校验功能用于在保存前检查行数据。如果校验不通过，则当前行保持编辑状态，且控件显示错误提示。
 
@@ -369,7 +369,7 @@
 
 :::
 
-### 手动触发-基础
+## 手动触发-基础
 
 展示手动触发的基本效果。
 
@@ -528,7 +528,7 @@
 
 :::
 
-### 手动触发-校验
+## 手动触发-校验
 
 校验功能用于在保存前检查行数据。如果校验不通过，则当前行保持编辑状态，且控件显示错误提示。
 
@@ -695,7 +695,7 @@
 
 :::
 
-### 表格内部-新增
+## 表格内部-新增
 
 展示新增功能的用法。
 
@@ -892,7 +892,7 @@
 
 :::
 
-### 行内事件
+## 行内事件
 
 展示行内事件的用法。
 
@@ -1010,7 +1010,142 @@
 
 :::
 
-### 分页
+## 定制事件
+
+展示行内事件的用法。
+
+:::demo 行内事件分为两种状态：`常规态`和`编辑态`。`常规态`的事件`extendProps.commands`中，`编辑态`的事件`extendProps.editableCommands`中。
+
+```html
+<template>
+  <ca-edit-table
+    editTriggerMode="auto"
+    :dataSource="table.dataList"
+    :columns="tableColumns"
+    :editCommand="rowEditCommand"
+    :saveCommand="rowSaveCommand"
+    :customCommands="table.customCommands"
+    @handleEdit="handleEdit"
+    @handleSave="handleSave"
+    @handleDelete="handleDelete"
+  />
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        table: {
+          dataList: [
+            {
+              id: 1001,
+              code: 'A1',
+              name: '上海燃气一期工程',
+            },
+            {
+              id: 1002,
+              code: 'A2',
+              name: '上海燃气二期工程',
+            },
+            {
+              id: 1003,
+              code: 'A3',
+              name: '上海燃气三期工程',
+            },
+          ],
+          customCommands: [
+            {
+              text: '关注',
+              command: 'handleStar',
+            },
+            {
+              text: '取消关注',
+              command: 'handleUnstar',
+            },
+          ],
+        },
+      };
+    },
+    computed: {
+      tableColumns() {
+        return [
+          {
+            type: 'default',
+            label: 'ID',
+            dataField: 'id',
+          },
+          {
+            type: 'default',
+            label: '编号',
+            dataField: 'code',
+          },
+          {
+            type: 'default',
+            label: '名称',
+            dataField: 'name',
+            elementProps: {
+              minWidth: 2,
+            },
+          },
+          {
+            type: 'commands',
+            label: '操作',
+            elementProps: {
+              width: '140px',
+            },
+            extendProps: {
+              commands: [
+                {
+                  text: '删除',
+                  command: 'handleDelete',
+                  elementProps: {
+                    type: 'danger',
+                  },
+                },
+              ],
+            },
+          },
+        ];
+      },
+      rowEditCommand() {
+        return {
+          command: 'handleEdit',
+        };
+      },
+      rowSaveCommand() {
+        return {
+          command: 'handleSave',
+        };
+      },
+    },
+    methods: {
+      handleEdit(index, row, callback) {
+        console.log('handleEdit,', index, row);
+        row.operateType = 'edit';
+        callback();
+      },
+      handleSave(index, row, callback) {
+        console.log('handleSave,', index, row);
+        callback();
+      },
+      handleDelete(index, row, callback) {
+        console.log('handleDelete,', index, row);
+        callback();
+      },
+      handleStar() {
+        console.log('star');
+      },
+      handleUnstar() {
+        console.log('unstar');
+      }
+    },
+  };
+</script>
+```
+
+:::
+
+## 分页
 
 展示表格分页的用法。
 
@@ -1126,7 +1261,7 @@
 
 :::
 
-### Table Attributes
+## Table Attributes
 
 常规属性可参考 [通用表格](http://castor.polarwin.cn/#/component/common-table) , 独有属性如下：
 
@@ -1141,7 +1276,7 @@
 | appendContent     | 插入至表格最后一行之后的内容                                                                                | string  | —                     | —           |
 | elementProps      | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object  | —                     | {}          |
 
-### Column Options
+## Column Options
 
 | 参数         | 说明                                                                                                        | 类型    | 可选值                                                             | 默认值  |
 | ------------ | ----------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------ | ------- |
@@ -1153,7 +1288,7 @@
 | elementProps | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object  | -                                                                  | {}      |
 | extendProps  | 扩展属性，参考 `Column ExtendProps Options`                                                                 | object  | -                                                                  | {}      |
 
-### Column ExtendProps Options
+## Column ExtendProps Options
 
 | 参数         | 说明                                                                                                                               | 类型     | 可选值 | 默认值 |
 | ------------ | ---------------------------------------------------------------------------------------------------------------------------------- | -------- | ------ | ------ |
@@ -1163,13 +1298,13 @@
 | onChange     | 当前行处于编辑状态时，当前单元格的值发生变化时触发                                                                                 | Function | -      |        |
 | onEnter      | 当前行处于编辑状态时，回车键触发                                                                                                   | Function | -      |        |
 
-### Table Events
+## Table Events
 
 | 事件名    | 说明                         | 参数 |
 | --------- | ---------------------------- | ---- |
 | row-click | 当某一行被点击时会触发该事件 | row  |
 
-### 注意事项
+## 注意事项
 
 校验方式采用 Element Form 组件内置的 validate 事件，使用方式推荐：
 
