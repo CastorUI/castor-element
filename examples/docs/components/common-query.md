@@ -1,6 +1,6 @@
-## CommonQuery 通用查询
+# CommonQuery 通用查询
 
-### 基础查询
+## 基础查询
 
 展示通用查询基础功能的用法。
 
@@ -296,7 +296,7 @@
 
 :::
 
-### 动态查询
+## 动态查询
 
 展示动态查询的用法。
 
@@ -469,7 +469,7 @@
 
 :::
 
-### Attributes
+## Attributes
 
 | 参数                  | 说明                                                                                                                           | 类型    | 可选值     | 默认值 |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------- | ---------- | ------ |
@@ -485,7 +485,7 @@
 | downloadOpt           | 下拉命令项                                                                                                                     | object  | —          | {}     |
 | elementProps          | ElementUI 属性,作用于 ElForm 组件 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object  | —          | {}     |
 
-### Field Options
+## Field Options
 
 | 参数         | 说明                                                                                                        | 类型   | 可选值         | 默认值    |
 | ------------ | ----------------------------------------------------------------------------------------------------------- | ------ | -------------- | --------- |
@@ -498,7 +498,7 @@
 | elementProps | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | string | -              | ascending |
 | extendProps  | 扩展属性，参考 `Field ExtendProps Options`                                                                  | object | -              | {}        |
 
-### Field ExtendProps Options
+## Field ExtendProps Options
 
 | 参数      | 说明                                                                                    | 类型     | 可选值 | 默认值 |
 | --------- | --------------------------------------------------------------------------------------- | -------- | ------ | ------ |
@@ -507,7 +507,7 @@
 | options   | 选项数据源,限于`type` 为 `select multiSelect checkboxGroup radioGroup radioButtonGroup` | array    | -      | []     |
 | onChange  | 值变动时回调事件                                                                        | function | —      | —      |
 
-### Field Type Options
+## Field Type Options
 
 | 类型             | 说明                 |
 | ---------------- | -------------------- |

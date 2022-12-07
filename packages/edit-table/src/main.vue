@@ -1,21 +1,59 @@
 <template>
   <div class="common-edit-table-container">
     <div
-      v-if="title || (addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this)))"
       class="table-append-header"
+      :class="{
+        'custom-commands':
+          (addCommand &&
+            addCommand.text &&
+            (!addCommand.visibleValidator ||
+              addCommand.visibleValidator.call(this))) ||
+          (customCommands && customCommands.length),
+      }"
     >
       <div class="table-title">
         {{ title }}
       </div>
-      <div class="table-add-command">
-        <el-button
-          v-if="addCommand && addCommand.text && (!addCommand.visibleValidator || addCommand.visibleValidator.call(this))"
-          :disabled="loading || editing || (addCommand.disableValidator && addCommand.disableValidator.call(this))"
-          v-bind="{type: 'primary', icon: 'el-icon-plus', ...addCommand.elementProps}"
-          @click="handleAdd"
+      <div class="table-commands">
+        <div
+          v-if="
+            addCommand &&
+              addCommand.text &&
+              (!addCommand.visibleValidator ||
+                addCommand.visibleValidator.call(this))
+          "
+          class="table-add-command divider"
         >
-          {{ addCommand.text }}
-        </el-button>
+          <el-button
+            :disabled="
+              loading ||
+                editing ||
+                (addCommand.disableValidator &&
+                  addCommand.disableValidator.call(this))
+            "
+            v-bind="{
+              type: 'primary',
+              icon: 'el-icon-plus',
+              ...addCommand.elementProps,
+            }"
+            @click="handleAdd"
+          >
+            {{ addCommand.text }}
+          </el-button>
+        </div>
+        <el-button-group
+          v-if="customCommands && customCommands.length"
+          class="table-custom-commands divider"
+        >
+          <el-button
+            v-for="(item, index) of customCommands"
+            :key="index"
+            v-bind="item.elementProps"
+            @click="$emit(item.command)"
+          >
+            {{ item.text }}
+          </el-button>
+        </el-button-group>
       </div>
     </div>
     <div class="table-content">
@@ -23,13 +61,13 @@
         v-loading="loading"
         row-key="id"
         :data="dataSource"
-        style="height:auto;padding:1px;"
-        v-bind="{border: true, ...elementProps}"
+        style="height: auto; padding: 1px"
+        v-bind="{ border: true, ...elementProps }"
         @row-click="handleRowClick"
         @current-change="handleCurrentChange"
       >
         <edit-column
-          v-for="(item,index) of columns"
+          v-for="(item, index) of columns"
           :key="index"
           :label="item.label"
           :data-field="item.dataField"
@@ -52,26 +90,26 @@
           v-if="dataSource && dataSource.length && appendContent"
           v-slot:append
         >
-          <span
-            class="append-content"
-            style="padding: 0 10px"
-          >{{ appendContent }}</span>
+          <span class="append-content" style="padding: 0 10px">{{
+            appendContent
+          }}</span>
         </template>
       </el-table>
     </div>
-    <div
-      v-if="pagination.pageSize"
-      class="common-pagination-container"
-    >
+    <div v-if="pagination.pageSize" class="common-pagination-container">
       <el-pagination
         :current-page="pagination.pageIndex"
         :page-size="pagination.pageSize"
         :page-sizes="pageSizes"
         :total="pagination.total"
-        style="margin: 10px 0;"
-        v-bind="{layout: 'total,sizes, prev, pager, next',background: true, ...pagination.elementProps}"
-        @size-change="pageSize => handlePageSizeChange(pageSize)"
-        @current-change="pageIndex => handlePageIndexChange(pageIndex)"
+        style="margin: 10px 0"
+        v-bind="{
+          layout: 'total,sizes, prev, pager, next',
+          background: true,
+          ...pagination.elementProps,
+        }"
+        @size-change="(pageSize) => handlePageSizeChange(pageSize)"
+        @current-change="(pageIndex) => handlePageIndexChange(pageIndex)"
       />
     </div>
   </div>
@@ -82,81 +120,85 @@ import EditColumn from './../../components/EditColumn';
 export default {
   name: 'CaEditTable',
   components: {
-    'edit-column': EditColumn,
+    'edit-column': EditColumn
   },
   props: {
     editTriggerMode: {
       type: String,
       default: 'manual',
-      validator: (value) => ['manual', 'auto'].indexOf(value) > -1,
+      validator: value => ['manual', 'auto'].indexOf(value) > -1
     },
     loading: {
       type: Boolean,
-      default: false,
+      default: false
     },
     title: {
       type: String,
-      default: '',
+      default: ''
     },
     dataSource: {
       type: Array,
-      default: () => [],
+      default: () => []
     },
     columns: {
       type: Array,
-      default: () => [],
+      default: () => []
     },
     pagination: {
       type: Object,
-      default: function () {
+      default: function() {
         return {};
-      },
+      }
     },
     addCommand: {
       type: Object,
-      default: () => {},
+      default: () => {}
     },
     editCommand: {
       type: Object,
-      default: () => {},
+      default: () => {}
     },
     saveCommand: {
       type: Object,
-      default: () => {},
+      default: () => {}
     },
     addInside: { type: Boolean, default: false },
     addInsidePosition: {
       type: String,
       default: 'beforeFirst',
-      validator: function (value) {
+      validator: function(value) {
         return ['beforeFirst', 'afterLast'].indexOf(value) > -1;
-      },
+      }
+    },
+    customCommands: {
+      type: Array,
+      default: () => []
     },
     appendContent: {
       type: String,
-      default: '',
+      default: ''
     },
     getList: {
       type: Function,
-      default: () => {},
+      default: () => {}
     },
     customComponents: {
       type: Object,
-      default: function () {
+      default: function() {
         return {};
-      },
+      }
     },
     elementProps: {
       type: Object,
-      default: function () {
+      default: function() {
         return {};
-      },
-    },
+      }
+    }
   },
   data() {
     return {
       editingRow: null,
-      formValidateResult: {},
+      formValidateResult: {}
     };
   },
   computed: {
@@ -168,7 +210,7 @@ export default {
     },
     editing() {
       return this.editingRow != null;
-    },
+    }
   },
   created() {
     if (this.editTriggerMode === 'auto') {
@@ -188,26 +230,26 @@ export default {
         this.editingRow = null;
       }
     },
-    handleEmitEvent: function (commandType, command, index, row) {
+    handleEmitEvent: function(commandType, command, index, row) {
       console.log('handleEmitEvent', commandType, command, index, row);
       this.$emit(command, index, row, () => {
         this.callback(row);
       });
     },
-    handleAdd: function () {
+    handleAdd: function() {
       let newId = -10001;
       if (
         this.dataSource &&
         this.dataSource.length > 0 &&
-        this.dataSource.some((r) => r.id < 0)
+        this.dataSource.some(r => r.id < 0)
       ) {
         newId =
-          this.dataSource.map((r) => r.id).reduce((a, b) => Math.min(a, b)) - 1;
+          this.dataSource.map(r => r.id).reduce((a, b) => Math.min(a, b)) - 1;
       }
 
       if (this.addInside) {
         const newRow = {};
-        (this.columns || []).forEach((col) => {
+        (this.columns || []).forEach(col => {
           if (col.dataField) {
             newRow[col.dataField] = (col.extendProps || {}).defaultValue;
           }
@@ -225,7 +267,7 @@ export default {
 
       this.$emit(this.addCommand.command);
     },
-    handleRowClick: function (row, column, event) {
+    handleRowClick: function(row, column, event) {
       console.log('handleRowClick', row, column, event);
       event.stopPropagation();
       if (
@@ -246,7 +288,7 @@ export default {
         this.$emit('row-click', row, column, event);
       }
     },
-    handleCurrentChange: function (currentRow, oldCurrentRow) {
+    handleCurrentChange: function(currentRow, oldCurrentRow) {
       console.log(
         'handleCurrentChange: ',
         oldCurrentRow,
@@ -285,7 +327,7 @@ export default {
       console.log('handleValidateForm', validateField, validateStatus);
       this.formValidateResult[validateField] = validateStatus;
       const formValidateStatus = Object.values(this.formValidateResult).every(
-        (r) => r
+        r => r
       );
       this.$emit('update:validateStatus', formValidateStatus);
     },
@@ -298,8 +340,8 @@ export default {
       this.pagination.pageSize = pageSize;
       this.$emit('page-size-change', pageSize);
       this.getList();
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -320,17 +362,37 @@ export default {
   }
 
   .table-append-header {
-    height: 40px;
-    line-height: 40px;
-    margin-bottom: 12px;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &.custom-commands {
+      margin-bottom: 12px;
+    }
     .table-title {
-      float: left;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: bold;
     }
-    .table-add-command {
-      float: right;
+    .table-commands {
+      display: flex;
+      .table-add-command {
+        button {
+          font-size: 13px;
+        }
+      }
+      .table-custom-commands,
+      .table-setting-commands {
+        margin-left: 16px;
+        button {
+          font-size: 13px;
+        }
+      }
+      .divider {
+        padding-right: 16px;
+        border-right: 1px solid rgba(0, 0, 0, 0.06);
+      }
+      .el-button [class*='el-icon-'] + span {
+        margin-left: 0;
+      }
     }
   }
 
