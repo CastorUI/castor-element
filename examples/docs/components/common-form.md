@@ -1,6 +1,6 @@
-## CommonForm 通用表单
+# CommonForm 通用表单
 
-### 基础表单
+## 基础表单
 
 展示通用表单基础功能的用法。
 
@@ -134,6 +134,7 @@
           operateType: 'add',
           model: {
             code: '1001',
+            code2: 0,
             en_name: undefined,
             cn_name: undefined,
             sex: 2,
@@ -514,7 +515,7 @@
 
 :::
 
-### 表单校验
+## 表单校验
 
 展示表单校验的用法。
 
@@ -745,7 +746,7 @@
 
 :::
 
-### 查看状态
+## 查看状态
 
 `查看状态`下所有控件字段为只读，且不显示操作按钮
 
@@ -965,7 +966,7 @@
 
 :::
 
-### 状态校验
+## 状态校验
 
 所有的表单字段都支持 `visibleValidator` 和 `disableValidator`
 
@@ -1037,7 +1038,7 @@
 
 :::
 
-### Attributes
+## Attributes
 
 | 参数             | 说明                                                                                                                     | 类型    | 可选值        | 默认值 |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------ | ------- | ------------- | ------ |
@@ -1051,7 +1052,7 @@
 | customComponents | 定制组件集合                                                                                                             | array   | —             | []     |
 | elementProps     | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing)              | object  | —             | {}     |
 
-### Field Options
+## Field Options
 
 | 参数             | 说明                                                                                                        | 类型     | 可选值 | 默认值    |
 | ---------------- | ----------------------------------------------------------------------------------------------------------- | -------- | ------ | --------- |
@@ -1065,7 +1066,7 @@
 | elementProps     | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | string   | —      | ascending |
 | extendProps      | 扩展属性，参考 `Field ExtendProps Options`                                                                  | object   | —      | {}        |
 
-### Field ExtendProps Options
+## Field ExtendProps Options
 
 | 参数              | 说明                                                                                                     | 类型                   | 可选值 | 默认值 |
 | ----------------- | -------------------------------------------------------------------------------------------------------- | ---------------------- | ------ | ------ |
@@ -1080,7 +1081,7 @@
 | getSuggestOptions | 输入时查询匹配结果，只限于 `type` 为 `autoComplete`                                                      | function(queryString)) | —      | —      |
 | appendText        | 后缀文本，用于 `type` 为 `input、text`                                                                   | string                 | —      | —      |
 
-### Field Type Options
+## Field Type Options
 
 | 类型           | 说明                         |
 | -------------- | ---------------------------- |

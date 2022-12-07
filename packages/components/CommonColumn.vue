@@ -58,7 +58,7 @@
           <el-image
             :style="
               item.extendProps.imageStyle ||
-              'width: 24px; height: 24px;line-height:24px;'
+                'width: 24px; height: 24px;line-height:24px;'
             "
             :src="item.extendProps.imageUrl"
             fit="fill"
@@ -104,9 +104,9 @@
         v-if="extendProps.options.some((r) => r.value === scope.row[dataField])"
         :style="
           'color:' +
-          extendProps.options.filter((r) => r.value === scope.row[dataField])[0]
-            .color +
-          ';'
+            extendProps.options.filter((r) => r.value === scope.row[dataField])[0]
+              .color +
+            ';'
         "
       >
         <i
@@ -123,7 +123,7 @@
         <el-tooltip
           v-if="
             elementProps.showTips === scope.row[dataField] &&
-            scope.row[elementProps.tipsContent]
+              scope.row[elementProps.tipsContent]
           "
           popper-class="normal"
           effect="dark"
@@ -185,11 +185,10 @@
     <template slot-scope="scope">
       <span
         v-if="extendProps.options.some((r) => r.value === scope.row[dataField])"
-        >{{
-          extendProps.options.filter((r) => r.value === scope.row[dataField])[0]
-            .label
-        }}</span
-      >
+      >{{
+        extendProps.options.filter((r) => r.value === scope.row[dataField])[0]
+          .label
+      }}</span>
     </template>
   </el-table-column>
   <el-table-column

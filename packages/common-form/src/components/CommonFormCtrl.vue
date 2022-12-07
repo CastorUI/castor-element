@@ -125,10 +125,16 @@
       v-bind="{ style: 'display:inline-block;', ...elementProps }"
     >{{
       `${
-        (extendProps.options
-          ? extendProps.options.filter((r) => r.value === model[dataField])[0]
-            .label
-          : model[dataField]) || '暂无'
+        extendProps.options
+          ? (
+            extendProps.options.find((r) => r.value === model[dataField]) ||
+            {}
+          ).label || '暂无'
+          : model[dataField] === null ||
+            model[dataField] === undefined ||
+            model[dataField] === ''
+            ? '暂无'
+            : model[dataField]
       }${extendProps.appendText || ''}`
     }}</span>
     <span
