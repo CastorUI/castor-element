@@ -7,6 +7,7 @@
     :rules="rules"
     :disabled="operateType === 'view'"
     v-bind="{ labelWidth: '120px', labelPosition: 'right', ...elementProps }"
+    @submit.native.prevent
   >
     <div
       v-if="customCommands"
