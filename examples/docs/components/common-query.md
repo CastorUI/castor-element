@@ -166,6 +166,12 @@
             columnSpan: 1,
           },
           {
+            type: 'year',
+            label: '有效年份',
+            dataField: 'valid_year',
+            columnSpan: 1,
+          },
+          {
             type: 'multiSelect',
             label: '角色',
             dataField: 'user_role',
