@@ -213,7 +213,7 @@ module.exports = {
         allowTemplateLiterals: true,
       },
     ],
-    semi: [0, 'never'],
+    // semi: [0, 'never'],
     'semi-spacing': [
       2,
       {

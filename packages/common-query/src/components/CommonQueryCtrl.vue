@@ -84,13 +84,7 @@
         >{{ option.label }}</el-radio-button>
       </el-radio-group>
       <el-date-picker
-        v-else-if="
-          type === 'dateTimeRange' ||
-            type === 'dateRange' ||
-            type === 'monthRange' ||
-            type === 'date' ||
-            type === 'month'
-        "
+        v-else-if="datePickerType.indexOf(type) > -1"
         v-model="model[dataField]"
         :disabled="disableValidator && disableValidator.call(this, model)"
         :type="type.toLocaleLowerCase()"
@@ -195,44 +189,60 @@ export default {
   props: {
     type: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     label: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     model: {
       type: Object,
-      default: undefined
+      default: undefined,
     },
     dataField: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     width: {
       type: String,
-      default: undefined
+      default: undefined,
     },
     disableValidator: {
       type: Function,
-      default: undefined
+      default: undefined,
     },
     visibleValidator: {
       type: Function,
-      default: () => true
+      default: () => true,
     },
     elementProps: {
       type: Object,
       default: function() {
         return {
-          valueFormat: 'yyyy-MM-dd'
+          valueFormat: 'yyyy-MM-dd',
         };
-      }
+      },
     },
     extendProps: {
       type: Object,
-      default: () => {}
-    }
+      default: () => {},
+    },
+  },
+  data() {
+    return {
+      datePickerType: [
+        'year',
+        'month',
+        'date',
+        'dates',
+        'months',
+        'week',
+        'datetime',
+        'datetimerange',
+        'daterange',
+        'monthrange',
+      ],
+    };
   },
   computed: {
     pickerOptions: function() {
@@ -247,7 +257,7 @@ export default {
                   const start = new Date();
                   start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
                   picker.$emit('pick', [start, end]);
-                }
+                },
               },
               {
                 text: '最近一个月',
@@ -256,7 +266,7 @@ export default {
                   const start = new Date();
                   start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
                   picker.$emit('pick', [start, end]);
-                }
+                },
               },
               {
                 text: '最近三个月',
@@ -265,9 +275,9 @@ export default {
                   const start = new Date();
                   start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
                   picker.$emit('pick', [start, end]);
-                }
-              }
-            ]
+                },
+              },
+            ],
           }
         );
       } else if (this.type === 'monthRange') {
@@ -278,7 +288,7 @@ export default {
                 text: '本月',
                 onClick(picker) {
                   picker.$emit('pick', [new Date(), new Date()]);
-                }
+                },
               },
               {
                 text: '今年至今',
@@ -286,7 +296,7 @@ export default {
                   const end = new Date();
                   const start = new Date(new Date().getFullYear(), 0);
                   picker.$emit('pick', [start, end]);
-                }
+                },
               },
               {
                 text: '最近六个月',
@@ -295,15 +305,15 @@ export default {
                   const start = new Date();
                   start.setMonth(start.getMonth() - 6);
                   picker.$emit('pick', [start, end]);
-                }
-              }
-            ]
+                },
+              },
+            ],
           }
         );
       } else {
         return {};
       }
-    }
-  }
+    },
+  },
 };
 </script>
