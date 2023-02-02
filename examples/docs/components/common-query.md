@@ -110,7 +110,7 @@
             labelWidth: '120px',
           },
         },
-      }
+      };
     },
     computed: {
       searchFields() {
@@ -255,48 +255,48 @@
               options: this.optionsMap['equipment'],
             },
           },
-        ]
+        ];
       },
     },
     methods: {
       handleCodeFocus(model) {
-        console.log('handleCodeFocus', model)
+        console.log('handleCodeFocus', model);
       },
       handleUserSexChange(model) {
-        console.log('handleUserSexChange', model)
+        console.log('handleUserSexChange', model);
       },
       handleAuthorSexChange(model) {
-        console.log('handleAuthorSexChange', model)
+        console.log('handleAuthorSexChange', model);
       },
       handleFilter() {
-        console.log('handleFilter', this.search.model)
+        console.log('handleFilter', this.search.model);
       },
       handleReset() {
-        this.$refs['searchForm'].$refs['form'].resetFields()
+        this.$refs['searchForm'].$refs['form'].resetFields();
       },
       getUserTypesAuto(queryString, cb) {
-        console.log('getUserTypesAuto', queryString)
+        console.log('getUserTypesAuto', queryString);
         setTimeout(() => {
           const res = this.optionsMap['user_type'].map((r) => {
             return {
               value: r.label,
               id: r.value,
-            }
-          })
+            };
+          });
           const finalRes = queryString
             ? res.filter(
                 (r) =>
                   r.value.toLowerCase().indexOf(queryString.toLowerCase()) > -1
               )
-            : res
-          cb(finalRes)
-        }, 500)
+            : res;
+          cb(finalRes);
+        }, 500);
       },
       handleUserTypeAutoSelect(item, model) {
-        console.log('handleUserTypeAutoSelect', item, model)
+        console.log('handleUserTypeAutoSelect', item, model);
       },
     },
-  }
+  };
 </script>
 ```
 
@@ -393,7 +393,7 @@
             },
           ],
         },
-      }
+      };
     },
     computed: {
       searchFields() {
@@ -458,18 +458,18 @@
               options: this.optionsMap['equipment'],
             },
           },
-        ]
+        ];
       },
     },
     methods: {
       handleFilter() {
-        console.log('handleFilter', this.search.model)
+        console.log('handleFilter', this.search.model);
       },
       handleReset() {
-        this.$refs['searchForm'].$refs['form'].resetFields()
+        this.$refs['searchForm'].$refs['form'].resetFields();
       },
     },
-  }
+  };
 </script>
 ```
 
