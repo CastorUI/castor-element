@@ -65,7 +65,8 @@
           v-for="option in extendProps.options"
           :key="option.value"
           :label="option.value"
-        >{{ option.label }}</el-radio>
+          >{{ option.label }}</el-radio
+        >
       </el-radio-group>
       <el-radio-group
         v-else-if="type === 'radioButtonGroup'"
@@ -81,16 +82,11 @@
           v-for="option in extendProps.options"
           :key="option.value"
           :label="option.value"
-        >{{ option.label }}</el-radio-button>
+          >{{ option.label }}</el-radio-button
+        >
       </el-radio-group>
       <el-date-picker
-        v-else-if="
-          type === 'dateTimeRange' ||
-            type === 'dateRange' ||
-            type === 'monthRange' ||
-            type === 'date' ||
-            type === 'month'
-        "
+        v-else-if="datePickerType.indexOf(type) > -1"
         v-model="model[dataField]"
         :disabled="disableValidator && disableValidator.call(this, model)"
         :type="type.toLocaleLowerCase()"
@@ -233,6 +229,22 @@ export default {
       type: Object,
       default: () => {}
     }
+  },
+  data() {
+    return {
+      datePickerType: [
+        'year',
+        'month',
+        'date',
+        'dates',
+        'months',
+        'week',
+        'datetime',
+        'datetimerange',
+        'daterange',
+        'monthrange'
+      ]
+    };
   },
   computed: {
     pickerOptions: function() {
