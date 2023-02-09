@@ -250,8 +250,14 @@ export default {
       );
     },
   },
-  created() {
-    this.getTypedColumns(this.defaultConfigColumns);
+  watch: {
+    defaultConfigColumns: {
+      handler() {
+        this.getTypedColumns(this.defaultConfigColumns);
+      },
+      deep: true,
+      immediate: true
+    }
   },
   methods: {
     getTypedColumns(columns) {
