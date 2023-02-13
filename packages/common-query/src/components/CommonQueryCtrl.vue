@@ -100,6 +100,23 @@
         }"
         @change="extendProps.onChange && extendProps.onChange.call(this, model)"
       />
+      <CustomDatePicker
+        v-else-if="type === 'yearRange'"
+        v-model="model[dataField]"
+        :disabled="disableValidator && disableValidator.call(this, model)"
+        :type="type.toLocaleLowerCase()"
+        v-bind="{
+          placeholder: '请选择',
+          startPlaceholder: '开始日期',
+          rangeSeparator: '~',
+          endPlaceholder: '结束日期',
+          valueFormat: 'yyyy-MM-dd',
+          pickerOptions: pickerOptions,
+          style: 'width:100%;',
+          ...elementProps,
+        }"
+        @change="extendProps.onChange && extendProps.onChange.call(this, model)"
+      />
       <el-switch
         v-else-if="type === 'switch'"
         v-model="model[dataField]"
@@ -184,8 +201,9 @@
 </template>
 <script>
 import InputNumberRange from './InputNumberRange';
+import CustomDatePicker from './custom-date-picker'
 export default {
-  components: { InputNumberRange },
+  components: { InputNumberRange, CustomDatePicker },
   props: {
     type: {
       type: String,

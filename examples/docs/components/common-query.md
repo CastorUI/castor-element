@@ -247,6 +247,16 @@
             },
           },
           {
+            type: 'yearRange',
+            label: '创建年份区间',
+            dataField: 'create_year_range',
+            columnSpan: 2,
+            showType: 'static',
+            elementProps: {
+              valueFormat: 'yyyy',
+            },
+          },
+          {
             type: 'checkboxGroup',
             label: '主打产品',
             dataField: 'equipment',

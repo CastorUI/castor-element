@@ -1,0 +1,113 @@
+@import "~element-ui/packages/theme-chalk/src/mixins/mixins";
+@import "~element-ui/packages/theme-chalk/src/common/var";
+
+@include b(date-editor) {
+  position: relative;
+  display: inline-block;
+  text-align: left;
+
+  &.el-input,
+  &.el-input__inner {
+    width: 220px;
+  }
+
+  @include m((yearrange)) {
+    &.el-input,
+    &.el-input__inner {
+      width: 300px;
+    }
+  }
+
+  @include m((timerange)) {
+    &.el-input,
+    &.el-input__inner {
+      width: 350px;
+    }
+  }
+
+}
+@include b(year-table) {
+  font-size: 12px;
+  margin: -1px;
+  border-collapse: collapse;
+
+  .el-icon {
+    color: $--datepicker-icon-color;
+  }
+
+  td {
+    text-align: center;
+    padding: 20px 3px;
+    cursor: pointer;
+    &.in-range {
+      padding: 20px 0px;
+    }
+    &.today {
+      .cell {
+        color: $--color-primary;
+        font-weight: bold;
+      }
+    }
+    &.disabled .cell {
+      background-color: $--background-color-base;
+      cursor: not-allowed;
+      color: $--color-text-placeholder;
+
+      &:hover {
+        color: $--color-text-placeholder;
+      }
+    }
+
+    & div {
+      height: 44px;
+      padding: 6px 0;
+      box-sizing: border-box;
+    }
+
+    .cell {
+      width: 60px;
+      height: 32px;
+      display: block;
+      line-height: 32px;
+      color: $--datepicker-font-color;
+      margin: 0 auto;
+      border-radius: 16px;
+
+      &:hover {
+        color: $--datepicker-hover-font-color;
+      }
+    }
+
+    &.in-range div {
+      background-color: $--datepicker-inrange-background-color;
+      &:hover {
+        background-color: $--datepicker-inrange-hover-background-color;
+      }
+    }
+    &.start-date div,
+    &.end-date div {
+      color: $--color-white;
+    }
+
+    &.start-date .cell,
+    &.end-date .cell {
+      color: $--color-white;
+      background-color: $--datepicker-active-color;
+    }
+
+    &.start-date div {
+      border-top-left-radius: 24px;
+      border-bottom-left-radius: 24px;
+    }
+
+    &.end-date div {
+      border-top-right-radius: 24px;
+      border-bottom-right-radius: 24px;
+    }
+
+    &.current:not(.disabled) .cell {
+      color: $--datepicker-active-color;
+    }
+  }
+}
+
