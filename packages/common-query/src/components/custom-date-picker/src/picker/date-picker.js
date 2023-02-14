@@ -1,12 +1,9 @@
 import Picker from '../picker';
-import DatePanel from '../panel/date';
 import YearRangePanel from '../panel/year-range';
 
 const getPanel = function(type) {
-  if (type === 'yearrange') {
-    return YearRangePanel;
-  }
-  return DatePanel;
+  // Since it is a hack component, the panel returns the year regardless of the situation
+  return YearRangePanel;
 };
 
 export default {
