@@ -1,5 +1,5 @@
-import Picker from '../picker';
-import YearRangePanel from '../panel/year-range';
+import Picker from './year-picker';
+import YearRangePanel from './year-range-panel.vue';
 
 const getPanel = function(type) {
   // Since it is a hack component, the panel returns the year regardless of the situation
@@ -9,7 +9,7 @@ const getPanel = function(type) {
 export default {
   mixins: [Picker],
 
-  name: 'ElDatePicker',
+  name: 'YearRangePicker',
 
   props: {
     type: {

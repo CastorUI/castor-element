@@ -942,3 +942,6 @@ export default {
   }
 };
 </script>
+<style lang="scss">
+@import "./year-table.scss";
+</style>

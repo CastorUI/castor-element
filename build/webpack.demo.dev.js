@@ -36,11 +36,6 @@ const webpackConfig = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        include: [path.resolve('src'), path.resolve('test'), path.resolve('node_modules/element-ui/packages')]
-      },
-      {
         enforce: 'pre',
         test: /\.(vue|jsx?)$/,
         exclude: /node_modules/,

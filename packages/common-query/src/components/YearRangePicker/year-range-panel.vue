@@ -92,7 +92,7 @@
   } from 'element-ui/src/utils/date-util';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Locale from 'element-ui/src/mixins/locale';
-  import YearTable from '../basic/year-table';
+  import YearTable from './year-table';
 
   const getStartDate = (date) => {
     return new Date(Math.floor(date.getFullYear() / 10) * 10, 0, 1);

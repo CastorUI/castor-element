@@ -252,9 +252,6 @@
             dataField: 'create_year_range',
             columnSpan: 2,
             showType: 'static',
-            elementProps: {
-              valueFormat: 'yyyy',
-            },
           },
           {
             type: 'checkboxGroup',

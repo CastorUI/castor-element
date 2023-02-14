@@ -84,7 +84,7 @@
         >{{ option.label }}</el-radio-button>
       </el-radio-group>
       <el-date-picker
-        v-else-if="datePickerType.indexOf(type) > -1"
+        v-else-if="datePickerTypes.indexOf(type) > -1"
         v-model="model[dataField]"
         :disabled="disableValidator && disableValidator.call(this, model)"
         :type="type.toLocaleLowerCase()"
@@ -100,18 +100,17 @@
         }"
         @change="extendProps.onChange && extendProps.onChange.call(this, model)"
       />
-      <CustomDatePicker
+      <YearRangePicker
         v-else-if="type === 'yearRange'"
         v-model="model[dataField]"
         :disabled="disableValidator && disableValidator.call(this, model)"
         :type="type.toLocaleLowerCase()"
         v-bind="{
           placeholder: '请选择',
-          startPlaceholder: '开始日期',
+          startPlaceholder: '开始年份',
           rangeSeparator: '~',
-          endPlaceholder: '结束日期',
-          valueFormat: 'yyyy-MM-dd',
-          pickerOptions: pickerOptions,
+          endPlaceholder: '结束年份',
+          valueFormat: 'yyyy',
           style: 'width:100%;',
           ...elementProps,
         }"
@@ -201,9 +200,9 @@
 </template>
 <script>
 import InputNumberRange from './InputNumberRange';
-import CustomDatePicker from './custom-date-picker'
+import YearRangePicker from './YearRangePicker'
 export default {
-  components: { InputNumberRange, CustomDatePicker },
+  components: { InputNumberRange, YearRangePicker },
   props: {
     type: {
       type: String,
@@ -248,7 +247,7 @@ export default {
   },
   data() {
     return {
-      datePickerType: [
+      datePickerTypes: [
         'year',
         'month',
         'date',
