@@ -94,6 +94,7 @@
         :default-sort="defaultSort"
         v-bind="{ border: true, stripe: true, ...elementProps }"
         @row-click="handleRowClick"
+        @row-dblclick="handleRowDblClick"
         @selection-change="
           (multipleSelection) => handleSelectionChange(multipleSelection)
         "
@@ -237,13 +238,13 @@ export default {
       hackReset: true,
       originColumns: [],
       multipleSelection: [],
-      dynamicColums: JSON.parse(JSON.stringify(this.columns)),
+      dynamicColums: [],
       configColumns: []
     };
   },
   computed: {
     pageSizes() {
-      const pageSizeList = [10, 15, 20, 30, 50];
+      const pageSizeList = this.$pageSizeList || [10, 15, 20, 30, 50];
       if (pageSizeList.indexOf(this.pagination.pageSize) <= -1) {
         pageSizeList.push(this.pagination.pageSize);
         pageSizeList.sort((a, b) => a - b);
@@ -310,12 +311,7 @@ export default {
             fixed: (r.elementProps || {}).fixed
           };
         });
-        this.dynamicColums.forEach(r => {
-          const originColumn = this.columns.filter(
-            c => c.dataField === r.dataField
-          )[0];
-          r.extendProps = originColumn.extendProps;
-        });
+        this.refreshConfigColumns();
         this.$nextTick(() => {
           this.hackReset = true;
         });
@@ -326,65 +322,67 @@ export default {
   },
   created() {
     console.log('this.tableTag', this.tableTag);
-    if (
-      this.tableTag &&
-      (this.extendProps || {}).cacheConfigColumns !== false
-    ) {
-      const cacheConfigColumnsJson = localStorage.getItem(
-        `${this.tableTag}-CONFIG-COLUMNS`
-      );
-      if (cacheConfigColumnsJson) {
-        const cachedColumns = JSON.parse(cacheConfigColumnsJson);
-        // 过滤删除列&&获取列标题
-        const validCachedColumns = cachedColumns
-          // 过滤删除列
-          .filter(r => this.columns.some(c => c.dataField === r.dataField))
-          // 获取列标题
-          .map(r => {
-            const originColumn = this.columns.find(
-              c => c.dataField === r.dataField
-            );
-            return {
-              ...r,
-              label:
-                originColumn.type === 'selection'
-                  ? '选择列'
-                  : originColumn.label
-            };
-          });
-        // 获取新增列
-        const addedColumns = this.columns
-          .filter(
-            r => !validCachedColumns.some(c => c.dataField === r.dataField)
-          )
-          .map(r => {
-            return {
-              ...r,
-              show: true,
-              fixed: (r.elementProps || {}).fixed
-            };
-          });
-        // 组装所有可设置列
-        this.configColumns = validCachedColumns.concat(addedColumns);
-      }
-    }
-
-    if (!(this.configColumns && this.configColumns.length)) {
-      this.configColumns = this.columns.map(r => {
-        return {
-          show: true,
-          dataField: r.dataField,
-          label: r.type === 'selection' ? '选择列' : r.label,
-          fixed: (r.elementProps || {}).fixed
-        };
-      });
-    }
   },
   methods: {
     indexMethod(index) {
       return (
         this.pagination.pageSize * (this.pagination.pageIndex - 1) + index + 1
       );
+    },
+    refreshConfigColumns() {
+      if (
+        this.tableTag &&
+        (this.extendProps || {}).cacheConfigColumns !== false
+      ) {
+        const cacheConfigColumnsJson = localStorage.getItem(
+          `${this.tableTag}-CONFIG-COLUMNS`
+        );
+        if (cacheConfigColumnsJson) {
+          const cachedColumns = JSON.parse(cacheConfigColumnsJson);
+          // 过滤删除列&&获取列标题
+          const validCachedColumns = cachedColumns
+            // 过滤删除列
+            .filter(r => this.columns.some(c => c.dataField === r.dataField))
+            // 获取列标题
+            .map(r => {
+              const originColumn = this.columns.find(
+                c => c.dataField === r.dataField
+              );
+              return {
+                ...r,
+                label:
+                  originColumn.type === 'selection'
+                    ? '选择列'
+                    : originColumn.label
+              };
+            });
+          // 获取新增列
+          const addedColumns = this.columns
+            .filter(
+              r => !validCachedColumns.some(c => c.dataField === r.dataField)
+            )
+            .map(r => {
+              return {
+                ...r,
+                show: true,
+                fixed: (r.elementProps || {}).fixed
+              };
+            });
+          // 组装所有可设置列
+          this.configColumns = validCachedColumns.concat(addedColumns);
+        }
+      }
+
+      if (!(this.configColumns && this.configColumns.length)) {
+        this.configColumns = this.columns.map(r => {
+          return {
+            show: true,
+            dataField: r.dataField,
+            label: r.type === 'selection' ? '选择列' : r.label,
+            fixed: (r.elementProps || {}).fixed
+          };
+        });
+      }
     },
     handleSelectionChange(multipleSelection) {
       this.multipleSelection = multipleSelection;
@@ -428,6 +426,15 @@ export default {
       }
 
       this.$emit('row-click', row, column, event);
+    },
+    handleRowDblClick(row, column, event) {
+      console.log('handleRowDblClick', row, column, event);
+      // 列类型为commands时,包装层为SPAN或IMG
+      if (['SPAN', 'IMG'].indexOf(event.target.nodeName) > -1) {
+        return;
+      }
+
+      this.$emit('row-dblclick', row, column, event);
     }
   }
 };
