@@ -94,6 +94,7 @@
         :default-sort="defaultSort"
         v-bind="{ border: true, stripe: true, ...elementProps }"
         @row-click="handleRowClick"
+        @row-dblclick="handleRowDblClick"
         @selection-change="
           (multipleSelection) => handleSelectionChange(multipleSelection)
         "
@@ -243,7 +244,7 @@ export default {
   },
   computed: {
     pageSizes() {
-      const pageSizeList = [10, 15, 20, 30, 50];
+      const pageSizeList = this.$pageSizeList || [10, 15, 20, 30, 50];
       if (pageSizeList.indexOf(this.pagination.pageSize) <= -1) {
         pageSizeList.push(this.pagination.pageSize);
         pageSizeList.sort((a, b) => a - b);
@@ -425,6 +426,15 @@ export default {
       }
 
       this.$emit('row-click', row, column, event);
+    },
+    handleRowDblClick(row, column, event) {
+      console.log('handleRowDblClick', row, column, event);
+      // 列类型为commands时,包装层为SPAN或IMG
+      if (['SPAN', 'IMG'].indexOf(event.target.nodeName) > -1) {
+        return;
+      }
+
+      this.$emit('row-dblclick', row, column, event);
     }
   }
 };
