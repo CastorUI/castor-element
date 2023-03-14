@@ -24,7 +24,7 @@ const install = function(Vue, options) {
   if (install.installed) return;
   // 遍历注册全局组件
   if (options) {
-    Vue.prototype.$pageSizeList = options.pageSizeList || [10, 15, 20, 30, 50]
+    Vue.prototype.$pageSizeList = options.pageSizeList
   }
   components.map((component) => Vue.component(component.name, component));
 };
