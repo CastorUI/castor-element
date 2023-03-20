@@ -29,7 +29,7 @@ npm run build:packages
 最后发布到 npm 私库
 
 ```
-npm publish
+npm run verdaccio
 ```
 
 ## 二. 组件库文档
