@@ -135,6 +135,9 @@
             elementProps: {
               minWidth: '130px',
             },
+            extendProps: {
+              onChange:(row) => this.handleInputNumberChange(row),
+            },
           },
           {
             type: 'select',
@@ -207,6 +210,9 @@
         console.log('handleSave,', index, row);
         row.operateType = 'view';
         callback();
+      },
+      handleInputNumberChange(row) {
+        console.log('handleInputNumberChange', row);
       },
     },
   };
@@ -1137,7 +1143,7 @@
       },
       handleUnstar() {
         console.log('unstar');
-      }
+      },
     },
   };
 </script>
