@@ -233,7 +233,7 @@ export default {
     handleEmitEvent: function(commandType, command, index, row) {
       console.log('handleEmitEvent', commandType, command, index, row);
       // 对于内部行跳转，做特殊处理
-      if (commandType === 'current-change') {
+      if (commandType === 'currentChange') {
         this.$emit(command, index, row, () => {
       });
       } else {
@@ -305,11 +305,11 @@ export default {
       if (this.editingRow && !oldCurrentRow) {
         return;
       }
-      this.saveEditingRow('current-change');
+      this.saveEditingRow('currentChange');
     },
     handleOuterRowChange(event) {
       console.log('handleOuterRowChange', this.editingRow);
-      this.saveEditingRow('outer-row-change');
+      this.saveEditingRow('outerRowChange');
     },
     saveEditingRow(eventType) {
       if (
