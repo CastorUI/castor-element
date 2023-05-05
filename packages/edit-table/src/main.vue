@@ -232,9 +232,15 @@ export default {
     },
     handleEmitEvent: function(commandType, command, index, row) {
       console.log('handleEmitEvent', commandType, command, index, row);
-      this.$emit(command, index, row, () => {
+      // 对于内部行跳转，做特殊处理
+      if (commandType === 'currentChange') {
+        this.$emit(command, index, row, () => {
+      });
+      } else {
+        this.$emit(command, index, row, () => {
         this.callback(row);
       });
+      }
     },
     handleAdd: function() {
       let newId = -10001;
@@ -296,17 +302,16 @@ export default {
         this.editingRow
       );
       // 新增行-双击事件-不做处理
-      if (this.editingRow && !this.oldCurrentRow) {
+      if (this.editingRow && !oldCurrentRow) {
         return;
       }
-
-      this.saveEditingRow();
+      this.saveEditingRow('currentChange');
     },
     handleOuterRowChange(event) {
       console.log('handleOuterRowChange', this.editingRow);
-      this.saveEditingRow();
+      this.saveEditingRow('outerRowChange');
     },
-    saveEditingRow() {
+    saveEditingRow(eventType) {
       if (
         this.editTriggerMode === 'auto' &&
         this.editingRow != null &&
@@ -320,7 +325,7 @@ export default {
           return;
         }
 
-        this.handleEmitEvent('', this.saveCommand.command, 0, this.editingRow);
+        this.handleEmitEvent(eventType, this.saveCommand.command, 0, this.editingRow);
       }
     },
     handleValidateForm(validateField, validateStatus) {

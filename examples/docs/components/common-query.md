@@ -535,6 +535,7 @@
 | dateRange        | 日期区间选择器       |
 | dateTimeRange    | 时间区间选择器       |
 | monthRange       | 月份区间选择器       |
+| yearRange       | 年份区间选择器       |
 | switch           | 开关                 |
 | checkboxGroup    | 复选框组             |
 | inputNumberRange | 数字区间选择器       |

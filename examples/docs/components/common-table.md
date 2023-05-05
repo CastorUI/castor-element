@@ -1585,5 +1585,6 @@
 
 | 事件名           | 说明                                         | 参数              |
 | ---------------- | -------------------------------------------- | ----------------- |
-| row-click        | 当某一行被点击时会触发该事件                 | row               |
-| selection-change | 用于多选表格，当选择项发生变化时会触发该事件 | multipleSelection |
+| row-click        | 当某一行被单击时触发                 | row               |
+| row-dblclick        | 当某一行被双击时触发                 | row               |
+| selection-change | 用于多选表格，当选择项发生变化时触发 | multipleSelection |
