@@ -296,10 +296,9 @@ export default {
         this.editingRow
       );
       // 新增行-双击事件-不做处理
-      if (this.editingRow && !this.oldCurrentRow) {
+      if (this.editingRow && !oldCurrentRow) {
         return;
       }
-
       this.saveEditingRow();
     },
     handleOuterRowChange(event) {
