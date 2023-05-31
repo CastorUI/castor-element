@@ -136,7 +136,7 @@
               minWidth: '130px',
             },
             extendProps: {
-              onChange:(row) => this.handleInputNumberChange(row),
+              onChange: (row) => this.handleInputNumberChange(row),
             },
           },
           {
@@ -306,6 +306,9 @@
             label: '编号',
             dataField: 'code',
             editable: true,
+            extendProps: {
+              onFocus: this.hanleCodeFocus,
+            },
           },
           {
             type: 'default',
@@ -358,6 +361,9 @@
       },
     },
     methods: {
+      hanleCodeFocus(row){
+        console.log('hanleCodeFocus',row);
+      },
       handleEdit(index, row, callback) {
         console.log('handleEdit,', index, row);
         row.operateType = 'edit';

@@ -120,47 +120,47 @@ import EditColumn from './../../components/EditColumn';
 export default {
   name: 'CaEditTable',
   components: {
-    'edit-column': EditColumn
+    'edit-column': EditColumn,
   },
   props: {
     editTriggerMode: {
       type: String,
       default: 'manual',
-      validator: value => ['manual', 'auto'].indexOf(value) > -1
+      validator: (value) => ['manual', 'auto'].indexOf(value) > -1,
     },
     loading: {
       type: Boolean,
-      default: false
+      default: false,
     },
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     dataSource: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     columns: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     pagination: {
       type: Object,
       default: function() {
         return {};
-      }
+      },
     },
     addCommand: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     editCommand: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     saveCommand: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     addInside: { type: Boolean, default: false },
     addInsidePosition: {
@@ -168,37 +168,37 @@ export default {
       default: 'beforeFirst',
       validator: function(value) {
         return ['beforeFirst', 'afterLast'].indexOf(value) > -1;
-      }
+      },
     },
     customCommands: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     appendContent: {
       type: String,
-      default: ''
+      default: '',
     },
     getList: {
       type: Function,
-      default: () => {}
+      default: () => {},
     },
     customComponents: {
       type: Object,
       default: function() {
         return {};
-      }
+      },
     },
     elementProps: {
       type: Object,
       default: function() {
         return {};
-      }
-    }
+      },
+    },
   },
   data() {
     return {
       editingRow: null,
-      formValidateResult: {}
+      formValidateResult: {},
     };
   },
   computed: {
@@ -210,7 +210,7 @@ export default {
     },
     editing() {
       return this.editingRow != null;
-    }
+    },
   },
   created() {
     if (this.editTriggerMode === 'auto') {
@@ -228,18 +228,19 @@ export default {
         this.editingRow = row;
       } else {
         this.editingRow = null;
+        this.formValidateResult = {};
+        this.$emit('update:validateStatus', true);
       }
     },
     handleEmitEvent: function(commandType, command, index, row) {
       console.log('handleEmitEvent', commandType, command, index, row);
       // 对于内部行跳转，做特殊处理
       if (commandType === 'currentChange') {
-        this.$emit(command, index, row, () => {
-      });
+        this.$emit(command, index, row, () => {});
       } else {
         this.$emit(command, index, row, () => {
-        this.callback(row);
-      });
+          this.callback(row);
+        });
       }
     },
     handleAdd: function() {
@@ -247,15 +248,15 @@ export default {
       if (
         this.dataSource &&
         this.dataSource.length > 0 &&
-        this.dataSource.some(r => r.id < 0)
+        this.dataSource.some((r) => r.id < 0)
       ) {
         newId =
-          this.dataSource.map(r => r.id).reduce((a, b) => Math.min(a, b)) - 1;
+          this.dataSource.map((r) => r.id).reduce((a, b) => Math.min(a, b)) - 1;
       }
 
       if (this.addInside) {
         const newRow = {};
-        (this.columns || []).forEach(col => {
+        (this.columns || []).forEach((col) => {
           if (col.dataField) {
             newRow[col.dataField] = (col.extendProps || {}).defaultValue;
           }
@@ -325,14 +326,19 @@ export default {
           return;
         }
 
-        this.handleEmitEvent(eventType, this.saveCommand.command, 0, this.editingRow);
+        this.handleEmitEvent(
+          eventType,
+          this.saveCommand.command,
+          0,
+          this.editingRow
+        );
       }
     },
     handleValidateForm(validateField, validateStatus) {
       console.log('handleValidateForm', validateField, validateStatus);
       this.formValidateResult[validateField] = validateStatus;
       const formValidateStatus = Object.values(this.formValidateResult).every(
-        r => r
+        (r) => r
       );
       this.$emit('update:validateStatus', formValidateStatus);
     },
@@ -345,12 +351,12 @@ export default {
       this.pagination.pageSize = pageSize;
       this.$emit('page-size-change', pageSize);
       this.getList();
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style lang="scss" >
+<style lang="scss">
 .common-edit-table-container {
   // 暂时解决不同缩放比例下表头行内线消失的问题
   .el-table th.is-leaf {
