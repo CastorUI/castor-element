@@ -121,6 +121,8 @@
               v-model.trim="editingRow[dataField]"
               v-inputFocus="extendProps.autoFocus"
               v-bind="{ style: 'width:100%;', ...elementProps }"
+              @focus="extendProps.onFocus &&
+                extendProps.onFocus.call(this, editingRow)"
               @change="
                 extendProps.onChange &&
                   extendProps.onChange.call(this, editingRow)
