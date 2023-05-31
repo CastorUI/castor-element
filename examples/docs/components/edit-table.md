@@ -143,8 +143,10 @@
             type: 'select',
             label: '性别',
             dataField: 'sex',
+            editable: true,
             elementProps: {
-              minWidth: '80px',
+              minWidth: '120px',
+              allowCreate: true,
             },
             extendProps: {
               options: this.optionsMap['sex'],
@@ -361,8 +363,8 @@
       },
     },
     methods: {
-      hanleCodeFocus(row){
-        console.log('hanleCodeFocus',row);
+      hanleCodeFocus(row) {
+        console.log('hanleCodeFocus', row);
       },
       handleEdit(index, row, callback) {
         console.log('handleEdit,', index, row);
