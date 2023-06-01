@@ -61,7 +61,6 @@
         v-loading="loading"
         row-key="id"
         :data="dataSource"
-        style="height: auto; padding: 1px"
         v-bind="{ border: true, ...elementProps }"
         @row-click="handleRowClick"
         @current-change="handleCurrentChange"
