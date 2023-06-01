@@ -257,6 +257,7 @@
                 )[0].label || ''
               }}
             </span>
+            <span v-else>{{ scope.row[dataField] || '' }}</span>
           </template>
         </template>
         <template v-else>
