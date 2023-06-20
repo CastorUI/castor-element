@@ -221,7 +221,7 @@
             },
           },
           {
-            type: 'dateRange',
+            type: 'splitDateRange',
             label: '创建日期区间',
             dataField: 'create_date_range',
             columnSpan: 2,
