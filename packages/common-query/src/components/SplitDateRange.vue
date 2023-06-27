@@ -94,19 +94,19 @@ export default {
   },
   methods: {
     handleStartChange(val) {
-      console.log('handleStartChange', val);
-      if (!this.model[this.dataField]) {
+      console.log('handleStartChange', val, this.model[this.dataField]);
+      if ((this.model[this.dataField] || []).length === 0) {
         this.model[this.dataField] = ['', ''];
       }
-      this.model[this.dataField][0] = val;
+      this.model[this.dataField][0] = val || '';
       this.$emit('change');
     },
     handleEndChange(val) {
-      console.log('handleStartChange', val);
-      if (!this.model[this.dataField]) {
+      console.log('handleStartChange', val, this.model[this.dataField]);
+      if ((this.model[this.dataField] || []).length === 0) {
         this.model[this.dataField] = ['', ''];
       }
-      this.model[this.dataField][1] = val;
+      this.model[this.dataField][1] = val || '';
       this.$emit('change');
     },
     formatDate(time, fmt) {

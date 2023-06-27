@@ -91,7 +91,7 @@
             from_num: 200,
             to_num: 500,
             create_date_range: undefined,
-            create_split_date_range: undefined,
+            create_split_date_range: [],
             create_month_range: undefined,
             create_month: undefined,
           },
