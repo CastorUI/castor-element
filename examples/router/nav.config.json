@@ -49,6 +49,10 @@
             "title": "通用查询"
           },
           {
+            "path": "/common-desc",
+            "title": "通用描述"
+          },
+          {
             "path": "/edit-table",
             "title": "可编辑表格"
           },
