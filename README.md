@@ -56,4 +56,4 @@ npm run build:examples
 
 - node 版本 >= 10.19.0
 - npm 版本 >= 6.13.4
-- element-ui 版本 >=2.10.1
+- element-ui 版本 >=2.15.3
