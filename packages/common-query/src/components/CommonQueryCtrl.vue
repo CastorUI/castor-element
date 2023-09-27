@@ -116,6 +116,14 @@
         }"
         @change="extendProps.onChange && extendProps.onChange.call(this, model)"
       />
+      <SplitDateRange
+        v-else-if="type === 'splitDateRange'"
+        :model="model"
+        :data-field="dataField"
+        :disabled="disableValidator && disableValidator.call(this, model)"
+        v-bind="elementProps"
+        @change="extendProps.onChange && extendProps.onChange.call(this, model)"
+      />
       <el-switch
         v-else-if="type === 'switch'"
         v-model="model[dataField]"
@@ -200,9 +208,10 @@
 </template>
 <script>
 import InputNumberRange from './InputNumberRange';
+import SplitDateRange from './SplitDateRange';
 import YearRangePicker from './YearRangePicker'
 export default {
-  components: { InputNumberRange, YearRangePicker },
+  components: { InputNumberRange, YearRangePicker, SplitDateRange },
   props: {
     type: {
       type: String,
