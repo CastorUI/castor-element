@@ -91,6 +91,7 @@
             from_num: 200,
             to_num: 500,
             create_date_range: undefined,
+            create_split_date_range: [],
             create_month_range: undefined,
             create_month: undefined,
           },
@@ -224,6 +225,13 @@
             type: 'dateRange',
             label: '创建日期区间',
             dataField: 'create_date_range',
+            columnSpan: 2,
+            showType: 'static',
+          },
+          {
+            type: 'splitDateRange',
+            label: '独立日期区间',
+            dataField: 'create_split_date_range',
             columnSpan: 2,
             showType: 'static',
           },
@@ -533,9 +541,10 @@
 | date             | 日期选择器           |
 | month            | 月份选择器           |
 | dateRange        | 日期区间选择器       |
+| splitDateRange   | 独立日期区间选择器   |
 | dateTimeRange    | 时间区间选择器       |
 | monthRange       | 月份区间选择器       |
-| yearRange       | 年份区间选择器       |
+| yearRange        | 年份区间选择器       |
 | switch           | 开关                 |
 | checkboxGroup    | 复选框组             |
 | inputNumberRange | 数字区间选择器       |
