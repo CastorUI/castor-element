@@ -192,11 +192,12 @@
                   type === 'monthRange' ||
                   type === 'date' ||
                   type === 'month' ||
+                  type === 'year' ||
                   type === 'datetime'
               "
               v-model="editingRow[dataField]"
-              :type="type.toLocaleLowerCase()"
               v-bind="{
+                type: type.toLocaleLowerCase(),
                 startPlaceholder: '开始日期',
                 rangeSeparator: '~',
                 endPlaceholder: '结束日期',
@@ -436,7 +437,7 @@ export default {
             ]
           }
         );
-      } else {
+      } else if (this.type === 'date' || this.type === 'datetime') {
         return (
           this.elementProps.pickerOptions || {
             shortcuts: [
@@ -465,6 +466,8 @@ export default {
             ]
           }
         );
+      } else {
+        return this.elementProps.pickerOptions;
       }
     }
   },
