@@ -76,6 +76,7 @@
               role: [1, 3],
               sex: 1,
               createTime: '2020-11-24 00:00:01',
+              createYear: '2020',
               enabled: false,
             },
             {
@@ -87,6 +88,7 @@
               role: [1, 3],
               sex: 0,
               createTime: '2020-11-24 00:00:01',
+              createYear: '2020',
               enabled: true,
             },
             {
@@ -97,7 +99,8 @@
               age: 30,
               role: [1, 2, 3],
               sex: 0,
-              createTime: '2020-11-24 00:00:01',
+              createTime: '2022-11-24 00:00:01',
+              createYear: '2022',
             },
           ],
         },
@@ -174,6 +177,17 @@
               minWidth: '210px',
               valueFormat: 'yyyy-MM-dd HH:mm:ss',
               placeholder: '创建时间',
+            },
+          },
+          {
+            type: 'year',
+            label: '创建年份',
+            dataField: 'createYear',
+            editable: true,
+            elementProps: {
+              minWidth: '210px',
+              valueFormat: 'yyyy',
+              placeholder: '创建年份',
             },
           },
           {
@@ -1292,15 +1306,15 @@
 
 ## Column Options
 
-| 参数         | 说明                                                                                                        | 类型    | 可选值                                                             | 默认值  |
-| ------------ | ----------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------ | ------- |
-| type         | 类型                                                                                                        | string  | default / index / expand / input / inputNumber / select / commands | default |
-| label        | 标题                                                                                                        | string  | —                                                                  | 10      |
-| dataField    | 绑定字段                                                                                                    | string  | —                                                                  | 0       |
-| addable      | 新增时是否可编辑                                                                                            | boolean | —                                                                  | true    |
-| editable     | 修改时是否可编辑                                                                                            | boolean | —                                                                  | false   |
-| elementProps | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object  | -                                                                  | {}      |
-| extendProps  | 扩展属性，参考 `Column ExtendProps Options`                                                                 | object  | -                                                                  | {}      |
+| 参数         | 说明                                                                                                        | 类型    | 可选值 | 默认值 |
+| ------------ | ----------------------------------------------------------------------------------------------------------- | ------- | ------ | ------ |
+| type         | 类型, 见 `Field Type Options`                                                                               | string  | -      | -      |
+| label        | 标题                                                                                                        | string  | —      | 10     |
+| dataField    | 绑定字段                                                                                                    | string  | —      | 0      |
+| addable      | 新增时是否可编辑                                                                                            | boolean | —      | true   |
+| editable     | 修改时是否可编辑                                                                                            | boolean | —      | false  |
+| elementProps | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object  | -      | {}     |
+| extendProps  | 扩展属性，参考 `Column ExtendProps Options`                                                                 | object  | -      | {}     |
 
 ## Column ExtendProps Options
 
@@ -1317,6 +1331,25 @@
 | 事件名    | 说明                         | 参数 |
 | --------- | ---------------------------- | ---- |
 | row-click | 当某一行被点击时会触发该事件 | row  |
+
+## Field Type Options
+
+| 类型          | 说明                |
+| ------------- | ------------------- |
+| index         | 行号                |
+| input         | 输入框              |
+| inputNumber   | 数字输入框          |
+| select        | 下拉框              |
+| switch        | 开关                |
+| dateTimeRange | 日期+时间区间选择器 |
+| dateRange     | 日期区间选择器      |
+| monthRange    | 月份区间选择器      |
+| date          | 日期选择器          |
+| month         | 月份选择器          |
+| year          | 年份选择器          |
+| datetime      | 日期时间选择器      |
+| commands      | 多选下拉框          |
+| expand        | 展示行对应列        |
 
 ## 注意事项
 
