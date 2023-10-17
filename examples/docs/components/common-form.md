@@ -140,6 +140,7 @@
             sex: 2,
             valid_end_date: undefined,
             create_time: undefined,
+            create_year: undefined,
             user: 1,
             user_type: 2,
             user_type_text: undefined,
@@ -251,6 +252,16 @@
             columnSpan: 1,
             elementProps: {
               valueFormat: 'yyyy-MM-dd HH:mm:ss',
+            },
+          },
+          {
+            type: 'year',
+            label: '创建年份',
+            dataField: 'create_year',
+            columnSpan: 1,
+            elementProps: {
+              format: 'yyyy',
+              valueFormat: 'yyyy',
             },
           },
           {
@@ -1105,6 +1116,8 @@
 | dateRange      | 日期区间选择器               |
 | datetime       | 日期时间选择器               |
 | dateTimeRange  | 日期+时间区间选择器          |
+| month  | 月份选择器          |
+| year  | 年份选择器          |
 | hr             | 分行                         |
 | groupTitle     | 组标题                       |
 | complexInput   | 组合输入框                   |

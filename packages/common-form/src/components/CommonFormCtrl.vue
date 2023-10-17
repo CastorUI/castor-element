@@ -218,13 +218,14 @@
           'monthRange',
           'date',
           'month',
+          'year',
           'datetime',
         ].indexOf(type) > -1
       "
       v-model="model[dataField]"
       :disabled="disableValidator && disableValidator.call(this, model)"
-      :type="type.toLocaleLowerCase()"
       v-bind="{
+        type:type.toLocaleLowerCase(),
         placeholder: '请选择',
         startPlaceholder: '开始日期',
         rangeSeparator: '~',
