@@ -16,6 +16,41 @@
     v-bind="{ align: 'center', ...elementProps }"
   />
   <el-table-column
+    v-else-if="type === 'status'"
+    :label="label"
+    :prop="dataField"
+    v-bind="{
+      minWidth: 1,
+      align: 'center',
+      showOverflowTooltip: true,
+      ...elementProps,
+    }"
+  >
+    <template slot-scope="scope">
+      <span
+        v-if="extendProps.options.some((r) => r.value === scope.row[dataField])"
+        :style="
+          'color:' +
+            extendProps.options.filter((r) => r.value === scope.row[dataField])[0]
+              .color +
+            ';'
+        "
+      >
+        <i
+          :class="
+            extendProps.options.filter(
+              (r) => r.value === scope.row[dataField]
+            )[0].icon
+          "
+        />
+        {{
+          extendProps.options.filter((r) => r.value === scope.row[dataField])[0]
+            .label
+        }}
+      </span>
+    </template>
+  </el-table-column>
+  <el-table-column
     v-else-if="type === 'commands'"
     :label="label"
     v-bind="{ align: 'center', ...elementProps }"
