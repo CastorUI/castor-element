@@ -64,6 +64,32 @@
               icon: 'el-icon-top',
             },
           ],
+          type: [
+            {
+              value: 1,
+              label: '住宅配套项目',
+              color: '#f5a623',
+              icon: 'el-icon-success',
+            },
+            {
+              value: 2,
+              label: '工营事业项目',
+              color: '#d0021b',
+              icon: 'el-icon-remove',
+            },
+            {
+              value: 3,
+              label: '道路工程项目',
+              color: '#3d1ab7',
+              icon: 'el-icon-time',
+            },
+            {
+              value: 4,
+              label: '街坊管位移项目',
+              color: '#4a90e2',
+              icon: 'el-icon-top',
+            },
+          ],
         },
         table: {
           dataList: [
@@ -78,6 +104,7 @@
               createTime: '2020-11-24 00:00:01',
               createYear: '2020',
               enabled: false,
+              type: 1,
             },
             {
               id: 1002,
@@ -90,6 +117,7 @@
               createTime: '2020-11-24 00:00:01',
               createYear: '2020',
               enabled: true,
+              type: 2,
             },
             {
               id: 1003,
@@ -101,6 +129,7 @@
               sex: 0,
               createTime: '2022-11-24 00:00:01',
               createYear: '2022',
+              type: 3,
             },
           ],
         },
@@ -153,6 +182,17 @@
             },
             extendProps: {
               options: this.optionsMap['sex'],
+            },
+          },
+          {
+            type: 'status',
+            label: '项目类型',
+            dataField: 'type',
+            elementProps: {
+              width: '140px',
+            },
+            extendProps: {
+              options: this.optionsMap['type'],
             },
           },
           {
