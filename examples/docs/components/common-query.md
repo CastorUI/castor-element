@@ -400,6 +400,7 @@
               text: '查询',
               command: 'handleFilter',
               icon: 'el-icon-search',
+              keyCode: 13
             },
             {
               text: '重置',
