@@ -23,7 +23,7 @@ const webpackConfig = {
   },
   devServer: {
     host: '0.0.0.0',
-    port: 7777,
+    port: 7788,
     publicPath: '/',
     hot: true,
   },

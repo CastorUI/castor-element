@@ -119,7 +119,7 @@
       v-if="
         pagination.pageSize &&
           (pagination.type === 'bigData' ||
-            (pagination.type !== 'bigData' && pagination.total > pageSizes[0]))
+            (pagination.type !== 'bigData' && pagination.total > pageSizes[0])|| pagination.showPagination)
       "
       class="common-pagination-container"
     >

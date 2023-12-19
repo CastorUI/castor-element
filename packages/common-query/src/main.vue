@@ -239,6 +239,7 @@ export default {
   },
   mounted() {
     this.handleResize();
+    this.keyUpSubmit();
   },
   methods: {
     handleResize: function() {
@@ -246,6 +247,18 @@ export default {
       this.rowFieldsCount = Math.floor(
         form.getBoundingClientRect().width / this.maxFieldWidth
       );
+    },
+    keyUpSubmit: function() {
+      document.onkeydown = (e) => {
+        const _key = window.event.keyCode;
+        if (_key === 13) {
+          for (let i = 0; i < this.commands.length; i++) {
+            if (this.commands[i].keyCode === 13) {
+              this.$emit(this.commands[i].command);
+            }
+          }
+        }
+      }
     }
   }
 };
