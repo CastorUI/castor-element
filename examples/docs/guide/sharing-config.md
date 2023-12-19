@@ -15,6 +15,7 @@ command 代表一个可交互的命令或事件，包含两种情况：
 | command          | 绑定事件名称                                                                                                | string   | —      | —      |
 | visibleValidator | 可见性校验,返回 `true` 时可见                                                                               | function | —      | —      |
 | disableValidator | 可用性校验,返回 `true` 时禁用                                                                               | function | —      | —      |
+| keyCode          | 支持键盘回车事件                                                                                           | number   | 13      | —      |
 | elementProps     | ElementUI 属性 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object   | —      | —      |
 | extendProps      | 扩展属性                                                                                                    | object   | —      | —      |
 
@@ -68,3 +69,4 @@ command 代表一个可交互的命令或事件，包含两种情况：
 | total     | 数据条数总计 | number | -                    | 0         |
 | sortField | 排序字段     | string | —                    | —         |
 | order     | 排序方式     | string | ascending/descending | ascending |
+| showPagination     | 强制显示分页     | boolean | true/false | false |

@@ -48,6 +48,7 @@
             pageIndex: 1,
             pageSize: 10,
             total: 3,
+            showPagination: true
           },
         },
       };
