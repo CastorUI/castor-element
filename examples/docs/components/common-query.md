@@ -15,6 +15,7 @@
     :commands="search.commands"
     :fields="searchFields"
     :elementProps="search.elementProps"
+    :fixedRowCount="3"
     @handleFilter="handleFilter"
     @handleReset="handleReset"
     @handleUserTypeAutoSelect="handleUserTypeAutoSelect"
@@ -506,6 +507,7 @@
 | defaultCheckedKeys    | 动态查询默认选中字段                                                                                                           | array   | —          | []     |
 | downloadOpt           | 下拉命令项                                                                                                                     | object  | —          | {}     |
 | elementProps          | ElementUI 属性,作用于 ElForm 组件 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object  | —          | {}     |
+| fixedRowCount         | 固定查询区域每一行item数量，为0则不固定                                                                                           | number  | —          | 0     |
 
 ## Field Options
 

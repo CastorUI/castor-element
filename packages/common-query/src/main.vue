@@ -198,12 +198,16 @@ export default {
       default: function() {
         return {};
       }
+    },
+    fixedRowCount: {
+      type: Number,
+      default: 0
     }
   },
   data() {
     return {
       checkedKeys: [],
-      rowFieldsCount: 3
+      rowFieldsCount: this.fixedRowCount || 3
     };
   },
   computed: {
@@ -243,6 +247,7 @@ export default {
   },
   methods: {
     handleResize: function() {
+      if (this.fixedRowCount !== 0) return
       const form = document.getElementById(this.formId);
       this.rowFieldsCount = Math.floor(
         form.getBoundingClientRect().width / this.maxFieldWidth
