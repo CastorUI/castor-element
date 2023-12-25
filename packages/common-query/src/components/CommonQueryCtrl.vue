@@ -159,6 +159,20 @@
         }"
         @change="extendProps.onChange && extendProps.onChange.call(this, model)"
       />
+      <el-cascader
+        v-else-if="type === 'cascader'"
+        v-model="model[dataField]"
+        :disabled="disableValidator && disableValidator.call(this, model)"
+        :options="extendProps.options"
+        v-bind="{
+          placeholder: '请选择',
+          style: 'width:100%;',
+          clearable: true,
+          filterable: true,
+          ...elementProps,
+        }"
+        @change="extendProps.onChange && extendProps.onChange.call(this, model)"
+      />
       <el-input
         v-else
         v-model="model[dataField]"
