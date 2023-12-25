@@ -75,6 +75,22 @@
               label: '女',
             },
           ],
+          partment: [
+            {
+              value: 1,
+              label: '一级部门1',
+              children: [
+                { value: 3, label: '二级部门1' },
+                { value: 4, label: '二级部门2', children: [
+                  { value: 5, label: '三级部门1'}
+                ]},
+              ]
+            },
+            {
+              value: 2,
+              label: '一级部门2'
+            },
+          ]
         },
         search: {
           formId: 'basicSearchForm',
@@ -95,6 +111,7 @@
             create_split_date_range: [],
             create_month_range: undefined,
             create_month: undefined,
+            partment: undefined
           },
           commands: [
             {
@@ -269,6 +286,15 @@
             columnSpan: 2,
             extendProps: {
               options: this.optionsMap['equipment'],
+            },
+          },
+          {
+            type: 'cascader',
+            label: '部门',
+            dataField: 'partment',
+            columnSpan: 1,
+            extendProps: {
+              options: this.optionsMap['partment'],
             },
           },
         ];

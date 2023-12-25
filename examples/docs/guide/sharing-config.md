@@ -59,6 +59,7 @@ command 代表一个可交互的命令或事件，包含两种情况：
       - `type` 为 `checkboxGroup` 时同时参考 `el-checkbox-group`
       - `type` 为 `inputNumberRange` 时同时参考 `el-input-number`
       - `type` 为 `input` 和 `textArea` 时同时参考 `el-input`
+      - `type` 为 `cascader`时参考`el-cascader`
 
 ### Pagination Options
 
