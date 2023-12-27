@@ -206,15 +206,8 @@
 | 参数              | 说明                                                                                                     | 类型                   | 可选值 | 默认值 |
 | ----------------- | -------------------------------------------------------------------------------------------------------- | ---------------------- | ------ | ------ |
 | groupTitle        | 分组标题名称，只限于 `type` 为 `groupTitle`                                                              | string                 | —      | —      |
-| groupCommands     | 分组命令集合，只限于 `type` 为 `groupTitle`                                                              | array                  | —      | —      |
-| componentKey      | 自定义组件名称，只限于 `type` 为 `custom`                                                                | string                 | —      | —      |
 | options           | 选项数据源,用于`type` 为 `select multiSelect groupedSelect radioGroup checkboxGroup text status cascade` | array                  | —      | []     |
-| currentField      | 当前字段，只限于 `type` 为 `complexInput`                                                                | object                 | —      | —      |
-| appendField       | 附加字段，只限于 `type` 为 `complexInput`                                                                | object                 | —      | —      |
-| onChange          | 值变动时回调事件                                                                                         | function(model)        | —      | —      |
-| onSelect          | 值变动时回调事件，只限于 `type` 为 `autoComplete`                                                        | function(model,item)   | —      | —      |
-| getSuggestOptions | 输入时查询匹配结果，只限于 `type` 为 `autoComplete`                                                      | function(queryString)) | —      | —      |
-| appendText        | 后缀文本，用于 `type` 为 `input、text`                                                                   | string                 | —      | —      |
+
 
 ## Field Type Options
 
