@@ -67,6 +67,7 @@
       v-else-if="type === 'radioGroup'"
       v-model="model[dataField]"
       v-bind="elementProps"
+      :disabled="disableValidator && disableValidator.call(this, model)"
       @change="extendProps.onChange && extendProps.onChange.call(this, model)"
     >
       <el-radio
