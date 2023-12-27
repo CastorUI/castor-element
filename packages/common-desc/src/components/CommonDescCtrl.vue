@@ -1,29 +1,54 @@
 <template>
   <div class="CommonDescCtrl">
     <div v-if="type === 'tag'">
-      <el-tag v-bind="{ ...elementProps }">
+      <el-tag
+        :color="(elementProps || {}).color"
+        :style="{
+          ...(elementProps || {}).style
+        }"
+        v-bind="{ ...elementProps }"
+      >
         {{ model[dataField] }}
       </el-tag>
     </div>
     <!-- -->
     <div v-else-if="type === 'keyTag'">
-      <span v-if="extendProps.options.some((r) => r.value === model[dataField])">
-        <el-tag
-          :color="
-            (extendProps.options || []).filter(
+      <el-tag
+        :color="
+          ((extendProps.options || []).filter(
+            (r) => r.value === model[dataField]
+          )[0] || {}).color
+        "
+        effect="dark"
+        :style="{
+          borderColor:
+            ((extendProps.options || []).filter(
               (r) => r.value === model[dataField]
-            )[0].color || 'blue'
-          "
-          v-bind="{ ...elementProps }"
-        >
-          {{
-            (extendProps.options || []).filter(
-              (r) => r.value === model[dataField]
-            )[0].label
-          }}
-        </el-tag>
+            )[0] || {}).color,
+          fontWeight: 'bold',
+          ...(elementProps || {}).style,
+        }"
+        v-bind="{ ...elementProps }"
+      >
+        {{
+          ((extendProps.options || []).filter(
+            (r) => r.value === model[dataField]
+          )[0] || {}).label
+        }}
+      </el-tag>
+    </div>
+    <div v-else-if="type === 'keyToValue'">
+      <span
+        :style="{
+          ...(elementProps || {}).style,
+        }"
+      >
+        {{
+          ((extendProps.options || []).filter(
+            (r) => r.value === model[dataField]
+          )[0] || {}).label
+        }}
       </span>
-      <span v-else />
     </div>
     <div v-else-if="type === 'link'">
       <el-link

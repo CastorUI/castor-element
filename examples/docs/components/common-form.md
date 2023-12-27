@@ -238,6 +238,8 @@
             extendProps: {
               options: this.optionsMap['sex'],
             },
+            disableValidator: (model) => true,
+            
           },
           {
             type: 'date',
