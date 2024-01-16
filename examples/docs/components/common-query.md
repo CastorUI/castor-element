@@ -124,6 +124,12 @@
               command: 'handleReset',
               icon: 'el-icon-refresh',
             },
+            {
+              text: '自定义',
+              command: 'handleReset',
+              icon: 'el-icon-refresh',
+              disableValidator: () => true
+            },
           ],
           elementProps: {
             labelWidth: '120px',
