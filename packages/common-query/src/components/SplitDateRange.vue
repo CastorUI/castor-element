@@ -4,7 +4,7 @@
       v-model="startDate"
       :disabled="disabled"
       type="date"
-      :picker-options="startPickerOptions"
+      :picker-options="extendProps.startPickerOptions || startPickerOptions"
       v-bind="{
         placeholder: '开始日期',
         valueFormat: 'yyyy-MM-dd',
@@ -20,7 +20,7 @@
       v-model="endDate"
       :disabled="disabled"
       type="date"
-      :picker-options="endPickerOptions"
+      :picker-options="extendProps.endPickerOptions || endPickerOptions"
       v-bind="{
         placeholder: '结束日期',
         valueFormat: 'yyyy-MM-dd',
@@ -52,6 +52,10 @@ export default {
       default: function() {
         return {};
       },
+    },
+    extendProps: {
+      type: Object,
+      default: () => {},
     },
   },
   data() {
