@@ -702,6 +702,13 @@
             columnSpan: 1,
           },
           {
+            type: 'input',
+            label: '启用验证',
+            dataField: 'enableValid',
+            columnSpan: 1,
+            rules: [{ required: false, message: '不能为空' }],
+          },
+          {
             type: 'groupTitle',
             label: '',
             dataField: '',
@@ -751,6 +758,17 @@
         this.$refs['editForm'].$refs['form'].validate((valid) => {
           console.log('校验结果，', valid);
         });
+      },
+    },
+    watch: {
+      'form.model.enabled': function (val) {
+        console.log('enabled:', val);
+        if (val) {
+          this.$refs['editForm'].rules['enableValid'] = [{ required: true, message: '不能为空' }];
+        } else {
+          // 重置校验规则
+          this.$refs['editForm'].rules['enableValid'] = [{ required: false, message: '不能为空' }];
+        }
       },
     },
   };
