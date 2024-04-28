@@ -4,7 +4,7 @@
 
 ### 注册 npm 私库用户
 
-```
+```shell
 npm adduser --registry http://verdaccio.polarwin.cn
 npm profile set password --registry http://verdaccio.polarwin.cn
 ```
@@ -13,7 +13,7 @@ npm profile set password --registry http://verdaccio.polarwin.cn
 
 每次更新后在 `package.json` 文件中手动更新版本号
 
-```
+```shell
 {
   "name": "@polarwin/castor-ui",
   "version": "1.0.5",
@@ -22,13 +22,13 @@ npm profile set password --registry http://verdaccio.polarwin.cn
 
 然后打包到根目录 lib 文件夹
 
-```
+```shell
 npm run build:packages
 ```
 
 最后发布到 npm 私库
 
-```
+```shell
 npm run verdaccio
 ```
 
@@ -40,7 +40,7 @@ npm run verdaccio
 
 ### 本地运行
 
-```
+```shell
 npm run dev
 ```
 
@@ -48,7 +48,7 @@ npm run dev
 
 打包示例站点到根目录 dist 文件夹
 
-```
+```shell
 npm run build:examples
 ```
 
