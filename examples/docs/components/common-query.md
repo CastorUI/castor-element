@@ -124,6 +124,12 @@
               command: 'handleReset',
               icon: 'el-icon-refresh',
             },
+            {
+              text: '自定义',
+              command: 'handleReset',
+              icon: 'el-icon-refresh',
+              disableValidator: () => true
+            },
           ],
           elementProps: {
             labelWidth: '120px',
@@ -252,6 +258,13 @@
             dataField: 'create_split_date_range',
             columnSpan: 2,
             showType: 'static',
+            extendProps: {
+              startPickerOptions: {
+                disabledDate: (time) => {
+                  return false
+                },
+              },
+            }
           },
           {
             type: 'monthRange',
@@ -556,6 +569,8 @@
 | toField   | 最大值绑定字段，只限于 `type` 为`inputNumberRange`                                      | string   | —      | 0      |
 | options   | 选项数据源,限于`type` 为 `select multiSelect checkboxGroup radioGroup radioButtonGroup` | array    | -      | []     |
 | onChange  | 值变动时回调事件                                                                        | function | —      | —      |
+| startPickerOptions  |开始日期的 Picker Options,仅限于`type` 为 `splitDateRange`, 不填默认为,结束日期有值时，结束日期往后不能选                                         | Object | —      | ...  |
+| endPickerOptions  |结束日期的 Picker Options,仅限于`type` 为 `splitDateRange`, 不填默认为,开始日期有值时，开始日期往后不能选                                         | Object | —      | ...  |
 
 ## Field Type Options
 

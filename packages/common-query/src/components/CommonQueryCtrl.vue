@@ -121,6 +121,7 @@
         :model="model"
         :data-field="dataField"
         :disabled="disableValidator && disableValidator.call(this, model)"
+        :extend-props="extendProps"
         v-bind="elementProps"
         @change="extendProps.onChange && extendProps.onChange.call(this, model)"
       />

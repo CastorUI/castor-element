@@ -48,7 +48,7 @@
             pageIndex: 1,
             pageSize: 10,
             total: 3,
-            showPagination: true
+            showPagination: true,
           },
         },
       };
@@ -973,8 +973,47 @@
       },
     },
     methods: {
+      fetchdata() {
+       // 创建一个Promise对象
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              // 模拟数据获取成功
+              const data = {
+                total: 50,
+                results: [
+                  {
+                    id: 1008,
+                    code: 'A8',
+                    name: '上海燃气三期工程',
+                  },
+                  {
+                    id: 1009,
+                    code: 'A9',
+                    name: '上海燃气三期工程',
+                  },
+                  {
+                    id: 1010,
+                    code: 'A10',
+                    name: '上海燃气三期工程',
+                  },]
+              }
+
+              // 使用resolve方法传递数据
+              resolve(data);
+              // 或者使用reject方法模拟获取数据失败
+              // reject('Error: Unable to fetch data');
+            }, 1000); // 1秒钟的延时
+          });
+      },
       getList() {
-        console.log('this.table.pagination', this.table.pagination);
+        // 模拟获取数据
+          this.fetchdata().then((data) => {
+          // 获取数据成功后，将数据赋值给dataList
+          this.table.dataList = data.results;
+          // 获取数据成功后，将数据总数赋值给pagination.total
+          this.table.pagination.total = data.total;
+          return this.table.dataList
+        });
       },
     },
   };
@@ -1584,8 +1623,8 @@
 
 ## Table Events
 
-| 事件名           | 说明                                         | 参数              |
-| ---------------- | -------------------------------------------- | ----------------- |
+| 事件名           | 说明                                 | 参数              |
+| ---------------- | ------------------------------------ | ----------------- |
 | row-click        | 当某一行被单击时触发                 | row               |
-| row-dblclick        | 当某一行被双击时触发                 | row               |
+| row-dblclick     | 当某一行被双击时触发                 | row               |
 | selection-change | 用于多选表格，当选择项发生变化时触发 | multipleSelection |
