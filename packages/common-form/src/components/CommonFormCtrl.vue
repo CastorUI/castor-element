@@ -1,6 +1,7 @@
 <template>
   <el-form-item
     v-if="!visibleValidator || visibleValidator.call(this, model)"
+    :ref="type === 'custom'? extendProps.componentKey: ''"
     :prop="dataField"
     :style="{
       width: `calc(${width} - ${
