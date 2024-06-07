@@ -766,6 +766,7 @@
     @handleEdit="handleEdit"
     @handleDelete="handleDelete"
     @row-click="handleRowClick"
+    @cell-click="handleCellClick"
   />
 </template>
 
@@ -864,6 +865,9 @@
       },
       handleRowClick(row) {
         console.log('handleRowClick,', row);
+      },
+      handleCellClick(row,column,cell) {
+        console.log('handleRowClick,', row,column,cell);
       },
     },
   };
@@ -1631,6 +1635,8 @@
 
 | 事件名           | 说明                                 | 参数              |
 | ---------------- | ------------------------------------ | ----------------- |
-| row-click        | 当某一行被单击时触发                 | row               |
-| row-dblclick     | 当某一行被双击时触发                 | row               |
+| cell-click        | 当某一单元格被单击时触发     | row, column, cell, event    |
+| cell-dblclick     | 当某一单元格被双击时触发     | row, column, cell, event    |
+| row-click        | 当某一行被单击时触发         | row, column, event          |
+| row-dblclick     | 当某一行被双击时触发         | row, column, event          |
 | selection-change | 用于多选表格，当选择项发生变化时触发 | multipleSelection |

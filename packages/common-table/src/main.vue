@@ -95,6 +95,8 @@
         v-bind="{ border: true, stripe: true, ...elementProps }"
         @row-click="handleRowClick"
         @row-dblclick="handleRowDblClick"
+        @cell-click="handleCellClick"
+        @cell-dblclick="handleCellDblClick"
         @selection-change="
           (multipleSelection) => handleSelectionChange(multipleSelection)
         "
@@ -419,6 +421,24 @@ export default {
     handleBigDataPageIndexChange(direction) {
       this.pagination.direction = direction;
       this.getList();
+    },
+    handleCellClick(row, column, cell, event) {
+      console.log('handleCellClick', row, column, cell, event);
+      // 列类型为commands时,包装层为SPAN或IMG
+      if (['SPAN', 'IMG'].indexOf(event.target.nodeName) > -1) {
+        return;
+      }
+
+      this.$emit('cell-click', row, column, cell, event);
+    },
+    handleCellDblClick(row, column, cell, event) {
+      console.log('handleCellDblClick', row, column, cell, event);
+      // 列类型为commands时,包装层为SPAN或IMG
+      if (['SPAN', 'IMG'].indexOf(event.target.nodeName) > -1) {
+        return;
+      }
+
+      this.$emit('cell-dblclick', row, column, cell, event);
     },
     handleRowClick(row, column, event) {
       console.log('handleRowClick', row, column, event);
