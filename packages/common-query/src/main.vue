@@ -96,10 +96,14 @@
           :loading="item.loading && loading"
           :disabled="item.disableValidator && item.disableValidator.call(this)"
           class="filter-item"
-          v-bind="item.elementProps"
+          v-bind="{
+            ...item.elementProps,
+            icon: (item.extendProps || {}).iconPosition === 'right' ? '' : (item.elementProps || {}).icon
+          }"
           @click="$emit(item.command)"
         >
           {{ item.text }}
+          <i v-if="(item.extendProps||{}).iconPosition==='right' && (item.elementProps||{}).icon" class="el-icon--right" :class="item.elementProps.icon" />
         </el-button>
 
         <el-dropdown

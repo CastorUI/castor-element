@@ -1,6 +1,7 @@
 <template>
   <el-form-item
     v-if="!visibleValidator || visibleValidator.call(this, model)"
+    :ref="type === 'custom'? extendProps.componentKey: ''"
     :prop="dataField"
     :style="{
       width: `calc(${width} - ${
@@ -318,6 +319,7 @@
     <component
       :is="customComponents[extendProps.componentKey]"
       v-else-if="type === 'custom'"
+      :ref="extendProps.componentKey"
       :component-data.sync="model[dataField]"
       :model="model"
       :operate-type="operateType"
@@ -589,7 +591,7 @@ export default {
       console.log('handleGroupCommand', item, model);
       console.log('$listeners', this.$listeners);
       this.$emit(item.command, model);
-    }
+    },
   }
 };
 </script>

@@ -81,16 +81,18 @@
               label: '一级部门1',
               children: [
                 { value: 3, label: '二级部门1' },
-                { value: 4, label: '二级部门2', children: [
-                  { value: 5, label: '三级部门1'}
-                ]},
-              ]
+                {
+                  value: 4,
+                  label: '二级部门2',
+                  children: [{ value: 5, label: '三级部门1' }],
+                },
+              ],
             },
             {
               value: 2,
-              label: '一级部门2'
+              label: '一级部门2',
             },
-          ]
+          ],
         },
         search: {
           formId: 'basicSearchForm',
@@ -111,24 +113,33 @@
             create_split_date_range: [],
             create_month_range: undefined,
             create_month: undefined,
-            partment: undefined
+            partment: undefined,
           },
           commands: [
             {
               text: '查询',
               command: 'handleFilter',
-              icon: 'el-icon-search',
+              elementProps: {
+                icon: 'el-icon-search',
+              },
             },
             {
               text: '重置',
               command: 'handleReset',
-              icon: 'el-icon-refresh',
+              elementProps: {
+                icon: 'el-icon-refresh',
+              },
+              extendProps: {
+                iconPosition: 'right',
+              },
             },
             {
               text: '自定义',
               command: 'handleReset',
-              icon: 'el-icon-refresh',
-              disableValidator: () => true
+              disableValidator: () => true,
+              elementProps: {
+                icon: 'el-icon-refresh',
+              },
             },
           ],
           elementProps: {
@@ -261,10 +272,10 @@
             extendProps: {
               startPickerOptions: {
                 disabledDate: (time) => {
-                  return false
+                  return false;
                 },
               },
-            }
+            },
           },
           {
             type: 'monthRange',
@@ -440,7 +451,7 @@
               text: '查询',
               command: 'handleFilter',
               icon: 'el-icon-search',
-              keyCode: 13
+              keyCode: 13,
             },
             {
               text: '重置',
@@ -546,7 +557,7 @@
 | defaultCheckedKeys    | 动态查询默认选中字段                                                                                                           | array   | —          | []     |
 | downloadOpt           | 下拉命令项                                                                                                                     | object  | —          | {}     |
 | elementProps          | ElementUI 属性,作用于 ElForm 组件 [详情](http://castor.polarwin.cn/#/component/sharing-config#elementprops-elementui-shu-xing) | object  | —          | {}     |
-| fixedRowCount         | 固定查询区域每一行item数量，为0则不固定                                                                                           | number  | —          | 0     |
+| fixedRowCount         | 固定查询区域每一行 item 数量，为 0 则不固定                                                                                    | number  | —          | 0      |
 
 ## Field Options
 
@@ -563,14 +574,15 @@
 
 ## Field ExtendProps Options
 
-| 参数      | 说明                                                                                    | 类型     | 可选值 | 默认值 |
-| --------- | --------------------------------------------------------------------------------------- | -------- | ------ | ------ |
-| fromField | 最小值绑定字段，只限于 `type` 为`inputNumberRange`                                      | string   | —      | 0      |
-| toField   | 最大值绑定字段，只限于 `type` 为`inputNumberRange`                                      | string   | —      | 0      |
-| options   | 选项数据源,限于`type` 为 `select multiSelect checkboxGroup radioGroup radioButtonGroup` | array    | -      | []     |
-| onChange  | 值变动时回调事件                                                                        | function | —      | —      |
-| startPickerOptions  |开始日期的 Picker Options,仅限于`type` 为 `splitDateRange`, 不填默认为,结束日期有值时，结束日期往后不能选                                         | Object | —      | ...  |
-| endPickerOptions  |结束日期的 Picker Options,仅限于`type` 为 `splitDateRange`, 不填默认为,开始日期有值时，开始日期往后不能选                                         | Object | —      | ...  |
+| 参数               | 说明                                                                                                      | 类型     | 可选值     | 默认值 |
+| ------------------ | --------------------------------------------------------------------------------------------------------- | -------- | ---------- | ------ |
+| fromField          | 最小值绑定字段，只限于 `type` 为`inputNumberRange`                                                        | string   | —          | 0      |
+| toField            | 最大值绑定字段，只限于 `type` 为`inputNumberRange`                                                        | string   | —          | 0      |
+| options            | 选项数据源,限于`type` 为 `select multiSelect checkboxGroup radioGroup radioButtonGroup`                   | array    | -          | []     |
+| onChange           | 值变动时回调事件                                                                                          | function | —          | —      |
+| startPickerOptions | 开始日期的 Picker Options,仅限于`type` 为 `splitDateRange`, 不填默认为,结束日期有值时，结束日期往后不能选 | Object   | —          | ...    |
+| endPickerOptions   | 结束日期的 Picker Options,仅限于`type` 为 `splitDateRange`, 不填默认为,开始日期有值时，开始日期往后不能选 | Object   | —          | ...    |
+| iconPostion        | 命令按钮图标的显示位置                                                                                    | string   | left,right | left   |
 
 ## Field Type Options
 

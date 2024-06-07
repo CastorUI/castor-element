@@ -29,11 +29,13 @@
               code: 'A1',
               name: '上海燃气一期工程',
               age: 10,
+              date: '2024-05-30T00:00:00+0800',
             },
             {
               id: 1002,
               code: 'A2',
               age: 0,
+              date: '2024-05-29T00:00:00+0800',
               name:
                 '上海燃气二期工程 it will work no matter where your popper and reference elements live, even in the most complex scenarios like nested scrolling containers or alternative offsetParent contexts. it will work no matter where your popper and reference elements live, even in the most complex scenarios like nested scrolling containers or alternative offsetParent contexts.',
             },
@@ -42,6 +44,7 @@
               code: 'A3',
               age: 20,
               name: '上海燃气三期工程',
+              date: '2024-05-31T00:00:00+0800',
             },
           ],
           pagination: {
@@ -89,12 +92,15 @@
             },
           },
           {
-            type: 'default',
-            label: '测试表格列3',
-            dataField: 'name2',
+            type: 'date',
+            label: '时间转换',
+            dataField: 'date',
             elementProps: {
               minWidth: 2,
             },
+            extendProps: {
+              format: 'DD/MM/YYYY HH:mm:ss'
+            }
           },
         ];
       },
@@ -760,6 +766,7 @@
     @handleEdit="handleEdit"
     @handleDelete="handleDelete"
     @row-click="handleRowClick"
+    @cell-click="handleCellClick"
   />
 </template>
 
@@ -858,6 +865,9 @@
       },
       handleRowClick(row) {
         console.log('handleRowClick,', row);
+      },
+      handleCellClick(row,column,cell) {
+        console.log('handleRowClick,', row,column,cell);
       },
     },
   };
@@ -1625,6 +1635,8 @@
 
 | 事件名           | 说明                                 | 参数              |
 | ---------------- | ------------------------------------ | ----------------- |
-| row-click        | 当某一行被单击时触发                 | row               |
-| row-dblclick     | 当某一行被双击时触发                 | row               |
+| cell-click        | 当某一单元格被单击时触发     | row, column, cell, event    |
+| cell-dblclick     | 当某一单元格被双击时触发     | row, column, cell, event    |
+| row-click        | 当某一行被单击时触发         | row, column, event          |
+| row-dblclick     | 当某一行被双击时触发         | row, column, event          |
 | selection-change | 用于多选表格，当选择项发生变化时触发 | multipleSelection |

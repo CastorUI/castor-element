@@ -1,6 +1,6 @@
 {
   "name": "@polarwin/castor-ui",
-  "version": "2.20.5",
+  "version": "2.20.10",
   "private": false,
   "author": "heke",
   "main": "lib/castor-ui.umd.min.js",
@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.4",
+    "dayjs": "^1.11.11",
     "element-ui": "2.15.13",
     "throttle-debounce": "^1.0.1",
     "vue": "^2.6.11",

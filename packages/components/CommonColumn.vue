@@ -230,6 +230,21 @@
     </template>
   </el-table-column>
   <el-table-column
+    v-else-if="type === 'date'"
+    :label="label"
+    :prop="dataField"
+    v-bind="{
+      minWidth: 1,
+      align: 'center',
+      showOverflowTooltip: true,
+      ...elementProps,
+    }"
+  >
+    <template slot-scope="scope">
+      {{ formatDate(scope.row[dataField], extendProps.format) }}
+    </template>
+  </el-table-column>
+  <el-table-column
     v-else
     :label="label"
     :prop="dataField"
@@ -250,6 +265,7 @@
   </el-table-column>
 </template>
 <script>
+import * as dayjs from 'dayjs'
 export default {
   props: {
     type: {
@@ -289,6 +305,11 @@ export default {
       default: function() {
         return {};
       }
+    }
+  },
+  methods: {
+    formatDate(date, format = 'YYYY-MM-DD') {
+      return dayjs(date).format(format);
     }
   }
 };
