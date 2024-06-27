@@ -322,6 +322,7 @@
       :ref="extendProps.componentKey"
       :component-data.sync="model[dataField]"
       :model="model"
+      :data-field="dataField"
       :operate-type="operateType"
       v-bind="elementProps"
     />
