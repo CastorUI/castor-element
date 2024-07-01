@@ -241,7 +241,7 @@
     }"
   >
     <template slot-scope="scope">
-      {{ formatDate(scope.row[dataField], extendProps.format) }}
+      {{ scope.row[dataField] ? formatDate(scope.row[dataField], extendProps.format): '' }}
     </template>
   </el-table-column>
   <el-table-column
