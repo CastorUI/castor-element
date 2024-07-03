@@ -194,7 +194,109 @@
   };
 </script>
 ```
+:::
 
+## 树形数据
+
+展示树形数据的用法。
+
+:::demo 在`tableColumns`中添加`type`为`index`的对象即可。序号列的内部计算依赖分页对象`pagination`.
+
+```html
+<template>
+  <ca-common-table
+    table-tag="demo-index"
+    :dataSource="table.dataList"
+    :columns="tableColumns"
+    :pagination="table.pagination"
+    :elementProps="table.elementProps"
+  />
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        table: {
+          dataList: [
+            {
+              id: 1001,
+              code: 'A1',
+              name: '上海燃气一期工程',
+              testChildren: [
+                {
+                  id: 10011,
+                  code: 'A11',
+                  name: '上海燃气一期工程-1',
+                },
+                {
+                  id: 10012,
+                  code: 'A12',
+                  name: '上海燃气一期工程-2',
+                },
+              ]
+            },
+            {
+              id: 1002,
+              code: 'A2',
+              name: '上海燃气二期工程',
+            },
+            {
+              id: 1003,
+              code: 'A3',
+              name: '上海燃气三期工程',
+            },
+          ],
+          pagination: {
+            pageIndex: 1,
+            pageSize: 10,
+            total: 3,
+          },
+          elementProps: {
+            treeProps: {
+              children: 'testChildren',
+              hasChildren: 'hasChildren',
+            },
+          },
+        },
+      };
+    },
+    computed: {
+      tableColumns() {
+        return [
+          {
+            type: 'index',
+            label: '序号',
+            dataField: 'index',
+            elementProps: {
+              width: '80px',
+            },
+          },
+          {
+            type: 'default',
+            label: 'ID',
+            dataField: 'id',
+          },
+          {
+            type: 'default',
+            label: '编号',
+            dataField: 'code',
+          },
+          {
+            type: 'default',
+            label: '名称',
+            dataField: 'name',
+            elementProps: {
+              minWidth: 4,
+              align: 'left',
+            },
+          },
+        ];
+      },
+    },
+  };
+</script>
+```
 :::
 
 ## 超链接列
