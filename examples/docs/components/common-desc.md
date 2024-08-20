@@ -45,6 +45,7 @@
             userType: 1,
             contacts: '联系人',
             trainingTime: '2022-10-10~2022-12-12',
+            date: '2024-08-20T09:04:46+0800',
             trainingHours: 60,
             address: '培训地点',
             trainingMaterial: 'http://castor.polarwin.cn/',
@@ -89,6 +90,11 @@
             type: 'default',
             label: '培训时间',
             dataField: 'trainingTime',
+          },
+          {
+            type: 'date',
+            label: '培训日期',
+            dataField: 'date',
           },
           {
             type: 'keyTag',

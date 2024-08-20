@@ -61,6 +61,11 @@
       </el-link>
     </div>
     <div
+      v-else-if="type === 'date'"
+    >
+      {{ model[dataField] ? formatDate(model[dataField], extendProps.format): '' }}
+    </div>
+    <div
       v-else-if="type === 'custom'"
       :label="label"
       :prop="dataField"
@@ -92,6 +97,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+import * as dayjs from 'dayjs'
 export default {
   components: {},
   props: {
@@ -142,6 +148,11 @@ export default {
       return this.defaultModel;
     },
   },
+  methods: {
+    formatDate(date, format = 'YYYY-MM-DD') {
+      return dayjs(date).format(format);
+    }
+  }
 };
 </script>
 
