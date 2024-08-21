@@ -52,9 +52,8 @@
     </div>
     <div v-else-if="type === 'link'">
       <el-link
-        icon="el-icon-link"
-        type="text"
-        v-bind="{ ...extendProps.formItemProps }"
+        v-if="model[dataField]"
+        v-bind="{ ...extendProps.formItemProps, ...elementProps }"
         @click.stop="$emit(extendProps.linkCommand, { model })"
       >
         {{ model[dataField] }}

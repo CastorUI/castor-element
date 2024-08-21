@@ -49,6 +49,7 @@
             trainingHours: 60,
             address: '培训地点',
             trainingMaterial: 'http://castor.polarwin.cn/',
+            testLink: 'http://castor.polarwin.cn/',
             trainingForm: '线上',
             refresh: true,
             company: 'spaceX',
@@ -118,6 +119,20 @@
             type: 'link',
             label: '培训资料',
             dataField: 'trainingMaterial',
+            elementProps: {
+              type: 'primary',
+            },
+            extendProps: {
+              linkCommand: 'handleLink',
+            },
+          },
+          {
+            type: 'link',
+            label: '培训资料',
+            dataField: 'testLink',
+            elementProps: {
+              type: 'danger',
+            },
             extendProps: {
               linkCommand: 'handleLink',
             },
