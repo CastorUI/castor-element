@@ -52,13 +52,17 @@
     </div>
     <div v-else-if="type === 'link'">
       <el-link
-        icon="el-icon-link"
-        type="text"
-        v-bind="{ ...extendProps.formItemProps }"
+        v-if="model[dataField]"
+        v-bind="{ ...extendProps.formItemProps, ...elementProps }"
         @click.stop="$emit(extendProps.linkCommand, { model })"
       >
         {{ model[dataField] }}
       </el-link>
+    </div>
+    <div
+      v-else-if="type === 'date'"
+    >
+      {{ model[dataField] ? formatDate(model[dataField], extendProps.format): '' }}
     </div>
     <div
       v-else-if="type === 'custom'"
@@ -92,6 +96,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+import * as dayjs from 'dayjs'
 export default {
   components: {},
   props: {
@@ -142,6 +147,11 @@ export default {
       return this.defaultModel;
     },
   },
+  methods: {
+    formatDate(date, format = 'YYYY-MM-DD') {
+      return dayjs(date).format(format);
+    }
+  }
 };
 </script>
 
