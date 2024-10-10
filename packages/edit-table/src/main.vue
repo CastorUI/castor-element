@@ -25,11 +25,10 @@
           class="table-add-command divider"
         >
           <el-button
-            :disabled="
-              loading ||
-                editing ||
-                (addCommand.disableValidator &&
-                  addCommand.disableValidator.call(this))
+            :disabled="loading ||
+              editing ||
+              (addCommand.disableValidator &&
+                addCommand.disableValidator.call(this))
             "
             v-bind="{
               type: 'primary',
@@ -41,10 +40,7 @@
             {{ addCommand.text }}
           </el-button>
         </div>
-        <el-button-group
-          v-if="customCommands && customCommands.length"
-          class="table-custom-commands divider"
-        >
+        <el-button-group v-if="customCommands && customCommands.length" class="table-custom-commands divider">
           <el-button
             v-for="(item, index) of customCommands"
             :key="index"
@@ -87,10 +83,7 @@
           :extend-props="item.extendProps"
           v-on="$listeners"
         />
-        <template
-          v-if="dataSource && dataSource.length && appendContent"
-          v-slot:append
-        >
+        <template v-if="dataSource && dataSource.length && appendContent" v-slot:append>
           <span class="append-content" style="padding: 0 10px">{{
             appendContent
           }}</span>
@@ -147,27 +140,27 @@ export default {
     },
     pagination: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
       },
     },
     addCommand: {
       type: Object,
-      default: () => {},
+      default: () => { },
     },
     editCommand: {
       type: Object,
-      default: () => {},
+      default: () => { },
     },
     saveCommand: {
       type: Object,
-      default: () => {},
+      default: () => { },
     },
     addInside: { type: Boolean, default: false },
     addInsidePosition: {
       type: String,
       default: 'beforeFirst',
-      validator: function(value) {
+      validator: function (value) {
         return ['beforeFirst', 'afterLast'].indexOf(value) > -1;
       },
     },
@@ -181,17 +174,17 @@ export default {
     },
     getList: {
       type: Function,
-      default: () => {},
+      default: () => { },
     },
     customComponents: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
       },
     },
     elementProps: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
       },
     },
@@ -239,18 +232,18 @@ export default {
         this.$emit('update:validateStatus', true);
       }
     },
-    handleEmitEvent: function(commandType, command, index, row) {
+    handleEmitEvent: function (commandType, command, index, row) {
       console.log('handleEmitEvent', commandType, command, index, row);
       // 对于内部行跳转，做特殊处理
       if (commandType === 'currentChange') {
-        this.$emit(command, index, row, () => {});
+        this.$emit(command, index, row, () => { });
       } else {
         this.$emit(command, index, row, () => {
           this.callback(row);
         });
       }
     },
-    handleAdd: function() {
+    handleAdd: function () {
       let newId = -10001;
       if (
         this.dataSource &&
@@ -281,7 +274,7 @@ export default {
 
       this.$emit(this.addCommand.command);
     },
-    handleRowClick: function(row, column, event) {
+    handleRowClick: function (row, column, event) {
       console.log('handleRowClick', row, column, event);
       event.stopPropagation();
       if (
@@ -307,7 +300,7 @@ export default {
       this.pagination.order = order;
       this.getList();
     },
-    handleCurrentChange: function(currentRow, oldCurrentRow) {
+    handleCurrentChange: function (currentRow, oldCurrentRow) {
       console.log(
         'handleCurrentChange: ',
         oldCurrentRow,
@@ -370,11 +363,13 @@ export default {
 
 <style lang="scss">
 .common-edit-table-container {
+
   // 暂时解决不同缩放比例下表头行内线消失的问题
   .el-table th.is-leaf {
     border-bottom-width: 1.2px;
     border-bottom-style: solid;
   }
+
   .el-table__header-wrapper tr th,
   .el-table__fixed-header-wrapper tr th {
     font-weight: 500;
@@ -388,32 +383,40 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     &.custom-commands {
       margin-bottom: 12px;
     }
+
     .table-title {
       font-size: 16px;
       font-weight: bold;
     }
+
     .table-commands {
       display: flex;
+
       .table-add-command {
         button {
           font-size: 13px;
         }
       }
+
       .table-custom-commands,
       .table-setting-commands {
         margin-left: 16px;
+
         button {
           font-size: 13px;
         }
       }
+
       .divider {
         padding-right: 16px;
         border-right: 1px solid rgba(0, 0, 0, 0.06);
       }
-      .el-button [class*='el-icon-'] + span {
+
+      .el-button [class*='el-icon-']+span {
         margin-left: 0;
       }
     }
@@ -424,6 +427,7 @@ export default {
       font-weight: 500;
     }
   }
+
   .common-pagination-container {
     text-align: right;
   }
