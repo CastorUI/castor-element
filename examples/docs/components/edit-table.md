@@ -1329,6 +1329,145 @@
 
 :::
 
+## 排序
+
+展示表格排序的用法。
+
+:::demo 在`pagination`中配置排序相关属性，包含`sortField`和`order`。这里的分页用于后台排序，所以需要配置`getList`方法用于调用后台接口，每次切换排序时都会调用此方法。
+
+```html
+<template>
+  <ca-edit-table
+    :dataSource="table.dataList"
+    :columns="tableColumns"
+    :pagination="table.pagination"
+    :getList="getList"
+  />
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        table: {
+          dataList: [
+            {
+              id: 1001,
+              code: 'A1',
+              name: '上海燃气一期工程',
+            },
+            {
+              id: 1002,
+              code: 'A2',
+              name: '上海燃气二期工程',
+            },
+            {
+              id: 1003,
+              code: 'A3',
+              name: '上海燃气三期工程',
+            },
+            {
+              id: 1004,
+              code: 'A4',
+              name: '上海燃气四期工程',
+            },
+            {
+              id: 1005,
+              code: 'A5',
+              name: '上海燃气三期工程',
+            },
+            {
+              id: 1006,
+              code: 'A6',
+              name: '上海燃气三期工程',
+            },
+            {
+              id: 1007,
+              code: 'A7',
+              name: '上海燃气三期工程',
+            },
+            {
+              id: 1008,
+              code: 'A8',
+              name: '上海燃气三期工程',
+            },
+            {
+              id: 1009,
+              code: 'A9',
+              name: '上海燃气三期工程',
+            },
+            {
+              id: 1010,
+              code: 'A10',
+              name: '上海燃气三期工程',
+            },
+          ],
+          pagination: {
+            pageIndex: 1,
+            pageSize: 10,
+            total: 30,
+            sortField: '',
+            order: '',
+          },
+        },
+      };
+    },
+    computed: {
+      tableColumns() {
+        return [
+          {
+            type: 'default',
+            label: 'ID',
+            dataField: 'id',
+          },
+          {
+            type: 'default',
+            label: '编号',
+            dataField: 'code',
+            elementProps: {
+              sortable: 'custom',
+            },
+          },
+          {
+            type: 'default',
+            label: '名称',
+            dataField: 'name',
+            elementProps: {
+              minWidth: 2,
+              sortable: 'custom',
+            },
+          },
+        ];
+      },
+    },
+    methods: {
+      getList() {
+        console.log('this.table.pagination', this.table.pagination);
+        if (this.table.pagination.sortField && this.table.pagination.order) {
+          if (this.table.pagination.order === 'ascending') {
+            this.table.dataList.sort((a, b) =>
+              a[this.table.pagination.sortField].localeCompare(
+                b[this.table.pagination.sortField]
+              )
+            );
+          } else {
+            this.table.dataList.sort((a, b) =>
+              b[this.table.pagination.sortField].localeCompare(
+                a[this.table.pagination.sortField]
+              )
+            );
+          }
+        }
+        console.log('this.table.dataList', this.table.dataList);
+        return this.table.dataList;
+      },
+    },
+  };
+</script>
+```
+
+:::
+
 ## Table Attributes
 
 常规属性可参考 [通用表格](http://castor.polarwin.cn/#/component/common-table) , 独有属性如下：

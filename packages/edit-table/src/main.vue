@@ -61,8 +61,10 @@
         v-loading="loading"
         row-key="id"
         :data="dataSource"
+        :default-sort="defaultSort"
         v-bind="{ border: true, ...elementProps }"
         @row-click="handleRowClick"
+        @sort-change="(args) => handleSortChange(args)"
         @current-change="handleCurrentChange"
       >
         <edit-column
@@ -207,6 +209,12 @@ export default {
         ? pageSizeArray
         : pageSizeArray.concat(this.pagination.pageSize);
     },
+    defaultSort() {
+      return {
+        prop: this.pagination.sortField,
+        order: this.pagination.order
+      };
+    },
     editing() {
       return this.editingRow != null;
     },
@@ -293,6 +301,11 @@ export default {
       } else {
         this.$emit('row-click', row, column, event);
       }
+    },
+    handleSortChange({ prop, order }) {
+      this.pagination.sortField = prop;
+      this.pagination.order = order;
+      this.getList();
     },
     handleCurrentChange: function(currentRow, oldCurrentRow) {
       console.log(
