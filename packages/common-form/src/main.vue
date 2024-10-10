@@ -29,6 +29,7 @@
     <common-form-ctrl
       v-for="item in fields"
       :key="item.dataField ? item.dataField : undefined"
+      :ref="item.dataField ? item.dataField : undefined"
       :type="item.type"
       :label="item.label"
       :operate-type="operateType"

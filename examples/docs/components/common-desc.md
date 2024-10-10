@@ -45,9 +45,11 @@
             userType: 1,
             contacts: '联系人',
             trainingTime: '2022-10-10~2022-12-12',
+            date: '2024-08-20T09:04:46+0800',
             trainingHours: 60,
             address: '培训地点',
             trainingMaterial: 'http://castor.polarwin.cn/',
+            testLink: 'http://castor.polarwin.cn/',
             trainingForm: '线上',
             refresh: true,
             company: 'spaceX',
@@ -91,6 +93,11 @@
             dataField: 'trainingTime',
           },
           {
+            type: 'date',
+            label: '培训日期',
+            dataField: 'date',
+          },
+          {
             type: 'keyTag',
             label: '供应商类型',
             dataField: 'userType',
@@ -112,6 +119,20 @@
             type: 'link',
             label: '培训资料',
             dataField: 'trainingMaterial',
+            elementProps: {
+              type: 'primary',
+            },
+            extendProps: {
+              linkCommand: 'handleLink',
+            },
+          },
+          {
+            type: 'link',
+            label: '培训资料',
+            dataField: 'testLink',
+            elementProps: {
+              type: 'danger',
+            },
             extendProps: {
               linkCommand: 'handleLink',
             },

@@ -1,3 +1,4 @@
+
 # CommonForm 通用表单
 
 ## 基础表单
@@ -239,7 +240,6 @@
               options: this.optionsMap['sex'],
             },
             disableValidator: (model) => true,
-            
           },
           {
             type: 'date',
@@ -702,6 +702,13 @@
             columnSpan: 1,
           },
           {
+            type: 'input',
+            label: '启用验证',
+            dataField: 'enableValid',
+            columnSpan: 1,
+            rules: [{ required: false, message: '不能为空' }],
+          },
+          {
             type: 'groupTitle',
             label: '',
             dataField: '',
@@ -753,12 +760,22 @@
         });
       },
     },
+    watch: {
+      'form.model.enabled': function (val) {
+        console.log('enabled:', val);
+        if (val) {
+          this.$refs['editForm'].rules['enableValid'] = [{ required: true, message: '不能为空' }];
+        } else {
+          // 重置校验规则
+          this.$refs['editForm'].rules['enableValid'] = [{ required: false, message: '不能为空' }];
+        }
+      },
+    },
   };
 </script>
 ```
 
 :::
-
 ## 查看状态
 
 `查看状态`下所有控件字段为只读，且不显示操作按钮
@@ -779,6 +796,7 @@
 </template>
 
 <script>
+  
   export default {
     data() {
       return {
@@ -863,6 +881,7 @@
             enabled: false,
             equipment: [],
           },
+          
           commands: [
             {
               text: '取消',
@@ -1118,8 +1137,8 @@
 | dateRange      | 日期区间选择器               |
 | datetime       | 日期时间选择器               |
 | dateTimeRange  | 日期+时间区间选择器          |
-| month  | 月份选择器          |
-| year  | 年份选择器          |
+| month          | 月份选择器                   |
+| year           | 年份选择器                   |
 | hr             | 分行                         |
 | groupTitle     | 组标题                       |
 | complexInput   | 组合输入框                   |
