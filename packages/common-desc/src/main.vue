@@ -20,7 +20,7 @@
       >{{ item.text }}</el-button>
     </template>
     <el-descriptions-item
-      v-for="(field, index) in fields"
+      v-for="(field, index) in visibleFields"
       :key="index"
       :default-model="model"
       v-bind="{ ...field, ...(field.elementProps || {}) }"
@@ -106,7 +106,13 @@ export default {
   data() {
     return {}
   },
-  watch: {},
+  computed: {
+    visibleFields() {
+      return this.fields.filter(field =>
+        this.validateVisible(this.model, field.visibleValidator)
+      );
+    }
+  },
   methods: {
     validate(model, statusValidator) {
       return !statusValidator || statusValidator.call(this, model);
