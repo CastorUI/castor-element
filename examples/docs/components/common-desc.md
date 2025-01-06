@@ -18,6 +18,8 @@
     @handleDownload="handleDownload"
     @handleEditInfo="handleEditInfo"
   />
+
+  动态显示：<el-switch v-model="description.model.visible" />
 </template>
 
 <script>
@@ -55,6 +57,8 @@
             company: 'spaceX',
             examPaper: '考核试卷',
             evaluationForm: '培训评价表',
+            visible: true,
+            visibleLabel: '显示',
           },
           commands: [
             {
@@ -156,6 +160,17 @@
             type: 'default',
             label: '培训评价表（学员）',
             dataField: 'evaluationForm',
+            visibleValidator: (model, field) => {
+              return false
+            },
+          },
+          {
+            type: 'default',
+            label: '显示控制',
+            dataField: 'visibleLabel',
+            visibleValidator: (model, field) => {
+              return this.description.model.visible
+            },
           },
           {
             type: 'button',
