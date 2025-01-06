@@ -8,7 +8,7 @@
             addCommand.text &&
             (!addCommand.visibleValidator ||
               addCommand.visibleValidator.call(this))) ||
-          (customCommands && customCommands.length),
+          (visibleCustomCommands && visibleCustomCommands.length),
       }"
     >
       <div class="table-title">
@@ -25,9 +25,8 @@
           class="table-add-command divider"
         >
           <el-button
-            :disabled="
-              addCommand.disableValidator &&
-                addCommand.disableValidator.call(this)
+            :disabled="addCommand.disableValidator &&
+              addCommand.disableValidator.call(this)
             "
             v-bind="{ icon: 'el-icon-plus', ...addCommand.elementProps }"
             @click="$emit(addCommand.command)"
@@ -36,15 +35,14 @@
           </el-button>
         </div>
         <el-button-group
-          v-if="customCommands && customCommands.length"
+          v-if="visibleCustomCommands && visibleCustomCommands.length"
           class="table-custom-commands divider"
         >
           <el-button
-            v-for="(item, index) of customCommands"
+            v-for="(item, index) of visibleCustomCommands"
             :key="index"
-            :disabled="
-              item.disableValidator &&
-                item.disableValidator.call(this, multipleSelection)
+            :disabled="item.disableValidator &&
+              item.disableValidator.call(this, multipleSelection)
             "
             v-bind="item.elementProps"
             @click="$emit(item.command, multipleSelection)"
@@ -54,7 +52,7 @@
         </el-button-group>
         <div class="table-setting-commands">
           <el-button
-            v-for="(item, index) of settingCommands"
+            v-for="(item, index) of visibleSettingCommands"
             :key="index"
             v-bind="{ type: 'text', ...item.elementProps }"
             @click="$emit(item.command)"
@@ -78,12 +76,7 @@
         </div>
       </div>
     </div>
-    <el-alert
-      v-if="tips"
-      class="table-tips"
-      :title="tips.title"
-      v-bind="tips.elementProps"
-    />
+    <el-alert v-if="tips" class="table-tips" :title="tips.title" v-bind="tips.elementProps" />
     <div class="table-content">
       <el-table
         v-if="hackReset"
@@ -97,8 +90,7 @@
         @row-dblclick="handleRowDblClick"
         @cell-click="handleCellClick"
         @cell-dblclick="handleCellDblClick"
-        @selection-change="
-          (multipleSelection) => handleSelectionChange(multipleSelection)
+        @selection-change="(multipleSelection) => handleSelectionChange(multipleSelection)
         "
         @sort-change="(args) => handleSortChange(args)"
       >
@@ -121,7 +113,7 @@
       v-if="
         pagination.pageSize &&
           (pagination.type === 'bigData' ||
-            (pagination.type !== 'bigData' && pagination.total > pageSizes[0])|| pagination.showPagination)
+            (pagination.type !== 'bigData' && pagination.total > pageSizes[0]) || pagination.showPagination)
       "
       class="common-pagination-container"
     >
@@ -182,7 +174,7 @@ export default {
     },
     tips: {
       type: Object,
-      default: () => {}
+      default: () => { }
     },
     dataSource: {
       type: Array,
@@ -194,11 +186,11 @@ export default {
     },
     pagination: {
       type: Object,
-      default: () => {}
+      default: () => { }
     },
     addCommand: {
       type: Object,
-      default: () => {}
+      default: () => { }
     },
     customCommands: {
       type: Array,
@@ -210,11 +202,11 @@ export default {
     },
     getList: {
       type: Function,
-      default: () => {}
+      default: () => { }
     },
     customComponents: {
       type: Object,
-      default: () => {}
+      default: () => { }
     },
     tableTag: {
       type: String,
@@ -222,11 +214,11 @@ export default {
     },
     elementProps: {
       type: Object,
-      default: () => {}
+      default: () => { }
     },
     extendProps: {
       type: Object,
-      default: function() {
+      default: function () {
         return {
           cacheConfigColumns: true,
           showRefresh: true,
@@ -258,6 +250,19 @@ export default {
         prop: this.pagination.sortField,
         order: this.pagination.order
       };
+    },
+    visibleCustomCommands() {
+      return this.customCommands.filter(
+        r =>
+          !r.visibleValidator ||
+          r.visibleValidator.call(this, this.multipleSelection)
+      );
+    }, visibleSettingCommands() {
+      return this.settingCommands.filter(
+        r =>
+          !r.visibleValidator ||
+          r.visibleValidator.call(this, this.multipleSelection)
+      );
     }
   },
   watch: {
@@ -465,50 +470,64 @@ export default {
 <style lang="scss">
 .common-table-container {
   overflow: hidden;
+
   .table-append-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     &.custom-commands {
       margin-bottom: 12px;
     }
+
     .table-title {
       font-size: 16px;
       font-weight: bold;
     }
+
     .table-commands {
       display: flex;
+
       .table-add-command {
         button {
           font-size: 13px;
         }
       }
+
       .table-custom-commands,
       .table-setting-commands {
         margin-left: 16px;
+
         button {
           font-size: 13px;
         }
       }
+
       .divider {
         padding-right: 16px;
         border-right: 1px solid rgba(0, 0, 0, 0.06);
       }
-      .el-button [class*='el-icon-'] + span {
+
+      .el-button [class*='el-icon-']+span {
         margin-left: 0;
       }
     }
   }
+
   .table-tips {
     margin-bottom: 6px;
   }
+
   .table-content {
     overflow: auto;
     width: 100%;
   }
+
   .common-pagination-container {
     text-align: right;
+
     .big-data-pagination {
+
       .btn-prev,
       .btn-next {
         padding: 0 12px;
