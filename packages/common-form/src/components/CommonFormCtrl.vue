@@ -300,7 +300,7 @@
       :model="model"
       :data-field="dataField"
       :operate-type="operateType"
-      v-bind="elementProps"
+      v-bind="{ ...elementProps, ...extendProps }"
     />
     <el-input
       v-else-if="type === 'textArea'"
