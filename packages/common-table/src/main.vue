@@ -238,7 +238,7 @@ export default {
   },
   computed: {
     pageSizes() {
-      const pageSizeList = this.$pageSizeList || [10, 15, 20, 30, 50];
+      const pageSizeList = this.$pageSizeList || [10, 15, 20, 30, 50, 100, 200];
       if (pageSizeList.indexOf(this.pagination.pageSize) <= -1) {
         pageSizeList.push(this.pagination.pageSize);
         pageSizeList.sort((a, b) => a - b);
