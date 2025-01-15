@@ -214,7 +214,7 @@ export default {
   },
   computed: {
     pageSizes: function() {
-      const pageSizeArray = [10, 15, 20, 30, 50];
+      const pageSizeArray = [10, 15, 20, 30, 50, 100, 200];
       return pageSizeArray.indexOf(this.pagination.pageSize) > -1
         ? pageSizeArray
         : pageSizeArray.concat(this.pagination.pageSize);
