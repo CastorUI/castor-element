@@ -1,11 +1,10 @@
 <template>
   <el-form-item
     v-if="!visibleValidator || visibleValidator.call(this, model)"
-    :ref="type === 'custom'? extendProps.componentKey: ''"
+    :ref="type === 'custom' ? extendProps.componentKey : ''"
     :prop="dataField"
     :style="{
-      width: `calc(${width} - ${
-        extendProps.marginLeft || (labelPosition === 'top' ? '16px' : '0px')
+      width: `calc(${width} - ${extendProps.marginLeft || (labelPosition === 'top' ? '16px' : '0px')
       })`,
       marginBottom: extendProps.marginBottom || '22px',
       marginLeft:
@@ -51,17 +50,8 @@
       @change="extendProps.onChange && extendProps.onChange.call(this, model)"
       @clear="handleClear"
     >
-      <el-option-group
-        v-for="group in extendProps.options"
-        :key="group.label"
-        :label="group.label"
-      >
-        <el-option
-          v-for="option in group.options"
-          :key="option.value"
-          :label="option.label"
-          :value="option.value"
-        />
+      <el-option-group v-for="group in extendProps.options" :key="group.label" :label="group.label">
+        <el-option v-for="option in group.options" :key="option.value" :label="option.label" :value="option.value" />
       </el-option-group>
     </el-select>
     <el-radio-group
@@ -71,11 +61,7 @@
       :disabled="disableValidator && disableValidator.call(this, model)"
       @change="extendProps.onChange && extendProps.onChange.call(this, model)"
     >
-      <el-radio
-        v-for="option in extendProps.options"
-        :key="option.value"
-        :label="option.value"
-      >
+      <el-radio v-for="option in extendProps.options" :key="option.value" :label="option.value">
         {{ option.label }}
       </el-radio>
     </el-radio-group>
@@ -106,13 +92,11 @@
       <div v-if="extendProps.groupCommands" style="float: right">
         <el-link
           v-for="(item, index) of extendProps.groupCommands"
-          v-show="
-            !item.visibleValidator || item.visibleValidator.call(this, model)
+          v-show="!item.visibleValidator || item.visibleValidator.call(this, model)
           "
           :key="index"
           type="primary"
-          :disabled="
-            item.disableValidator && item.disableValidator.call(this, model)
+          :disabled="item.disableValidator && item.disableValidator.call(this, model)
           "
           v-bind="{ type: 'primary', underline: true, ...item.elementProps }"
           @click.stop="handleGroupCommand.call(this, item, model)"
@@ -122,21 +106,17 @@
         </el-link>
       </div>
     </div>
-    <span
-      v-else-if="type === 'text'"
-      v-bind="{ style: 'display:inline-block;', ...elementProps }"
-    >{{
-      `${
-        extendProps.options
-          ? (
-            extendProps.options.find((r) => r.value === model[dataField]) ||
-            {}
-          ).label || '暂无'
-          : model[dataField] === null ||
-            model[dataField] === undefined ||
-            model[dataField] === ''
-            ? '暂无'
-            : model[dataField]
+    <span v-else-if="type === 'text'" v-bind="{ style: 'display:inline-block;', ...elementProps }">{{
+      `${extendProps.options
+        ? (
+          extendProps.options.find((r) => r.value === model[dataField]) ||
+          {}
+        ).label || '暂无'
+        : model[dataField] === null ||
+          model[dataField] === undefined ||
+          model[dataField] === ''
+          ? '暂无'
+          : model[dataField]
       }${extendProps.appendText || ''}`
     }}</span>
     <span
@@ -151,9 +131,8 @@
       }"
     >
       <i
-        :class="
-          extendProps.options.filter((r) => r.value === model[dataField])[0]
-            .icon
+        :class="extendProps.options.filter((r) => r.value === model[dataField])[0]
+          .icon
         "
       />
       {{
@@ -227,7 +206,7 @@
       v-model="model[dataField]"
       :disabled="disableValidator && disableValidator.call(this, model)"
       v-bind="{
-        type:type.toLocaleLowerCase(),
+        type: type.toLocaleLowerCase(),
         placeholder: '请选择',
         startPlaceholder: '开始日期',
         rangeSeparator: '~',
@@ -272,10 +251,9 @@
             (r) => r.value === model[extendProps.currentField.dataField]
           ).length > 0
       "
-      v-model="
-        extendProps.currentField.options.filter(
-          (r) => r.value === model[extendProps.currentField.dataField]
-        )[0].label
+      v-model="extendProps.currentField.options.filter(
+        (r) => r.value === model[extendProps.currentField.dataField]
+      )[0].label
       "
       :class="['complexInput']"
       v-bind="{
@@ -291,19 +269,17 @@
             extendProps.appendField.options &&
               model[extendProps.appendField.dataField]
           "
-          :style="
-            'color:' +
-              extendProps.appendField.options.filter(
-                (r) => r.value === model[extendProps.appendField.dataField]
-              )[0].color +
-              ';'
+          :style="'color:' +
+            extendProps.appendField.options.filter(
+              (r) => r.value === model[extendProps.appendField.dataField]
+            )[0].color +
+            ';'
           "
         >
           <i
-            :class="
-              extendProps.appendField.options.filter(
-                (r) => r.value === model[extendProps.appendField.dataField]
-              )[0].icon
+            :class="extendProps.appendField.options.filter(
+              (r) => r.value === model[extendProps.appendField.dataField]
+            )[0].icon
             "
           />
           {{
@@ -351,20 +327,14 @@
         style: 'width:100%;',
         ...elementProps,
       }"
-      @select="
-        (item) =>
-          extendProps.onSelect && extendProps.onSelect.call(this, model, item)
+      @select="(item) =>
+        extendProps.onSelect && extendProps.onSelect.call(this, model, item)
       "
-      @clear="
-        () => extendProps.onClear && extendProps.onClear.call(this, model)
+      @clear="() => extendProps.onClear && extendProps.onClear.call(this, model)
       "
       @blur="handleAutoCompleteBlur"
     />
-    <el-upload
-      v-else-if="type === 'avatarUploader'"
-      class="avatar-uploader"
-      v-bind="elementProps"
-    >
+    <el-upload v-else-if="type === 'avatarUploader'" class="avatar-uploader" v-bind="elementProps">
       <img
         v-if="model[dataField]"
         :src="model[dataField]"
@@ -391,9 +361,7 @@
         {{ extendProps.appendText }}
       </template>
     </el-input>
-    <template
-      v-if="type === 'autoComplete' && model[dataField] && autoCompleteNoData"
-    >
+    <template v-if="type === 'autoComplete' && model[dataField] && autoCompleteNoData">
       <div
         role="region"
         class="el-autocomplete-suggestion el-popper"
@@ -454,17 +422,17 @@ export default {
     },
     customComponents: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
       }
     },
     elementProps: {
       type: Object,
-      default: () => {}
+      default: () => { }
     },
     extendProps: {
       type: Object,
-      default: () => {}
+      default: () => { }
     },
     onChange: {
       type: Function,
@@ -602,17 +570,20 @@ export default {
     padding: 0 5px;
   }
 }
+
 .avatar-uploader {
   // width: 178px;
   // height: 178px;
   // display: block;
   overflow: hidden;
+
   .el-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
     cursor: pointer;
     position: relative;
     overflow: hidden;
+
     .avatar-uploader-icon {
       font-size: 28px;
       color: #8c939d;
@@ -621,6 +592,7 @@ export default {
       line-height: 178px;
       text-align: center;
     }
+
     &:hover {
       border-color: #409eff;
     }
