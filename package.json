@@ -1,6 +1,6 @@
 {
   "name": "@polarwin/castor-ui",
-  "version": "2.20.19",
+  "version": "2.20.21",
   "private": false,
   "author": "heke",
   "main": "lib/castor-ui.umd.min.js",

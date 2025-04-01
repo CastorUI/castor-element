@@ -77,6 +77,7 @@
       align: 'center',
       showOverflowTooltip: true,
       ...elementProps,
+      type: '',
     }"
   >
     <template slot-scope="scope">
