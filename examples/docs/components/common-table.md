@@ -353,6 +353,9 @@
             type: 'default',
             label: 'ID',
             dataField: 'id',
+            elementProps: {
+              sortable: 'true',
+            },
           },
           {
             type: 'link',
@@ -360,6 +363,7 @@
             dataField: 'code',
             elementProps: {
               type: 'primary',
+              sortable: 'true',
             },
             extendProps: {
               linkCommand: 'handleLink',
@@ -1056,6 +1060,8 @@
             pageIndex: 1,
             pageSize: 10,
             total: 30,
+            sortField: '',
+            order: '',
           },
         },
       };
@@ -1064,14 +1070,20 @@
       tableColumns() {
         return [
           {
-            type: 'default',
+            type: 'link',
             label: 'ID',
             dataField: 'id',
+            elementProps: {
+              sortable: 'true',
+            },
           },
           {
             type: 'default',
             label: '编号',
             dataField: 'code',
+            elementProps: {
+              sortable: 'custom',
+            },
           },
           {
             type: 'default',
@@ -1079,6 +1091,7 @@
             dataField: 'name',
             elementProps: {
               minWidth: 2,
+              sortable: 'true',
             },
           },
         ];
@@ -1119,6 +1132,7 @@
       },
       getList() {
         // 模拟获取数据
+        console.log('getList', this.table.pagination);
           this.fetchdata().then((data) => {
           // 获取数据成功后，将数据赋值给dataList
           this.table.dataList = data.results;
