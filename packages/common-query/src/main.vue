@@ -4,14 +4,8 @@
     style="overflow: hidden; padding: 14px 10px 0 10px"
     class="clearfix common-query"
   >
-    <div
-      v-if="fields.some((r) => r.showType === 'dynamic')"
-      style="display: inline-block; float: left"
-    >
-      <el-button
-        style="paddingleft: 10px; paddingright: 10px"
-        @click="$refs.filterSelect.$el.click()"
-      >
+    <div v-if="fields.some((r) => r.showType === 'dynamic')" style=" float: left">
+      <el-button style="padding-left: 10px; padding-right: 10px" @click="$refs.filterSelect.$el.click()">
         筛选
         <i class="el-icon-arrow-down" />
       </el-button>
@@ -22,6 +16,7 @@
         multiple
         collapse-tags
         placeholder="请选择"
+        @change="handleCheckedKeyChange"
       >
         <el-option
           v-for="item in fields.filter((r) => r.showType === 'dynamic')"
@@ -37,8 +32,7 @@
       ref="form"
       :model="model"
       style="overflow: hidden"
-      :style="
-        fields.some((r) => r.showType === 'dynamic') ? 'marginLeft:68px;' : ''
+      :style="fields.some((r) => r.showType === 'dynamic') ? 'marginLeft:68px;' : ''
       "
       v-bind="{
         labelWidth: '110px',
@@ -103,7 +97,11 @@
           @click="$emit(item.command)"
         >
           {{ item.text }}
-          <i v-if="(item.extendProps||{}).iconPosition==='right' && (item.elementProps||{}).icon" class="el-icon--right" :class="item.elementProps.icon" />
+          <i
+            v-if="(item.extendProps || {}).iconPosition === 'right' && (item.elementProps || {}).icon"
+            class="el-icon--right"
+            :class="item.elementProps.icon"
+          />
         </el-button>
 
         <el-dropdown
@@ -124,8 +122,7 @@
               v-for="(item, index) of downloadOpt.options"
               :key="index"
               :icon="item.icon"
-              :disabled="
-                item.disableValidator && item.disableValidator.call(this)
+              :disabled="item.disableValidator && item.disableValidator.call(this)
               "
               :type="item.styleType || 'primary'"
               class="filter-item"
@@ -167,19 +164,19 @@ export default {
     },
     model: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
       }
     },
     fields: {
       type: Array,
-      default: function() {
+      default: function () {
         return [];
       }
     },
     commands: {
       type: Array,
-      default: function() {
+      default: function () {
         return [];
       }
     },
@@ -193,13 +190,13 @@ export default {
     },
     downloadOpt: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
       }
     },
     elementProps: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
       }
     },
@@ -225,24 +222,25 @@ export default {
   watch: {
     defaultCheckedKeys: {
       handler() {
-        this.checkedKeys = this.defaultCheckedKeys;
+        this.checkedKeys = [...this.defaultCheckedKeys];
       },
       immediate: true,
       deep: false
     },
-    checkedKeys: {
-      immediate: true,
+    model: {
       handler() {
-        this.fields
-          .filter(
-            r =>
-              r.showType === 'dynamic' &&
-              this.checkedKeys.indexOf(r.dataField) === -1
-          )
-          .forEach(r => {
-            this.model[r.dataField] = undefined;
-          });
-      }
+        console.log('watch model change start2', this.model, this.checkedKeys);
+        this.fields.filter((r) => r.showType === 'dynamic').forEach((item) => {
+          if (this.model[item.dataField] !== null && this.model[item.dataField] !== undefined && (Array.isArray(this.model[item.dataField]) ? this.model[item.dataField].length > 0 : true)) {
+            if (this.checkedKeys.indexOf(item.dataField) === -1) {
+              this.checkedKeys.push(item.dataField);
+            }
+          }
+        })
+        console.log('watch model change end2', this.checkedKeys);
+      },
+      immediate: true,
+      deep: true
     }
   },
   mounted() {
@@ -250,14 +248,14 @@ export default {
     this.keyUpSubmit();
   },
   methods: {
-    handleResize: function() {
+    handleResize: function () {
       if (this.fixedRowCount !== 0) return
       const form = document.getElementById(this.formId);
       this.rowFieldsCount = Math.floor(
         form.getBoundingClientRect().width / this.maxFieldWidth
       );
     },
-    keyUpSubmit: function() {
+    keyUpSubmit: function () {
       document.onkeydown = (e) => {
         const _key = window.event.keyCode;
         if (_key === 13) {
@@ -268,6 +266,18 @@ export default {
           }
         }
       }
+    },
+    handleCheckedKeyChange: function () {
+      console.log('handleCheckedKeyChange', this.checkedKeys)
+      this.fields
+        .filter(
+          r =>
+            r.showType === 'dynamic' &&
+            this.checkedKeys.indexOf(r.dataField) === -1
+        )
+        .forEach(r => {
+          this.model[r.dataField] = undefined;
+        });
     }
   }
 };
@@ -282,33 +292,41 @@ export default {
     width: 148px;
     overflow: hidden;
   }
+
   .dynamic-select-options {
     min-width: 150px;
   }
+
   .el-form-item--mini {
     margin-bottom: 10px !important;
+
     &.fixed-height-field {
       .el-form-item__content {
         height: 28px;
       }
     }
   }
+
   .el-form-item--small {
-    margin-bottom: 14px !important ;
+    margin-bottom: 14px !important;
+
     &.fixed-height-field {
       .el-form-item__content {
         height: 32px;
       }
     }
   }
+
   .el-form-item--medium {
     margin-bottom: 18px !important;
+
     &.fixed-height-field {
       .el-form-item__content {
         height: 36px;
       }
     }
   }
+
   .el-button--small {
     padding: 8px 15px;
   }
