@@ -441,6 +441,7 @@
             code: '1001',
             en_name: undefined,
             cn_name: undefined,
+            installDateRange: [],
             valid_end_date: undefined,
             user_type: undefined,
             enabled: false,
@@ -478,6 +479,19 @@
             dataField: 'en_name',
             columnSpan: 1,
             showType: 'dynamic',
+          },
+          {
+            type: 'dateRange',
+            label: '安装时间',
+            dataField: 'installDateRange',
+            columnSpan: 1.6,
+            showType: 'dynamic',
+            elementProps: {
+              startPlaceholder: '开始日期',
+              rangeSeparator: '~',
+              endPlaceholder: '结束日期',
+              clearable: true,
+            },
           },
           {
             type: 'input',
@@ -527,6 +541,12 @@
           },
         ];
       },
+    },
+    mounted() {
+      console.log('mounted model change start', this.search.model);
+      this.search.model.en_name = 'sdfwefw';
+      this.search.model.installDateRange = [];
+      console.log('mounted model change end', this.search.model);
     },
     methods: {
       handleFilter() {
