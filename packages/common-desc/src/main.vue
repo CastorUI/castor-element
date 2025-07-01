@@ -1,5 +1,6 @@
 <template>
   <el-descriptions
+    v-loading="loading"
     class="margin-top"
     :title="title"
     :column="rowFieldsCount"
